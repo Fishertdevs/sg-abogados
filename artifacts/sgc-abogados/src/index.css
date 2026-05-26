@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -76,65 +76,67 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 33 31% 86%; /* #E8DDD0 */
-  --foreground: 24 52% 11%; /* #2C1A0E */
+  /* Warm parchment background */
+  --background: 36 28% 87%;       /* #EAE0D2 */
+  --foreground: 22 52% 13%;       /* #2E1A0C */
 
-  --border: 38 25% 65%;
-  --card: 38 35% 75%; /* #D4C4A8 */
-  --card-foreground: 24 52% 11%;
-  --card-border: 38 25% 65%;
+  --border: 34 22% 68%;
+  --card: 35 25% 80%;             /* #D8CABC */
+  --card-foreground: 22 52% 13%;
+  --card-border: 34 22% 68%;
 
-  --sidebar: 38 35% 75%;
-  --sidebar-foreground: 24 52% 11%;
-  --sidebar-border: 38 25% 65%;
-  --sidebar-primary: 43 75% 31%;
-  --sidebar-primary-foreground: 33 31% 86%;
-  --sidebar-accent: 38 25% 65%;
-  --sidebar-accent-foreground: 24 52% 11%;
-  --sidebar-ring: 43 75% 31%;
+  --sidebar: 35 25% 80%;
+  --sidebar-foreground: 22 52% 13%;
+  --sidebar-border: 34 22% 68%;
+  --sidebar-primary: 22 55% 28%;
+  --sidebar-primary-foreground: 36 28% 87%;
+  --sidebar-accent: 34 22% 68%;
+  --sidebar-accent-foreground: 22 52% 13%;
+  --sidebar-ring: 22 55% 28%;
 
-  --popover: 33 31% 86%;
-  --popover-foreground: 24 52% 11%;
-  --popover-border: 38 25% 65%;
+  --popover: 36 28% 87%;
+  --popover-foreground: 22 52% 13%;
+  --popover-border: 34 22% 68%;
 
-  --primary: 43 75% 31%; /* #8B6914 */
-  --primary-foreground: 33 31% 86%;
+  /* Professional coffee brown — the anchor color */
+  --primary: 22 55% 28%;          /* #6B3D18 rich brown */
+  --primary-foreground: 36 28% 92%;
 
-  --secondary: 38 35% 75%;
-  --secondary-foreground: 24 52% 11%;
+  --secondary: 35 25% 80%;
+  --secondary-foreground: 22 52% 13%;
 
-  --muted: 38 35% 75%;
-  --muted-foreground: 28 34% 31%; /* #6B4E35 */
+  --muted: 35 25% 80%;
+  --muted-foreground: 25 35% 38%; /* #7A5438 mid brown */
 
-  --accent: 38 25% 65%;
-  --accent-foreground: 24 52% 11%;
+  --accent: 34 22% 72%;
+  --accent-foreground: 22 52% 13%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 38 25% 65%;
-  --ring: 43 75% 31%;
-  
-  --chart-1: 43 75% 31%;
-  --chart-2: 28 34% 31%;
-  --chart-3: 38 25% 65%;
-  --chart-4: 38 35% 75%;
-  --chart-5: 33 31% 86%;
+  --input: 34 22% 68%;
+  --ring: 22 55% 28%;
 
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: 'Cormorant Garamond', serif;
+  --chart-1: 22 55% 28%;
+  --chart-2: 25 35% 38%;
+  --chart-3: 34 22% 68%;
+  --chart-4: 35 25% 80%;
+  --chart-5: 36 28% 87%;
+
+  --app-font-sans: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --app-font-serif: 'Cormorant Garamond', Georgia, serif;
   --app-font-mono: Menlo, monospace;
-  
-  --radius: .5rem;
-  
-  --shadow-2xs: 0px 2px 0px 0px hsl(24 52% 11% / 0.05);
-  --shadow-xs: 0px 2px 0px 0px hsl(24 52% 11% / 0.05);
-  --shadow-sm: 0px 2px 0px 0px hsl(24 52% 11% / 0.05), 0px 1px 2px -1px hsl(24 52% 11% / 0.1);
-  --shadow: 0px 2px 0px 0px hsl(24 52% 11% / 0.05), 0px 1px 2px -1px hsl(24 52% 11% / 0.1);
-  --shadow-md: 0px 2px 0px 0px hsl(24 52% 11% / 0.05), 0px 2px 4px -1px hsl(24 52% 11% / 0.1);
-  --shadow-lg: 0px 2px 0px 0px hsl(24 52% 11% / 0.05), 0px 4px 6px -1px hsl(24 52% 11% / 0.1);
-  --shadow-xl: 0px 2px 0px 0px hsl(24 52% 11% / 0.05), 0px 8px 10px -1px hsl(24 52% 11% / 0.1);
-  --shadow-2xl: 0px 2px 0px 0px hsl(24 52% 11% / 0.05);
+
+  --radius: .25rem;
+
+  --shadow-2xs: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
+  --shadow-xs: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
+  --shadow-sm: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 1px 2px -1px hsl(22 52% 13% / 0.08);
+  --shadow: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 1px 2px -1px hsl(22 52% 13% / 0.08);
+  --shadow-md: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 2px 4px -1px hsl(22 52% 13% / 0.1);
+  --shadow-lg: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 4px 6px -1px hsl(22 52% 13% / 0.1);
+  --shadow-xl: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 8px 10px -1px hsl(22 52% 13% / 0.1);
+  --shadow-2xl: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
@@ -155,29 +157,29 @@
 }
 
 .dark {
-  --background: 24 52% 11%;
-  --foreground: 33 31% 86%;
-  --primary: 43 75% 31%;
-  --primary-foreground: 33 31% 86%;
-  --card: 28 34% 15%;
-  --card-foreground: 33 31% 86%;
-  --border: 28 34% 31%;
-  --muted: 28 34% 15%;
-  --muted-foreground: 38 35% 75%;
-  --accent: 28 34% 31%;
-  --accent-foreground: 33 31% 86%;
-  --popover: 28 34% 15%;
-  --popover-foreground: 33 31% 86%;
-  --input: 28 34% 31%;
-  --ring: 43 75% 31%;
-  --sidebar: 28 34% 15%;
-  --sidebar-foreground: 33 31% 86%;
-  --sidebar-primary: 43 75% 31%;
-  --sidebar-primary-foreground: 33 31% 86%;
-  --sidebar-accent: 28 34% 31%;
-  --sidebar-accent-foreground: 33 31% 86%;
-  --sidebar-border: 28 34% 31%;
-  --sidebar-ring: 43 75% 31%;
+  --background: 22 52% 10%;
+  --foreground: 36 28% 87%;
+  --primary: 22 55% 42%;
+  --primary-foreground: 36 28% 92%;
+  --card: 25 35% 14%;
+  --card-foreground: 36 28% 87%;
+  --border: 25 35% 26%;
+  --muted: 25 35% 14%;
+  --muted-foreground: 35 25% 65%;
+  --accent: 25 35% 26%;
+  --accent-foreground: 36 28% 87%;
+  --popover: 25 35% 14%;
+  --popover-foreground: 36 28% 87%;
+  --input: 25 35% 26%;
+  --ring: 22 55% 42%;
+  --sidebar: 25 35% 14%;
+  --sidebar-foreground: 36 28% 87%;
+  --sidebar-primary: 22 55% 42%;
+  --sidebar-primary-foreground: 36 28% 92%;
+  --sidebar-accent: 25 35% 26%;
+  --sidebar-accent-foreground: 36 28% 87%;
+  --sidebar-border: 25 35% 26%;
+  --sidebar-ring: 22 55% 42%;
 }
 
 @layer base {
@@ -185,7 +187,7 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-serif antialiased bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;

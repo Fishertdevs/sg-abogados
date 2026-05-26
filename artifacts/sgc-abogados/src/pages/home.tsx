@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { 
-  Scale, 
-  Users, 
-  Briefcase, 
-  ShieldCheck, 
-  Award, 
-  Clock, 
+import {
+  Scale,
+  Users,
+  Briefcase,
+  ShieldCheck,
+  Award,
+  Clock,
   HeartHandshake,
   CheckCircle,
   Menu,
@@ -17,7 +16,6 @@ import {
   Mail,
   MapPin
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -38,370 +36,649 @@ export default function Home() {
 
   const navLinks = [
     { name: "Inicio", href: "#inicio" },
-    { name: "Áreas de Práctica", href: "#areas" },
-    { name: "Por qué elegirnos", href: "#por-que-elegirnos" },
+    { name: "Áreas", href: "#areas" },
     { name: "Nosotros", href: "#nosotros" },
     { name: "Contacto", href: "#contacto" },
   ];
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/30">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-primary">
-            <Scale className="h-8 w-8" />
-            <span className="font-serif text-2xl font-bold tracking-wide">SGC Abogados</span>
+    <div className="min-h-[100dvh] flex flex-col bg-background selection:bg-primary/20">
+
+      {/* ── NAVBAR ── */}
+      <header
+        className="sticky top-0 z-50 w-full"
+        style={{ background: "hsl(36 28% 87% / 0.97)", backdropFilter: "blur(6px)", borderBottom: "1px solid hsl(34 22% 68% / 0.35)" }}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2.5" style={{ color: "hsl(22 55% 28%)" }}>
+            <Scale className="h-6 w-6" strokeWidth={1.5} />
+            <span className="font-serif text-xl tracking-widest" style={{ letterSpacing: "0.18em" }}>SGC ABOGADOS</span>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
+              <a
+                key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                className="font-serif text-sm tracking-widest transition-colors"
+                style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.15em" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "hsl(22 55% 28%)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "hsl(22 52% 13% / 0.7)")}
               >
-                {link.name}
+                {link.name.toUpperCase()}
               </a>
             ))}
-            <Button asChild className="font-serif text-lg tracking-wide rounded-none px-6">
-              <a href="#contacto">Consulta Gratuita</a>
-            </Button>
+            <a
+              href="#contacto"
+              data-testid="button-nav-cta"
+              className="font-serif text-sm tracking-widest px-7 py-2.5 transition-all"
+              style={{
+                background: "hsl(22 55% 28%)",
+                color: "hsl(36 28% 92%)",
+                letterSpacing: "0.15em"
+              }}
+            >
+              CONSULTA GRATUITA
+            </a>
           </nav>
 
-          <button 
-            className="md:hidden p-2 text-foreground"
+          <button
+            className="md:hidden p-2"
+            style={{ color: "hsl(22 52% 13%)" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            data-testid="button-mobile-menu"
           >
             {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 w-full bg-background border-b border-border/40 shadow-lg p-4 flex flex-col gap-4">
+          <div
+            className="md:hidden absolute top-20 left-0 w-full shadow-lg p-6 flex flex-col gap-5"
+            style={{ background: "hsl(36 28% 87%)", borderBottom: "1px solid hsl(34 22% 68% / 0.35)" }}
+          >
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
+              <a
+                key={link.name}
                 href={link.href}
-                className="text-base font-medium text-foreground py-2"
+                className="font-serif text-base tracking-widest"
+                style={{ color: "hsl(22 52% 13%)", letterSpacing: "0.15em" }}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {link.name}
+                {link.name.toUpperCase()}
               </a>
             ))}
-            <Button asChild className="w-full font-serif text-lg mt-2">
-              <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>Consulta Gratuita</a>
-            </Button>
+            <a
+              href="#contacto"
+              className="font-serif text-sm tracking-widest py-3 text-center mt-2"
+              style={{ background: "hsl(22 55% 28%)", color: "hsl(36 28% 92%)", letterSpacing: "0.15em" }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              CONSULTA GRATUITA
+            </a>
           </div>
         )}
       </header>
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <section id="inicio" className="relative min-h-[90vh] flex items-center pt-10 pb-20 overflow-hidden">
-          {/* Background image full bleed with overlay */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src={heroImg} 
-              alt="SGC Abogados Hero" 
-              className="w-full h-full object-cover object-center opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent"></div>
-          </div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-2xl">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="flex items-center gap-3 mb-6"
+        {/* ── HERO — recreated exactly from reference image ── */}
+        <section
+          id="inicio"
+          className="relative overflow-hidden"
+          style={{
+            minHeight: "calc(100vh - 80px)",
+            background: "linear-gradient(108deg, hsl(36 30% 85%) 0%, hsl(35 26% 80%) 55%, hsl(33 24% 76%) 100%)"
+          }}
+        >
+          {/* Subtle linen texture overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='none'/%3E%3Ccircle cx='1' cy='1' r='0.4' fill='hsl(22,30%25,20%25)' opacity='0.04'/%3E%3Ccircle cx='3' cy='3' r='0.4' fill='hsl(22,30%25,20%25)' opacity='0.04'/%3E%3C/svg%3E")`,
+              backgroundSize: "4px 4px"
+            }}
+          />
+
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 h-full" style={{ minHeight: "calc(100vh - 80px)" }}>
+
+            {/* LEFT — content */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.1 }}
+              className="flex flex-col justify-center items-center text-center px-10 lg:px-20 py-16"
+            >
+              {/* SGC Logo block */}
+              <div className="mb-10 w-full max-w-sm">
+                {/* Scale icon with decorative leaves */}
+                <div className="flex items-center justify-center mb-3">
+                  <Scale
+                    className="w-12 h-12"
+                    strokeWidth={1}
+                    style={{ color: "hsl(22 55% 28%)" }}
+                  />
+                </div>
+
+                {/* S G C */}
+                <div className="relative flex items-center justify-center gap-1 mb-0.5">
+                  {/* Left laurel */}
+                  <svg width="38" height="52" viewBox="0 0 38 52" fill="none" className="opacity-60">
+                    <path d="M34 26 C28 18, 18 12, 10 8 M34 26 C28 34, 18 40, 10 44 M34 26 C24 24, 16 20, 8 14 M34 26 C24 28, 16 32, 8 38" stroke="hsl(22,55%,28%)" strokeWidth="1.2" strokeLinecap="round"/>
+                    <path d="M30 26 C22 20, 14 15, 6 10 M30 26 C22 32, 14 37, 6 42" stroke="hsl(22,55%,28%)" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
+                  </svg>
+
+                  <h1
+                    className="font-serif font-semibold leading-none px-2"
+                    style={{ fontSize: "clamp(3.5rem, 8vw, 5.5rem)", color: "hsl(22 55% 28%)", letterSpacing: "0.08em" }}
+                  >
+                    SGC
+                  </h1>
+
+                  {/* Right laurel (mirrored) */}
+                  <svg width="38" height="52" viewBox="0 0 38 52" fill="none" className="opacity-60" style={{ transform: "scaleX(-1)" }}>
+                    <path d="M34 26 C28 18, 18 12, 10 8 M34 26 C28 34, 18 40, 10 44 M34 26 C24 24, 16 20, 8 14 M34 26 C24 28, 16 32, 8 38" stroke="hsl(22,55%,28%)" strokeWidth="1.2" strokeLinecap="round"/>
+                    <path d="M30 26 C22 20, 14 15, 6 10 M30 26 C22 32, 14 37, 6 42" stroke="hsl(22,55%,28%)" strokeWidth="0.8" strokeLinecap="round" opacity="0.5"/>
+                  </svg>
+                </div>
+
+                {/* Divider with diamond */}
+                <div className="flex items-center justify-center gap-2 my-2">
+                  <div className="h-px flex-1" style={{ background: "hsl(22 55% 28% / 0.3)" }} />
+                  <div
+                    className="w-1.5 h-1.5 rotate-45"
+                    style={{ background: "hsl(22 55% 28% / 0.6)" }}
+                  />
+                  <div className="h-px flex-1" style={{ background: "hsl(22 55% 28% / 0.3)" }} />
+                </div>
+
+                <p
+                  className="font-serif tracking-widest mb-4"
+                  style={{ fontSize: "0.8rem", color: "hsl(22 55% 28%)", letterSpacing: "0.5em" }}
+                >
+                  ABOGADOS
+                </p>
+
+                <div className="w-full h-px mb-4" style={{ background: "hsl(22 52% 13% / 0.12)" }} />
+
+                <p
+                  className="font-serif tracking-widest"
+                  style={{ fontSize: "0.65rem", color: "hsl(22 52% 13% / 0.55)", letterSpacing: "0.3em" }}
+                >
+                  EXPERIENCIA &nbsp;|&nbsp; COMPROMISO &nbsp;|&nbsp; RESULTADOS
+                </p>
+              </div>
+
+              {/* Body copy — exact from reference */}
+              <div className="max-w-xs mb-8">
+                <p
+                  className="font-serif leading-relaxed"
+                  style={{ fontSize: "1.05rem", color: "hsl(22 52% 13% / 0.85)" }}
+                >
+                  Abogados con experiencia en derecho de familia y laboral, enfocados en ofrecer{" "}
+                  <strong style={{ color: "hsl(22 52% 13%)" }}>
+                    acompañamiento jurídico responsable, cercano y eficaz.
+                  </strong>
+                </p>
+              </div>
+
+              {/* CTA label */}
+              <p
+                className="font-serif tracking-widest mb-6"
+                style={{ fontSize: "0.65rem", color: "hsl(22 52% 13% / 0.5)", letterSpacing: "0.25em" }}
               >
-                <div className="h-px w-12 bg-primary"></div>
-                <span className="text-primary font-semibold tracking-widest text-sm uppercase">
-                  EXPERIENCIA | COMPROMISO | RESULTADOS
-                </span>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-5xl md:text-7xl font-bold font-serif text-foreground leading-tight mb-6"
-              >
-                Acompañamiento jurídico <span className="text-primary italic">responsable</span> y <span className="text-primary italic">cercano</span>.
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-lg md:text-xl text-foreground/80 mb-10 leading-relaxed font-light"
-              >
-                Especialistas en Derecho de Familia y Laboral. Un equipo humano dedicado a proteger sus derechos con profesionalismo, empatía y la confianza que usted merece.
-              </motion.p>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Button size="lg" asChild className="font-serif text-xl h-14 px-8 rounded-none shadow-xl shadow-primary/20">
-                  <a href="#contacto">Agenda tu consulta</a>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="font-serif text-xl h-14 px-8 rounded-none border-primary text-primary hover:bg-primary/5">
-                  <a href="#areas">Nuestras áreas</a>
-                </Button>
-              </motion.div>
+                CONSULTAS Y ACOMPAÑAMIENTO JURÍDICO:
+              </p>
+
+              {/* CTA buttons — text only, no border */}
+              <div className="flex items-center gap-6">
+                <a
+                  href="#contacto"
+                  data-testid="link-hero-contacto"
+                  className="font-serif transition-all"
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "hsl(22 55% 28%)",
+                    letterSpacing: "0.08em",
+                    textDecoration: "none",
+                    borderBottom: "1px solid hsl(22 55% 28% / 0.4)"
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.borderBottomColor = "hsl(22 55% 28%)")}
+                  onMouseLeave={e => (e.currentTarget.style.borderBottomColor = "hsl(22 55% 28% / 0.4)")}
+                >
+                  Agendar consulta
+                </a>
+                <span style={{ color: "hsl(22 52% 13% / 0.25)" }}>|</span>
+                <a
+                  href="#areas"
+                  data-testid="link-hero-areas"
+                  className="font-serif transition-all"
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "hsl(22 52% 13% / 0.6)",
+                    letterSpacing: "0.08em",
+                    textDecoration: "none"
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "hsl(22 55% 28%)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "hsl(22 52% 13% / 0.6)")}
+                >
+                  Nuestras áreas
+                </a>
+              </div>
+
+              {/* Decorative diamond bottom */}
+              <div className="mt-12 opacity-30">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <rect x="4" y="4" width="8" height="8" rx="0" transform="rotate(45 8 8)" fill="hsl(22,55%,28%)" />
+                </svg>
+              </div>
+            </motion.div>
+
+            {/* RIGHT — Lady Justice statue */}
+            <div className="relative hidden md:block">
+              {/* Gradient fade on left edge to blend with left column */}
+              <div
+                className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+                style={{ width: "52%", background: "linear-gradient(to right, hsl(34 27% 79%) 0%, hsl(34 27% 79% / 0.85) 55%, transparent 100%)" }}
+              />
+              <img
+                src={heroImg}
+                alt="Diosa de la Justicia — SGC Abogados"
+                data-testid="img-lady-justice-hero"
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "right center",
+                  filter: "brightness(1.02) contrast(1.02)"
+                }}
+              />
             </div>
           </div>
         </section>
 
-        {/* Áreas de Práctica */}
-        <section id="areas" className="py-24 bg-card/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">Áreas de Práctica</h2>
-              <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-              <p className="text-lg text-foreground/70">
-                Nos especializamos en brindar soluciones efectivas en los momentos más importantes de su vida personal y profesional.
+        {/* ── ÁREAS DE PRÁCTICA ── */}
+        <section
+          id="areas"
+          className="py-28"
+          style={{ background: "hsl(35 25% 83%)" }}
+        >
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p
+                className="font-serif tracking-widest mb-4"
+                style={{ fontSize: "0.65rem", color: "hsl(22 55% 28%)", letterSpacing: "0.35em" }}
+              >
+                ESPECIALIDADES
               </p>
+              <h2
+                className="font-serif font-medium mb-5"
+                style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "hsl(22 52% 13%)" }}
+              >
+                Áreas de Práctica
+              </h2>
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 28% / 0.35)" }} />
+                <div className="w-1.5 h-1.5 rotate-45" style={{ background: "hsl(22 55% 28% / 0.5)" }} />
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 28% / 0.35)" }} />
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-background border border-border/50 p-10 shadow-lg hover:border-primary/30 transition-colors group"
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <Users className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-3xl font-serif font-bold mb-4 text-foreground">Derecho de Familia</h3>
-                <p className="text-foreground/70 mb-6 leading-relaxed">
-                  Acompañamiento sensible y firme en los procesos que involucran a sus seres queridos, protegiendo siempre el bienestar familiar.
-                </p>
-                <ul className="space-y-3">
-                  {[
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  icon: Users,
+                  title: "Derecho de Familia",
+                  desc: "Acompañamiento sensible y firme en los procesos que involucran a sus seres queridos, protegiendo siempre el bienestar familiar.",
+                  items: [
                     "Divorcios y cesación de efectos civiles",
                     "Custodia y cuidado personal",
                     "Fijación de cuotas alimentarias",
                     "Sucesiones y testamentos",
                     "Declaración de unión marital de hecho"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-foreground/80">
-                      <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-background border border-border/50 p-10 shadow-lg hover:border-primary/30 transition-colors group"
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <Briefcase className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-3xl font-serif font-bold mb-4 text-foreground">Derecho Laboral</h3>
-                <p className="text-foreground/70 mb-6 leading-relaxed">
-                  Defensa férrea de los derechos de los trabajadores y asesoría precisa para empleadores, buscando siempre la justicia en el ámbito laboral.
-                </p>
-                <ul className="space-y-3">
-                  {[
+                  ]
+                },
+                {
+                  icon: Briefcase,
+                  title: "Derecho Laboral",
+                  desc: "Defensa de los derechos de trabajadores y asesoría precisa para empleadores, buscando siempre la justicia en el ámbito laboral.",
+                  items: [
                     "Despidos injustificados",
                     "Liquidaciones y prestaciones sociales",
                     "Acoso laboral (Ley 1010)",
                     "Procesos disciplinarios",
                     "Pensiones y seguridad social"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-foreground/80">
-                      <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Por qué elegirnos */}
-        <section id="por-que-elegirnos" className="py-24 bg-foreground text-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Por qué elegirnos</h2>
-              <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-              <p className="text-lg text-background/70">
-                No somos un despacho corporativo frío. Somos sus aliados de confianza en los momentos decisivos.
-              </p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: Award,
-                  title: "Experiencia",
-                  desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas."
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Compromiso",
-                  desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige."
-                },
-                {
-                  icon: HeartHandshake,
-                  title: "Acompañamiento",
-                  desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso."
-                },
-                {
-                  icon: Clock,
-                  title: "Resultados",
-                  desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible."
+                  ]
                 }
-              ].map((feature, idx) => (
-                <motion.div 
+              ].map((area, idx) => (
+                <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="text-center p-6"
+                  transition={{ duration: 0.7, delay: idx * 0.15 }}
+                  className="p-10"
+                  style={{ background: "hsl(36 28% 87%)", borderTop: "2px solid hsl(22 55% 28% / 0.3)" }}
                 >
-                  <div className="w-16 h-16 mx-auto bg-primary/20 rounded-full flex items-center justify-center mb-6">
-                    <feature.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-serif font-bold mb-3">{feature.title}</h3>
-                  <p className="text-background/70 font-light text-sm">{feature.desc}</p>
+                  <area.icon
+                    className="w-9 h-9 mb-6"
+                    strokeWidth={1.2}
+                    style={{ color: "hsl(22 55% 28%)" }}
+                  />
+                  <h3
+                    className="font-serif font-medium mb-3"
+                    style={{ fontSize: "1.6rem", color: "hsl(22 52% 13%)" }}
+                  >
+                    {area.title}
+                  </h3>
+                  <p
+                    className="font-serif leading-relaxed mb-7"
+                    style={{ color: "hsl(22 52% 13% / 0.65)", fontSize: "1rem" }}
+                  >
+                    {area.desc}
+                  </p>
+                  <ul className="space-y-3">
+                    {area.items.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle
+                          className="w-4 h-4 shrink-0 mt-1"
+                          strokeWidth={1.5}
+                          style={{ color: "hsl(22 55% 28%)" }}
+                        />
+                        <span
+                          className="font-serif"
+                          style={{ color: "hsl(22 52% 13% / 0.8)", fontSize: "0.95rem" }}
+                        >
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Sobre Nosotros */}
-        <section id="nosotros" className="py-24 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+        {/* ── POR QUÉ ELEGIRNOS ── */}
+        <section
+          className="py-28"
+          style={{ background: "hsl(22 52% 13%)" }}
+        >
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <p
+                className="font-serif tracking-widest mb-4"
+                style={{ fontSize: "0.65rem", color: "hsl(36 28% 80%)", letterSpacing: "0.35em", opacity: 0.6 }}
+              >
+                NUESTRA PROPUESTA
+              </p>
+              <h2
+                className="font-serif font-medium mb-5"
+                style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "hsl(36 28% 87%)" }}
+              >
+                Por qué elegirnos
+              </h2>
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 50% / 0.4)" }} />
+                <div className="w-1.5 h-1.5 rotate-45" style={{ background: "hsl(22 55% 50% / 0.5)" }} />
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 50% / 0.4)" }} />
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {[
+                { icon: Award, title: "Experiencia", desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas." },
+                { icon: ShieldCheck, title: "Compromiso", desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige." },
+                { icon: HeartHandshake, title: "Acompañamiento", desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso." },
+                { icon: Clock, title: "Resultados", desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
+              ].map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.12 }}
+                  className="text-center"
+                >
+                  <feature.icon
+                    className="w-8 h-8 mx-auto mb-5"
+                    strokeWidth={1.2}
+                    style={{ color: "hsl(22 55% 55%)" }}
+                  />
+                  <h3
+                    className="font-serif font-medium mb-3"
+                    style={{ fontSize: "1.25rem", color: "hsl(36 28% 87%)" }}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p
+                    className="font-serif leading-relaxed"
+                    style={{ color: "hsl(36 28% 75% / 0.65)", fontSize: "0.9rem" }}
+                  >
+                    {feature.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── SOBRE NOSOTROS ── */}
+        <section
+          id="nosotros"
+          className="py-28"
+          style={{ background: "hsl(36 28% 87%)" }}
+        >
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-20 items-center">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -24 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative"
               >
-                <div className="aspect-square bg-card relative overflow-hidden flex items-center justify-center p-8 border-8 border-background shadow-2xl">
-                  {/* Decorative placeholder if image isn't loaded */}
-                  <div className="absolute inset-0 bg-primary/5"></div>
-                  <Scale className="w-32 h-32 text-primary/20 absolute -right-8 -bottom-8" />
-                  <div className="relative z-10 text-center">
-                    <h3 className="font-serif text-4xl text-primary font-bold mb-2">SGC</h3>
-                    <div className="h-px w-16 bg-primary/50 mx-auto mb-2"></div>
-                    <p className="tracking-widest text-sm text-foreground/60 uppercase">Abogados</p>
-                  </div>
+                {/* Decorative frame */}
+                <div
+                  className="aspect-[4/5] relative overflow-hidden"
+                  style={{ borderTop: "2px solid hsl(22 55% 28% / 0.25)", borderLeft: "2px solid hsl(22 55% 28% / 0.25)" }}
+                >
+                  <img
+                    src={heroImg}
+                    alt="SGC Abogados — Diosa de la Justicia"
+                    data-testid="img-lady-justice-nosotros"
+                    className="w-full h-full"
+                    style={{
+                      objectFit: "cover",
+                      objectPosition: "80% 20%",
+                      filter: "brightness(0.97) sepia(0.08)"
+                    }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(to top, hsl(35 25% 83% / 0.15), transparent 60%)" }}
+                  />
                 </div>
+                {/* Offset decorative border */}
+                <div
+                  className="absolute -bottom-4 -right-4 w-full h-full pointer-events-none"
+                  style={{ border: "2px solid hsl(22 55% 28% / 0.12)", zIndex: -1 }}
+                />
               </motion.div>
-              
+
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
               >
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-6">Sobre Nosotros</h2>
-                <h3 className="text-xl text-primary italic font-serif mb-6">"Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."</h3>
-                <div className="space-y-4 text-foreground/80 font-light leading-relaxed text-lg">
-                  <p>
+                <p
+                  className="font-serif tracking-widest mb-5"
+                  style={{ fontSize: "0.65rem", color: "hsl(22 55% 28%)", letterSpacing: "0.35em" }}
+                >
+                  QUIÉNES SOMOS
+                </p>
+                <h2
+                  className="font-serif font-medium mb-4"
+                  style={{ fontSize: "clamp(2rem, 4vw, 2.6rem)", color: "hsl(22 52% 13%)" }}
+                >
+                  Sobre Nosotros
+                </h2>
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-px w-16" style={{ background: "hsl(22 55% 28% / 0.35)" }} />
+                  <div className="w-1.5 h-1.5 rotate-45" style={{ background: "hsl(22 55% 28% / 0.5)" }} />
+                </div>
+
+                <p
+                  className="font-serif italic mb-6"
+                  style={{ fontSize: "1.15rem", color: "hsl(22 55% 28%)", lineHeight: "1.75" }}
+                >
+                  "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
+                </p>
+
+                <div className="space-y-5" style={{ color: "hsl(22 52% 13% / 0.72)", fontSize: "1rem", lineHeight: "1.8" }}>
+                  <p className="font-serif">
                     SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.
                   </p>
-                  <p>
-                    Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia, hablándole con la verdad sobre las posibilidades reales de su caso y diseñando estrategias legales a la medida de sus necesidades.
+                  <p className="font-serif">
+                    Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia, hablándole con la verdad sobre las posibilidades reales de su caso.
                   </p>
-                  <p>
+                  <p className="font-serif">
                     Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan el rigor académico con la empatía humana.
                   </p>
+                </div>
+
+                <div className="mt-10">
+                  <a
+                    href="#contacto"
+                    data-testid="link-nosotros-contacto"
+                    className="font-serif transition-all"
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "hsl(22 55% 28%)",
+                      letterSpacing: "0.12em",
+                      borderBottom: "1px solid hsl(22 55% 28% / 0.4)",
+                      paddingBottom: "2px"
+                    }}
+                  >
+                    Agendar una consulta
+                  </a>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Contacto */}
-        <section id="contacto" className="py-24 bg-card">
-          <div className="container mx-auto px-4 max-w-5xl">
+        {/* ── CONTACTO ── */}
+        <section
+          id="contacto"
+          className="py-28"
+          style={{ background: "hsl(35 25% 83%)" }}
+        >
+          <div className="max-w-5xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">Contacto</h2>
-              <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-              <p className="text-lg text-foreground/70">
-                Dé el primer paso hacia la solución de su situación legal. Agende su consulta.
+              <p
+                className="font-serif tracking-widest mb-4"
+                style={{ fontSize: "0.65rem", color: "hsl(22 55% 28%)", letterSpacing: "0.35em" }}
+              >
+                CONTÁCTENOS
               </p>
+              <h2
+                className="font-serif font-medium mb-5"
+                style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "hsl(22 52% 13%)" }}
+              >
+                Contacto
+              </h2>
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 28% / 0.35)" }} />
+                <div className="w-1.5 h-1.5 rotate-45" style={{ background: "hsl(22 55% 28% / 0.5)" }} />
+                <div className="h-px w-16" style={{ background: "hsl(22 55% 28% / 0.35)" }} />
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-5 gap-12">
-              <div className="md:col-span-2 space-y-8">
-                <div>
-                  <h3 className="text-2xl font-serif font-bold mb-6 text-foreground">Información de contacto</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                        <Phone className="w-5 h-5 text-primary" />
-                      </div>
+            <div className="grid md:grid-cols-5 gap-14">
+              {/* Contact info */}
+              <div className="md:col-span-2">
+                <h3
+                  className="font-serif font-medium mb-8"
+                  style={{ fontSize: "1.3rem", color: "hsl(22 52% 13%)" }}
+                >
+                  Información de contacto
+                </h3>
+                <div className="space-y-7">
+                  {[
+                    { icon: Phone, label: "Teléfono", value: "+57 (300) 123-4567" },
+                    { icon: Mail, label: "Correo electrónico", value: "contacto@sgcabogados.co" },
+                    { icon: MapPin, label: "Oficina principal", value: "Bogotá, Colombia", note: "Atención con cita previa" }
+                  ].map(({ icon: Icon, label, value, note }, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <Icon
+                        className="w-5 h-5 shrink-0 mt-0.5"
+                        strokeWidth={1.4}
+                        style={{ color: "hsl(22 55% 28%)" }}
+                      />
                       <div>
-                        <p className="font-semibold text-foreground">Teléfono</p>
-                        <p className="text-foreground/70">+57 (300) 123-4567</p>
+                        <p className="font-serif text-sm font-medium" style={{ color: "hsl(22 52% 13%)" }}>{label}</p>
+                        <p className="font-serif" style={{ color: "hsl(22 52% 13% / 0.65)", fontSize: "0.95rem" }}>{value}</p>
+                        {note && <p className="font-serif text-xs mt-0.5" style={{ color: "hsl(22 52% 13% / 0.4)" }}>{note}</p>}
                       </div>
                     </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                        <Mail className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground">Correo electrónico</p>
-                        <p className="text-foreground/70">contacto@sgcabogados.co</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                        <MapPin className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground">Oficina principal</p>
-                        <p className="text-foreground/70">Bogotá, Colombia</p>
-                        <p className="text-sm text-foreground/50 mt-1">Atención con cita previa</p>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="md:col-span-3 bg-background p-8 border border-border/50 shadow-xl">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
+              {/* Form */}
+              <div
+                className="md:col-span-3 p-10"
+                style={{ background: "hsl(36 28% 87%)" }}
+              >
+                <form onSubmit={handleSubmit} className="space-y-6" data-testid="form-contact">
+                  <div className="grid grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium text-foreground">Nombre completo</label>
-                      <Input id="name" required placeholder="Ej. Juan Pérez" className="bg-card" />
+                      <label htmlFor="name" className="font-serif text-sm" style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.05em" }}>Nombre completo</label>
+                      <Input
+                        id="name"
+                        required
+                        placeholder="Juan Pérez"
+                        className="rounded-none border-0 border-b font-serif"
+                        style={{ background: "transparent", borderBottom: "1px solid hsl(22 52% 13% / 0.25)", boxShadow: "none" }}
+                        data-testid="input-name"
+                      />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-medium text-foreground">Teléfono</label>
-                      <Input id="phone" required placeholder="Ej. 300 123 4567" className="bg-card" />
+                      <label htmlFor="phone" className="font-serif text-sm" style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.05em" }}>Teléfono</label>
+                      <Input
+                        id="phone"
+                        required
+                        placeholder="300 123 4567"
+                        className="rounded-none border-0 border-b font-serif"
+                        style={{ background: "transparent", borderBottom: "1px solid hsl(22 52% 13% / 0.25)", boxShadow: "none" }}
+                        data-testid="input-phone"
+                      />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground">Correo electrónico</label>
-                    <Input id="email" type="email" required placeholder="juan@ejemplo.com" className="bg-card" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="area" className="text-sm font-medium text-foreground">Área de consulta</label>
-                    <select 
-                      id="area" 
-                      className="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    <label htmlFor="email" className="font-serif text-sm" style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.05em" }}>Correo electrónico</label>
+                    <Input
+                      id="email"
+                      type="email"
                       required
+                      placeholder="juan@ejemplo.com"
+                      className="rounded-none border-0 border-b font-serif"
+                      style={{ background: "transparent", borderBottom: "1px solid hsl(22 52% 13% / 0.25)", boxShadow: "none" }}
+                      data-testid="input-email"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="area" className="font-serif text-sm" style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.05em" }}>Área de consulta</label>
+                    <select
+                      id="area"
+                      required
+                      data-testid="select-area"
+                      className="w-full py-2 font-serif text-sm bg-transparent border-0 border-b focus:outline-none"
+                      style={{ borderBottom: "1px solid hsl(22 52% 13% / 0.25)", color: "hsl(22 52% 13% / 0.8)" }}
                     >
                       <option value="">Seleccione un área</option>
                       <option value="familia">Derecho de Familia</option>
@@ -409,20 +686,37 @@ export default function Home() {
                       <option value="otro">Otro</option>
                     </select>
                   </div>
-                  
+
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-foreground">Mensaje o caso breve</label>
-                    <Textarea 
-                      id="message" 
-                      required 
-                      placeholder="Describa brevemente su situación..." 
-                      className="min-h-[120px] bg-card"
+                    <label htmlFor="message" className="font-serif text-sm" style={{ color: "hsl(22 52% 13% / 0.7)", letterSpacing: "0.05em" }}>Su consulta</label>
+                    <Textarea
+                      id="message"
+                      required
+                      placeholder="Describa brevemente su situación..."
+                      className="rounded-none border-0 border-b font-serif resize-none min-h-[100px]"
+                      style={{ background: "transparent", borderBottom: "1px solid hsl(22 52% 13% / 0.25)", boxShadow: "none" }}
+                      data-testid="textarea-message"
                     />
                   </div>
-                  
-                  <Button type="submit" className="w-full font-serif text-lg h-12 rounded-none">
-                    Enviar mensaje
-                  </Button>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      data-testid="button-submit"
+                      className="w-full py-3.5 font-serif tracking-widest transition-all"
+                      style={{
+                        background: "hsl(22 55% 28%)",
+                        color: "hsl(36 28% 92%)",
+                        fontSize: "0.8rem",
+                        letterSpacing: "0.2em",
+                        border: "none"
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "hsl(22 55% 23%)")}
+                      onMouseLeave={e => (e.currentTarget.style.background = "hsl(22 55% 28%)")}
+                    >
+                      ENVIAR MENSAJE
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -430,36 +724,55 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-foreground text-background/80 py-12 border-t border-background/10">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2 text-primary">
-            <Scale className="h-6 w-6" />
-            <span className="font-serif text-xl font-bold tracking-wide text-background">SGC Abogados</span>
+      {/* ── FOOTER ── */}
+      <footer
+        className="py-12"
+        style={{ background: "hsl(22 52% 10%)", borderTop: "1px solid hsl(22 52% 18%)" }}
+      >
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5" style={{ color: "hsl(22 55% 55%)" }}>
+            <Scale className="h-5 w-5" strokeWidth={1.4} />
+            <span className="font-serif tracking-widest" style={{ color: "hsl(36 28% 80%)", letterSpacing: "0.18em", fontSize: "0.9rem" }}>
+              SGC ABOGADOS
+            </span>
           </div>
-          
-          <div className="text-sm text-center md:text-left">
-            <p>&copy; {new Date().getFullYear()} SGC Abogados. Todos los derechos reservados.</p>
-          </div>
-          
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-primary transition-colors">Aviso de Privacidad</a>
-            <span className="text-background/30">|</span>
-            <a href="#" className="hover:text-primary transition-colors">Términos de Servicio</a>
+
+          <p className="font-serif text-sm text-center" style={{ color: "hsl(36 28% 60% / 0.5)" }}>
+            &copy; {new Date().getFullYear()} SGC Abogados. Todos los derechos reservados.
+          </p>
+
+          <div className="flex gap-6">
+            {["Aviso de Privacidad", "Términos de Servicio"].map((label) => (
+              <a
+                key={label}
+                href="#"
+                className="font-serif text-sm transition-colors"
+                style={{ color: "hsl(36 28% 60% / 0.45)", letterSpacing: "0.04em" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "hsl(22 55% 55%)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "hsl(36 28% 60% / 0.45)")}
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
-      <a 
-        href="https://wa.me/573001234567" 
-        target="_blank" 
+      {/* ── FLOATING WHATSAPP ── */}
+      <a
+        href="https://wa.me/573001234567"
+        target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#20bd5a] hover:scale-110 transition-all z-50 group"
+        data-testid="link-whatsapp"
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-105 z-50 group"
+        style={{ background: "#25D366" }}
         aria-label="Contactar por WhatsApp"
       >
-        <MessageCircle className="w-7 h-7" />
-        <span className="absolute right-full mr-4 bg-background text-foreground text-sm py-1 px-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-medium">
+        <MessageCircle className="w-7 h-7 text-white" />
+        <span
+          className="absolute right-full mr-4 text-sm py-1.5 px-4 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-serif"
+          style={{ background: "hsl(22 52% 13%)", color: "hsl(36 28% 87%)", letterSpacing: "0.04em" }}
+        >
           Chatea con nosotros
         </span>
       </a>

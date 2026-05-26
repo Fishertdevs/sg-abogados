@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "SGC Abogados"
+version = "1.0.0"
+id = "artifacts/sgc-abogados"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25458
+
+[services.development]
+run = "pnpm --filter @workspace/sgc-abogados run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sgc-abogados", "run", "build" ]
+publicDir = "artifacts/sgc-abogados/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25458"
+BASE_PATH = "/"

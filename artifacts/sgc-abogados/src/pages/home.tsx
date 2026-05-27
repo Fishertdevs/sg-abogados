@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Scale,
   Users,
@@ -16,33 +16,93 @@ import {
   Mail,
   MapPin,
   Facebook,
-  Instagram
+  Instagram,
+  Car,
+  Building2,
+  FileText,
+  Shield,
+  ChevronDown
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import justiceHeroImg from "@assets/justice_hero.png";
+import justiceHeroImg from "@assets/image_1779849869728.png";
 import justiceDetailImg from "@assets/justice_detail.png";
 
-/* ── Brand tokens ─────────────────────────────────────── */
-const NAVY   = "hsl(220 62% 18%)";   /* deep navy  #0D1C49  */
-const NAVY2  = "hsl(220 58% 26%)";   /* mid navy   #1A2F6B  */
-const GOLD   = "hsl(43 72% 44%)";    /* gold       #C49A18  */
-const GOLD2  = "hsl(41 65% 55%)";    /* light gold #D4B03A  */
-const LIGHT  = "hsl(220 30% 97%)";   /* off-white            */
-const DARK   = "hsl(220 65% 10%)";   /* very dark navy       */
-const DARKBG = "hsl(220 65% 7%)";    /* footer bg            */
+/* ─── Design tokens ────────────────────────────────────── */
+const N900 = "#0A1628";   /* darkest navy */
+const N800 = "#0F2150";   /* deep navy    */
+const N700 = "#1A2F6B";   /* mid navy     */
+const GOLD  = "#C49A18";  /* primary gold */
+const GOLD2 = "#D4B03A";  /* lighter gold */
+const OFF   = "#F7F8FC";  /* off-white    */
+const WARM  = "#F2EDE4";  /* warm cream   */
 
+/* Fade-in-up variant */
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7 } }
+};
+
+/* Stagger container */
+const stagger = { show: { transition: { staggerChildren: 0.1 } } };
+
+/* ─── Practice areas (from Sofia Garavito reference) ─────── */
+const AREAS = [
+  {
+    icon: Scale,
+    title: "Derecho Penal",
+    desc: "Defensa y representación jurídica en procesos penales, denuncias, audiencias y protección de derechos fundamentales.",
+    items: ["Defensa técnica", "Denuncias y querellas", "Audiencias preliminares", "Asistencia a víctimas", "Procesos ante Fiscalía y juzgados"]
+  },
+  {
+    icon: Briefcase,
+    title: "Derecho Laboral",
+    desc: "Asesoría integral para trabajadores y empleadores en conflictos laborales y protección de derechos.",
+    items: ["Liquidaciones e indemnizaciones", "Despidos injustificados", "Acoso laboral", "Contratos laborales", "Conciliaciones y demandas"]
+  },
+  {
+    icon: Building2,
+    title: "Derecho Administrativo",
+    desc: "Representación en actuaciones ante entidades públicas y defensa de derechos frente a decisiones administrativas.",
+    items: ["Derechos de petición", "Acciones constitucionales", "Procesos contencioso-administrativos", "Reparación directa", "Nulidad y restablecimiento"]
+  },
+  {
+    icon: Shield,
+    title: "Derecho Disciplinario Policivo",
+    desc: "Defensa y acompañamiento jurídico en investigaciones y procesos disciplinarios de carácter policivo.",
+    items: ["Descargos y defensa técnica", "Recursos y apelaciones", "Acompañamiento en audiencias", "Asesoría preventiva disciplinaria"]
+  },
+  {
+    icon: Car,
+    title: "Derecho de Tránsito",
+    desc: "Asesoría y representación en asuntos relacionados con infracciones y procedimientos de tránsito.",
+    items: ["Comparendos", "Audiencias de tránsito", "Impugnaciones", "Accidentes de tránsito", "Cobros coactivos"]
+  },
+  {
+    icon: Users,
+    title: "Derecho de Familia",
+    desc: "Acompañamiento en asuntos familiares con enfoque humano, conciliatorio y estratégico.",
+    items: ["Cuota alimentaria", "Custodia y visitas", "Divorcios", "Sucesiones", "Unión marital de hecho"]
+  },
+  {
+    icon: FileText,
+    title: "Derecho Civil",
+    desc: "Soluciones legales en conflictos patrimoniales, contractuales y obligaciones civiles.",
+    items: ["Procesos ejecutivos", "Contratos", "Responsabilidad civil", "Cobro de cartera", "Declarativos civiles"]
+  }
+];
+
+/* ─── Component ─────────────────────────────────────────── */
 export default function Home() {
   const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollY } = useScroll();
+  const navBg = useTransform(scrollY, [0, 80], ["rgba(247,248,252,0.0)", "rgba(247,248,252,0.97)"]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Mensaje enviado",
-      description: "Nos pondremos en contacto con usted lo más pronto posible.",
-    });
+    toast({ title: "Mensaje enviado", description: "Nos pondremos en contacto con usted lo más pronto posible." });
     (e.target as HTMLFormElement).reset();
   };
 
@@ -54,482 +114,357 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-background">
+    <div className="min-h-[100dvh] flex flex-col" style={{ background: OFF, color: N900 }}>
 
-      {/* ── NAVBAR ── */}
-      <header
-        className="sticky top-0 z-50 w-full"
-        style={{
-          background: `${LIGHT}f7`,
-          backdropFilter: "blur(6px)",
-          borderBottom: `1px solid hsl(220 20% 82% / 0.5)`
-        }}
+      {/* ═══════════════════════════════════════════════════
+          NAVBAR — transparent → frosted on scroll
+      ══════════════════════════════════════════════════════ */}
+      <motion.header
+        style={{ backgroundColor: navBg }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm"
       >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <Scale className="h-6 w-6" strokeWidth={1.5} style={{ color: GOLD }} />
-            <span
-              className="font-serif tracking-widest"
-              style={{ color: NAVY, letterSpacing: "0.18em", fontSize: "1rem" }}
-            >
+        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between" style={{ borderBottom: `1px solid ${N800}12` }}>
+          <a href="#inicio" className="flex items-center gap-2.5">
+            <Scale strokeWidth={1.4} className="w-5 h-5" style={{ color: GOLD }} />
+            <span className="font-serif" style={{ color: N800, letterSpacing: "0.2em", fontSize: "0.82rem", fontWeight: 500 }}>
               SGC ABOGADOS
             </span>
-          </div>
+          </a>
 
-          {/* Desktop nav — no CTA button */}
           <nav className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
+            {navLinks.map(l => (
               <a
-                key={link.name}
-                href={link.href}
-                className="font-serif text-xs transition-colors"
-                style={{ color: `${NAVY}99`, letterSpacing: "0.18em" }}
+                key={l.name} href={l.href}
+                className="font-serif transition-colors duration-200"
+                style={{ fontSize: "0.62rem", letterSpacing: "0.2em", color: `${N800}99` }}
                 onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                onMouseLeave={e => (e.currentTarget.style.color = `${NAVY}99`)}
-              >
-                {link.name}
-              </a>
+                onMouseLeave={e => (e.currentTarget.style.color = `${N800}99`)}
+              >{l.name}</a>
             ))}
           </nav>
 
-          <button
-            className="md:hidden p-2"
-            style={{ color: NAVY }}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            data-testid="button-mobile-menu"
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
+          <button className="md:hidden p-2" style={{ color: N800 }}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <div
-            className="md:hidden absolute top-20 left-0 w-full p-6 flex flex-col gap-5 shadow-lg"
-            style={{ background: LIGHT, borderBottom: `1px solid hsl(220 20% 82%)` }}
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="font-serif text-sm tracking-widest"
-                style={{ color: NAVY, letterSpacing: "0.15em" }}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
+          <div className="md:hidden p-6 flex flex-col gap-4 shadow-lg" style={{ background: OFF, borderBottom: `1px solid ${N800}20` }}>
+            {navLinks.map(l => (
+              <a key={l.name} href={l.href} className="font-serif text-xs tracking-widest" style={{ color: N800 }}
+                onClick={() => setMobileMenuOpen(false)}>{l.name}</a>
             ))}
           </div>
         )}
-      </header>
+      </motion.header>
 
-      <main className="flex-1">
+      <main className="flex-1 pt-[72px]">
 
-        {/* ── HERO ── */}
-        <section
-          id="inicio"
-          className="relative overflow-hidden"
-          style={{ minHeight: "calc(100vh - 80px)", background: LIGHT }}
-        >
-          {/* Subtle diagonal background accent */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: `linear-gradient(135deg, ${LIGHT} 0%, hsl(220 25% 93%) 50%, hsl(220 30% 90%) 100%)`
-            }}
-          />
+        {/* ═══════════════════════════════════════════════════
+            HERO — split, next-level
+        ══════════════════════════════════════════════════════ */}
+        <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #F7F8FC 0%, #EEF0F7 40%, #E8EAF2 100%)" }}>
 
-          <div
-            className="relative z-10 grid grid-cols-1 md:grid-cols-2 h-full"
-            style={{ minHeight: "calc(100vh - 80px)" }}
-          >
+          {/* Warm parchment blur circle — bottom left */}
+          <div className="absolute pointer-events-none" style={{
+            bottom: "-120px", left: "-80px", width: "520px", height: "520px", borderRadius: "50%",
+            background: `radial-gradient(circle, ${WARM}CC 0%, transparent 70%)`,
+            filter: "blur(40px)"
+          }} />
+          {/* Gold blur — top right corner of left col */}
+          <div className="absolute pointer-events-none" style={{
+            top: "60px", left: "30%", width: "300px", height: "300px", borderRadius: "50%",
+            background: `radial-gradient(circle, ${GOLD}18 0%, transparent 70%)`,
+            filter: "blur(30px)"
+          }} />
+
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "100vh" }}>
+
             {/* LEFT — content */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              className="flex flex-col justify-center items-center text-center px-10 lg:px-20 py-16"
-            >
-              {/* Scale icon */}
-              <div className="mb-4">
-                <Scale className="w-14 h-14 mx-auto" strokeWidth={1} style={{ color: GOLD }} />
-              </div>
+            <div className="flex flex-col justify-center items-start px-12 lg:px-20 py-24">
 
-              {/* S G C */}
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <svg width="36" height="50" viewBox="0 0 36 50" fill="none">
-                  <path d="M32 25C26 17,16 11,8 7 M32 25C26 33,16 39,8 43 M32 25C22 23,14 19,6 13 M32 25C22 27,14 31,6 37"
-                    stroke={GOLD} strokeWidth="1.2" strokeLinecap="round" opacity="0.55"/>
-                </svg>
-                <h1
-                  className="font-serif font-semibold leading-none px-1"
-                  style={{ fontSize: "clamp(3.5rem,8vw,5.5rem)", color: NAVY, letterSpacing: "0.06em" }}
-                >
-                  SGC
-                </h1>
-                <svg width="36" height="50" viewBox="0 0 36 50" fill="none" style={{ transform: "scaleX(-1)" }}>
-                  <path d="M32 25C26 17,16 11,8 7 M32 25C26 33,16 39,8 43 M32 25C22 23,14 19,6 13 M32 25C22 27,14 31,6 37"
-                    stroke={GOLD} strokeWidth="1.2" strokeLinecap="round" opacity="0.55"/>
-                </svg>
-              </div>
+              {/* Eyebrow */}
+              <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
+                className="flex items-center gap-3 mb-10">
+                <div style={{ width: "32px", height: "1px", background: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>
+                  EXPERIENCIA · COMPROMISO · RESULTADOS
+                </span>
+              </motion.div>
 
-              {/* Divider + diamond */}
-              <div className="flex items-center justify-center gap-2 my-2 w-64">
-                <div className="h-px flex-1" style={{ background: `${GOLD}55` }} />
-                <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}88` }} />
-                <div className="h-px flex-1" style={{ background: `${GOLD}55` }} />
-              </div>
+              {/* SGC Logotype */}
+              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.15 }} className="mb-3">
+                {/* Laurels + SGC */}
+                <div className="flex items-center gap-0 mb-1">
+                  {/* Left laurel */}
+                  <svg width="28" height="44" viewBox="0 0 28 44" fill="none">
+                    <path d="M24 22C19 15,12 10,5 7 M24 22C19 29,12 34,5 37 M24 22C16 21,10 17,4 12 M24 22C16 23,10 27,4 32"
+                      stroke={GOLD} strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
+                  </svg>
+                  <Scale strokeWidth={0.9} style={{ color: GOLD, width: "28px", height: "28px", marginBottom: "2px" }} />
+                  <svg width="28" height="44" viewBox="0 0 28 44" fill="none" style={{ transform: "scaleX(-1)" }}>
+                    <path d="M24 22C19 15,12 10,5 7 M24 22C19 29,12 34,5 37 M24 22C16 21,10 17,4 12 M24 22C16 23,10 27,4 32"
+                      stroke={GOLD} strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
+                  </svg>
+                </div>
 
-              <p
-                className="font-serif tracking-widest mb-4"
-                style={{ fontSize: "0.72rem", color: GOLD, letterSpacing: "0.55em" }}
-              >
-                ABOGADOS
-              </p>
+                <h1 style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontSize: "clamp(4rem, 9vw, 6.5rem)",
+                  color: N800,
+                  letterSpacing: "0.04em",
+                  lineHeight: 1,
+                  fontWeight: 600
+                }}>SGC</h1>
 
-              <div className="w-64 h-px mb-4" style={{ background: `${NAVY}18` }} />
+                {/* Divider */}
+                <div className="flex items-center gap-2 my-2" style={{ width: "200px" }}>
+                  <div style={{ flex: 1, height: "1px", background: `${GOLD}50` }} />
+                  <div style={{ width: "5px", height: "5px", background: `${GOLD}80`, transform: "rotate(45deg)" }} />
+                  <div style={{ flex: 1, height: "1px", background: `${GOLD}50` }} />
+                </div>
 
-              <p
-                className="font-serif tracking-widest mb-10"
-                style={{ fontSize: "0.6rem", color: `${NAVY}60`, letterSpacing: "0.28em" }}
-              >
-                EXPERIENCIA &nbsp;|&nbsp; COMPROMISO &nbsp;|&nbsp; RESULTADOS
-              </p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.7rem", color: GOLD, letterSpacing: "0.55em", fontWeight: 400 }}>
+                  ABOGADOS
+                </p>
+              </motion.div>
+
+              {/* Separator */}
+              <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
+                transition={{ duration: 0.9, delay: 0.5, ease: "easeInOut" }}
+                style={{ width: "200px", height: "1px", background: `${N800}15`, marginBottom: "24px", transformOrigin: "left" }} />
 
               {/* Body copy */}
-              <div className="max-w-xs mb-8">
-                <p
-                  className="font-serif leading-relaxed"
-                  style={{ fontSize: "1.05rem", color: `${NAVY}BB` }}
-                >
-                  Abogados con experiencia en derecho de familia y laboral, enfocados en ofrecer{" "}
-                  <strong style={{ color: NAVY }}>
-                    acompañamiento jurídico responsable, cercano y eficaz.
-                  </strong>
-                </p>
-              </div>
+              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "#0A1628", lineHeight: 1.75, maxWidth: "320px", marginBottom: "20px" }}>
+                Abogados con experiencia en derecho de familia y laboral, enfocados en ofrecer{" "}
+                <strong style={{ color: N800 }}>acompañamiento jurídico responsable, cercano y eficaz.</strong>
+              </motion.p>
 
               {/* CTA label */}
-              <p
-                className="font-serif tracking-widest mb-6"
-                style={{ fontSize: "0.6rem", color: `${NAVY}50`, letterSpacing: "0.25em" }}
-              >
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.58rem", color: `${N800}60`, letterSpacing: "0.28em", marginBottom: "18px" }}>
                 CONSULTAS Y ACOMPAÑAMIENTO JURÍDICO:
-              </p>
+              </motion.p>
 
-              {/* Text-only CTAs — no borders */}
-              <div className="flex items-center gap-6">
-                <a
-                  href="#contacto"
-                  data-testid="link-hero-contacto"
-                  className="font-serif transition-all"
-                  style={{
-                    fontSize: "0.9rem",
-                    color: NAVY,
-                    letterSpacing: "0.08em",
-                    paddingBottom: "2px",
-                    borderBottom: `1px solid ${GOLD}88`
-                  }}
+              {/* CTAs */}
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="flex items-center gap-7">
+                <a href="#contacto" data-testid="link-hero-contacto"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: N800, letterSpacing: "0.08em", paddingBottom: "2px", borderBottom: `1px solid ${GOLD}AA` }}
                   onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                  onMouseLeave={e => (e.currentTarget.style.color = NAVY)}
-                >
+                  onMouseLeave={e => (e.currentTarget.style.color = N800)}>
                   Agendar consulta
                 </a>
-                <span style={{ color: `${NAVY}25` }}>|</span>
-                <a
-                  href="#areas"
-                  data-testid="link-hero-areas"
-                  className="font-serif transition-all"
-                  style={{ fontSize: "0.9rem", color: `${NAVY}70`, letterSpacing: "0.08em" }}
+                <span style={{ color: `${N800}25`, fontSize: "0.7rem" }}>|</span>
+                <a href="#areas" data-testid="link-hero-areas"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: "#0F215099", letterSpacing: "0.08em" }}
                   onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                  onMouseLeave={e => (e.currentTarget.style.color = `${NAVY}70`)}
-                >
+                  onMouseLeave={e => (e.currentTarget.style.color = "#0F215099")}>
                   Nuestras áreas
                 </a>
-              </div>
+              </motion.div>
 
-              <div className="mt-12 opacity-40">
-                <svg width="14" height="14" viewBox="0 0 14 14">
-                  <rect x="3" y="3" width="8" height="8" transform="rotate(45 7 7)" fill={GOLD} />
-                </svg>
-              </div>
-            </motion.div>
+              {/* Scroll cue */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
+                className="absolute bottom-10 left-12 lg:left-20 flex items-center gap-2"
+                style={{ color: `${N800}40` }}>
+                <div style={{ width: "20px", height: "1px", background: "currentColor" }} />
+                <ChevronDown size={14} />
+              </motion.div>
+            </div>
 
-            {/* RIGHT — AI-generated Lady Justice */}
+            {/* RIGHT — Lady Justice, warm-blended */}
             <div className="relative hidden md:block">
-              {/* Fade blend with left */}
-              <div
-                className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
-                style={{
-                  width: "45%",
-                  background: `linear-gradient(to right, hsl(220 25% 93%) 0%, hsl(220 25% 93% / 0.7) 50%, transparent 100%)`
-                }}
-              />
-              <img
-                src={justiceHeroImg}
-                alt="Diosa de la Justicia — SGC Abogados"
+              {/* Warm parchment radial behind statue */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: `radial-gradient(ellipse at 60% 60%, ${WARM}FF 0%, #EEF0F7 55%, transparent 100%)`
+              }} />
+              {/* Left fade blend */}
+              <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" style={{
+                width: "42%",
+                background: `linear-gradient(to right, #EEF0F7 0%, #EEF0F7CC 50%, transparent 100%)`
+              }} />
+              <img src={justiceHeroImg} alt="Diosa de la Justicia"
                 data-testid="img-lady-justice-hero"
                 className="absolute inset-0 w-full h-full"
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                  filter: "brightness(1.02)"
-                }}
+                style={{ objectFit: "cover", objectPosition: "center top" }}
               />
+              {/* Subtle gold diamond watermark */}
+              <div className="absolute bottom-12 right-12 z-20 opacity-20">
+                <svg width="18" height="18" viewBox="0 0 18 18">
+                  <rect x="4" y="4" width="10" height="10" transform="rotate(45 9 9)" fill={GOLD}/>
+                </svg>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── ÁREAS DE PRÁCTICA ── */}
-        <section id="areas" className="py-28" style={{ background: "hsl(220 25% 94%)" }}>
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center mb-16">
-              <p
-                className="font-serif tracking-widest mb-4"
-                style={{ fontSize: "0.62rem", color: GOLD, letterSpacing: "0.38em" }}
-              >
-                ESPECIALIDADES
-              </p>
-              <h2
-                className="font-serif font-medium mb-5"
-                style={{ fontSize: "clamp(2rem,4vw,2.8rem)", color: NAVY }}
-              >
+        {/* ═══════════════════════════════════════════════════
+            ÁREAS DE PRÁCTICA — 7 areas, compact premium grid
+        ══════════════════════════════════════════════════════ */}
+        <section id="areas" className="py-24 relative overflow-hidden">
+          {/* Warm blur accent */}
+          <div className="absolute pointer-events-none" style={{
+            top: "-60px", right: "-100px", width: "500px", height: "500px", borderRadius: "50%",
+            background: `radial-gradient(circle, ${WARM}DD 0%, transparent 70%)`,
+            filter: "blur(50px)"
+          }} />
+
+          <div className="max-w-7xl mx-auto px-8 relative z-10">
+            {/* Section header */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
+              variants={fadeUp} className="mb-14">
+              <div className="flex items-center gap-3 mb-4">
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>ESPECIALIDADES</span>
+              </div>
+              <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: N800, fontWeight: 500 }}>
                 Áreas de Práctica
               </h2>
-              <div className="flex items-center justify-center gap-3">
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-                <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}77` }} />
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {[
-                {
-                  icon: Users,
-                  title: "Derecho de Familia",
-                  desc: "Acompañamiento sensible y firme en los procesos que involucran a sus seres queridos, protegiendo siempre el bienestar familiar.",
-                  items: [
-                    "Divorcios y cesación de efectos civiles",
-                    "Custodia y cuidado personal",
-                    "Fijación de cuotas alimentarias",
-                    "Sucesiones y testamentos",
-                    "Declaración de unión marital de hecho"
-                  ]
-                },
-                {
-                  icon: Briefcase,
-                  title: "Derecho Laboral",
-                  desc: "Defensa de los derechos de trabajadores y asesoría precisa para empleadores, buscando siempre la justicia en el ámbito laboral.",
-                  items: [
-                    "Despidos injustificados",
-                    "Liquidaciones y prestaciones sociales",
-                    "Acoso laboral (Ley 1010)",
-                    "Procesos disciplinarios",
-                    "Pensiones y seguridad social"
-                  ]
-                }
-              ].map((area, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: idx * 0.15 }}
-                  className="p-10"
-                  style={{
-                    background: LIGHT,
-                    borderTop: `3px solid ${GOLD}`
-                  }}
-                >
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center mb-6"
-                    style={{ background: `${NAVY}12` }}
-                  >
-                    <area.icon className="w-7 h-7" strokeWidth={1.3} style={{ color: NAVY }} />
-                  </div>
-                  <h3
-                    className="font-serif font-medium mb-3"
-                    style={{ fontSize: "1.6rem", color: NAVY }}
-                  >
-                    {area.title}
-                  </h3>
-                  <p
-                    className="font-serif leading-relaxed mb-7"
-                    style={{ color: `${NAVY}88`, fontSize: "0.97rem" }}
-                  >
-                    {area.desc}
-                  </p>
-                  <ul className="space-y-3">
-                    {area.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle
-                          className="w-4 h-4 shrink-0 mt-1"
-                          strokeWidth={1.5}
-                          style={{ color: GOLD }}
-                        />
-                        <span
-                          className="font-serif"
-                          style={{ color: `${NAVY}99`, fontSize: "0.95rem" }}
-                        >
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
+            {/* 7-area grid: 4 top, 3 bottom */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+              {AREAS.slice(0, 4).map((area, i) => (
+                <AreaCard key={i} area={area} />
               ))}
-            </div>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {AREAS.slice(4).map((area, i) => (
+                <AreaCard key={i} area={area} />
+              ))}
+            </motion.div>
           </div>
         </section>
 
-        {/* ── POR QUÉ ELEGIRNOS ── */}
-        <section className="py-28" style={{ background: NAVY }}>
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center mb-16">
-              <p
-                className="font-serif tracking-widest mb-4"
-                style={{ fontSize: "0.62rem", color: GOLD2, letterSpacing: "0.38em", opacity: 0.75 }}
-              >
-                NUESTRA PROPUESTA
-              </p>
-              <h2
-                className="font-serif font-medium mb-5"
-                style={{ fontSize: "clamp(2rem,4vw,2.8rem)", color: LIGHT }}
-              >
+        {/* ═══════════════════════════════════════════════════
+            POR QUÉ ELEGIRNOS — navy bg, visible text
+        ══════════════════════════════════════════════════════ */}
+        <section className="py-24 relative overflow-hidden" style={{ background: N800 }}>
+          {/* Warm blur — bottom left */}
+          <div className="absolute pointer-events-none" style={{
+            bottom: "-80px", left: "-60px", width: "400px", height: "400px", borderRadius: "50%",
+            background: `radial-gradient(circle, ${WARM}20 0%, transparent 70%)`,
+            filter: "blur(40px)"
+          }} />
+
+          <div className="max-w-7xl mx-auto px-8 relative z-10">
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+              <div className="flex items-center gap-3 mb-4">
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD2, letterSpacing: "0.38em", opacity: 0.8 }}>NUESTRA PROPUESTA</span>
+              </div>
+              <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: "#FFFFFF", fontWeight: 500 }}>
                 Por qué elegirnos
               </h2>
-              <div className="flex items-center justify-center gap-3">
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-                <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}77` }} />
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { icon: Award,         title: "Experiencia",      desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas." },
-                { icon: ShieldCheck,   title: "Compromiso",       desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige." },
-                { icon: HeartHandshake,title: "Acompañamiento",   desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso." },
-                { icon: Clock,         title: "Resultados",       desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
-              ].map((f, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.12 }}
-                  className="text-center"
-                >
-                  <div
-                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-                    style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}33` }}
-                  >
-                    <f.icon className="w-7 h-7" strokeWidth={1.3} style={{ color: GOLD }} />
+                { icon: Award,          title: "Experiencia",      desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas para su caso." },
+                { icon: ShieldCheck,    title: "Compromiso",       desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige y usted merece." },
+                { icon: HeartHandshake, title: "Acompañamiento",   desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso, sin sorpresas." },
+                { icon: Clock,          title: "Resultados",       desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
+              ].map((f, i) => (
+                <motion.div key={i} variants={fadeUp} className="group">
+                  <div className="mb-5 w-11 h-11 rounded-full flex items-center justify-center"
+                    style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}33` }}>
+                    <f.icon size={18} strokeWidth={1.4} style={{ color: GOLD }} />
                   </div>
-                  <h3 className="font-serif font-medium mb-3" style={{ fontSize: "1.2rem", color: LIGHT }}>
+                  <h3 className="font-serif mb-3" style={{ fontSize: "1.15rem", color: "#FFFFFF", fontWeight: 500 }}>
                     {f.title}
                   </h3>
-                  <p className="font-serif leading-relaxed" style={{ color: `${LIGHT}88`, fontSize: "0.9rem" }}>
+                  <p className="font-serif" style={{ fontSize: "0.88rem", color: "rgba(247,248,252,0.78)", lineHeight: 1.75 }}>
                     {f.desc}
                   </p>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* ── SOBRE NOSOTROS ── */}
-        <section id="nosotros" className="py-28" style={{ background: LIGHT }}>
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-20 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
-              >
-                <div
-                  className="aspect-[4/5] relative overflow-hidden"
-                  style={{ borderTop: `2px solid ${GOLD}55`, borderLeft: `2px solid ${GOLD}55` }}
-                >
-                  <img
-                    src={justiceDetailImg}
-                    alt="SGC Abogados — Diosa de la Justicia"
-                    data-testid="img-lady-justice-nosotros"
-                    className="w-full h-full"
-                    style={{
-                      objectFit: "cover",
-                      objectPosition: "center top",
-                      filter: "brightness(1.0)"
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: `linear-gradient(to top, ${NAVY}22, transparent 60%)` }}
-                  />
+        {/* ═══════════════════════════════════════════════════
+            SOBRE NOSOTROS — image LEFT, text RIGHT
+        ══════════════════════════════════════════════════════ */}
+        <section id="nosotros" className="py-24 relative overflow-hidden" style={{ background: OFF }}>
+          {/* Warm parchment accent — right side */}
+          <div className="absolute pointer-events-none" style={{
+            top: "0", right: "-60px", width: "560px", height: "100%",
+            background: `linear-gradient(to left, ${WARM}88 0%, transparent 60%)`
+          }} />
+
+          <div className="max-w-7xl mx-auto px-8 relative z-10">
+            <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+              {/* LEFT — image with premium border treatment */}
+              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.9, ease: "easeInOut" }}
+                className="relative">
+                {/* Outer gold border frame — offset */}
+                <div className="absolute pointer-events-none" style={{
+                  top: "16px", left: "16px", right: "-16px", bottom: "-16px",
+                  border: `1px solid ${GOLD}30`,
+                  zIndex: 0
+                }} />
+                {/* Inner frame */}
+                <div className="relative" style={{
+                  border: `1px solid ${GOLD}50`,
+                  zIndex: 1
+                }}>
+                  {/* Gold corner accents */}
+                  {[["top-0 left-0", "0,0 16,0 0,16"], ["top-0 right-0", "0,0 -16,0 0,16"], ["bottom-0 left-0", "0,0 16,0 0,-16"], ["bottom-0 right-0", "0,0 -16,0 0,-16"]].map(([pos, pts], ci) => (
+                    <svg key={ci} width="20" height="20" viewBox="-2 -2 20 20"
+                      className={`absolute ${pos} z-20`}>
+                      <polyline points={pts} fill="none" stroke={GOLD} strokeWidth="2"/>
+                    </svg>
+                  ))}
+                  <div className="overflow-hidden" style={{ aspectRatio: "4/5" }}>
+                    <img src={justiceDetailImg} alt="SGC Abogados"
+                      data-testid="img-lady-justice-nosotros"
+                      className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                      style={{ objectFit: "cover", objectPosition: "center top", filter: "brightness(1.02)" }}
+                    />
+                  </div>
                 </div>
-                <div
-                  className="absolute -bottom-4 -right-4 w-full h-full pointer-events-none"
-                  style={{ border: `2px solid ${GOLD}20`, zIndex: -1 }}
-                />
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
-                <p
-                  className="font-serif tracking-widest mb-5"
-                  style={{ fontSize: "0.62rem", color: GOLD, letterSpacing: "0.38em" }}
-                >
-                  QUIÉNES SOMOS
-                </p>
-                <h2
-                  className="font-serif font-medium mb-4"
-                  style={{ fontSize: "clamp(2rem,4vw,2.6rem)", color: NAVY }}
-                >
+              {/* RIGHT — text */}
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.9, ease: "easeInOut" }}>
+                <div className="flex items-center gap-3 mb-5">
+                  <div style={{ width: "28px", height: "1px", background: GOLD }} />
+                  <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>QUIÉNES SOMOS</span>
+                </div>
+                <h2 className="font-serif mb-6" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: N800, fontWeight: 500 }}>
                   Sobre Nosotros
                 </h2>
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-                  <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}77` }} />
-                </div>
-                <p
-                  className="font-serif italic mb-6"
-                  style={{ fontSize: "1.15rem", color: NAVY2, lineHeight: "1.8" }}
-                >
+                <p className="font-serif italic mb-7" style={{ fontSize: "1.1rem", color: N700, lineHeight: 1.8, borderLeft: `2px solid ${GOLD}`, paddingLeft: "16px" }}>
                   "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
                 </p>
-                <div className="space-y-5" style={{ color: `${NAVY}BB`, fontSize: "1rem", lineHeight: "1.85" }}>
-                  <p className="font-serif">
-                    SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.
-                  </p>
-                  <p className="font-serif">
-                    Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia, hablándole con la verdad sobre las posibilidades reales de su caso.
-                  </p>
-                  <p className="font-serif">
-                    Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.
-                  </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  {[
+                    "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
+                    "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
+                    "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana."
+                  ].map((txt, i) => (
+                    <p key={i} className="font-serif" style={{ fontSize: "0.95rem", color: "#0A1628", lineHeight: 1.82 }}>
+                      {txt}
+                    </p>
+                  ))}
                 </div>
-                <div className="mt-10">
-                  <a
-                    href="#contacto"
-                    data-testid="link-nosotros-contacto"
-                    className="font-serif transition-all"
-                    style={{
-                      fontSize: "0.85rem",
-                      color: NAVY,
-                      letterSpacing: "0.1em",
-                      paddingBottom: "2px",
-                      borderBottom: `1px solid ${GOLD}88`
-                    }}
+                <div className="mt-9">
+                  <a href="#contacto" data-testid="link-nosotros-contacto"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.82rem", color: N800, letterSpacing: "0.12em", paddingBottom: "2px", borderBottom: `1px solid ${GOLD}BB` }}
                     onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                    onMouseLeave={e => (e.currentTarget.style.color = NAVY)}
-                  >
+                    onMouseLeave={e => (e.currentTarget.style.color = N800)}>
                     Agendar una consulta
                   </a>
                 </div>
@@ -538,302 +473,306 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── CONTACTO ── */}
-        <section id="contacto" className="py-28" style={{ background: "hsl(220 25% 94%)" }}>
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="text-center mb-16">
-              <p
-                className="font-serif tracking-widest mb-4"
-                style={{ fontSize: "0.62rem", color: GOLD, letterSpacing: "0.38em" }}
-              >
-                CONTÁCTENOS
-              </p>
-              <h2
-                className="font-serif font-medium mb-5"
-                style={{ fontSize: "clamp(2rem,4vw,2.8rem)", color: NAVY }}
-              >
+        {/* ═══════════════════════════════════════════════════
+            CONTACTO — form + info + location
+        ══════════════════════════════════════════════════════ */}
+        <section id="contacto" className="py-24 relative overflow-hidden" style={{ background: "#F0F2F8" }}>
+          {/* Warm blur — bottom right */}
+          <div className="absolute pointer-events-none" style={{
+            bottom: "-80px", right: "-80px", width: "500px", height: "500px", borderRadius: "50%",
+            background: `radial-gradient(circle, ${WARM}CC 0%, transparent 70%)`,
+            filter: "blur(50px)"
+          }} />
+
+          <div className="max-w-7xl mx-auto px-8 relative z-10">
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+              <div className="flex items-center gap-3 mb-4">
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>CONTÁCTENOS</span>
+              </div>
+              <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: N800, fontWeight: 500 }}>
                 Contacto
               </h2>
-              <div className="flex items-center justify-center gap-3">
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-                <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}77` }} />
-                <div className="h-px w-16" style={{ background: `${GOLD}55` }} />
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="grid md:grid-cols-5 gap-14">
-              {/* Info */}
-              <div className="md:col-span-2">
-                <h3
-                  className="font-serif font-medium mb-8"
-                  style={{ fontSize: "1.3rem", color: NAVY }}
-                >
-                  Información de contacto
-                </h3>
-                <div className="space-y-7">
-                  {[
-                    { icon: Phone,  label: "Teléfono",            value: "+57 (300) 123-4567" },
-                    { icon: Mail,   label: "Correo electrónico",  value: "contacto@sgcabogados.co" },
-                    { icon: MapPin, label: "Oficina principal",   value: "Bogotá, Colombia", note: "Atención con cita previa" }
-                  ].map(({ icon: Icon, label, value, note }, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <Icon className="w-5 h-5 shrink-0 mt-0.5" strokeWidth={1.4} style={{ color: GOLD }} />
-                      <div>
-                        <p className="font-serif text-sm font-medium" style={{ color: NAVY }}>{label}</p>
-                        <p className="font-serif" style={{ color: `${NAVY}88`, fontSize: "0.95rem" }}>{value}</p>
-                        {note && <p className="font-serif text-xs mt-0.5" style={{ color: `${NAVY}55` }}>{note}</p>}
-                      </div>
-                    </div>
-                  ))}
+            <div className="grid lg:grid-cols-5 gap-10">
+
+              {/* INFO + LOCATION — 2 cols */}
+              <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+                className="lg:col-span-2 flex flex-col gap-8">
+
+                {/* Contact data */}
+                <div>
+                  <h3 className="font-serif mb-6" style={{ fontSize: "1.1rem", color: N800, fontWeight: 500 }}>
+                    Información de contacto
+                  </h3>
+                  <div className="flex flex-col gap-5">
+                    {[
+                      { icon: Phone,  label: "Teléfono",           value: "+57 (300) 123-4567", href: "tel:+573001234567" },
+                      { icon: Mail,   label: "Correo electrónico", value: "contacto@sgcabogados.co", href: "mailto:contacto@sgcabogados.co" },
+                      { icon: MessageCircle, label: "WhatsApp",    value: "+57 (300) 123-4567", href: "https://wa.me/573001234567" },
+                    ].map(({ icon: Icon, label, value, href }, i) => (
+                      <a key={i} href={href} className="flex items-start gap-3 group">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                          style={{ background: `${N800}10` }}>
+                          <Icon size={14} strokeWidth={1.5} style={{ color: GOLD }} />
+                        </div>
+                        <div>
+                          <p className="font-serif" style={{ fontSize: "0.72rem", color: "#0F215099", letterSpacing: "0.1em" }}>{label.toUpperCase()}</p>
+                          <p className="font-serif transition-colors" style={{ fontSize: "0.92rem", color: N800 }}
+                            onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
+                            onMouseLeave={e => (e.currentTarget.style.color = N800)}>{value}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Form */}
-              <div className="md:col-span-3 p-10" style={{ background: LIGHT, borderTop: `3px solid ${GOLD}` }}>
-                <form onSubmit={handleSubmit} className="space-y-6" data-testid="form-contact">
-                  <div className="grid grid-cols-2 gap-5">
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="name"
-                        className="font-serif text-xs tracking-widest"
-                        style={{ color: `${NAVY}88`, letterSpacing: "0.12em" }}
-                      >
-                        NOMBRE COMPLETO
-                      </label>
-                      <Input
-                        id="name" required placeholder="Juan Pérez"
-                        className="rounded-none border-0 border-b font-serif bg-transparent"
-                        style={{ borderBottom: `1px solid ${NAVY}30`, boxShadow: "none" }}
-                        data-testid="input-name"
-                      />
-                    </div>
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="phone"
-                        className="font-serif text-xs tracking-widest"
-                        style={{ color: `${NAVY}88`, letterSpacing: "0.12em" }}
-                      >
-                        TELÉFONO
-                      </label>
-                      <Input
-                        id="phone" required placeholder="300 123 4567"
-                        className="rounded-none border-0 border-b font-serif bg-transparent"
-                        style={{ borderBottom: `1px solid ${NAVY}30`, boxShadow: "none" }}
-                        data-testid="input-phone"
-                      />
-                    </div>
+                {/* Location — address card + map */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <MapPin size={14} strokeWidth={1.5} style={{ color: GOLD }} />
+                    <span className="font-serif" style={{ fontSize: "0.72rem", color: "#0F215099", letterSpacing: "0.1em" }}>UBICACIÓN</span>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="email"
-                      className="font-serif text-xs tracking-widest"
-                      style={{ color: `${NAVY}88`, letterSpacing: "0.12em" }}
-                    >
-                      CORREO ELECTRÓNICO
-                    </label>
-                    <Input
-                      id="email" type="email" required placeholder="juan@ejemplo.com"
-                      className="rounded-none border-0 border-b font-serif bg-transparent"
-                      style={{ borderBottom: `1px solid ${NAVY}30`, boxShadow: "none" }}
-                      data-testid="input-email"
+                  {/* OpenStreetMap embed — Bogotá centro */}
+                  <div className="relative overflow-hidden mb-4" style={{ height: "180px", border: `1px solid ${GOLD}33` }}>
+                    <iframe
+                      src="https://www.openstreetmap.org/export/embed.html?bbox=-74.0780,-74.0700&layer=mapnik&marker=4.6093,-74.0721"
+                      title="Ubicación SGC Abogados"
+                      width="100%" height="100%"
+                      style={{ border: 0, display: "block", filter: "grayscale(0.3) sepia(0.1)" }}
+                      loading="lazy"
                     />
+                    {/* Gradient overlay to match palette */}
+                    <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: `inset 0 0 0 1px ${GOLD}33` }} />
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="area"
-                      className="font-serif text-xs tracking-widest"
-                      style={{ color: `${NAVY}88`, letterSpacing: "0.12em" }}
-                    >
+                  {/* Address details like Sofia Garavito flyer */}
+                  <div className="p-4" style={{ background: `${N800}08`, borderLeft: `2px solid ${GOLD}` }}>
+                    <p className="font-serif font-medium mb-0.5" style={{ fontSize: "0.92rem", color: N800 }}>
+                      Oficina SGC Abogados
+                    </p>
+                    <p className="font-serif" style={{ fontSize: "0.85rem", color: `${N800}AA` }}>
+                      Cl 12 B 8-23, Oficina 421
+                    </p>
+                    <p className="font-serif" style={{ fontSize: "0.85rem", color: `${N800}AA` }}>
+                      Bogotá, Colombia
+                    </p>
+                    <p className="font-serif mt-1" style={{ fontSize: "0.72rem", color: "#0F215099" }}>
+                      Atención con cita previa · Lun–Vie 8am–6pm
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* FORM — 3 cols */}
+              <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
+                className="lg:col-span-3 p-10"
+                style={{ background: OFF, borderTop: `3px solid ${GOLD}` }}>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6" data-testid="form-contact">
+                  <div className="grid grid-cols-2 gap-5">
+                    <FormField id="name" label="NOMBRE COMPLETO" placeholder="Juan Pérez" required />
+                    <FormField id="phone" label="TELÉFONO" placeholder="300 123 4567" required />
+                  </div>
+                  <FormField id="email" label="CORREO ELECTRÓNICO" type="email" placeholder="juan@ejemplo.com" required />
+
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="area" className="font-serif"
+                      style={{ fontSize: "0.62rem", letterSpacing: "0.18em", color: "#0F215099" }}>
                       ÁREA DE CONSULTA
                     </label>
-                    <select
-                      id="area" required
-                      data-testid="select-area"
+                    <select id="area" required data-testid="select-area"
                       className="w-full py-2 font-serif text-sm bg-transparent border-0 border-b focus:outline-none"
-                      style={{ borderBottom: `1px solid ${NAVY}30`, color: `${NAVY}CC` }}
-                    >
+                      style={{ borderBottom: `1px solid ${N800}28`, color: "#0A1628" }}>
                       <option value="">Seleccione un área</option>
-                      <option value="familia">Derecho de Familia</option>
-                      <option value="laboral">Derecho Laboral</option>
-                      <option value="otro">Otro</option>
+                      {AREAS.map(a => <option key={a.title} value={a.title}>{a.title}</option>)}
                     </select>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="message"
-                      className="font-serif text-xs tracking-widest"
-                      style={{ color: `${NAVY}88`, letterSpacing: "0.12em" }}
-                    >
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="message" className="font-serif"
+                      style={{ fontSize: "0.62rem", letterSpacing: "0.18em", color: "#0F215099" }}>
                       SU CONSULTA
                     </label>
-                    <Textarea
-                      id="message" required
-                      placeholder="Describa brevemente su situación..."
-                      className="rounded-none border-0 border-b font-serif resize-none min-h-[90px] bg-transparent"
-                      style={{ borderBottom: `1px solid ${NAVY}30`, boxShadow: "none" }}
-                      data-testid="textarea-message"
-                    />
+                    <Textarea id="message" required placeholder="Describa brevemente su situación..."
+                      className="rounded-none border-0 border-b font-serif resize-none min-h-[90px] bg-transparent focus-visible:ring-0"
+                      style={{ borderBottom: `1px solid ${N800}28`, boxShadow: "none", color: "#0A1628", fontSize: "0.92rem" }}
+                      data-testid="textarea-message" />
                   </div>
 
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      data-testid="button-submit"
-                      className="w-full py-3.5 font-serif tracking-widest transition-all"
-                      style={{
-                        background: NAVY,
-                        color: GOLD2,
-                        fontSize: "0.75rem",
-                        letterSpacing: "0.22em",
-                        border: "none"
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.background = NAVY2)}
-                      onMouseLeave={e => (e.currentTarget.style.background = NAVY)}
-                    >
-                      ENVIAR MENSAJE
-                    </button>
-                  </div>
+                  <button type="submit" data-testid="button-submit"
+                    className="w-full py-4 font-serif transition-all"
+                    style={{ background: N800, color: GOLD2, fontSize: "0.7rem", letterSpacing: "0.25em", border: "none", cursor: "pointer" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = N700)}
+                    onMouseLeave={e => (e.currentTarget.style.background = N800)}>
+                    ENVIAR MENSAJE
+                  </button>
                 </form>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* ── FOOTER — inspired by reference: dark bg, social icons, tagline ── */}
-      <footer style={{ background: DARKBG }}>
-        {/* Gold wave divider */}
+      {/* ═══════════════════════════════════════════════════
+          FOOTER — high contrast, fully visible
+      ══════════════════════════════════════════════════════ */}
+      <footer style={{ background: N900 }}>
+        {/* Wave divider */}
         <div style={{ lineHeight: 0 }}>
-          <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "60px" }}>
-            <path
-              d="M0,30 C360,60 1080,0 1440,30 L1440,0 L0,0 Z"
-              fill={NAVY}
-            />
+          <svg viewBox="0 0 1440 48" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "48px" }}>
+            <path d="M0,24 C360,48 1080,0 1440,24 L1440,0 L0,0 Z" fill={N800} />
           </svg>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 py-14 text-center">
+        <div className="max-w-5xl mx-auto px-8 py-14 text-center">
           {/* Logo */}
-          <div className="flex items-center justify-center gap-2.5 mb-6">
-            <Scale className="w-7 h-7" strokeWidth={1.3} style={{ color: GOLD }} />
-            <span
-              className="font-serif tracking-widest"
-              style={{ color: LIGHT, letterSpacing: "0.22em", fontSize: "1.1rem" }}
-            >
+          <div className="flex items-center justify-center gap-2.5 mb-5">
+            <Scale strokeWidth={1.3} className="w-6 h-6" style={{ color: GOLD }} />
+            <span className="font-serif" style={{ color: "#FFFFFF", letterSpacing: "0.24em", fontSize: "0.9rem", fontWeight: 500 }}>
               SGC ABOGADOS
             </span>
           </div>
 
           {/* Gold rule */}
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-20" style={{ background: `${GOLD}44` }} />
-            <div className="w-1.5 h-1.5 rotate-45" style={{ background: `${GOLD}66` }} />
-            <div className="h-px w-20" style={{ background: `${GOLD}44` }} />
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div style={{ width: "60px", height: "1px", background: `${GOLD}55` }} />
+            <div style={{ width: "5px", height: "5px", background: `${GOLD}77`, transform: "rotate(45deg)" }} />
+            <div style={{ width: "60px", height: "1px", background: `${GOLD}55` }} />
           </div>
 
           {/* Tagline */}
-          <p
-            className="font-serif italic mb-10"
-            style={{ color: `${LIGHT}88`, fontSize: "0.95rem" }}
-          >
-            Experiencia, compromiso y resultados a su servicio.
+          <p className="font-serif italic mb-9" style={{ color: "rgba(247,248,252,0.70)", fontSize: "0.92rem" }}>
+            Estrategia jurídica con carácter.
           </p>
 
           {/* Social icons */}
-          <div className="flex items-center justify-center gap-5 mb-10">
+          <div className="flex items-center justify-center gap-4 mb-9">
             {[
-              {
-                label: "Facebook",
-                icon: <Facebook className="w-5 h-5" />,
-                href: "#"
-              },
-              {
-                label: "Instagram",
-                icon: <Instagram className="w-5 h-5" />,
-                href: "#"
-              },
-              {
-                label: "WhatsApp",
-                icon: <MessageCircle className="w-5 h-5" />,
-                href: "https://wa.me/573001234567"
-              }
+              { label: "Facebook",  icon: <Facebook size={18} />,        href: "#" },
+              { label: "Instagram", icon: <Instagram size={18} />,       href: "#" },
+              { label: "WhatsApp",  icon: <MessageCircle size={18} />,   href: "https://wa.me/573001234567" },
             ].map(({ label, icon, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                data-testid={`link-social-${label.toLowerCase()}`}
-                className="w-11 h-11 rounded-full flex items-center justify-center transition-all"
-                style={{ background: `${LIGHT}15`, color: `${LIGHT}BB` }}
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                aria-label={label} data-testid={`link-social-${label.toLowerCase()}`}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                style={{ background: "rgba(255,255,255,0.10)", color: "rgba(247,248,252,0.75)" }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.background = `${GOLD}33`;
                   (e.currentTarget as HTMLElement).style.color = GOLD2;
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = `${LIGHT}15`;
-                  (e.currentTarget as HTMLElement).style.color = `${LIGHT}BB`;
-                }}
-              >
+                  (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.10)";
+                  (e.currentTarget as HTMLElement).style.color = "rgba(247,248,252,0.75)";
+                }}>
                 {icon}
               </a>
             ))}
           </div>
 
+          {/* Contact quick strip */}
+          <div className="flex items-center justify-center gap-6 flex-wrap mb-9">
+            {[
+              { icon: <Phone size={12} />, text: "+57 (300) 123-4567" },
+              { icon: <Mail size={12} />, text: "contacto@sgcabogados.co" },
+              { icon: <MapPin size={12} />, text: "Bogotá, Colombia" },
+            ].map(({ icon, text }, i) => (
+              <div key={i} className="flex items-center gap-1.5">
+                <span style={{ color: GOLD }}>{icon}</span>
+                <span className="font-serif" style={{ fontSize: "0.78rem", color: "rgba(247,248,252,0.65)" }}>{text}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.08)", marginBottom: "20px" }} />
+
           {/* Bottom links */}
-          <div
-            className="flex items-center justify-center gap-2 flex-wrap"
-            style={{ color: `${LIGHT}40`, fontSize: "0.75rem" }}
-          >
-            <a
-              href="#"
-              className="font-serif transition-colors"
-              style={{ letterSpacing: "0.06em" }}
-              onMouseEnter={e => (e.currentTarget.style.color = `${LIGHT}80`)}
-              onMouseLeave={e => (e.currentTarget.style.color = `${LIGHT}40`)}
-            >
-              Política de Privacidad
-            </a>
-            <span style={{ color: `${LIGHT}25` }}>·</span>
-            <a
-              href="#"
-              className="font-serif transition-colors"
-              style={{ letterSpacing: "0.06em" }}
-              onMouseEnter={e => (e.currentTarget.style.color = `${LIGHT}80`)}
-              onMouseLeave={e => (e.currentTarget.style.color = `${LIGHT}40`)}
-            >
-              Términos de Servicio
-            </a>
-            <span style={{ color: `${LIGHT}25` }}>·</span>
-            <span className="font-serif" style={{ letterSpacing: "0.04em" }}>
-              &copy; {new Date().getFullYear()} SGC Abogados
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            {["Política de Privacidad", "Términos de Servicio"].map(label => (
+              <a key={label} href="#" className="font-serif transition-colors"
+                style={{ fontSize: "0.72rem", color: "rgba(247,248,252,0.42)", letterSpacing: "0.05em" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "rgba(247,248,252,0.75)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(247,248,252,0.42)")}>
+                {label}
+              </a>
+            ))}
+            <span style={{ color: "rgba(247,248,252,0.25)", fontSize: "0.6rem" }}>·</span>
+            <span className="font-serif" style={{ fontSize: "0.72rem", color: "rgba(247,248,252,0.35)" }}>
+              &copy; {new Date().getFullYear()} SGC Abogados. Todos los derechos reservados.
             </span>
           </div>
         </div>
       </footer>
 
-      {/* ── FLOATING WHATSAPP ── */}
-      <a
-        href="https://wa.me/573001234567"
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Floating WhatsApp */}
+      <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer"
         data-testid="link-whatsapp"
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-105 z-50 group"
-        style={{ background: "#25D366" }}
-        aria-label="Contactar por WhatsApp"
-      >
-        <MessageCircle className="w-7 h-7 text-white" />
-        <span
-          className="absolute right-full mr-4 text-sm py-1.5 px-4 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-serif"
-          style={{ background: DARK, color: LIGHT, letterSpacing: "0.04em" }}
-        >
+        className="fixed bottom-6 right-6 w-13 h-13 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-105 z-50 group"
+        style={{ background: "#25D366", width: "52px", height: "52px" }}
+        aria-label="Contactar por WhatsApp">
+        <MessageCircle size={24} className="text-white" />
+        <span className="absolute right-full mr-4 text-xs py-1.5 px-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none font-serif"
+          style={{ background: N900, color: "rgba(247,248,252,0.9)", letterSpacing: "0.04em" }}>
           Chatea con nosotros
         </span>
       </a>
+    </div>
+  );
+}
+
+/* ─── Sub-components ───────────────────────────────────── */
+function AreaCard({ area }: { area: typeof AREAS[0] }) {
+  const N800 = "#0F2150";
+  const N900 = "#0A1628";
+  const GOLD = "#C49A18";
+  const OFF  = "#F7F8FC";
+  return (
+    <motion.div variants={fadeUp}
+      className="group p-7 transition-all duration-300"
+      style={{ background: OFF, borderTop: `2px solid ${GOLD}`, cursor: "default" }}
+      onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 8px 32px ${N900}12`)}
+      onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}>
+      <div className="w-10 h-10 rounded-full flex items-center justify-center mb-4 transition-colors"
+        style={{ background: `${N800}0E` }}>
+        <area.icon size={18} strokeWidth={1.4} style={{ color: N800 }} />
+      </div>
+      <h3 className="font-serif mb-2.5" style={{ fontSize: "1.05rem", color: N800, fontWeight: 500 }}>
+        {area.title}
+      </h3>
+      <p className="font-serif mb-4" style={{ fontSize: "0.82rem", color: "#0A1628CC", lineHeight: 1.65 }}>
+        {area.desc}
+      </p>
+      <ul className="flex flex-col gap-1.5">
+        {area.items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <CheckCircle size={12} strokeWidth={1.5} className="shrink-0" style={{ color: GOLD, marginTop: "3px" }} />
+            <span className="font-serif" style={{ fontSize: "0.8rem", color: "#0A1628DD" }}>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
+
+function FormField({ id, label, placeholder, type = "text", required = false }: {
+  id: string; label: string; placeholder: string; type?: string; required?: boolean;
+}) {
+  const N800 = "#0F2150";
+  const N900 = "#0A1628";
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="font-serif"
+        style={{ fontSize: "0.62rem", letterSpacing: "0.18em", color: "#0F215099" }}>
+        {label}
+      </label>
+      <Input id={id} type={type} required={required} placeholder={placeholder}
+        data-testid={`input-${id}`}
+        className="rounded-none border-0 border-b font-serif bg-transparent focus-visible:ring-0"
+        style={{ borderBottom: `1px solid ${N800}28`, boxShadow: "none", color: "#0A1628", fontSize: "0.92rem" }}
+      />
     </div>
   );
 }

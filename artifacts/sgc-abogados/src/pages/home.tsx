@@ -2,12 +2,6 @@ import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Scale,
-  Users,
-  Briefcase,
-  ShieldCheck,
-  Award,
-  Clock,
-  HeartHandshake,
   CheckCircle,
   Menu,
   X,
@@ -17,10 +11,6 @@ import {
   MapPin,
   Facebook,
   Instagram,
-  Car,
-  Building2,
-  FileText,
-  Shield,
   ChevronDown
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -50,43 +40,36 @@ const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 /* ─── Practice areas (from Sofia Garavito reference) ─────── */
 const AREAS = [
   {
-    icon: Scale,
     title: "Derecho Penal",
     desc: "Defensa y representación jurídica en procesos penales, denuncias, audiencias y protección de derechos fundamentales.",
     items: ["Defensa técnica", "Denuncias y querellas", "Audiencias preliminares", "Asistencia a víctimas", "Procesos ante Fiscalía y juzgados"]
   },
   {
-    icon: Briefcase,
     title: "Derecho Laboral",
     desc: "Asesoría integral para trabajadores y empleadores en conflictos laborales y protección de derechos.",
     items: ["Liquidaciones e indemnizaciones", "Despidos injustificados", "Acoso laboral", "Contratos laborales", "Conciliaciones y demandas"]
   },
   {
-    icon: Building2,
     title: "Derecho Administrativo",
     desc: "Representación en actuaciones ante entidades públicas y defensa de derechos frente a decisiones administrativas.",
     items: ["Derechos de petición", "Acciones constitucionales", "Procesos contencioso-administrativos", "Reparación directa", "Nulidad y restablecimiento"]
   },
   {
-    icon: Shield,
     title: "Derecho Disciplinario Policivo",
     desc: "Defensa y acompañamiento jurídico en investigaciones y procesos disciplinarios de carácter policivo.",
     items: ["Descargos y defensa técnica", "Recursos y apelaciones", "Acompañamiento en audiencias", "Asesoría preventiva disciplinaria"]
   },
   {
-    icon: Car,
     title: "Derecho de Tránsito",
     desc: "Asesoría y representación en asuntos relacionados con infracciones y procedimientos de tránsito.",
     items: ["Comparendos", "Audiencias de tránsito", "Impugnaciones", "Accidentes de tránsito", "Cobros coactivos"]
   },
   {
-    icon: Users,
     title: "Derecho de Familia",
     desc: "Acompañamiento en asuntos familiares con enfoque humano, conciliatorio y estratégico.",
     items: ["Cuota alimentaria", "Custodia y visitas", "Divorcios", "Sucesiones", "Unión marital de hecho"]
   },
   {
-    icon: FileText,
     title: "Derecho Civil",
     desc: "Soluciones legales en conflictos patrimoniales, contractuales y obligaciones civiles.",
     items: ["Procesos ejecutivos", "Contratos", "Responsabilidad civil", "Cobro de cartera", "Declarativos civiles"]
@@ -181,90 +164,84 @@ export default function Home() {
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "100vh" }}>
 
-            {/* LEFT — content */}
-            <div className="flex flex-col justify-center items-start px-12 lg:px-20 py-24">
+            {/* LEFT — editorial content */}
+            <div className="flex flex-col justify-center items-start px-12 lg:px-20 py-24 relative">
 
-              {/* Eyebrow */}
-              <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
+              {/* Eyebrow strip */}
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}
                 className="flex items-center gap-3 mb-10">
-                <div style={{ width: "32px", height: "1px", background: GOLD }} />
-                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>
-                  EXPERIENCIA · COMPROMISO · RESULTADOS
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.6rem", color: GOLD, letterSpacing: "0.36em" }}>
+                  ESTUDIO JURÍDICO · BOGOTÁ, COLOMBIA
                 </span>
               </motion.div>
 
-              {/* SGC Logotype */}
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.15 }} className="mb-3">
-                {/* Laurels + SGC */}
-                <div className="flex items-center gap-0 mb-1">
-                  {/* Left laurel */}
-                  <svg width="28" height="44" viewBox="0 0 28 44" fill="none">
-                    <path d="M24 22C19 15,12 10,5 7 M24 22C19 29,12 34,5 37 M24 22C16 21,10 17,4 12 M24 22C16 23,10 27,4 32"
-                      stroke={GOLD} strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
-                  </svg>
-                  <Scale strokeWidth={0.9} style={{ color: GOLD, width: "28px", height: "28px", marginBottom: "2px" }} />
-                  <svg width="28" height="44" viewBox="0 0 28 44" fill="none" style={{ transform: "scaleX(-1)" }}>
-                    <path d="M24 22C19 15,12 10,5 7 M24 22C19 29,12 34,5 37 M24 22C16 21,10 17,4 12 M24 22C16 23,10 27,4 32"
-                      stroke={GOLD} strokeWidth="1.1" strokeLinecap="round" opacity="0.6"/>
-                  </svg>
-                </div>
+              {/* Editorial headline — 3 lines, mixed weight */}
+              <div className="mb-8">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.6rem, 5.5vw, 4.2rem)", color: N800, fontWeight: 300, fontStyle: "italic", lineHeight: 1.05, marginBottom: "2px" }}>
+                  Justicia que
+                </motion.p>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.22 }}
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3.4rem, 7.5vw, 5.8rem)", color: N800, fontWeight: 700, lineHeight: 0.95, letterSpacing: "-0.02em" }}>
+                  protege.
+                </motion.p>
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.34 }}
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 3vw, 2.2rem)", color: GOLD, fontWeight: 400, fontStyle: "italic", lineHeight: 1.3, marginTop: "6px" }}>
+                  lo que más importa.
+                </motion.p>
+              </div>
 
-                <h1 style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: "clamp(4rem, 9vw, 6.5rem)",
-                  color: N800,
-                  letterSpacing: "0.04em",
-                  lineHeight: 1,
-                  fontWeight: 600
-                }}>SG</h1>
-
-                {/* Divider */}
-                <div className="flex items-center gap-2 my-2" style={{ width: "200px" }}>
-                  <div style={{ flex: 1, height: "1px", background: `${GOLD}50` }} />
-                  <div style={{ width: "5px", height: "5px", background: `${GOLD}80`, transform: "rotate(45deg)" }} />
-                  <div style={{ flex: 1, height: "1px", background: `${GOLD}50` }} />
-                </div>
-
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.7rem", color: GOLD, letterSpacing: "0.55em", fontWeight: 400 }}>
-                  ABOGADOS
-                </p>
+              {/* Firm identity strip */}
+              <motion.div initial={{ opacity: 0, scaleX: 0.8 }} animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                className="flex items-center gap-3 mb-8" style={{ transformOrigin: "left" }}>
+                <div style={{ width: "36px", height: "1px", background: `${GOLD}70` }} />
+                <Scale size={13} strokeWidth={1.3} style={{ color: GOLD }} />
+                <span className="font-serif" style={{ fontSize: "0.65rem", color: N800, letterSpacing: "0.38em", fontWeight: 500 }}>
+                  SG ABOGADOS
+                </span>
+                <div style={{ width: "36px", height: "1px", background: `${GOLD}70` }} />
               </motion.div>
 
-              {/* Separator */}
-              <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, delay: 0.5, ease: "easeInOut" }}
-                style={{ width: "200px", height: "1px", background: `${N800}15`, marginBottom: "24px", transformOrigin: "left" }} />
-
               {/* Body copy */}
-              <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: "#0A1628", lineHeight: 1.75, maxWidth: "320px", marginBottom: "20px" }}>
-                Abogados con experiencia en derecho de familia y laboral, enfocados en ofrecer{" "}
-                <strong style={{ color: N800 }}>acompañamiento jurídico responsable, cercano y eficaz.</strong>
+              <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.65 }}
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: N900, lineHeight: 1.8, maxWidth: "340px", marginBottom: "28px", opacity: 0.78 }}>
+                Derecho de familia y laboral con presencia humana. Representamos su caso con la dedicación y estrategia que usted merece.
               </motion.p>
 
-              {/* CTA label */}
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.58rem", color: `${N800}60`, letterSpacing: "0.28em", marginBottom: "18px" }}>
-                CONSULTAS Y ACOMPAÑAMIENTO JURÍDICO:
-              </motion.p>
+              {/* Stats row */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+                className="flex items-center gap-6 mb-9">
+                {[["7", "Áreas"], ["100%", "Dedicación"], ["Bogotá", "Colombia"]].map(([val, lbl], i) => (
+                  <div key={i} className="flex flex-col items-start">
+                    <span className="font-serif" style={{ fontSize: "1.1rem", color: N800, fontWeight: 600, lineHeight: 1 }}>{val}</span>
+                    <span className="font-serif" style={{ fontSize: "0.6rem", color: GOLD, letterSpacing: "0.2em", marginTop: "2px" }}>{lbl}</span>
+                  </div>
+                ))}
+              </motion.div>
 
               {/* CTAs */}
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.95 }}
                 className="flex items-center gap-7">
                 <a href="#contacto" data-testid="link-hero-contacto"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: N800, letterSpacing: "0.08em", paddingBottom: "2px", borderBottom: `1px solid ${GOLD}AA` }}
+                  className="font-serif"
+                  style={{ fontSize: "0.88rem", color: N800, letterSpacing: "0.08em", paddingBottom: "3px", borderBottom: `1px solid ${GOLD}BB` }}
                   onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
                   onMouseLeave={e => (e.currentTarget.style.color = N800)}>
                   Agendar consulta
                 </a>
-                <span style={{ color: `${N800}25`, fontSize: "0.7rem" }}>|</span>
+                <span style={{ color: `${N800}22`, fontSize: "0.8rem" }}>|</span>
                 <a href="#areas" data-testid="link-hero-areas"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: "#0F215099", letterSpacing: "0.08em" }}
+                  className="font-serif"
+                  style={{ fontSize: "0.88rem", color: `${N800}88`, letterSpacing: "0.08em" }}
                   onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#0F215099")}>
+                  onMouseLeave={e => (e.currentTarget.style.color = `${N800}88`)}>
                   Nuestras áreas
                 </a>
               </motion.div>
@@ -316,16 +293,22 @@ export default function Home() {
           }} />
 
           <div className="max-w-7xl mx-auto px-8 relative z-10">
-            {/* Section header */}
+            {/* Section header — centered */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
-              variants={fadeUp} className="mb-14">
-              <div className="flex items-center gap-3 mb-4">
+              variants={fadeUp} className="text-center mb-14">
+              <div className="flex items-center justify-center gap-3 mb-4">
                 <div style={{ width: "28px", height: "1px", background: GOLD }} />
                 <span className="font-serif" style={{ fontSize: "0.78rem", color: GOLD, letterSpacing: "0.32em", fontWeight: 500 }}>ESPECIALIDADES</span>
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
               </div>
               <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: N800, fontWeight: 500 }}>
                 Áreas de Práctica
               </h2>
+              <div className="flex items-center justify-center gap-3 mt-3">
+                <div style={{ width: "40px", height: "1px", background: `${GOLD}40` }} />
+                <div style={{ width: "4px", height: "4px", background: `${GOLD}70`, transform: "rotate(45deg)" }} />
+                <div style={{ width: "40px", height: "1px", background: `${GOLD}40` }} />
+              </div>
             </motion.div>
 
             {/* 7-area grid: 4 top, 3 bottom */}
@@ -356,33 +339,54 @@ export default function Home() {
           }} />
 
           <div className="max-w-7xl mx-auto px-8 relative z-10">
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
-              <div className="flex items-center gap-3 mb-4">
+            {/* Section header — centered */}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+              className="text-center mb-16">
+              <div className="flex items-center justify-center gap-3 mb-4">
                 <div style={{ width: "28px", height: "1px", background: GOLD }} />
-                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD2, letterSpacing: "0.38em", opacity: 0.8 }}>NUESTRA PROPUESTA</span>
+                <span className="font-serif" style={{ fontSize: "0.65rem", color: GOLD2, letterSpacing: "0.38em" }}>NUESTRA PROPUESTA</span>
+                <div style={{ width: "28px", height: "1px", background: GOLD }} />
               </div>
-              <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: "#FFFFFF", fontWeight: 500 }}>
+              <h2 className="font-serif" style={{ fontSize: "clamp(2rem,3.8vw,3rem)", color: "#FFFFFF", fontWeight: 500, letterSpacing: "0.01em" }}>
                 Por qué elegirnos
               </h2>
+              <div className="flex items-center justify-center gap-3 mt-4">
+                <div style={{ width: "48px", height: "1px", background: `${GOLD}40` }} />
+                <div style={{ width: "5px", height: "5px", background: `${GOLD}60`, transform: "rotate(45deg)" }} />
+                <div style={{ width: "48px", height: "1px", background: `${GOLD}40` }} />
+              </div>
             </motion.div>
 
+            {/* Cards — numbered, centered */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px"
+              style={{ background: `${GOLD}18` }}>
               {[
-                { icon: Award,          title: "Experiencia",      desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas para su caso." },
-                { icon: ShieldCheck,    title: "Compromiso",       desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige y usted merece." },
-                { icon: HeartHandshake, title: "Acompañamiento",   desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso, sin sorpresas." },
-                { icon: Clock,          title: "Resultados",       desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
+                { num: "01", title: "Experiencia",    desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas para su caso." },
+                { num: "02", title: "Compromiso",     desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige y usted merece." },
+                { num: "03", title: "Acompañamiento", desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso, sin sorpresas." },
+                { num: "04", title: "Resultados",     desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
               ].map((f, i) => (
-                <motion.div key={i} variants={fadeUp} className="group">
-                  <div className="mb-5 w-11 h-11 rounded-full flex items-center justify-center"
-                    style={{ background: `${GOLD}18`, border: `1px solid ${GOLD}33` }}>
-                    <f.icon size={18} strokeWidth={1.4} style={{ color: GOLD }} />
-                  </div>
-                  <h3 className="font-serif mb-3" style={{ fontSize: "1.15rem", color: "#FFFFFF", fontWeight: 500 }}>
+                <motion.div key={i} variants={fadeUp}
+                  className="flex flex-col items-center text-center px-8 py-10 group transition-all duration-300"
+                  style={{ background: N800 }}
+                  onMouseEnter={e => (e.currentTarget.style.background = N900)}
+                  onMouseLeave={e => (e.currentTarget.style.background = N800)}>
+                  {/* Large numeral */}
+                  <span className="font-serif block mb-4"
+                    style={{ fontSize: "2.8rem", color: `${GOLD}35`, fontWeight: 700, lineHeight: 1, letterSpacing: "-0.02em" }}>
+                    {f.num}
+                  </span>
+                  {/* Gold rule under numeral */}
+                  <div style={{ width: "24px", height: "1px", background: `${GOLD}60`, marginBottom: "16px" }} />
+                  {/* Title */}
+                  <h3 className="font-serif mb-4"
+                    style={{ fontSize: "1.2rem", color: "#FFFFFF", fontWeight: 500, letterSpacing: "0.02em" }}>
                     {f.title}
                   </h3>
-                  <p className="font-serif" style={{ fontSize: "0.88rem", color: "rgba(247,248,252,0.78)", lineHeight: 1.75 }}>
+                  {/* Desc */}
+                  <p className="font-serif"
+                    style={{ fontSize: "0.88rem", color: "rgba(247,248,252,0.72)", lineHeight: 1.78 }}>
                     {f.desc}
                   </p>
                 </motion.div>
@@ -819,12 +823,6 @@ function AreaCard({ area, index }: { area: typeof AREAS[0]; index: number }) {
         ))}
       </ul>
 
-      {/* Creative icon — bottom right, thematic */}
-      <div className="flex justify-end mt-5 pt-4" style={{ borderTop: `1px solid ${GOLD}20` }}>
-        <span style={{ color: `${GOLD}70`, display: "block" }}>
-          {AREA_DECORATIONS[index]}
-        </span>
-      </div>
     </motion.div>
   );
 }

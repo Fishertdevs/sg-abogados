@@ -164,70 +164,42 @@ export default function Home() {
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "100vh" }}>
 
-            {/* LEFT — editorial content */}
-            <div className="flex flex-col justify-center items-start px-12 lg:px-20 py-24 relative">
+            {/* LEFT — centered editorial content */}
+            <div className="flex flex-col justify-center items-center text-center px-12 lg:px-20 py-24 relative">
 
-              {/* Eyebrow strip */}
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}
-                className="flex items-center gap-3 mb-10">
-                <div style={{ width: "28px", height: "1px", background: GOLD }} />
-                <span className="font-serif" style={{ fontSize: "0.6rem", color: GOLD, letterSpacing: "0.36em" }}>
-                  ESTUDIO JURÍDICO · BOGOTÁ, COLOMBIA
+              {/* Welcome label */}
+              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                <span className="font-serif" style={{ fontSize: "0.62rem", color: GOLD, letterSpacing: "0.42em" }}>
+                  BIENVENIDO A SG ABOGADOS
                 </span>
               </motion.div>
 
-              {/* Editorial headline — 3 lines, mixed weight */}
-              <div className="mb-8">
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.6rem, 5.5vw, 4.2rem)", color: N800, fontWeight: 300, fontStyle: "italic", lineHeight: 1.05, marginBottom: "2px" }}>
-                  Justicia que
-                </motion.p>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.22 }}
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3.4rem, 7.5vw, 5.8rem)", color: N800, fontWeight: 700, lineHeight: 0.95, letterSpacing: "-0.02em" }}>
-                  protege.
-                </motion.p>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.34 }}
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 3vw, 2.2rem)", color: GOLD, fontWeight: 400, fontStyle: "italic", lineHeight: 1.3, marginTop: "6px" }}>
-                  lo que más importa.
-                </motion.p>
-              </div>
-
-              {/* Firm identity strip */}
-              <motion.div initial={{ opacity: 0, scaleX: 0.8 }} animate={{ opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="flex items-center gap-3 mb-8" style={{ transformOrigin: "left" }}>
-                <div style={{ width: "36px", height: "1px", background: `${GOLD}70` }} />
-                <Scale size={13} strokeWidth={1.3} style={{ color: GOLD }} />
-                <span className="font-serif" style={{ fontSize: "0.65rem", color: N800, letterSpacing: "0.38em", fontWeight: 500 }}>
-                  SG ABOGADOS
-                </span>
-                <div style={{ width: "36px", height: "1px", background: `${GOLD}70` }} />
+              {/* Ornament */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.6 }}
+                className="flex items-center gap-3 my-7">
+                <div style={{ width: "44px", height: "1px", background: `${GOLD}55` }} />
+                <div style={{ width: "5px", height: "5px", background: `${GOLD}80`, transform: "rotate(45deg)" }} />
+                <div style={{ width: "44px", height: "1px", background: `${GOLD}55` }} />
               </motion.div>
+
+              {/* Headline — single elegant size */}
+              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.3 }}
+                className="font-serif mb-7"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", color: N800, fontWeight: 500, fontStyle: "italic", lineHeight: 1.2 }}>
+                Justicia con<br />rostro humano.
+              </motion.h1>
 
               {/* Body copy */}
               <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.65 }}
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem", color: N900, lineHeight: 1.8, maxWidth: "340px", marginBottom: "28px", opacity: 0.78 }}>
-                Derecho de familia y laboral con presencia humana. Representamos su caso con la dedicación y estrategia que usted merece.
+                transition={{ duration: 0.7, delay: 0.5 }}
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.02rem", color: N900, lineHeight: 1.88, maxWidth: "360px", marginBottom: "38px", opacity: 0.72 }}>
+                Somos un estudio jurídico comprometido con proteger lo que más importa para usted y su familia. Cada caso recibe la dedicación que merece.
               </motion.p>
-
-              {/* Stats row */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                className="flex items-center gap-6 mb-9">
-                {[["7", "Áreas"], ["100%", "Dedicación"], ["Bogotá", "Colombia"]].map(([val, lbl], i) => (
-                  <div key={i} className="flex flex-col items-start">
-                    <span className="font-serif" style={{ fontSize: "1.1rem", color: N800, fontWeight: 600, lineHeight: 1 }}>{val}</span>
-                    <span className="font-serif" style={{ fontSize: "0.6rem", color: GOLD, letterSpacing: "0.2em", marginTop: "2px" }}>{lbl}</span>
-                  </div>
-                ))}
-              </motion.div>
 
               {/* CTAs */}
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.95 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
                 className="flex items-center gap-7">
                 <a href="#contacto" data-testid="link-hero-contacto"
                   className="font-serif"
@@ -247,8 +219,8 @@ export default function Home() {
               </motion.div>
 
               {/* Scroll cue */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
-                className="absolute bottom-10 left-12 lg:left-20 flex items-center gap-2"
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
+                className="absolute bottom-10 flex items-center gap-2"
                 style={{ color: `${N800}40` }}>
                 <div style={{ width: "20px", height: "1px", background: "currentColor" }} />
                 <ChevronDown size={14} />
@@ -357,10 +329,9 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Cards — numbered, centered */}
+            {/* Cards — premium editorial, no shadows or hover darkening */}
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px"
-              style={{ background: `${GOLD}18` }}>
+              className="grid sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { num: "01", title: "Experiencia",    desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas para su caso." },
                 { num: "02", title: "Compromiso",     desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige y usted merece." },
@@ -368,25 +339,26 @@ export default function Home() {
                 { num: "04", title: "Resultados",     desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." }
               ].map((f, i) => (
                 <motion.div key={i} variants={fadeUp}
-                  className="flex flex-col items-center text-center px-8 py-10 group transition-all duration-300"
-                  style={{ background: N800 }}
-                  onMouseEnter={e => (e.currentTarget.style.background = N900)}
-                  onMouseLeave={e => (e.currentTarget.style.background = N800)}>
-                  {/* Large numeral */}
-                  <span className="font-serif block mb-4"
-                    style={{ fontSize: "2.8rem", color: `${GOLD}35`, fontWeight: 700, lineHeight: 1, letterSpacing: "-0.02em" }}>
+                  className="flex flex-col items-center text-center px-8 py-14"
+                  style={{
+                    borderTop: `1px solid ${GOLD}35`,
+                    borderRight: i < 3 ? `1px solid ${GOLD}15` : "none"
+                  }}>
+                  {/* Numeral — faint, decorative */}
+                  <span className="font-serif block mb-5"
+                    style={{ fontSize: "3rem", color: `${GOLD}22`, fontWeight: 700, lineHeight: 1, letterSpacing: "-0.02em" }}>
                     {f.num}
                   </span>
-                  {/* Gold rule under numeral */}
-                  <div style={{ width: "24px", height: "1px", background: `${GOLD}60`, marginBottom: "16px" }} />
+                  {/* Thin gold rule */}
+                  <div style={{ width: "20px", height: "1px", background: `${GOLD}55`, marginBottom: "22px" }} />
                   {/* Title */}
-                  <h3 className="font-serif mb-4"
-                    style={{ fontSize: "1.2rem", color: "#FFFFFF", fontWeight: 500, letterSpacing: "0.02em" }}>
+                  <h3 className="font-serif mb-5"
+                    style={{ fontSize: "1.22rem", color: "#FFFFFF", fontWeight: 500, letterSpacing: "0.01em" }}>
                     {f.title}
                   </h3>
                   {/* Desc */}
                   <p className="font-serif"
-                    style={{ fontSize: "0.88rem", color: "rgba(247,248,252,0.72)", lineHeight: 1.78 }}>
+                    style={{ fontSize: "0.9rem", color: "rgba(247,248,252,0.6)", lineHeight: 1.85 }}>
                     {f.desc}
                   </p>
                 </motion.div>

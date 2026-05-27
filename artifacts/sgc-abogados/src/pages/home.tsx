@@ -169,7 +169,7 @@ export default function Home() {
 
               {/* Welcome label */}
               <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-                <span className="font-serif" style={{ fontSize: "0.62rem", color: GOLD, letterSpacing: "0.42em" }}>
+                <span className="font-serif" style={{ fontSize: "0.62rem", color: "#8B6914", letterSpacing: "0.42em" }}>
                   BIENVENIDO A SG ABOGADOS
                 </span>
               </motion.div>
@@ -187,7 +187,7 @@ export default function Home() {
                 transition={{ duration: 0.9, delay: 0.3 }}
                 className="font-serif mb-7"
                 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", color: N800, fontWeight: 500, fontStyle: "italic", lineHeight: 1.2 }}>
-                Justicia con<br />rostro humano.
+                Nuestra prioridad es<br />tu tranquilidad legal.
               </motion.h1>
 
               {/* Body copy */}
@@ -211,9 +211,9 @@ export default function Home() {
                 <span style={{ color: `${N800}22`, fontSize: "0.8rem" }}>|</span>
                 <a href="#areas" data-testid="link-hero-areas"
                   className="font-serif"
-                  style={{ fontSize: "0.88rem", color: `${N800}88`, letterSpacing: "0.08em" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                  onMouseLeave={e => (e.currentTarget.style.color = `${N800}88`)}>
+                  style={{ fontSize: "0.88rem", color: `${N800}88`, letterSpacing: "0.08em", paddingBottom: "3px", borderBottom: `1px solid ${N800}44` }}
+                  onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.borderBottomColor = `${GOLD}BB`; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = `${N800}88`; e.currentTarget.style.borderBottomColor = `${N800}44`; }}>
                   Nuestras áreas
                 </a>
               </motion.div>

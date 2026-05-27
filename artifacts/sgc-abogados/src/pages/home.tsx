@@ -26,7 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import justiceHeroImg from "@assets/image_1779849869728.png";
+import heroNewImg from "@assets/generated_images/premium_law_firm_hero_023f.png";
 import justiceDetailImg from "@assets/justice_detail.png";
 
 /* ─── Design tokens ────────────────────────────────────── */
@@ -126,8 +126,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between" style={{ borderBottom: `1px solid ${N800}12` }}>
           <a href="#inicio" className="flex items-center gap-2.5">
             <Scale strokeWidth={1.4} className="w-5 h-5" style={{ color: GOLD }} />
-            <span className="font-serif" style={{ color: N800, letterSpacing: "0.2em", fontSize: "0.82rem", fontWeight: 500 }}>
-              SGC ABOGADOS
+            <span className="font-serif" style={{ color: N900, letterSpacing: "0.2em", fontSize: "0.92rem", fontWeight: 600 }}>
+              SG ABOGADOS
             </span>
           </a>
 
@@ -136,9 +136,9 @@ export default function Home() {
               <a
                 key={l.name} href={l.href}
                 className="font-serif transition-colors duration-200"
-                style={{ fontSize: "0.62rem", letterSpacing: "0.2em", color: `${N800}99` }}
+                style={{ fontSize: "0.76rem", letterSpacing: "0.18em", color: N900, fontWeight: 500 }}
                 onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                onMouseLeave={e => (e.currentTarget.style.color = `${N800}99`)}
+                onMouseLeave={e => (e.currentTarget.style.color = N900)}
               >{l.name}</a>
             ))}
           </nav>
@@ -217,7 +217,7 @@ export default function Home() {
                   letterSpacing: "0.04em",
                   lineHeight: 1,
                   fontWeight: 600
-                }}>SGC</h1>
+                }}>SG</h1>
 
                 {/* Divider */}
                 <div className="flex items-center gap-2 my-2" style={{ width: "200px" }}>
@@ -289,10 +289,10 @@ export default function Home() {
                 width: "42%",
                 background: `linear-gradient(to right, #EEF0F7 0%, #EEF0F7CC 50%, transparent 100%)`
               }} />
-              <img src={justiceHeroImg} alt="Diosa de la Justicia"
+              <img src={heroNewImg} alt="Balanza de la Justicia"
                 data-testid="img-lady-justice-hero"
                 className="absolute inset-0 w-full h-full"
-                style={{ objectFit: "cover", objectPosition: "center top" }}
+                style={{ objectFit: "cover", objectPosition: "center center" }}
               />
               {/* Subtle gold diamond watermark */}
               <div className="absolute bottom-12 right-12 z-20 opacity-20">
@@ -321,7 +321,7 @@ export default function Home() {
               variants={fadeUp} className="mb-14">
               <div className="flex items-center gap-3 mb-4">
                 <div style={{ width: "28px", height: "1px", background: GOLD }} />
-                <span className="font-serif" style={{ fontSize: "0.58rem", color: GOLD, letterSpacing: "0.38em" }}>ESPECIALIDADES</span>
+                <span className="font-serif" style={{ fontSize: "0.78rem", color: GOLD, letterSpacing: "0.32em", fontWeight: 500 }}>ESPECIALIDADES</span>
               </div>
               <h2 className="font-serif" style={{ fontSize: "clamp(1.8rem,3.5vw,2.6rem)", color: N800, fontWeight: 500 }}>
                 Áreas de Práctica
@@ -332,13 +332,13 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
               className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
               {AREAS.slice(0, 4).map((area, i) => (
-                <AreaCard key={i} area={area} />
+                <AreaCard key={i} area={area} index={i} />
               ))}
             </motion.div>
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
               className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {AREAS.slice(4).map((area, i) => (
-                <AreaCard key={i} area={area} />
+                <AreaCard key={i} area={area} index={i + 4} />
               ))}
             </motion.div>
           </div>
@@ -451,7 +451,7 @@ export default function Home() {
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                   {[
-                    "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
+                    "SG Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                     "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
                     "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana."
                   ].map((txt, i) => (
@@ -632,7 +632,7 @@ export default function Home() {
           <div className="flex items-center justify-center gap-2.5 mb-5">
             <Scale strokeWidth={1.3} className="w-6 h-6" style={{ color: GOLD }} />
             <span className="font-serif" style={{ color: "#FFFFFF", letterSpacing: "0.24em", fontSize: "0.9rem", fontWeight: 500 }}>
-              SGC ABOGADOS
+              SG ABOGADOS
             </span>
           </div>
 
@@ -701,7 +701,7 @@ export default function Home() {
             ))}
             <span style={{ color: "rgba(247,248,252,0.25)", fontSize: "0.6rem" }}>·</span>
             <span className="font-serif" style={{ fontSize: "0.72rem", color: "rgba(247,248,252,0.35)" }}>
-              &copy; {new Date().getFullYear()} SGC Abogados. Todos los derechos reservados.
+              &copy; {new Date().getFullYear()} SG Abogados. Todos los derechos reservados.
             </span>
           </div>
         </div>
@@ -723,36 +723,108 @@ export default function Home() {
   );
 }
 
+/* ─── Creative thematic SVG icons (one per area, placed at card footer) ── */
+const AREA_DECORATIONS = [
+  /* 0 Penal — gavel + block */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="10" y="7" width="13" height="8" rx="1.5" transform="rotate(-38 16.5 11)"/>
+    <line x1="22" y1="18" x2="36" y2="33"/>
+    <rect x="7" y="35" width="18" height="5" rx="1.5"/>
+  </svg>,
+  /* 1 Laboral — handshake */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 28 L16 20 L22 22 L30 20 L42 28"/>
+    <path d="M16 20 L20 14 L26 16 L30 20"/>
+    <path d="M22 22 L24 30 M26 22 L27 30"/>
+    <circle cx="24" cy="24" r="2.5" fill="currentColor" stroke="none"/>
+  </svg>,
+  /* 2 Administrativo — building columns */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="24,6 42,16 6,16"/>
+    <line x1="6" y1="16" x2="42" y2="16"/>
+    <rect x="6" y="38" width="36" height="4" rx="0.5"/>
+    <line x1="12" y1="18" x2="12" y2="37"/>
+    <line x1="20" y1="18" x2="20" y2="37"/>
+    <line x1="28" y1="18" x2="28" y2="37"/>
+    <line x1="36" y1="18" x2="36" y2="37"/>
+  </svg>,
+  /* 3 Disciplinario Policivo — shield + star */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M24 5 L40 11 L40 26 C40 35 24 44 24 44 C24 44 8 35 8 26 L8 11 Z"/>
+    <polygon points="24,15 26,20 31,20 27,23 28.5,29 24,26 19.5,29 21,23 17,20 22,20"/>
+  </svg>,
+  /* 4 Tránsito — steering wheel */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="24" cy="24" r="18"/>
+    <circle cx="24" cy="24" r="5"/>
+    <line x1="24" y1="6" x2="24" y2="19"/>
+    <line x1="8.4" y1="33" x2="19.7" y2="26.5"/>
+    <line x1="39.6" y1="33" x2="28.3" y2="26.5"/>
+  </svg>,
+  /* 5 Familia — house + heart */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 24 L24 8 L42 24"/>
+    <path d="M12 22 L12 40 L36 40 L36 22"/>
+    <path d="M18 40 L18 30 L30 30 L30 40"/>
+    <path d="M24 18 C22 15 18 16 18 20 C18 24 24 28 24 28 C24 28 30 24 30 20 C30 16 26 15 24 18Z" fill="currentColor" stroke="none" opacity="0.5"/>
+  </svg>,
+  /* 6 Civil — scroll with quill */
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 8 C8 8 8 14 12 14 L36 14 C40 14 40 8 36 8 Z"/>
+    <path d="M12 14 L12 38 C12 42 16 42 16 38 L16 14"/>
+    <line x1="20" y1="20" x2="36" y2="20"/>
+    <line x1="20" y1="26" x2="36" y2="26"/>
+    <line x1="20" y1="32" x2="30" y2="32"/>
+    <path d="M38 6 C44 12 42 22 36 26 L34 32 L32 28 C36 22 38 14 34 8 Z" fill="currentColor" stroke="none" opacity="0.4"/>
+  </svg>,
+];
+
 /* ─── Sub-components ───────────────────────────────────── */
-function AreaCard({ area }: { area: typeof AREAS[0] }) {
+function AreaCard({ area, index }: { area: typeof AREAS[0]; index: number }) {
   const N800 = "#0F2150";
   const N900 = "#0A1628";
   const GOLD = "#C49A18";
   const OFF  = "#F7F8FC";
   return (
     <motion.div variants={fadeUp}
-      className="group p-7 transition-all duration-300"
-      style={{ background: OFF, borderTop: `2px solid ${GOLD}`, cursor: "default" }}
+      className="group flex flex-col p-7 transition-all duration-300"
+      style={{ background: OFF, borderTop: `2px solid ${GOLD}`, cursor: "default", minHeight: "320px" }}
       onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 8px 32px ${N900}12`)}
       onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}>
-      <div className="w-10 h-10 rounded-full flex items-center justify-center mb-4 transition-colors"
-        style={{ background: `${N800}0E` }}>
-        <area.icon size={18} strokeWidth={1.4} style={{ color: N800 }} />
-      </div>
-      <h3 className="font-serif mb-2.5" style={{ fontSize: "1.05rem", color: N800, fontWeight: 500 }}>
+
+      {/* Title — centered */}
+      <h3 className="font-serif text-center mb-3" style={{ fontSize: "1.15rem", color: N800, fontWeight: 600, letterSpacing: "0.01em" }}>
         {area.title}
       </h3>
-      <p className="font-serif mb-4" style={{ fontSize: "0.82rem", color: "#0A1628CC", lineHeight: 1.65 }}>
+
+      {/* Gold divider under title */}
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <div style={{ width: "30px", height: "1px", background: `${GOLD}60` }} />
+        <div style={{ width: "4px", height: "4px", background: `${GOLD}80`, transform: "rotate(45deg)" }} />
+        <div style={{ width: "30px", height: "1px", background: `${GOLD}60` }} />
+      </div>
+
+      {/* Description — centered */}
+      <p className="font-serif text-center mb-5" style={{ fontSize: "0.88rem", color: N900, lineHeight: 1.7, opacity: 0.75 }}>
         {area.desc}
       </p>
-      <ul className="flex flex-col gap-1.5">
+
+      {/* Items list */}
+      <ul className="flex flex-col gap-1.5 flex-1">
         {area.items.map((item, i) => (
           <li key={i} className="flex items-start gap-2">
-            <CheckCircle size={12} strokeWidth={1.5} className="shrink-0" style={{ color: GOLD, marginTop: "3px" }} />
-            <span className="font-serif" style={{ fontSize: "0.8rem", color: "#0A1628DD" }}>{item}</span>
+            <CheckCircle size={12} strokeWidth={1.5} className="shrink-0" style={{ color: GOLD, marginTop: "4px" }} />
+            <span className="font-serif" style={{ fontSize: "0.84rem", color: N900, opacity: 0.82, lineHeight: 1.5 }}>{item}</span>
           </li>
         ))}
       </ul>
+
+      {/* Creative icon — bottom right, thematic */}
+      <div className="flex justify-end mt-5 pt-4" style={{ borderTop: `1px solid ${GOLD}20` }}>
+        <span style={{ color: `${GOLD}70`, display: "block" }}>
+          {AREA_DECORATIONS[index]}
+        </span>
+      </div>
     </motion.div>
   );
 }

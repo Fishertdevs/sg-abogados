@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "kwT034hJDw2O2LSQcewGt"
+uri = "file://attached_assets/justice_hero.png"
+type = "image"
+title = "lady justice bronze hero"
+
+[[generated]]
+id = "OPM3Zi9HlLgMTFxeSv8Fc"
+uri = "file://attached_assets/justice_detail.png"
+type = "image"
+title = "lady justice bronze detail"

@@ -70,73 +70,71 @@
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
-
   --opaque-button-border-intensity: -8;
-
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  /* Warm parchment background */
-  --background: 36 28% 87%;       /* #EAE0D2 */
-  --foreground: 22 52% 13%;       /* #2E1A0C */
+  /* Navy + Gold palette — from SGC brand reference */
+  --background: 220 30% 97%;        /* near-white with cool tint */
+  --foreground: 220 65% 12%;        /* very dark navy */
 
-  --border: 34 22% 68%;
-  --card: 35 25% 80%;             /* #D8CABC */
-  --card-foreground: 22 52% 13%;
-  --card-border: 34 22% 68%;
+  --border: 220 20% 82%;
+  --card: 220 25% 94%;
+  --card-foreground: 220 65% 12%;
+  --card-border: 220 20% 82%;
 
-  --sidebar: 35 25% 80%;
-  --sidebar-foreground: 22 52% 13%;
-  --sidebar-border: 34 22% 68%;
-  --sidebar-primary: 22 55% 28%;
-  --sidebar-primary-foreground: 36 28% 87%;
-  --sidebar-accent: 34 22% 68%;
-  --sidebar-accent-foreground: 22 52% 13%;
-  --sidebar-ring: 22 55% 28%;
+  --sidebar: 220 25% 94%;
+  --sidebar-foreground: 220 65% 12%;
+  --sidebar-border: 220 20% 82%;
+  --sidebar-primary: 220 62% 20%;
+  --sidebar-primary-foreground: 43 70% 50%;
+  --sidebar-accent: 220 20% 82%;
+  --sidebar-accent-foreground: 220 65% 12%;
+  --sidebar-ring: 43 72% 44%;
 
-  --popover: 36 28% 87%;
-  --popover-foreground: 22 52% 13%;
-  --popover-border: 34 22% 68%;
+  --popover: 220 30% 97%;
+  --popover-foreground: 220 65% 12%;
+  --popover-border: 220 20% 82%;
 
-  /* Professional coffee brown — the anchor color */
-  --primary: 22 55% 28%;          /* #6B3D18 rich brown */
-  --primary-foreground: 36 28% 92%;
+  /* Navy blue — deep, professional */
+  --primary: 220 62% 20%;           /* #0F2150 deep navy */
+  --primary-foreground: 43 70% 50%; /* gold on navy */
 
-  --secondary: 35 25% 80%;
-  --secondary-foreground: 22 52% 13%;
+  --secondary: 220 25% 94%;
+  --secondary-foreground: 220 65% 12%;
 
-  --muted: 35 25% 80%;
-  --muted-foreground: 25 35% 38%; /* #7A5438 mid brown */
+  --muted: 220 25% 94%;
+  --muted-foreground: 220 30% 48%;
 
-  --accent: 34 22% 72%;
-  --accent-foreground: 22 52% 13%;
+  --accent: 43 72% 44%;             /* #C49A18 gold */
+  --accent-foreground: 220 65% 12%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 34 22% 68%;
-  --ring: 22 55% 28%;
+  --input: 220 20% 82%;
+  --ring: 43 72% 44%;
 
-  --chart-1: 22 55% 28%;
-  --chart-2: 25 35% 38%;
-  --chart-3: 34 22% 68%;
-  --chart-4: 35 25% 80%;
-  --chart-5: 36 28% 87%;
+  --chart-1: 220 62% 20%;
+  --chart-2: 43 72% 44%;
+  --chart-3: 220 30% 60%;
+  --chart-4: 220 25% 94%;
+  --chart-5: 220 30% 97%;
 
-  --app-font-sans: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --app-font-sans: 'Cormorant Garamond', Georgia, serif;
   --app-font-serif: 'Cormorant Garamond', Georgia, serif;
   --app-font-mono: Menlo, monospace;
 
-  --radius: .25rem;
+  --radius: .2rem;
 
-  --shadow-2xs: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
-  --shadow-xs: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
-  --shadow-sm: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 1px 2px -1px hsl(22 52% 13% / 0.08);
-  --shadow: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 1px 2px -1px hsl(22 52% 13% / 0.08);
-  --shadow-md: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 2px 4px -1px hsl(22 52% 13% / 0.1);
-  --shadow-lg: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 4px 6px -1px hsl(22 52% 13% / 0.1);
-  --shadow-xl: 0px 2px 0px 0px hsl(22 52% 13% / 0.04), 0px 8px 10px -1px hsl(22 52% 13% / 0.1);
-  --shadow-2xl: 0px 2px 0px 0px hsl(22 52% 13% / 0.04);
+  --shadow-2xs: 0px 2px 0px 0px hsl(220 65% 12% / 0.04);
+  --shadow-xs: 0px 2px 0px 0px hsl(220 65% 12% / 0.04);
+  --shadow-sm: 0px 2px 0px 0px hsl(220 65% 12% / 0.04), 0px 1px 2px -1px hsl(220 65% 12% / 0.1);
+  --shadow: 0px 2px 0px 0px hsl(220 65% 12% / 0.04), 0px 1px 2px -1px hsl(220 65% 12% / 0.1);
+  --shadow-md: 0px 2px 0px 0px hsl(220 65% 12% / 0.05), 0px 2px 4px -1px hsl(220 65% 12% / 0.12);
+  --shadow-lg: 0px 2px 0px 0px hsl(220 65% 12% / 0.05), 0px 4px 6px -1px hsl(220 65% 12% / 0.12);
+  --shadow-xl: 0px 2px 0px 0px hsl(220 65% 12% / 0.05), 0px 8px 10px -1px hsl(220 65% 12% / 0.12);
+  --shadow-2xl: 0px 4px 0px 0px hsl(220 65% 12% / 0.05);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
@@ -157,29 +155,29 @@
 }
 
 .dark {
-  --background: 22 52% 10%;
-  --foreground: 36 28% 87%;
-  --primary: 22 55% 42%;
-  --primary-foreground: 36 28% 92%;
-  --card: 25 35% 14%;
-  --card-foreground: 36 28% 87%;
-  --border: 25 35% 26%;
-  --muted: 25 35% 14%;
-  --muted-foreground: 35 25% 65%;
-  --accent: 25 35% 26%;
-  --accent-foreground: 36 28% 87%;
-  --popover: 25 35% 14%;
-  --popover-foreground: 36 28% 87%;
-  --input: 25 35% 26%;
-  --ring: 22 55% 42%;
-  --sidebar: 25 35% 14%;
-  --sidebar-foreground: 36 28% 87%;
-  --sidebar-primary: 22 55% 42%;
-  --sidebar-primary-foreground: 36 28% 92%;
-  --sidebar-accent: 25 35% 26%;
-  --sidebar-accent-foreground: 36 28% 87%;
-  --sidebar-border: 25 35% 26%;
-  --sidebar-ring: 22 55% 42%;
+  --background: 220 65% 8%;
+  --foreground: 220 20% 92%;
+  --primary: 220 50% 35%;
+  --primary-foreground: 43 70% 60%;
+  --card: 220 55% 12%;
+  --card-foreground: 220 20% 92%;
+  --border: 220 40% 22%;
+  --muted: 220 55% 12%;
+  --muted-foreground: 220 20% 60%;
+  --accent: 43 65% 50%;
+  --accent-foreground: 220 65% 12%;
+  --popover: 220 55% 12%;
+  --popover-foreground: 220 20% 92%;
+  --input: 220 40% 22%;
+  --ring: 43 65% 50%;
+  --sidebar: 220 55% 12%;
+  --sidebar-foreground: 220 20% 92%;
+  --sidebar-primary: 220 50% 35%;
+  --sidebar-primary-foreground: 43 70% 60%;
+  --sidebar-accent: 220 40% 22%;
+  --sidebar-accent-foreground: 220 20% 92%;
+  --sidebar-border: 220 40% 22%;
+  --sidebar-ring: 43 65% 50%;
 }
 
 @layer base {

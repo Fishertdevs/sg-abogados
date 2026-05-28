@@ -206,3 +206,27 @@ html {
     pointer-events: none;
   }
 }
+
+/* Statute panel layout — push content left on desktop */
+@media (min-width: 768px) {
+  .content-with-statue {
+    padding-right: clamp(300px, 43vw, 660px);
+  }
+}
+
+/* Dark form inputs */
+.sg-input::placeholder,
+.sg-input input::placeholder {
+  color: rgba(240, 235, 224, 0.25) !important;
+}
+.sg-input {
+  color: #F0EBE0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.sg-input:focus,
+.sg-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: rgba(196, 154, 24, 0.6) !important;
+}

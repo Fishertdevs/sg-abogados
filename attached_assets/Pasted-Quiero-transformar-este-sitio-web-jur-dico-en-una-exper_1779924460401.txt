@@ -1,0 +1,92 @@
+Quiero transformar este sitio web jurídico en una experiencia cinematográfica premium e inmersiva estilo Awwwards, utilizando la imagen de la estatua de la justicia como elemento central del hero section.
+
+NO quiero un sitio web corporativo tradicional.
+Quiero una experiencia visual moderna, emocional, futurista y cinematográfica.
+
+La estatua debe sentirse viva e integrada en una escena 3D interactiva.
+
+OBJETIVO:
+Crear una landing page de firma legal de lujo con calidad visual tipo Apple, Cuberto, Obys, Zentry y sitios Awwwards modernos.
+
+STACK:
+- Next.js
+- TailwindCSS
+- Framer Motion
+- GSAP
+- React Three Fiber
+- Drei
+- Lenis Smooth Scroll
+
+REQUERIMIENTOS DEL HERO:
+
+1. HERO CINEMATOGRÁFICO
+- Usar la imagen de la estatua de la justicia como pieza principal.
+- Convertir la imagen en una experiencia visual pseudo-3D inmersiva.
+- Agregar profundidad usando capas y parallax.
+- Movimiento suave mientras el usuario mueve el mouse.
+- Cámara cinematográfica lenta.
+- Sensación de lujo y autoridad.
+
+2. EFECTOS VISUALES
+- Partículas ambientales flotando lentamente.
+- Iluminación dorada dinámica.
+- Glow cálido cinematográfico.
+- Sombras suaves.
+- Fog sutil.
+- Depth blur.
+- Glassmorphism elegante.
+- Fondo oscuro premium.
+
+3. ANIMACIONES
+- Scroll animations fluidas estilo Apple.
+- Reveal animations cinematográficas.
+- GSAP timelines.
+- Framer Motion transitions.
+- Smooth scrolling avanzado.
+- Microinteracciones premium.
+- Hover animations elegantes.
+
+4. EXPERIENCIA INTERACTIVA
+- La estatua debe reaccionar ligeramente al movimiento del cursor.
+- Efecto parallax multicapa.
+- Sensación de profundidad real.
+- Movimiento elegante y minimalista.
+- Transiciones suaves entre secciones.
+
+5. ESTÉTICA
+Paleta:
+- negro profundo
+- dorado elegante
+- blanco suave
+- tonos cálidos cinematográficos
+
+Tipografía:
+- editorial
+- moderna
+- sofisticada
+- minimalista premium
+
+6. PERFORMANCE
+- Optimizar todas las animaciones.
+- Mantener alto rendimiento.
+- Responsive completo.
+- Diseño moderno para desktop y mobile.
+
+7. ESTRUCTURA
+- Arquitectura limpia y escalable.
+- Componentes reutilizables.
+- Separar animaciones, escenas 3D y UI.
+- Código profesional y mantenible.
+
+IMPORTANTE:
+No usar estilos genéricos de plantillas.
+Quiero una experiencia visual cinematográfica y emocional que parezca desarrollada por un estudio creativo de alto nivel.
+
+La sensación debe ser:
+- lujo
+- poder
+- elegancia
+- confianza
+- autoridad jurídica moderna
+
+Usa la imagen subida de la estatua como elemento principal y construye una experiencia hero inmersiva alrededor de ella.

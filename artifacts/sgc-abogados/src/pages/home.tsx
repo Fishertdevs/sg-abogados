@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Scale,
@@ -11,13 +11,12 @@ import {
   MapPin,
   Facebook,
   Instagram,
-  ChevronDown
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import heroNewImg from "@assets/generated_images/premium_law_firm_hero_023f.png";
 import justiceDetailImg from "@assets/justice_detail.png";
+import CinematicHero from "@/components/cinematic-hero";
 
 /* ─── Design tokens ────────────────────────────────────── */
 const N900 = "#0A1628";   /* darkest navy */
@@ -81,7 +80,12 @@ export default function Home() {
   const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
-  const navBg = useTransform(scrollY, [0, 80], ["rgba(247,248,252,0.0)", "rgba(247,248,252,0.97)"]);
+  const navBg = useTransform(scrollY, [0, 80], ["rgba(6,6,14,0.0)", "rgba(247,248,252,0.97)"]);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const unsub = scrollY.on("change", v => setScrolled(v > 60));
+    return unsub;
+  }, [scrollY]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,10 +110,12 @@ export default function Home() {
         style={{ backgroundColor: navBg }}
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm"
       >
-        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between" style={{ borderBottom: `1px solid ${N800}12` }}>
+        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between"
+          style={{ borderBottom: scrolled ? `1px solid ${N800}12` : "1px solid rgba(196,154,24,0.1)" }}>
           <a href="#inicio" className="flex items-center gap-2.5">
             <Scale strokeWidth={1.4} className="w-5 h-5" style={{ color: GOLD }} />
-            <span className="font-serif" style={{ color: N900, letterSpacing: "0.2em", fontSize: "0.92rem", fontWeight: 600 }}>
+            <span className="font-serif transition-colors duration-500"
+              style={{ color: scrolled ? N900 : "#F0EBE0", letterSpacing: "0.2em", fontSize: "0.92rem", fontWeight: 600 }}>
               SG ABOGADOS
             </span>
           </a>
@@ -118,15 +124,16 @@ export default function Home() {
             {navLinks.map(l => (
               <a
                 key={l.name} href={l.href}
-                className="font-serif transition-colors duration-200"
-                style={{ fontSize: "0.76rem", letterSpacing: "0.18em", color: N900, fontWeight: 500 }}
+                className="font-serif transition-colors duration-300"
+                style={{ fontSize: "0.76rem", letterSpacing: "0.18em", color: scrolled ? N900 : "rgba(240,235,224,0.82)", fontWeight: 500 }}
                 onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                onMouseLeave={e => (e.currentTarget.style.color = N900)}
+                onMouseLeave={e => (e.currentTarget.style.color = scrolled ? N900 : "rgba(240,235,224,0.82)")}
               >{l.name}</a>
             ))}
           </nav>
 
-          <button className="md:hidden p-2" style={{ color: N800 }}
+          <button className="md:hidden p-2 transition-colors duration-300"
+            style={{ color: scrolled ? N800 : "rgba(240,235,224,0.82)" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -142,116 +149,12 @@ export default function Home() {
         )}
       </motion.header>
 
-      <main className="flex-1 pt-[72px]">
+      <main className="flex-1">
 
         {/* ═══════════════════════════════════════════════════
-            HERO — split, next-level
+            HERO — Cinematic, immersive, dark
         ══════════════════════════════════════════════════════ */}
-        <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: "linear-gradient(135deg, #F7F8FC 0%, #EEF0F7 40%, #E8EAF2 100%)" }}>
-
-          {/* Warm parchment blur circle — bottom left */}
-          <div className="absolute pointer-events-none" style={{
-            bottom: "-120px", left: "-80px", width: "520px", height: "520px", borderRadius: "50%",
-            background: `radial-gradient(circle, ${WARM}CC 0%, transparent 70%)`,
-            filter: "blur(40px)"
-          }} />
-          {/* Gold blur — top right corner of left col */}
-          <div className="absolute pointer-events-none" style={{
-            top: "60px", left: "30%", width: "300px", height: "300px", borderRadius: "50%",
-            background: `radial-gradient(circle, ${GOLD}18 0%, transparent 70%)`,
-            filter: "blur(30px)"
-          }} />
-
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "100vh" }}>
-
-            {/* LEFT — centered editorial content */}
-            <div className="flex flex-col justify-center items-center text-center px-12 lg:px-20 py-24 relative">
-
-              {/* Welcome label */}
-              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-                <span className="font-serif" style={{ fontSize: "0.62rem", color: "#8B6914", letterSpacing: "0.42em" }}>
-                  BIENVENIDO A SG ABOGADOS
-                </span>
-              </motion.div>
-
-              {/* Ornament */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.6 }}
-                className="flex items-center gap-3 my-7">
-                <div style={{ width: "44px", height: "1px", background: `${GOLD}55` }} />
-                <div style={{ width: "5px", height: "5px", background: `${GOLD}80`, transform: "rotate(45deg)" }} />
-                <div style={{ width: "44px", height: "1px", background: `${GOLD}55` }} />
-              </motion.div>
-
-              {/* Headline — single elegant size */}
-              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3 }}
-                className="font-serif mb-7"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", color: N800, fontWeight: 500, fontStyle: "italic", lineHeight: 1.2 }}>
-                Nuestra prioridad es<br />tu tranquilidad legal.
-              </motion.h1>
-
-              {/* Body copy */}
-              <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.02rem", color: N900, lineHeight: 1.88, maxWidth: "360px", marginBottom: "38px", opacity: 0.72 }}>
-                Somos un estudio jurídico comprometido con proteger lo que más importa para usted y su familia. Cada caso recibe la dedicación que merece.
-              </motion.p>
-
-              {/* CTAs */}
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="flex items-center gap-7">
-                <a href="#contacto" data-testid="link-hero-contacto"
-                  className="font-serif"
-                  style={{ fontSize: "0.88rem", color: N800, letterSpacing: "0.08em", paddingBottom: "3px", borderBottom: `1px solid ${GOLD}BB` }}
-                  onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                  onMouseLeave={e => (e.currentTarget.style.color = N800)}>
-                  Agendar consulta
-                </a>
-                <span style={{ color: `${N800}22`, fontSize: "0.8rem" }}>|</span>
-                <a href="#areas" data-testid="link-hero-areas"
-                  className="font-serif"
-                  style={{ fontSize: "0.88rem", color: `${N800}88`, letterSpacing: "0.08em", paddingBottom: "3px", borderBottom: `1px solid ${N800}44` }}
-                  onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.borderBottomColor = `${GOLD}BB`; }}
-                  onMouseLeave={e => { e.currentTarget.style.color = `${N800}88`; e.currentTarget.style.borderBottomColor = `${N800}44`; }}>
-                  Nuestras áreas
-                </a>
-              </motion.div>
-
-              {/* Scroll cue */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
-                className="absolute bottom-10 flex items-center gap-2"
-                style={{ color: `${N800}40` }}>
-                <div style={{ width: "20px", height: "1px", background: "currentColor" }} />
-                <ChevronDown size={14} />
-              </motion.div>
-            </div>
-
-            {/* RIGHT — Lady Justice, warm-blended */}
-            <div className="relative hidden md:block">
-              {/* Warm parchment radial behind statue */}
-              <div className="absolute inset-0 pointer-events-none" style={{
-                background: `radial-gradient(ellipse at 60% 60%, ${WARM}FF 0%, #EEF0F7 55%, transparent 100%)`
-              }} />
-              {/* Left fade blend */}
-              <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" style={{
-                width: "42%",
-                background: `linear-gradient(to right, #EEF0F7 0%, #EEF0F7CC 50%, transparent 100%)`
-              }} />
-              <img src={heroNewImg} alt="Balanza de la Justicia"
-                data-testid="img-lady-justice-hero"
-                className="absolute inset-0 w-full h-full"
-                style={{ objectFit: "cover", objectPosition: "center center" }}
-              />
-              {/* Subtle gold diamond watermark */}
-              <div className="absolute bottom-12 right-12 z-20 opacity-20">
-                <svg width="18" height="18" viewBox="0 0 18 18">
-                  <rect x="4" y="4" width="10" height="10" transform="rotate(45 9 9)" fill={GOLD}/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CinematicHero />
 
         {/* ═══════════════════════════════════════════════════
             ÁREAS DE PRÁCTICA — 7 areas, compact premium grid

@@ -1,0 +1,18 @@
+Activa el modo "UI/UX Pro Max Skill". Vamos a rediseñar por completo el sitio actual de "SG Abogados" para transformarlo de una plantilla genérica a una experiencia cinematográfica inmersiva y de altísimo nivel. 
+
+Quiero que la protagonista absoluta sea la Diosa de la Justicia (Themis) y que todo el diseño gire en torno a ella bajo las siguientes directrices estrictas:
+
+1. DIRECCIÓN DE ARTE Y PALETA DE COLORES:
+- Fondo (Azul): Olvida los fondos negros planos. Utiliza un degradado profundo de azul noche, azul marino y toques de azul heráldico oscuro (ej. #0a1128 a #000411). Debe evocar solemnidad y profundidad.
+- Acentos (Dorado): Usa un dorado sofisticado y metalizado (ej. #d4af37 o #c5a059) ÚNICAMENTE para bordes delgados de alta calidad, botones principales (CTA), títulos importantes y elementos activos.
+- Texto (Blanco): El texto del cuerpo debe ser blanco puro (#ffffff) o blanco roto (#f4f4f6) para garantizar un contraste perfecto y legibilidad premium.
+
+2. ESTRUCTURA DE "ESCENAS CINEMATOGRÁFICAS":
+- Sección Hero (Inicio): Modifica la estructura actual de dos columnas planas. La Diosa de la Justicia debe estar integrada de forma monumental. Si es una imagen con fondo transparente, aplícale un efecto de iluminación trasera (backdrop glow) en tonos dorados suaves o azul eléctrico para que parezca recortada tridimensionalmente contra el fondo oscuro. El texto principal debe superponerse con elegancia usando una tipografía Serif imponente (como Cinzel o Playfair Display).
+- Efecto de Iluminación Dramática: Implementa sombras internas (box-shadows) y luces difusas ambientales mediante CSS en los contenedores. Los elementos deben parecer iluminados por una luz de cine, no planos.
+- Tarjetas y Estadísticas: Rediseña los bloques de "7 Especialidades", "+5 Años" y "100% Compromiso". En lugar de texto plano, conviértelos en tarjetas con efecto "Glassmorphism" (fondo azul translúcido, desenfoque de fondo 'backdrop-blur' y un borde dorado milimétrico de 1px).
+
+3. SECCIÓN "ÁREAS DE PRÁCTICA" (Siguiente Nivel):
+- Transforma esta sección en una galería de "escenas". Cada área de práctica (Penal, Civil, Corporativo, etc.) debe ser representada por una tarjeta visualmente cinematográfica (puedes usar overlays oscuros sobre las imágenes para que el texto resalte en dorado al pasar el cursor con un efecto 'hover' suave).
+
+Aplica estos cambios directamente en el archivo CSS/Tailwind y en la estructura HTML/Componentes del sitio web actual. Mantén el menú de navegación superior pero estilízalo para que encaje en esta atmósfera.

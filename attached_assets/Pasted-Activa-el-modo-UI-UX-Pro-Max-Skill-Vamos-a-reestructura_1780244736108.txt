@@ -1,0 +1,23 @@
+Activa el modo "UI/UX Pro Max Skill". Vamos a reestructurar por completo el sitio actual de "SG Abogados" aplicando un cambio radical en su diseño, layout y colorimetría. Sigue estas instrucciones estrictas:
+
+1. NUEVA COLORIMETRÍA SUPREMA (Blanco, Negro y Dorado):
+- Fondo Principal: Negro absoluto (#000000) o un negro premium muy profundo (#0a0a0a) para generar un contraste cinematográfico y elegante.
+- Acentos y Destacados: Usa un Dorado metalizado y pulido (ej. #d4af37 o #c5a059). Este color se reservará exclusivamente para títulos principales, bordes finos de 1px, estados hover interactivos y el botón principal de llamada a la acción (CTA).
+- Textos y Claridad: Usa Blanco Puro (#ffffff) para los textos del cuerpo y descripciones, asegurando una legibilidad impecable sobre el fondo negro.
+
+2. SECCIÓN HERO (La Diosa Monumental):
+- La imagen de la Diosa de la Justicia (Themis) debe ser el elemento central y verse significativamente más grande, imponente y monumental que en el diseño actual.
+- Aplícale un sutil resplandor trasero dorado (backdrop glow mediante CSS) para separarla del fondo negro tridimensionalmente.
+- REGLA EXCLUSIVA: La Diosa de la Justicia SOLO debe aparecer y aplicar en la sección Hero. 
+
+3. DISEÑO DE LAS DEMÁS SECCIONES:
+- El resto de las secciones (Áreas de Práctica, Nosotros, etc.) NO deben verse divididas, cortadas o condicionadas por la estética o el espacio de la imagen de la diosa. 
+- Al hacer scroll hacia abajo, el diseño debe abrirse a un layout limpio, fluido y moderno en formato de bloques elegantes sobre el fondo negro, manteniendo la consistencia de tipografías y acentos dorados.
+- Estiliza las estadísticas ("7 Especialidades", etc.) en tarjetas minimalistas con bordes dorados ultra-finos.
+
+4. REDES SOCIALES Y DETALLES TÉCNICOS:
+- Queda estrictamente prohibido usar emojis o fuentes de iconos genéricas para las redes sociales. 
+- Inserta directamente en el código el marcado SVG nativo, limpio y profesional para cada red social (utiliza los paths oficiales de plataformas como Instagram, LinkedIn, X, o Facebook, con un tamaño uniforme, ej. `viewBox="0 0 24 24"` y clase `w-6 h-6`).
+- Los SVGs deben ser de color blanco o dorado apagado por defecto, y cambiar a dorado brillante al pasar el cursor (hover con transición suave).
+
+Realiza todos los ajustes solicitados directamente sobre la estructura HTML/Tailwind y el archivo CSS del proyecto. Mantén el menú de navegación superior con una tipografía Serif elegante que encaje con este nuevo estilo premium.

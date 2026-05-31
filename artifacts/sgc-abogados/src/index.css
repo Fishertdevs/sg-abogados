@@ -207,13 +207,6 @@ html {
   }
 }
 
-/* Statute panel layout — push content left on desktop */
-@media (min-width: 768px) {
-  .content-with-statue {
-    padding-right: clamp(300px, 43vw, 660px);
-  }
-}
-
 /* Dark form inputs */
 .sg-input::placeholder,
 .sg-input input::placeholder {

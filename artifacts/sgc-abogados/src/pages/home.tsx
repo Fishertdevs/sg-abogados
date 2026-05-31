@@ -113,63 +113,150 @@ function CafeDivider() {
   );
 }
 
-/* ─── Area card ──────────────────────────────────────────── */
-function AreaCard({ area }: { area: typeof AREAS[0] }) {
-  const [hov, setHov] = useState(false);
+/* ─── 3D Carousel ────────────────────────────────────────── */
+function AreasCarousel() {
+  const [active, setActive] = useState(0);
+  const total = AREAS.length;
+
+  useEffect(() => {
+    const timer = setInterval(() => setActive(p => (p + 1) % total), 4000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const go = (dir: 1 | -1) => setActive(p => (p + dir + total) % total);
+
+  /* relative position of each card to the active one */
+  const getPos = (i: number) => {
+    let d = i - active;
+    if (d >  total / 2) d -= total;
+    if (d < -total / 2) d += total;
+    return d;
+  };
+
+  const cardStyle = (pos: number): React.CSSProperties => {
+    const abs = Math.abs(pos);
+    if (abs > 2) return { display: "none" };
+
+    const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
+    const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
+    const translateX = pos * 260;
+    const zIndex  = 10 - abs;
+
+    return {
+      position: "absolute",
+      width: "300px",
+      transform: `translateX(${translateX}px) scale(${scale})`,
+      opacity,
+      zIndex,
+      transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
+      cursor: abs === 0 ? "default" : "pointer",
+      pointerEvents: abs > 2 ? "none" : "auto",
+    };
+  };
+
   return (
-    <motion.div
-      variants={fadeUp}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      className="flex flex-col p-8 relative transition-all duration-300"
-      style={{
-        background: hov ? BG2 : BG,
-        borderBottom: `2px solid ${hov ? CAFE : `${CAFE}25`}`,
-        minHeight: "260px", cursor: "default",
-        boxShadow: hov ? "0 4px 24px rgba(107,58,42,0.08)" : "none",
-      }}
-    >
-      <span style={{
-        position: "absolute", top: "10px", right: "16px",
-        fontFamily: "'Cinzel', serif", fontSize: "3.6rem", fontWeight: 700,
-        color: `rgba(107,58,42,${hov ? "0.09" : "0.04"})`,
-        lineHeight: 1, userSelect: "none", transition: "color 0.3s",
-      }}>{area.roman}</span>
+    <div className="flex flex-col items-center gap-10 w-full">
 
-      <div style={{
-        width: hov ? "42px" : "20px", height: "2px",
-        background: CAFE, marginBottom: "18px",
-        transition: "width 0.35s ease", opacity: hov ? 1 : 0.4,
-      }} />
+      {/* Card stage */}
+      <div className="relative w-full flex items-center justify-center"
+        style={{ height: "420px" }}>
+        {AREAS.map((area, i) => {
+          const pos = getPos(i);
+          if (Math.abs(pos) > 2) return null;
+          return (
+            <div key={i} style={cardStyle(pos)}
+              onClick={() => pos !== 0 && setActive(i)}>
+              <div className="flex flex-col p-8 h-full"
+                style={{
+                  background: "#ffffff",
+                  minHeight: "380px",
+                  boxShadow: pos === 0
+                    ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
+                    : "0 8px 30px rgba(0,0,0,0.18)",
+                }}>
 
-      <h3 style={{
-        fontFamily: "'Cinzel', serif", fontSize: "0.9rem", fontWeight: 600,
-        color: hov ? CAFE2 : TEXT, letterSpacing: "0.08em",
-        marginBottom: "12px", transition: "color 0.3s",
-      }}>{area.title}</h3>
+                {/* Roman number */}
+                <span style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "2.8rem", fontWeight: 700,
+                  color: `${CAFE}18`, lineHeight: 1, marginBottom: "4px",
+                }}>{area.roman}</span>
 
-      <p style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontSize: "0.92rem", color: MUTED, lineHeight: 1.80, marginBottom: "18px",
-      }}>{area.desc}</p>
+                {/* Accent line */}
+                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "18px" }} />
 
-      <ul className="flex flex-col gap-2 mt-auto">
-        {area.items.map((item, i) => (
-          <li key={i} className="flex items-start gap-2.5">
-            <div style={{
-              width: "4px", height: "4px", background: CAFE,
-              transform: "rotate(45deg)", marginTop: "6px", flexShrink: 0,
-              opacity: hov ? 0.85 : 0.35, transition: "opacity 0.3s",
-            }} />
-            <span style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: "0.82rem",
-              color: hov ? MUTED : "rgba(17,17,17,0.35)",
-              lineHeight: 1.5, transition: "color 0.3s",
-            }}>{item}</span>
-          </li>
+                {/* Title */}
+                <h3 style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
+                  color: TEXT, letterSpacing: "0.07em", marginBottom: "14px",
+                }}>{area.title}</h3>
+
+                {/* Description */}
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "0.88rem", color: MUTED, lineHeight: 1.80, marginBottom: "18px",
+                }}>{area.desc}</p>
+
+                {/* Items */}
+                <ul className="flex flex-col gap-2 mt-auto">
+                  {area.items.slice(0, 4).map((item, j) => (
+                    <li key={j} className="flex items-start gap-2">
+                      <div style={{
+                        width: "4px", height: "4px", background: CAFE,
+                        transform: "rotate(45deg)", marginTop: "6px", flexShrink: 0,
+                      }} />
+                      <span style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "0.80rem", color: "rgba(17,17,17,0.50)", lineHeight: 1.5,
+                      }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Pagination dots */}
+      <div className="flex items-center gap-2.5">
+        {AREAS.map((_, i) => (
+          <button key={i} onClick={() => setActive(i)}
+            style={{
+              width: i === active ? "24px" : "8px",
+              height: "8px",
+              borderRadius: "4px",
+              background: i === active ? "#ffffff" : "rgba(255,255,255,0.30)",
+              border: "none", cursor: "pointer", padding: 0,
+              transition: "all 0.35s ease",
+            }}
+          />
         ))}
-      </ul>
-    </motion.div>
+      </div>
+
+      {/* Prev / Next arrows */}
+      <div className="flex items-center gap-6">
+        <button onClick={() => go(-1)}
+          style={{
+            background: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer",
+            width: "44px", height: "44px", borderRadius: "50%",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#ffffff", fontSize: "1.2rem", transition: "background 0.3s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
+        >‹</button>
+        <button onClick={() => go(1)}
+          style={{
+            background: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer",
+            width: "44px", height: "44px", borderRadius: "50%",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#ffffff", fontSize: "1.2rem", transition: "background 0.3s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
+        >›</button>
+      </div>
+    </div>
   );
 }
 
@@ -323,7 +410,7 @@ export default function Home() {
           {/* TEXT — centrado dentro de su columna */}
           <div className="flex-1 flex flex-col items-center justify-center text-center py-28 z-20 relative">
 
-            {/* Headline — exactamente 2 líneas */}
+            {/* Headline — 2 líneas exactas, palabras intactas */}
             <h1 ref={headlineRef} className="mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -331,13 +418,22 @@ export default function Home() {
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
                 lineHeight: 1.10,
               }}>
-              {"Nuestra prioridad es tu".split("").map((ch, i) => (
-                <span key={`l1-${i}`} className="char inline-block">{ch === " " ? "\u00A0" : ch}</span>
-              ))}
-              <br />
-              {"tranquilidad legal.".split("").map((ch, i) => (
-                <span key={`l2-${i}`} className="char inline-block">{ch === " " ? "\u00A0" : ch}</span>
-              ))}
+              {/* Línea 1 */}
+              <span style={{ display: "block" }}>
+                {["Nuestra", "prioridad", "es", "tu"].map((word, wi) => (
+                  <span key={`w1-${wi}`} className="char inline-block" style={{ marginRight: "0.25em", whiteSpace: "nowrap" }}>
+                    {word}
+                  </span>
+                ))}
+              </span>
+              {/* Línea 2 */}
+              <span style={{ display: "block" }}>
+                {["tranquilidad", "legal."].map((word, wi) => (
+                  <span key={`w2-${wi}`} className="char inline-block" style={{ marginRight: "0.25em", whiteSpace: "nowrap" }}>
+                    {word}
+                  </span>
+                ))}
+              </span>
             </h1>
 
             {/* Divider café — centrado */}
@@ -434,30 +530,40 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          ÁREAS DE PRÁCTICA
+          ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="py-28 relative" style={{ background: BG2 }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${CAFE}35, transparent 55%)` }} />
+      <section id="areas" className="py-28 relative overflow-hidden" style={{ background: CAFE }}>
+
+        {/* Textura sutil */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%)",
+        }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16">
-            <SecLabel text="ESPECIALIDADES JURÍDICAS" />
+
+          {/* Header */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-center mb-16">
+            <span style={{
+              fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
+              color: "rgba(255,255,255,0.55)", display: "block", marginBottom: "18px",
+            }}>ESPECIALIDADES JURÍDICAS</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic", marginBottom: "16px",
+              color: "#ffffff", fontWeight: 500, fontStyle: "italic", marginBottom: "18px",
             }}>Áreas de Práctica</h2>
-            <CafeDivider />
+            <div className="flex items-center justify-center gap-3">
+              <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />
+              <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.55)" }} />
+              <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />
+            </div>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {AREAS.slice(0, 6).map((a, i) => <AreaCard key={i} area={a} />)}
-          </motion.div>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-            {AREAS.slice(6).map((a, i) => <AreaCard key={i} area={a} />)}
-          </motion.div>
+          {/* Carrusel */}
+          <AreasCarousel />
+
         </div>
       </section>
 

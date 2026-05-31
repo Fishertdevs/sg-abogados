@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import {
-  Scale, CheckCircle, Menu, X,
-  MessageCircle, Phone, Mail, MapPin, ChevronDown,
+  Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,19 +10,19 @@ import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
 
 /* ─── Design tokens ─────────────────────────────────────── */
-const BG    = "#0a0a0a";
-const BG2   = "#111111";
+const BG    = "#ffffff";
+const BG2   = "#f7f7f7";
 const GOLD  = "#d4af37";
-const GOLD2 = "#c5a059";
-const TEXT  = "#ffffff";
-const MUTED = "rgba(255,255,255,0.52)";
+const GOLD2 = "#b8932a";
+const TEXT  = "#0a0a0a";
+const MUTED = "rgba(10,10,10,0.52)";
 
 /* ─── Framer Motion variants ─────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.82, ease: [0.16, 1, 0.3, 1] } },
 };
-const stagger = { show: { transition: { staggerChildren: 0.11 } } };
+const stagger = { show: { transition: { staggerChildren: 0.10 } } };
 
 /* ─── Practice areas ─────────────────────────────────────── */
 const AREAS = [
@@ -96,7 +95,7 @@ const SvgFacebook = () => (
   </svg>
 );
 
-/* ─── Particle system (canvas) ───────────────────────────── */
+/* ─── Particle system ────────────────────────────────────── */
 interface Particle {
   x: number; y: number; vx: number; vy: number;
   size: number; alpha: number; maxAlpha: number;
@@ -107,8 +106,8 @@ function mkP(w: number, h: number): Particle {
     x: Math.random() * w, y: h + Math.random() * 40,
     vx: (Math.random() - 0.5) * 0.28,
     vy: -(Math.random() * 0.48 + 0.12),
-    size: Math.random() * 1.6 + 0.3,
-    alpha: 0, maxAlpha: Math.random() * 0.6 + 0.1,
+    size: Math.random() * 1.4 + 0.3,
+    alpha: 0, maxAlpha: Math.random() * 0.35 + 0.05,
     life: Math.floor(Math.random() * 280),
     maxLife: Math.floor(Math.random() * 220 + 140),
   };
@@ -124,73 +123,51 @@ function AreaCard({ area }: { area: typeof AREAS[0] }) {
       onMouseLeave={() => setHov(false)}
       className="flex flex-col p-8 relative transition-all duration-300"
       style={{
-        background: hov ? "rgba(212,175,55,0.04)" : "transparent",
-        border: `1px solid ${hov ? GOLD + "55" : "rgba(212,175,55,0.12)"}`,
-        boxShadow: hov ? `0 0 40px rgba(212,175,55,0.06), inset 0 1px 0 rgba(212,175,55,0.12)` : "none",
-        minHeight: "280px",
+        background: hov ? "#fafafa" : BG,
+        borderBottom: `2px solid ${hov ? GOLD : "rgba(212,175,55,0.18)"}`,
+        minHeight: "260px",
         cursor: "default",
+        boxShadow: hov ? "0 4px 24px rgba(0,0,0,0.06)" : "none",
       }}
     >
-      {/* Top glow line on hover */}
-      {hov && (
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: "1px",
-          background: `linear-gradient(to right, transparent, ${GOLD}80, transparent)`,
-        }} />
-      )}
-
-      {/* Roman numeral watermark */}
+      {/* Roman watermark */}
       <span style={{
         position: "absolute", top: "10px", right: "16px",
-        fontFamily: "'Cinzel', serif",
-        fontSize: "4rem", fontWeight: 700,
-        color: `rgba(212,175,55,${hov ? "0.07" : "0.03"})`,
-        lineHeight: 1, userSelect: "none",
-        transition: "color 0.3s",
+        fontFamily: "'Cinzel', serif", fontSize: "3.6rem", fontWeight: 700,
+        color: `rgba(212,175,55,${hov ? "0.09" : "0.04"})`,
+        lineHeight: 1, userSelect: "none", transition: "color 0.3s",
       }}>{area.roman}</span>
 
       {/* Gold rule */}
       <div style={{
-        width: hov ? "40px" : "20px", height: "1px",
-        background: GOLD, opacity: hov ? 1 : 0.45,
-        marginBottom: "18px",
-        transition: "width 0.35s ease, opacity 0.35s",
+        width: hov ? "42px" : "20px", height: "2px",
+        background: GOLD, marginBottom: "18px",
+        transition: "width 0.35s ease",
+        opacity: hov ? 1 : 0.4,
       }} />
 
       <h3 style={{
-        fontFamily: "'Cinzel', serif",
-        fontSize: "0.92rem", fontWeight: 600,
-        color: hov ? GOLD : TEXT,
-        letterSpacing: "0.08em",
-        marginBottom: "12px",
-        transition: "color 0.3s",
-      }}>
-        {area.title}
-      </h3>
+        fontFamily: "'Cinzel', serif", fontSize: "0.9rem", fontWeight: 600,
+        color: hov ? GOLD2 : TEXT, letterSpacing: "0.08em",
+        marginBottom: "12px", transition: "color 0.3s",
+      }}>{area.title}</h3>
 
       <p style={{
         fontFamily: "'Cormorant Garamond', serif",
-        fontSize: "0.9rem", color: MUTED,
-        lineHeight: 1.78, marginBottom: "20px",
-      }}>
-        {area.desc}
-      </p>
+        fontSize: "0.92rem", color: MUTED, lineHeight: 1.80, marginBottom: "18px",
+      }}>{area.desc}</p>
 
       <ul className="flex flex-col gap-2 mt-auto">
         {area.items.map((item, i) => (
           <li key={i} className="flex items-start gap-2.5">
             <div style={{
-              width: "4px", height: "4px",
-              background: GOLD, transform: "rotate(45deg)",
-              marginTop: "6px", flexShrink: 0,
-              opacity: hov ? 0.9 : 0.4,
-              transition: "opacity 0.3s",
+              width: "4px", height: "4px", background: GOLD,
+              transform: "rotate(45deg)", marginTop: "6px", flexShrink: 0,
+              opacity: hov ? 0.85 : 0.35, transition: "opacity 0.3s",
             }} />
             <span style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "0.83rem",
-              color: hov ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.38)",
-              lineHeight: 1.5,
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "0.82rem",
+              color: hov ? MUTED : "rgba(10,10,10,0.35)", lineHeight: 1.5,
               transition: "color 0.3s",
             }}>{item}</span>
           </li>
@@ -200,19 +177,18 @@ function AreaCard({ area }: { area: typeof AREAS[0] }) {
   );
 }
 
-/* ─── Stat card (minimalist gold border) ─────────────────── */
+/* ─── Stat card ──────────────────────────────────────────── */
 function StatCard({ num, label }: { num: string; label: string }) {
   return (
     <div style={{
       padding: "22px 28px",
-      border: `1px solid rgba(212,175,55,0.28)`,
-      background: "rgba(212,175,55,0.03)",
+      borderBottom: `2px solid ${GOLD}`,
+      background: BG,
     }}>
       <span style={{
         fontFamily: "'Cinzel', serif",
-        fontSize: "1.85rem", color: GOLD2,
-        fontWeight: 700, lineHeight: 1,
-        display: "block", marginBottom: "6px",
+        fontSize: "1.80rem", color: GOLD2,
+        fontWeight: 700, lineHeight: 1, display: "block", marginBottom: "6px",
       }}>{num}</span>
       <span style={{
         fontFamily: "'Cormorant Garamond', serif",
@@ -228,21 +204,18 @@ function SecLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-5">
       <div style={{ width: "28px", height: "1px", background: GOLD }} />
-      <span style={{
-        fontFamily: "'Cinzel', serif",
-        fontSize: "0.5rem", color: GOLD, letterSpacing: "0.5em",
-      }}>{text}</span>
+      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", color: GOLD, letterSpacing: "0.5em" }}>{text}</span>
     </div>
   );
 }
 
-/* ─── Gold divider ornament ──────────────────────────────── */
+/* ─── Gold divider ───────────────────────────────────────── */
 function GoldDivider() {
   return (
     <div className="flex items-center gap-3">
-      <div style={{ width: "40px", height: "1px", background: `${GOLD}55` }} />
-      <div style={{ width: "5px", height: "5px", background: `${GOLD}75`, transform: "rotate(45deg)" }} />
-      <div style={{ width: "20px", height: "1px", background: `${GOLD}35` }} />
+      <div style={{ width: "40px", height: "1px", background: `${GOLD}66` }} />
+      <div style={{ width: "5px", height: "5px", background: `${GOLD}88`, transform: "rotate(45deg)" }} />
+      <div style={{ width: "20px", height: "1px", background: `${GOLD}44` }} />
     </div>
   );
 }
@@ -254,12 +227,12 @@ function FormField({ id, label, placeholder, type = "text", required = false }:
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} style={{
         fontFamily: "'Cinzel', serif",
-        fontSize: "0.48rem", letterSpacing: "0.30em", color: `${GOLD}88`,
+        fontSize: "0.48rem", letterSpacing: "0.30em", color: GOLD2,
       }}>{label}</label>
       <Input id={id} type={type} placeholder={placeholder} required={required}
         className="rounded-none border-0 border-b bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
         style={{
-          borderBottom: `1px solid rgba(212,175,55,0.25)`,
+          borderBottom: `1px solid rgba(10,10,10,0.18)`,
           color: TEXT, fontSize: "0.9rem", boxShadow: "none",
           fontFamily: "'Cormorant Garamond', serif",
         }}
@@ -273,17 +246,18 @@ function FormField({ id, label, placeholder, type = "text", required = false }:
 export default function Home() {
   const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const canvasRef    = useRef<HTMLCanvasElement>(null);
-  const headlineRef  = useRef<HTMLHeadingElement>(null);
-  const subRef       = useRef<HTMLParagraphElement>(null);
-  const ctaRef       = useRef<HTMLDivElement>(null);
-  const statsRef     = useRef<HTMLDivElement>(null);
-  const eyebrowRef   = useRef<HTMLDivElement>(null);
-  const dividerRef   = useRef<HTMLDivElement>(null);
+  const canvasRef   = useRef<HTMLCanvasElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subRef      = useRef<HTMLParagraphElement>(null);
+  const ctaRef      = useRef<HTMLDivElement>(null);
+  const statsRef    = useRef<HTMLDivElement>(null);
+  const eyebrowRef  = useRef<HTMLDivElement>(null);
+  const dividerRef  = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
-  const navBg   = useTransform(scrollY, [0, 80], ["rgba(10,10,10,0.0)", "rgba(10,10,10,0.97)"]);
+  const navBg   = useTransform(scrollY, [0, 80], ["rgba(255,255,255,0.0)", "rgba(255,255,255,0.97)"]);
   const navBlur = useTransform(scrollY, [0, 80], ["blur(0px)", "blur(16px)"]);
+  const navShadow = useTransform(scrollY, [0, 80], ["none", "0 1px 0 rgba(0,0,0,0.06)"]);
 
   /* GSAP hero entrance */
   useEffect(() => {
@@ -293,7 +267,7 @@ export default function Home() {
     if (headlineRef.current) {
       const chars = headlineRef.current.querySelectorAll<HTMLElement>(".char");
       tl.fromTo(chars,
-        { opacity: 0, y: 60, rotateX: -50 },
+        { opacity: 0, y: 55, rotateX: -48 },
         { opacity: 1, y: 0, rotateX: 0, stagger: 0.022, duration: 1.1 }, 0.55);
     }
     if (dividerRef.current)
@@ -307,7 +281,7 @@ export default function Home() {
       tl.fromTo(statsRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8 }, 2.2);
   }, []);
 
-  /* Gold particles canvas (hero) */
+  /* Gold particles — subtle on white */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -318,7 +292,7 @@ export default function Home() {
     window.addEventListener("resize", resize);
     const W = () => canvas.width || 900;
     const H = () => canvas.height || 700;
-    const ps: Particle[] = Array.from({ length: 80 }, () => mkP(W(), H()));
+    const ps: Particle[] = Array.from({ length: 60 }, () => mkP(W(), H()));
     let raf: number;
     const tick = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -327,12 +301,10 @@ export default function Home() {
         const prog = p.life / p.maxLife;
         p.alpha = prog < 0.18 ? p.maxAlpha * prog / 0.18 :
                   prog > 0.75 ? p.maxAlpha * (1 - prog) / 0.25 : p.maxAlpha;
-        if (p.life >= p.maxLife) {
-          Object.assign(p, mkP(W(), H())); p.life = 0;
-        }
+        if (p.life >= p.maxLife) { Object.assign(p, mkP(W(), H())); p.life = 0; }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212,175,55,${p.alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(180,147,30,${p.alpha.toFixed(3)})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(tick);
@@ -364,12 +336,10 @@ export default function Home() {
           NAVBAR
       ══════════════════════════════════════════════════════════ */}
       <motion.header
-        style={{ backgroundColor: navBg, backdropFilter: navBlur }}
+        style={{ backgroundColor: navBg, backdropFilter: navBlur, boxShadow: navShadow }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between"
-          style={{ borderBottom: `1px solid rgba(212,175,55,0.10)` }}>
-
+        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between">
           <a href="#inicio" className="flex items-center gap-2.5">
             <Scale strokeWidth={1.3} className="w-5 h-5" style={{ color: GOLD }} />
             <span style={{
@@ -384,27 +354,27 @@ export default function Home() {
                 className="transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.58rem", letterSpacing: "0.22em",
-                  color: "rgba(255,255,255,0.55)", fontWeight: 500,
+                  fontSize: "0.56rem", letterSpacing: "0.22em",
+                  color: "rgba(10,10,10,0.50)", fontWeight: 500,
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = GOLD)}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
+                onMouseEnter={e => (e.currentTarget.style.color = GOLD2)}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.50)")}
               >{l.name}</a>
             ))}
           </nav>
 
+          {/* Text-only CTA — no border */}
           <a href="#contacto"
-            className="hidden md:inline-flex items-center px-5 py-2 transition-all duration-300"
+            className="hidden md:inline-flex items-center px-2 py-1 transition-colors duration-300"
             style={{
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.52rem", letterSpacing: "0.22em",
-              border: `1px solid ${GOLD}55`, color: GOLD,
+              fontSize: "0.56rem", letterSpacing: "0.22em", color: GOLD2,
             }}
-            onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = GOLD; el.style.color = BG; }}
-            onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = GOLD; }}
+            onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+            onMouseLeave={e => (e.currentTarget.style.color = GOLD2)}
           >CONSULTA</a>
 
-          <button className="md:hidden p-2" style={{ color: "rgba(255,255,255,0.75)" }}
+          <button className="md:hidden p-2" style={{ color: "rgba(10,10,10,0.65)", background: "none", border: "none" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -415,11 +385,11 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
               className="md:hidden px-8 py-6 flex flex-col gap-6"
-              style={{ background: "rgba(10,10,10,0.98)", borderBottom: `1px solid ${GOLD}18`, backdropFilter: "blur(16px)" }}
+              style={{ background: "rgba(255,255,255,0.98)", borderBottom: `1px solid rgba(0,0,0,0.06)`, backdropFilter: "blur(16px)" }}
             >
               {navLinks.map(l => (
                 <a key={l.name} href={l.href}
-                  style={{ fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.28em", color: "rgba(255,255,255,0.70)" }}
+                  style={{ fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.28em", color: "rgba(10,10,10,0.65)" }}
                   onClick={() => setMobileMenuOpen(false)}>{l.name}</a>
               ))}
             </motion.div>
@@ -428,30 +398,29 @@ export default function Home() {
       </motion.header>
 
       {/* ═══════════════════════════════════════════════════════
-          HERO — statue ONLY here, monumental
+          HERO — statue only here, monumental
       ══════════════════════════════════════════════════════════ */}
-      <section id="inicio" className="relative overflow-hidden"
-        style={{ minHeight: "100vh", background: "#000000" }}>
+      <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: BG }}>
 
-        {/* Gold particles canvas */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }} />
-
-        {/* Film grain */}
+        {/* Subtle warm ambient behind statue */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          zIndex: 2, opacity: 0.20,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E")`,
+          background: "radial-gradient(ellipse 55% 70% at 78% 60%, rgba(212,175,55,0.09) 0%, transparent 70%)",
+          zIndex: 1,
         }} />
 
-        {/* Edge vignettes */}
-        <div className="absolute inset-y-0 left-0 pointer-events-none" style={{ width: "8%", zIndex: 4, background: "linear-gradient(to right, #000 0%, transparent 100%)" }} />
-        <div className="absolute inset-y-0 right-0 pointer-events-none" style={{ width: "8%", zIndex: 4, background: "linear-gradient(to left, #000 0%, transparent 100%)" }} />
-        <div className="absolute top-0 inset-x-0 pointer-events-none" style={{ height: "12%", zIndex: 4, background: "linear-gradient(to bottom, #000 0%, transparent 100%)" }} />
-        <div className="absolute bottom-0 inset-x-0 pointer-events-none" style={{ height: "25%", zIndex: 5, background: "linear-gradient(to top, #000 0%, transparent 100%)" }} />
+        {/* Gold particles canvas */}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 2 }} />
 
-        {/* ── Main hero layout ── */}
+        {/* Bottom separator line */}
+        <div className="absolute bottom-0 inset-x-0 pointer-events-none" style={{
+          height: "1px", zIndex: 6,
+          background: `linear-gradient(to right, transparent, ${GOLD}33 40%, transparent)`,
+        }} />
+
+        {/* Layout */}
         <div className="relative z-10 h-full max-w-[1440px] mx-auto px-10 md:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
-          {/* TEXT — left column */}
+          {/* TEXT — left */}
           <div className="flex-1 flex flex-col justify-center py-28 z-20 relative">
 
             {/* Eyebrow */}
@@ -459,7 +428,7 @@ export default function Home() {
               <Scale size={11} strokeWidth={1.2} style={{ color: GOLD }} />
               <span style={{
                 fontFamily: "'Cinzel', serif",
-                fontSize: "0.48rem", color: GOLD, letterSpacing: "0.54em",
+                fontSize: "0.48rem", color: GOLD2, letterSpacing: "0.54em",
               }}>SG ABOGADOS · BOGOTÁ, COLOMBIA</span>
             </div>
 
@@ -469,8 +438,7 @@ export default function Home() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2.2rem, 4.5vw, 4.2rem)",
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
-                lineHeight: 1.14, perspective: "700px",
-                maxWidth: "540px",
+                lineHeight: 1.14, perspective: "700px", maxWidth: "540px",
               }}>
               {WORDS.map((word, wi) => (
                 <span key={wi} className="inline-block" style={{ marginRight: "0.28em" }}>
@@ -485,7 +453,7 @@ export default function Home() {
             <div ref={dividerRef} className="flex items-center gap-3 mb-7" style={{ opacity: 0, transformOrigin: "left" }}>
               <div style={{ width: "54px", height: "1px", background: GOLD }} />
               <div style={{ width: "6px", height: "6px", background: GOLD, transform: "rotate(45deg)" }} />
-              <div style={{ width: "22px", height: "1px", background: `${GOLD}55` }} />
+              <div style={{ width: "22px", height: "1px", background: `${GOLD}66` }} />
             </div>
 
             {/* Subtext */}
@@ -498,34 +466,32 @@ export default function Home() {
               Derecho de familia, laboral y más — con la dedicación, rigor ético y presencia humana que su caso merece.
             </p>
 
-            {/* CTAs */}
-            <div ref={ctaRef} className="flex items-center gap-8 flex-wrap mb-14">
+            {/* CTAs — text only, no borders */}
+            <div ref={ctaRef} className="flex items-center gap-10 flex-wrap mb-14">
               <a href="#contacto"
-                className="inline-flex items-center px-8 py-3.5 transition-all duration-300"
+                className="inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.58rem", letterSpacing: "0.24em",
-                  color: BG, background: GOLD, opacity: 0,
-                  boxShadow: `0 4px 28px rgba(212,175,55,0.35)`,
+                  fontSize: "0.58rem", letterSpacing: "0.30em",
+                  color: GOLD2, opacity: 0,
                 }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = GOLD2; el.style.boxShadow = "0 6px 36px rgba(212,175,55,0.50)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = GOLD; el.style.boxShadow = "0 4px 28px rgba(212,175,55,0.35)"; }}
+                onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+                onMouseLeave={e => (e.currentTarget.style.color = GOLD2)}
               >AGENDAR CONSULTA</a>
 
               <a href="#areas"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.58rem", letterSpacing: "0.22em",
-                  color: "rgba(255,255,255,0.44)", opacity: 0,
-                  paddingBottom: "4px", borderBottom: "1px solid rgba(255,255,255,0.18)",
+                  fontSize: "0.56rem", letterSpacing: "0.22em",
+                  color: "rgba(10,10,10,0.38)", opacity: 0,
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = TEXT; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.45)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.44)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.18)"; }}
+                onMouseEnter={e => (e.currentTarget.style.color = MUTED)}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.38)")}
               >NUESTRAS ÁREAS</a>
             </div>
 
             {/* Stat cards */}
-            <div ref={statsRef} className="flex items-stretch gap-4 flex-wrap" style={{ opacity: 0 }}>
+            <div ref={statsRef} className="flex items-stretch gap-5 flex-wrap" style={{ opacity: 0 }}>
               {[
                 { num: "7",    label: "Especialidades" },
                 { num: "+5",   label: "Años de experiencia" },
@@ -534,72 +500,47 @@ export default function Home() {
             </div>
           </div>
 
-          {/* STATUE — right side, monumental */}
+          {/* STATUE — right, monumental */}
           <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
-            style={{ width: "clamp(380px, 50vw, 720px)", height: "100vh" }}>
+            style={{ width: "clamp(360px, 48vw, 700px)", height: "100vh" }}>
 
-            {/* Outer ambient glow — large, soft */}
+            {/* Warm ambient glow */}
             <div style={{
               position: "absolute",
-              width: "600px", height: "600px", borderRadius: "50%",
+              width: "500px", height: "500px", borderRadius: "50%",
               top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-              background: `radial-gradient(circle, rgba(212,175,55,0.14) 0%, rgba(212,175,55,0.06) 35%, transparent 65%)`,
-              filter: "blur(80px)",
-            }} />
-
-            {/* Mid glow — warmer */}
-            <div style={{
-              position: "absolute",
-              width: "320px", height: "320px", borderRadius: "50%",
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-              background: "radial-gradient(circle, rgba(255,220,80,0.22) 0%, rgba(212,175,55,0.08) 50%, transparent 72%)",
-              filter: "blur(36px)",
-            }} />
-
-            {/* Tight hot glow — directly behind statue */}
-            <div style={{
-              position: "absolute",
-              width: "180px", height: "420px",
-              top: "50%", left: "50%", transform: "translate(-50%, -52%)",
-              background: "radial-gradient(ellipse, rgba(255,215,90,0.15) 0%, transparent 70%)",
-              filter: "blur(24px)",
+              background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 45%, transparent 68%)",
+              filter: "blur(60px)",
             }} />
 
             {/* Cinematic light rays */}
             <div style={{
-              position: "absolute", top: "8%", left: "55%",
-              width: "1.5px", height: "48%",
-              background: `linear-gradient(to bottom, transparent 0%, ${GOLD}28 40%, transparent 100%)`,
-              transform: "rotate(14deg)", filter: "blur(1px)",
-            }} />
-            <div style={{
-              position: "absolute", top: "18%", left: "38%",
-              width: "1px", height: "32%",
-              background: `linear-gradient(to bottom, transparent 0%, ${GOLD}13 55%, transparent 100%)`,
-              transform: "rotate(-10deg)", filter: "blur(2px)",
+              position: "absolute", top: "10%", left: "58%",
+              width: "1px", height: "42%",
+              background: `linear-gradient(to bottom, transparent 0%, ${GOLD}18 45%, transparent 100%)`,
+              transform: "rotate(12deg)", filter: "blur(1.5px)",
             }} />
 
-            {/* The statue — monumental */}
+            {/* The statue */}
             <motion.img
               src={justiceStatueImg}
               alt="Diosa de la Justicia, Themis — SG Abogados"
-              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              initial={{ opacity: 0, y: 28, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.6, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "relative", zIndex: 10,
-                width: "clamp(380px, 44vw, 680px)",
+                width: "clamp(360px, 42vw, 660px)",
                 height: "auto", objectFit: "contain",
                 filter: [
-                  "brightness(1.12)",
-                  "contrast(1.08)",
-                  "saturate(0.90)",
-                  `drop-shadow(0 0 80px rgba(212,175,55,0.32))`,
-                  `drop-shadow(0 0 36px rgba(212,175,55,0.22))`,
-                  `drop-shadow(0 24px 70px rgba(0,0,0,0.8))`,
+                  "brightness(1.05)",
+                  "contrast(1.10)",
+                  "saturate(0.85)",
+                  `drop-shadow(0 0 50px rgba(180,147,30,0.20))`,
+                  `drop-shadow(0 0 22px rgba(180,147,30,0.14))`,
+                  `drop-shadow(0 20px 50px rgba(0,0,0,0.10))`,
                 ].join(" "),
                 alignSelf: "flex-end",
-                marginBottom: 0,
               }}
             />
           </div>
@@ -608,56 +549,55 @@ export default function Home() {
         {/* Scroll cue */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: 3.2, duration: 1 }}
+          transition={{ delay: 3.0, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-20"
-          style={{ color: `${GOLD}44` }}
+          style={{ color: `${GOLD}55` }}
         >
-          <div style={{ width: "1px", height: "38px", background: `linear-gradient(to bottom, transparent, ${GOLD}55)` }} />
+          <div style={{ width: "1px", height: "36px", background: `linear-gradient(to bottom, transparent, ${GOLD}44)` }} />
           <ChevronDown size={12} strokeWidth={1.5} />
         </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          ÁREAS DE PRÁCTICA — full width, clean black
+          ÁREAS
       ══════════════════════════════════════════════════════════ */}
       <section id="areas" className="py-28 relative" style={{ background: BG2 }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}50, transparent 60%)` }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}40, transparent 55%)` }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-18">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16">
             <SecLabel text="ESPECIALIDADES JURÍDICAS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.8vw, 3.0rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
-              marginBottom: "16px",
+              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
+              color: TEXT, fontWeight: 500, fontStyle: "italic", marginBottom: "16px",
             }}>Áreas de Práctica</h2>
             <GoldDivider />
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14">
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {AREAS.slice(0, 6).map((a, i) => <AreaCard key={i} area={a} />)}
           </motion.div>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {AREAS.slice(6).map((a, i) => <AreaCard key={i} area={a} />)}
           </motion.div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          POR QUÉ ELEGIRNOS — full width
+          POR QUÉ ELEGIRNOS
       ══════════════════════════════════════════════════════════ */}
       <section className="py-28 relative" style={{ background: BG }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}45, transparent 60%)` }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}38, transparent 55%)` }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16">
             <SecLabel text="NUESTRA PROPUESTA" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.8vw, 3.0rem)",
+              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
             }}>Por qué elegirnos</h2>
           </motion.div>
@@ -673,21 +613,20 @@ export default function Home() {
               <motion.div key={i} variants={fadeUp}
                 className="flex flex-col p-10 py-14 transition-all duration-300"
                 style={{
-                  borderTop: `1px solid rgba(212,175,55,0.12)`,
-                  borderRight: i % 2 === 0 ? `1px solid rgba(212,175,55,0.08)` : "none",
+                  borderTop: `1px solid rgba(10,10,10,0.07)`,
+                  borderRight: i % 2 === 0 ? `1px solid rgba(10,10,10,0.06)` : "none",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(212,175,55,0.025)")}
+                onMouseEnter={e => (e.currentTarget.style.background = BG2)}
                 onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
               >
                 <span style={{
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "3rem", color: `${GOLD}12`,
-                  fontWeight: 700, lineHeight: 1, display: "block", marginBottom: "14px",
+                  fontFamily: "'Cinzel', serif", fontSize: "3rem",
+                  color: `rgba(212,175,55,0.18)`, fontWeight: 700, lineHeight: 1,
+                  display: "block", marginBottom: "14px",
                 }}>{f.num}</span>
-                <div style={{ width: "22px", height: "1px", background: GOLD, opacity: 0.45, marginBottom: "16px" }} />
+                <div style={{ width: "22px", height: "2px", background: GOLD, opacity: 0.55, marginBottom: "16px" }} />
                 <h3 style={{
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "0.96rem", color: TEXT,
+                  fontFamily: "'Cinzel', serif", fontSize: "0.92rem", color: TEXT,
                   fontWeight: 600, letterSpacing: "0.07em", marginBottom: "12px",
                 }}>{f.title}</h3>
                 <p style={{
@@ -701,17 +640,17 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          SOBRE NOSOTROS — full width
+          SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
       <section id="nosotros" className="py-28 relative" style={{ background: BG2 }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}45, transparent 60%)` }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}38, transparent 55%)` }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12">
             <SecLabel text="QUIÉNES SOMOS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.8vw, 3.0rem)",
+              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
             }}>Sobre Nosotros</h2>
           </motion.div>
@@ -720,11 +659,10 @@ export default function Home() {
             className="grid lg:grid-cols-2 gap-16 items-start">
             <div>
               <blockquote style={{
-                fontFamily: "'Playfair Display', serif",
-                fontStyle: "italic", fontSize: "1.20rem",
-                color: "rgba(255,255,255,0.82)", lineHeight: 1.86,
-                borderLeft: `2px solid ${GOLD}`,
-                paddingLeft: "24px", marginBottom: "40px",
+                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+                fontSize: "1.18rem", color: TEXT, lineHeight: 1.84,
+                borderLeft: `3px solid ${GOLD}`,
+                paddingLeft: "24px", marginBottom: "38px",
               }}>
                 "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
               </blockquote>
@@ -738,23 +676,22 @@ export default function Home() {
                 }}>{txt}</p>
               ))}
             </div>
-
-            <div className="flex flex-col justify-between gap-10">
+            <div className="flex flex-col gap-10">
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "0.98rem", color: MUTED, lineHeight: 1.94,
               }}>
                 Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.
               </p>
+              {/* Text-only button — no border */}
               <a href="#contacto"
-                className="inline-flex items-center self-start px-8 py-3.5 transition-all duration-300"
+                className="inline-flex items-center self-start transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.56rem", color: GOLD, letterSpacing: "0.24em",
-                  border: `1px solid ${GOLD}45`,
+                  fontSize: "0.56rem", color: GOLD2, letterSpacing: "0.24em",
                 }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = GOLD; el.style.color = BG; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = GOLD; }}
+                onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+                onMouseLeave={e => (e.currentTarget.style.color = GOLD2)}
                 data-testid="link-nosotros-contacto"
               >AGENDAR CONSULTA</a>
             </div>
@@ -763,17 +700,17 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          CONTACTO — full width
+          CONTACTO
       ══════════════════════════════════════════════════════════ */}
       <section id="contacto" className="py-28 relative" style={{ background: BG }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}45, transparent 60%)` }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${GOLD}38, transparent 55%)` }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.8vw, 3.0rem)",
+              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
             }}>Contacto</h2>
           </motion.div>
@@ -790,30 +727,26 @@ export default function Home() {
                   { icon: Mail,          label: "CORREO",    value: "contacto@sgabogados.co", href: "mailto:contacto@sgabogados.co" },
                   { icon: MessageCircle, label: "WHATSAPP",  value: "+57 (300) 123-4567",    href: "https://wa.me/573001234567"   },
                 ].map(({ icon: Icon, label, value, href }, i) => (
-                  <a key={i} href={href} className="flex items-start gap-3 group">
-                    <div className="w-9 h-9 flex items-center justify-center shrink-0 transition-all duration-300"
-                      style={{ border: `1px solid rgba(212,175,55,0.22)`, background: "rgba(212,175,55,0.03)" }}
-                      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = GOLD; el.style.background = `${GOLD}10`; }}
-                      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(212,175,55,0.22)"; el.style.background = "rgba(212,175,55,0.03)"; }}
-                    >
+                  <a key={i} href={href} className="flex items-start gap-3">
+                    <div className="w-9 h-9 flex items-center justify-center shrink-0">
                       <Icon size={14} strokeWidth={1.4} style={{ color: GOLD }} />
                     </div>
                     <div>
-                      <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: `${GOLD}80`, letterSpacing: "0.28em", marginBottom: "3px" }}>{label}</p>
+                      <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: GOLD2, letterSpacing: "0.28em", marginBottom: "3px" }}>{label}</p>
                       <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT }}>{value}</p>
                     </div>
                   </a>
                 ))}
               </div>
 
-              <div style={{ borderLeft: `2px solid ${GOLD}40`, paddingLeft: "18px" }}>
+              <div style={{ borderLeft: `3px solid ${GOLD}`, paddingLeft: "20px" }}>
                 <div className="flex items-center gap-2 mb-3">
                   <MapPin size={12} strokeWidth={1.4} style={{ color: GOLD }} />
-                  <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: `${GOLD}80`, letterSpacing: "0.28em" }}>UBICACIÓN</span>
+                  <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: GOLD2, letterSpacing: "0.28em" }}>UBICACIÓN</span>
                 </div>
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT, marginBottom: "2px" }}>Cl 12 B 8-23, Oficina 421</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.9rem", color: MUTED }}>Bogotá, Colombia</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", marginTop: "8px", fontSize: "0.8rem", color: `${GOLD}70` }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: MUTED }}>Bogotá, Colombia</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", marginTop: "8px", fontSize: "0.80rem", color: GOLD2 }}>
                   Lun–Vie · 8am–6pm · Con cita previa
                 </p>
               </div>
@@ -825,9 +758,8 @@ export default function Home() {
               viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 p-10"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                borderTop: `2px solid ${GOLD}50`,
-                border: `1px solid rgba(212,175,55,0.10)`,
+                background: BG2,
+                borderTop: `3px solid ${GOLD}`,
               }}>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-7" data-testid="form-contact">
@@ -838,46 +770,47 @@ export default function Home() {
                 <FormField id="email" label="CORREO ELECTRÓNICO" type="email" placeholder="juan@ejemplo.com" required />
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="area" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: `${GOLD}88` }}>
+                  <label htmlFor="area" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: GOLD2 }}>
                     ÁREA DE CONSULTA
                   </label>
                   <select id="area" required data-testid="select-area"
                     className="w-full py-2 focus:outline-none"
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
-                      borderBottom: `1px solid rgba(212,175,55,0.25)`,
+                      borderBottom: `1px solid rgba(10,10,10,0.18)`,
                       borderTop: "none", borderLeft: "none", borderRight: "none",
                       color: TEXT, background: "transparent", boxShadow: "none", fontSize: "0.9rem",
                     }}>
-                    <option value="" style={{ background: "#0a0a0a" }}>Seleccione un área</option>
-                    {AREAS.map(a => <option key={a.title} value={a.title} style={{ background: "#0a0a0a" }}>{a.title}</option>)}
+                    <option value="" style={{ background: BG2 }}>Seleccione un área</option>
+                    {AREAS.map(a => <option key={a.title} value={a.title} style={{ background: BG2 }}>{a.title}</option>)}
                   </select>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: `${GOLD}88` }}>
+                  <label htmlFor="message" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: GOLD2 }}>
                     SU CONSULTA
                   </label>
                   <Textarea id="message" required placeholder="Describa brevemente su situación..."
                     className="rounded-none border-0 border-b resize-none min-h-[90px] bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
-                      borderBottom: `1px solid rgba(212,175,55,0.25)`, boxShadow: "none",
+                      borderBottom: `1px solid rgba(10,10,10,0.18)`, boxShadow: "none",
                       color: TEXT, fontSize: "0.9rem",
                     }}
                     data-testid="textarea-message" />
                 </div>
 
+                {/* Text-only submit — no border */}
                 <button type="submit" data-testid="button-submit"
-                  className="w-full py-4 transition-all duration-300"
+                  className="w-full py-4 transition-colors duration-300"
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    background: `${GOLD}18`, color: GOLD2,
+                    background: "none", color: GOLD2,
                     fontSize: "0.56rem", letterSpacing: "0.32em",
-                    border: `1px solid ${GOLD}45`, cursor: "pointer",
+                    border: "none", cursor: "pointer",
                   }}
-                  onMouseEnter={e => { const el = e.currentTarget; el.style.background = GOLD; el.style.color = BG; el.style.boxShadow = `0 4px 28px rgba(212,175,55,0.35)`; }}
-                  onMouseLeave={e => { const el = e.currentTarget; el.style.background = `${GOLD}18`; el.style.color = GOLD2; el.style.boxShadow = "none"; }}>
+                  onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+                  onMouseLeave={e => (e.currentTarget.style.color = GOLD2)}>
                   ENVIAR MENSAJE
                 </button>
               </form>
@@ -889,7 +822,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FOOTER
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: "#050505", borderTop: `1px solid rgba(212,175,55,0.12)` }}>
+      <footer style={{ background: BG2, borderTop: `1px solid rgba(10,10,10,0.07)` }}>
         <div className="max-w-7xl mx-auto px-8 py-14 text-center">
           <div className="flex items-center justify-center gap-2.5 mb-5">
             <Scale strokeWidth={1.3} className="w-5 h-5" style={{ color: GOLD }} />
@@ -899,16 +832,16 @@ export default function Home() {
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-5">
-            <div style={{ width: "52px", height: "1px", background: `${GOLD}40` }} />
-            <div style={{ width: "5px", height: "5px", background: `${GOLD}60`, transform: "rotate(45deg)" }} />
-            <div style={{ width: "52px", height: "1px", background: `${GOLD}40` }} />
+            <div style={{ width: "52px", height: "1px", background: `${GOLD}55` }} />
+            <div style={{ width: "5px", height: "5px", background: `${GOLD}77`, transform: "rotate(45deg)" }} />
+            <div style={{ width: "52px", height: "1px", background: `${GOLD}55` }} />
           </div>
 
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "rgba(255,255,255,0.35)", fontSize: "0.96rem", marginBottom: "32px" }}>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: MUTED, fontSize: "0.96rem", marginBottom: "32px" }}>
             Estrategia jurídica con carácter.
           </p>
 
-          {/* Social icons — native SVG, NO lucide */}
+          {/* Social icons — native SVG */}
           <div className="flex items-center justify-center gap-5 mb-10">
             {[
               { label: "Instagram", Icon: SvgInstagram, href: "#" },
@@ -918,31 +851,28 @@ export default function Home() {
             ].map(({ label, Icon, href }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 aria-label={label} data-testid={`link-social-${label.toLowerCase()}`}
-                className="w-10 h-10 flex items-center justify-center transition-all duration-300"
-                style={{
-                  border: `1px solid rgba(212,175,55,0.18)`,
-                  color: "rgba(255,255,255,0.40)",
-                }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.color = GOLD; el.style.borderColor = GOLD; el.style.background = `${GOLD}0E`; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.color = "rgba(255,255,255,0.40)"; el.style.borderColor = "rgba(212,175,55,0.18)"; el.style.background = "transparent"; }}
+                className="w-10 h-10 flex items-center justify-center transition-colors duration-300"
+                style={{ color: "rgba(10,10,10,0.35)" }}
+                onMouseEnter={e => (e.currentTarget.style.color = GOLD2)}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.35)")}
               >
                 <Icon />
               </a>
             ))}
           </div>
 
-          <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.05)", marginBottom: "18px" }} />
+          <div style={{ width: "100%", height: "1px", background: "rgba(10,10,10,0.06)", marginBottom: "18px" }} />
 
           <div className="flex items-center justify-center gap-4 flex-wrap">
             {["Política de Privacidad", "Términos de Servicio"].map(label => (
               <a key={label} href="#"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(255,255,255,0.28)", letterSpacing: "0.04em" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.28)")}
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(10,10,10,0.35)", letterSpacing: "0.04em" }}
+                onMouseEnter={e => (e.currentTarget.style.color = MUTED)}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.35)")}
               >{label}</a>
             ))}
-            <span style={{ color: "rgba(255,255,255,0.14)", fontSize: "0.6rem" }}>·</span>
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(255,255,255,0.22)" }}>
+            <span style={{ color: "rgba(10,10,10,0.18)", fontSize: "0.6rem" }}>·</span>
+            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(10,10,10,0.30)" }}>
               &copy; {new Date().getFullYear()} SG Abogados. Todos los derechos reservados.
             </span>
           </div>
@@ -952,16 +882,16 @@ export default function Home() {
       {/* ── FLOATING WHATSAPP ─── */}
       <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer"
         data-testid="link-whatsapp"
-        className="fixed bottom-6 right-6 w-[52px] h-[52px] rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110 z-50 group"
-        style={{ background: "#25D366", boxShadow: "0 4px 24px rgba(37,211,102,0.35)" }}
+        className="fixed bottom-6 right-6 w-[52px] h-[52px] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-50 group"
+        style={{ background: "#25D366", boxShadow: "0 4px 20px rgba(37,211,102,0.30)" }}
         aria-label="Contactar por WhatsApp">
         <MessageCircle size={22} className="text-white" />
         <span className="absolute right-full mr-4 py-1.5 px-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "0.78rem",
-            background: "#0a0a0a", color: "rgba(255,255,255,0.88)",
-            letterSpacing: "0.04em", border: `1px solid ${GOLD}20`,
+            fontFamily: "'Cormorant Garamond', serif", fontSize: "0.78rem",
+            background: BG, color: MUTED,
+            letterSpacing: "0.04em",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
           }}>
           Chatea con nosotros
         </span>

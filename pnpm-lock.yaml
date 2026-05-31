@@ -401,9 +401,6 @@ importers:
 
   artifacts/sgc-abogados:
     dependencies:
-      '@types/gsap':
-        specifier: ^3.0.0
-        version: 3.0.0
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
@@ -1681,10 +1678,6 @@ packages:
 
   '@types/express@5.0.6':
     resolution: {integrity: sha512-sKYVuV7Sv9fbPIt/442koC7+IIwK5olP1KWeD88e/idgoJqDm3JV/YUiPwkoKK92ylff2MGxSz1CSjsXelx0YA==}
-
-  '@types/gsap@3.0.0':
-    resolution: {integrity: sha512-BbWLi4WRHGze4C8NV7U7yRevuBFiPkPZZyGa0rryanvh/9HPUFXTNBXsGQxJZJq7Ix7j4RXMYodP3s+OsqCErg==}
-    deprecated: This is a stub types definition. gsap provides its own type definitions, so you do not need this installed.
 
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
@@ -4371,10 +4364,6 @@ snapshots:
       '@types/body-parser': 1.19.6
       '@types/express-serve-static-core': 5.1.1
       '@types/serve-static': 2.2.0
-
-  '@types/gsap@3.0.0':
-    dependencies:
-      gsap: 3.15.0
 
   '@types/hast@3.0.4':
     dependencies:

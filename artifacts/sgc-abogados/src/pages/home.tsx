@@ -354,25 +354,14 @@ export default function Home() {
                 className="transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.56rem", letterSpacing: "0.22em",
-                  color: "rgba(10,10,10,0.50)", fontWeight: 500,
+                  fontSize: "0.78rem", letterSpacing: "0.18em",
+                  color: TEXT, fontWeight: 600,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = GOLD2)}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.50)")}
+                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
               >{l.name}</a>
             ))}
           </nav>
-
-          {/* Text-only CTA — no border */}
-          <a href="#contacto"
-            className="hidden md:inline-flex items-center px-2 py-1 transition-colors duration-300"
-            style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: "0.56rem", letterSpacing: "0.22em", color: GOLD2,
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
-            onMouseLeave={e => (e.currentTarget.style.color = GOLD2)}
-          >CONSULTA</a>
 
           <button className="md:hidden p-2" style={{ color: "rgba(10,10,10,0.65)", background: "none", border: "none" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
@@ -820,62 +809,91 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          FOOTER
+          FOOTER — estilo ejemplo: oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: BG2, borderTop: `1px solid rgba(10,10,10,0.07)` }}>
-        <div className="max-w-7xl mx-auto px-8 py-14 text-center">
-          <div className="flex items-center justify-center gap-2.5 mb-5">
-            <Scale strokeWidth={1.3} className="w-5 h-5" style={{ color: GOLD }} />
-            <span style={{ fontFamily: "'Cinzel', serif", color: TEXT, letterSpacing: "0.32em", fontSize: "0.80rem", fontWeight: 600 }}>
-              SG ABOGADOS
-            </span>
+      <footer style={{ background: "#111111" }}>
+
+        {/* Bloque principal */}
+        <div className="flex flex-col items-center px-8 py-14">
+
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(212,175,55,0.15)" }}>
+              <Scale strokeWidth={1.4} size={16} style={{ color: GOLD }} />
+            </div>
+            <span style={{
+              fontFamily: "'Cinzel', serif",
+              color: "#ffffff", letterSpacing: "0.28em", fontSize: "0.88rem", fontWeight: 600,
+            }}>SG ABOGADOS</span>
           </div>
 
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <div style={{ width: "52px", height: "1px", background: `${GOLD}55` }} />
-            <div style={{ width: "5px", height: "5px", background: `${GOLD}77`, transform: "rotate(45deg)" }} />
-            <div style={{ width: "52px", height: "1px", background: `${GOLD}55` }} />
-          </div>
-
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: MUTED, fontSize: "0.96rem", marginBottom: "32px" }}>
-            Estrategia jurídica con carácter.
-          </p>
-
-          {/* Social icons — native SVG */}
-          <div className="flex items-center justify-center gap-5 mb-10">
+          {/* Social icons — círculos oscuros */}
+          <div className="flex items-center gap-4 mb-6">
             {[
-              { label: "Instagram", Icon: SvgInstagram, href: "#" },
-              { label: "LinkedIn",  Icon: SvgLinkedIn,  href: "#" },
-              { label: "X",         Icon: SvgX,         href: "#" },
               { label: "Facebook",  Icon: SvgFacebook,  href: "#" },
+              { label: "Instagram", Icon: SvgInstagram, href: "#" },
+              { label: "X",         Icon: SvgX,         href: "#" },
+              { label: "LinkedIn",  Icon: SvgLinkedIn,  href: "#" },
             ].map(({ label, Icon, href }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 aria-label={label} data-testid={`link-social-${label.toLowerCase()}`}
-                className="w-10 h-10 flex items-center justify-center transition-colors duration-300"
-                style={{ color: "rgba(10,10,10,0.35)" }}
-                onMouseEnter={e => (e.currentTarget.style.color = GOLD2)}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.35)")}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
+                style={{ background: "#222222", color: "rgba(255,255,255,0.65)" }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.background = GOLD;
+                  (e.currentTarget as HTMLElement).style.color = "#111111";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background = "#222222";
+                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                }}
               >
                 <Icon />
               </a>
             ))}
           </div>
 
-          <div style={{ width: "100%", height: "1px", background: "rgba(10,10,10,0.06)", marginBottom: "18px" }} />
+          {/* Tagline */}
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: "italic", fontSize: "0.95rem",
+            color: "rgba(255,255,255,0.45)",
+          }}>
+            Estrategia jurídica con carácter.
+          </p>
+        </div>
 
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            {["Política de Privacidad", "Términos de Servicio"].map(label => (
-              <a key={label} href="#"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(10,10,10,0.35)", letterSpacing: "0.04em" }}
-                onMouseEnter={e => (e.currentTarget.style.color = MUTED)}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(10,10,10,0.35)")}
-              >{label}</a>
+        {/* Separador */}
+        <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
+
+        {/* Barra inferior */}
+        <div className="flex flex-col items-center gap-2 px-8 py-6">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            {["Política de Cookies", "Términos y Condiciones", "Política de Privacidad"].map((label, i, arr) => (
+              <span key={label} className="flex items-center gap-4">
+                <a href="#"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "0.78rem", color: "rgba(255,255,255,0.38)",
+                    letterSpacing: "0.03em",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.38)")}
+                >{label}</a>
+                {i < arr.length - 1 && (
+                  <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.7rem" }}>·</span>
+                )}
+              </span>
             ))}
-            <span style={{ color: "rgba(10,10,10,0.18)", fontSize: "0.6rem" }}>·</span>
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.72rem", color: "rgba(10,10,10,0.30)" }}>
-              &copy; {new Date().getFullYear()} SG Abogados. Todos los derechos reservados.
-            </span>
           </div>
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "0.76rem", color: "rgba(255,255,255,0.28)",
+            marginTop: "4px",
+          }}>
+            &copy; {new Date().getFullYear()} SG Abogados.
+          </p>
         </div>
       </footer>
 

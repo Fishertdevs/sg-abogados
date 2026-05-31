@@ -323,21 +323,20 @@ export default function Home() {
           {/* TEXT — centrado dentro de su columna */}
           <div className="flex-1 flex flex-col items-center justify-center text-center py-28 z-20 relative">
 
-            {/* Headline — CENTRADO */}
-            <h1 ref={headlineRef} className="mb-8"
+            {/* Headline — exactamente 2 líneas */}
+            <h1 ref={headlineRef} className="mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(2.4rem, 5vw, 4.6rem)",
+                fontSize: "clamp(2.8rem, 4.2vw, 4.4rem)",
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
-                lineHeight: 1.12, perspective: "700px",
-                maxWidth: "560px",
+                lineHeight: 1.10,
               }}>
-              {WORDS.map((word, wi) => (
-                <span key={wi} className="inline-block" style={{ marginRight: "0.28em" }}>
-                  {word.split("").map((ch, ci) => (
-                    <span key={ci} className="char inline-block">{ch}</span>
-                  ))}
-                </span>
+              {"Nuestra prioridad es tu".split("").map((ch, i) => (
+                <span key={`l1-${i}`} className="char inline-block">{ch === " " ? "\u00A0" : ch}</span>
+              ))}
+              <br />
+              {"tranquilidad legal.".split("").map((ch, i) => (
+                <span key={`l2-${i}`} className="char inline-block">{ch === " " ? "\u00A0" : ch}</span>
               ))}
             </h1>
 
@@ -360,27 +359,27 @@ export default function Home() {
               ofreciéndole asesoría experta, acompañamiento integral y soluciones efectivas en cada etapa de su proceso legal.
             </p>
 
-            {/* CTAs — texto, sin contorno */}
-            <div ref={ctaRef} className="flex items-center justify-center gap-10 flex-wrap">
+            {/* CTAs — texto grande, negro, legibles */}
+            <div ref={ctaRef} className="flex items-center justify-center gap-12 flex-wrap">
               <a href="#contacto"
                 className="inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.60rem", letterSpacing: "0.30em",
-                  color: CAFE, opacity: 0,
+                  fontSize: "0.95rem", letterSpacing: "0.14em",
+                  color: TEXT, fontWeight: 700, opacity: 0,
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = CAFE2)}
-                onMouseLeave={e => (e.currentTarget.style.color = CAFE)}
+                onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
+                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
               >AGENDAR CONSULTA</a>
 
               <a href="#areas"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.58rem", letterSpacing: "0.22em",
-                  color: "rgba(17,17,17,0.40)", opacity: 0,
+                  fontSize: "0.90rem", letterSpacing: "0.14em",
+                  color: TEXT, fontWeight: 600, opacity: 0,
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = MUTED)}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(17,17,17,0.40)")}
+                onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
+                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
               >NUESTRAS ÁREAS</a>
             </div>
           </div>

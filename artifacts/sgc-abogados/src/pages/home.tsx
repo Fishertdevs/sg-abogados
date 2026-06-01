@@ -551,54 +551,130 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          POR QUÉ ELEGIRNOS
+          POR QUÉ ELEGIRNOS — rediseño premium
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-28 relative" style={{ background: BG }}>
+      <section className="py-32 relative overflow-hidden" style={{ background: BG }}>
+
+        {/* Ambient cálido inferior */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "55%",
+          background: `radial-gradient(ellipse 80% 60% at 50% 110%, ${CAFE}0D 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16">
-            <SecLabel text="NUESTRA PROPUESTA" />
+
+          {/* ── Header centrado como hero ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="text-center mb-24">
+            <span style={{
+              fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
+              color: `${CAFE}99`, display: "block", marginBottom: "18px",
+            }}>NUESTRA PROPUESTA</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
+              fontSize: "clamp(2.2rem, 3.8vw, 3.2rem)",
+              color: TEXT, fontWeight: 500, fontStyle: "italic", marginBottom: "20px",
             }}>Por qué elegirnos</h2>
+            <CafeDivider />
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid sm:grid-cols-2 gap-0">
+          {/* ── 4 pilares: 2 col × 2 rows, premium ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}
+            variants={stagger} className="grid sm:grid-cols-2 gap-px"
+            style={{ background: `rgba(107,58,42,0.08)` }}>
             {[
-              { num: "01", title: "Experiencia",    desc: "Años de práctica enfocada que nos permiten anticipar escenarios y construir estrategias sólidas para su caso." },
-              { num: "02", title: "Compromiso",     desc: "Asumimos cada caso como propio, con la dedicación y el rigor ético que la ley exige y usted merece." },
-              { num: "03", title: "Acompañamiento", desc: "Trato personalizado y humano. Usted siempre sabrá el estado real de su proceso, sin sorpresas." },
-              { num: "04", title: "Resultados",     desc: "Nos enfocamos en la eficacia, buscando la resolución más favorable en el menor tiempo posible." },
+              {
+                num: "01", roman: "I",
+                title: "Experiencia",
+                desc: "Años de práctica jurídica especializada que nos permiten anticipar escenarios, construir estrategias sólidas y defender sus intereses con rigor técnico.",
+              },
+              {
+                num: "02", roman: "II",
+                title: "Compromiso",
+                desc: "Asumimos cada caso como propio. Nuestra dedicación y el rigor ético que la ley exige son la base de cada actuación que emprendemos en su nombre.",
+              },
+              {
+                num: "03", roman: "III",
+                title: "Acompañamiento",
+                desc: "Trato personalizado y cercano en cada etapa del proceso. Usted siempre sabrá el estado real de su caso, con transparencia y sin sorpresas.",
+              },
+              {
+                num: "04", roman: "IV",
+                title: "Resultados",
+                desc: "Nos enfocamos en la eficacia real. Buscamos la resolución más favorable en el menor tiempo posible, sin perder de vista la calidad de cada gestión.",
+              },
             ].map((f, i) => (
               <motion.div key={i} variants={fadeUp}
-                className="flex flex-col p-10 py-14 transition-all duration-300"
-                style={{
-                  borderTop: `1px solid rgba(17,17,17,0.07)`,
-                  borderRight: i % 2 === 0 ? `1px solid rgba(17,17,17,0.06)` : "none",
-                }}
+                className="relative flex flex-col p-12 py-16 transition-all duration-400 group"
+                style={{ background: BG, minHeight: "320px" }}
                 onMouseEnter={e => (e.currentTarget.style.background = BG2)}
-                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                onMouseLeave={e => (e.currentTarget.style.background = BG)}
               >
+                {/* Watermark número grande */}
                 <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "3rem",
-                  color: `rgba(107,58,42,0.16)`, fontWeight: 700, lineHeight: 1,
-                  display: "block", marginBottom: "14px",
+                  position: "absolute", top: "20px", right: "28px",
+                  fontFamily: "'Cinzel', serif", fontSize: "7rem", fontWeight: 800,
+                  color: `${CAFE}08`, lineHeight: 1, userSelect: "none",
+                  transition: "color 0.4s",
+                }}>{f.roman}</span>
+
+                {/* Número pequeño café */}
+                <span style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.68rem", fontWeight: 700,
+                  color: CAFE, letterSpacing: "0.18em", marginBottom: "16px",
                 }}>{f.num}</span>
-                <div style={{ width: "22px", height: "2px", background: CAFE, opacity: 0.55, marginBottom: "16px" }} />
+
+                {/* Línea de acento */}
+                <div className="transition-all duration-500"
+                  style={{
+                    width: "32px", height: "2px", background: CAFE,
+                    marginBottom: "20px",
+                  }}
+                  ref={el => {
+                    if (!el) return;
+                    const parent = el.closest(".group");
+                    if (parent) {
+                      parent.addEventListener("mouseenter", () => el.style.width = "56px");
+                      parent.addEventListener("mouseleave", () => el.style.width = "32px");
+                    }
+                  }}
+                />
+
+                {/* Título */}
                 <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.92rem", color: TEXT,
-                  fontWeight: 600, letterSpacing: "0.07em", marginBottom: "12px",
+                  fontFamily: "'Cinzel', serif", fontSize: "1.05rem", fontWeight: 700,
+                  color: TEXT, letterSpacing: "0.06em", marginBottom: "18px",
+                  textTransform: "uppercase",
                 }}>{f.title}</h3>
+
+                {/* Descripción */}
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "0.92rem", color: MUTED, lineHeight: 1.94,
+                  fontSize: "1.05rem", color: MUTED, lineHeight: 1.90,
                 }}>{f.desc}</p>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* ── CTA inferior ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            className="flex flex-col items-center mt-20 gap-5">
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+              fontSize: "1.15rem", color: MUTED, letterSpacing: "0.02em",
+            }}>Su caso merece el mejor equipo jurídico.</p>
+            <a href="#contacto"
+              style={{
+                fontFamily: "'Cinzel', serif", fontSize: "0.88rem",
+                letterSpacing: "0.14em", fontWeight: 700, color: TEXT,
+                transition: "color 0.3s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
+              onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
+            >AGENDAR CONSULTA</a>
+          </motion.div>
+
         </div>
       </section>
 
@@ -851,19 +927,24 @@ export default function Home() {
       </footer>
 
       {/* ── FLOATING WHATSAPP ─── */}
-      <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer"
+      <a
+        href={`https://wa.me/573001234567?text=${encodeURIComponent("Estimados señores de SG Abogados, me dirijo a ustedes con el propósito de solicitar una consulta jurídica. Agradezco su atención y quedo en espera de su respuesta.")}`}
+        target="_blank" rel="noopener noreferrer"
         data-testid="link-whatsapp"
         className="fixed bottom-6 right-6 w-[52px] h-[52px] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-50 group"
         style={{ background: "#25D366" }}
         aria-label="Contactar por WhatsApp">
-        <MessageCircle size={22} className="text-white" />
-        <span className="absolute right-full mr-4 py-1.5 px-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
+        {/* SVG oficial de WhatsApp */}
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        {/* Tooltip — texto plano, sin caja */}
+        <span className="absolute right-full mr-4 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
           style={{
-            fontFamily: "'Cormorant Garamond', serif", fontSize: "0.78rem",
-            background: BG, color: MUTED, letterSpacing: "0.04em",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+            fontFamily: "'Cinzel', serif", fontSize: "0.72rem", letterSpacing: "0.10em",
+            color: TEXT, fontWeight: 600,
           }}>
-          Chatea con nosotros
+          CHATEAR CON NOSOTROS
         </span>
       </a>
     </div>

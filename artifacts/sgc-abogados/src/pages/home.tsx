@@ -8,6 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
+import nosotrosImg from "@assets/nosotros-law-office.png"; // attached_assets/
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
@@ -714,59 +715,135 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px", paddingBottom: "140px" }}>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12">
-            <div className="flex items-center gap-3 mb-5">
-              <div style={{ width: "28px", height: "1px", background: CAFE }} />
-              <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", color: CAFE, letterSpacing: "0.5em" }}>QUIÉNES SOMOS</span>
-            </div>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-              color: "#ffffff", fontWeight: 500, fontStyle: "italic",
-            }}>Sobre Nosotros</h2>
-          </motion.div>
+        <div className="max-w-7xl mx-auto" style={{ paddingTop: "120px", paddingBottom: "120px" }}>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <blockquote style={{
+          {/* Grid: imagen izquierda + contenido derecha */}
+          <div className="grid lg:grid-cols-2 gap-0 items-stretch">
+
+            {/* ── COLUMNA IZQUIERDA: imagen ── */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              className="relative hidden lg:block"
+              style={{ minHeight: "620px" }}
+            >
+              {/* Marco decorativo */}
+              <div style={{
+                position: "absolute", inset: "28px 0 28px 40px",
+                border: `1px solid ${CAFE}30`, zIndex: 2, pointerEvents: "none",
+              }} />
+
+              {/* Imagen */}
+              <img
+                src={nosotrosImg}
+                alt="Oficina jurídica SG Abogados"
+                style={{
+                  position: "absolute", inset: "0 28px 0 0",
+                  width: "calc(100% - 28px)", height: "100%",
+                  objectFit: "cover", objectPosition: "center",
+                  filter: "brightness(0.88) contrast(1.12) saturate(0.08) grayscale(1)",
+                }}
+              />
+
+              {/* Gradiente lateral derecho para fusionar con el contenido */}
+              <div style={{
+                position: "absolute", top: 0, right: 0, bottom: 0, width: "80px",
+                background: "linear-gradient(to right, transparent, #000000)",
+                zIndex: 3,
+              }} />
+
+              {/* Etiqueta flotante inferior */}
+              <div style={{
+                position: "absolute", bottom: "40px", left: "60px", zIndex: 4,
+                borderLeft: `2px solid ${CAFE}`,
+                paddingLeft: "14px",
+              }}>
+                <p style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.52rem",
+                  color: "rgba(255,255,255,0.50)", letterSpacing: "0.30em",
+                  marginBottom: "4px",
+                }}>SG ABOGADOS</p>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
+                  fontSize: "0.95rem", color: "rgba(255,255,255,0.75)",
+                }}>Bogotá, Colombia</p>
+              </div>
+            </motion.div>
+
+            {/* ── COLUMNA DERECHA: contenido ── */}
+            <motion.div
+              initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+              className="flex flex-col justify-center px-6 md:px-14 lg:px-16"
+            >
+              {/* Eyebrow */}
+              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-7">
+                <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                <span style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
+                  color: CAFE, letterSpacing: "0.38em", fontWeight: 600,
+                }}>QUIÉNES SOMOS</span>
+              </motion.div>
+
+              {/* Título */}
+              <motion.h2 variants={fadeUp} style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
+                color: "#ffffff", fontWeight: 500, fontStyle: "italic",
+                lineHeight: 1.18, marginBottom: "28px",
+              }}>Sobre Nosotros</motion.h2>
+
+              {/* Separador */}
+              <motion.div variants={fadeUp} style={{
+                width: "48px", height: "1px", background: CAFE, marginBottom: "32px",
+              }} />
+
+              {/* Cita */}
+              <motion.blockquote variants={fadeUp} style={{
                 fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.18rem", color: "#ffffff", lineHeight: 1.84,
-                borderLeft: `3px solid ${CAFE}`,
-                paddingLeft: "24px", marginBottom: "38px",
+                fontSize: "1.10rem", color: "#ffffff", lineHeight: 1.82,
+                borderLeft: `2px solid ${CAFE}`,
+                paddingLeft: "22px", marginBottom: "32px",
               }}>
                 "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
-              </blockquote>
+              </motion.blockquote>
+
+              {/* Párrafos */}
               {[
                 "SG Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                 "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
+                "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.",
               ].map((txt, i) => (
-                <p key={i} style={{
+                <motion.p key={i} variants={fadeUp} style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "0.98rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.94, marginBottom: "20px",
-                }}>{txt}</p>
+                  fontSize: "1.02rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
+                  marginBottom: i < 2 ? "18px" : "36px",
+                }}>{txt}</motion.p>
               ))}
-            </div>
-            <div className="flex flex-col gap-10">
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "0.98rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.94,
-              }}>
-                Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.
-              </p>
-              <a href="#contacto"
-                className="inline-flex items-center self-start transition-colors duration-300"
+
+              {/* CTA */}
+              <motion.a variants={fadeUp}
+                href="#contacto"
+                className="inline-flex items-center gap-3 self-start transition-all duration-300 group"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.58rem", color: CAFE, letterSpacing: "0.24em",
+                  fontSize: "0.62rem", color: CAFE, letterSpacing: "0.26em", fontWeight: 600,
+                  borderBottom: `1px solid ${CAFE}40`, paddingBottom: "3px",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#c49a6c")}
-                onMouseLeave={e => (e.currentTarget.style.color = CAFE)}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.color = "#c49a6c";
+                  (e.currentTarget as HTMLElement).style.borderBottomColor = "#c49a6c";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.color = CAFE;
+                  (e.currentTarget as HTMLElement).style.borderBottomColor = `${CAFE}40`;
+                }}
                 data-testid="link-nosotros-contacto"
-              >AGENDAR CONSULTA</a>
-            </div>
-          </motion.div>
+              >AGENDAR CONSULTA</motion.a>
+
+            </motion.div>
+          </div>
         </div>
 
         {/* Ola inferior: negro entrando en contacto */}

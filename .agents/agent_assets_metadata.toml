@@ -24,3 +24,9 @@ id = "ugXUbhoL3-y1nV1DcnCR7"
 uri = "file://artifacts/sgc-abogados/src/assets/courthouse_illustration.png"
 type = "image"
 title = "courthouse black white illustration"
+
+[[generated]]
+id = "BJG0Cf3XuiKSApV4AYYqB"
+uri = "file://artifacts/sgc-abogados/src/assets/nosotros-law-office.png"
+type = "image"
+title = "law office bw"

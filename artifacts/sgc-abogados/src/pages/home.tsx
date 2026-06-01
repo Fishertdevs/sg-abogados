@@ -351,9 +351,9 @@ function TestimoniosSection() {
                   color: TEXT, lineHeight: 1.88, marginBottom: "28px",
                   fontStyle: "italic", textAlign: "center",
                 }}>
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>\u201c</span>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>{'\u201c'}</span>
                   {t.quote}
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>\u201d</span>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>{'\u201d'}</span>
                 </p>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
@@ -558,7 +558,7 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: CAFE2, lineHeight: 1.85,
+              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: "#2a1208", lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SG Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
@@ -663,7 +663,7 @@ export default function Home() {
             className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
-              color: "rgba(255,255,255,0.72)", display: "block", marginBottom: "18px",
+              color: "#ffffff", display: "block", marginBottom: "18px",
             }}>ESPECIALIDADES JURÍDICAS</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",

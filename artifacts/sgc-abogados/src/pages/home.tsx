@@ -117,16 +117,21 @@ function CafeDivider() {
 /* ─── 3D Carousel ────────────────────────────────────────── */
 function AreasCarousel() {
   const [active, setActive] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const total = AREAS.length;
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setActive(p => (p + 1) % total), 4000);
     return () => clearInterval(timer);
   }, [total]);
 
-  const go = (dir: 1 | -1) => setActive(p => (p + dir + total) % total);
-
-  /* relative position of each card to the active one */
   const getPos = (i: number) => {
     let d = i - active;
     if (d >  total / 2) d -= total;
@@ -136,19 +141,32 @@ function AreasCarousel() {
 
   const cardStyle = (pos: number): React.CSSProperties => {
     const abs = Math.abs(pos);
+    if (isMobile) {
+      if (abs > 1) return { display: "none" };
+      const scale   = abs === 0 ? 1 : 0.82;
+      const opacity = abs === 0 ? 1 : 0.30;
+      const translateX = pos * (window.innerWidth * 0.72);
+      return {
+        position: "absolute",
+        width: "min(80vw, 300px)",
+        transform: `translateX(${translateX}px) scale(${scale})`,
+        opacity,
+        zIndex: 10 - abs,
+        transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
+        cursor: abs === 0 ? "default" : "pointer",
+        pointerEvents: abs > 1 ? "none" : "auto",
+      };
+    }
     if (abs > 2) return { display: "none" };
-
     const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
     const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
     const translateX = pos * 260;
-    const zIndex  = 10 - abs;
-
     return {
       position: "absolute",
       width: "300px",
       transform: `translateX(${translateX}px) scale(${scale})`,
       opacity,
-      zIndex,
+      zIndex: 10 - abs,
       transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
       cursor: abs === 0 ? "default" : "pointer",
       pointerEvents: abs > 2 ? "none" : "auto",
@@ -160,50 +178,46 @@ function AreasCarousel() {
 
       {/* Card stage */}
       <div className="relative w-full flex items-center justify-center"
-        style={{ height: "420px" }}>
+        style={{ height: isMobile ? "380px" : "420px" }}>
         {AREAS.map((area, i) => {
           const pos = getPos(i);
-          if (Math.abs(pos) > 2) return null;
+          const maxVisible = isMobile ? 1 : 2;
+          if (Math.abs(pos) > maxVisible) return null;
           return (
             <div key={i} style={cardStyle(pos)}
               onClick={() => pos !== 0 && setActive(i)}>
-              <div className="flex flex-col items-center p-8 h-full"
+              <div className="flex flex-col items-center p-6 md:p-8 h-full"
                 style={{
                   background: "#ffffff",
-                  minHeight: "380px",
+                  minHeight: isMobile ? "340px" : "380px",
                   borderRadius: "18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
                     : "0 8px 30px rgba(0,0,0,0.18)",
                 }}>
 
-                {/* Roman number */}
                 <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "2.8rem", fontWeight: 700,
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.2rem" : "2.8rem", fontWeight: 700,
                   color: TEXT, lineHeight: 1, marginBottom: "4px",
                   textAlign: "center", width: "100%",
                 }}>{area.roman}</span>
 
-                {/* Accent line */}
-                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "18px" }} />
+                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "14px" }} />
 
-                {/* Title */}
                 <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
-                  color: TEXT, letterSpacing: "0.07em", marginBottom: "14px",
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 700,
+                  color: TEXT, letterSpacing: "0.07em", marginBottom: "12px",
                   textAlign: "center", width: "100%",
                 }}>{area.title}</h3>
 
-                {/* Description */}
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "0.88rem", color: TEXT, lineHeight: 1.80, marginBottom: "18px",
+                  fontSize: isMobile ? "0.82rem" : "0.88rem", color: TEXT, lineHeight: 1.70, marginBottom: "14px",
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
-                {/* Items */}
                 <ul className="flex flex-col gap-2 mt-auto w-full">
-                  {area.items.slice(0, 4).map((item, j) => (
+                  {area.items.slice(0, isMobile ? 3 : 4).map((item, j) => (
                     <li key={j} className="flex items-start gap-2">
                       <div style={{
                         width: "4px", height: "4px", background: CAFE,
@@ -289,25 +303,7 @@ function TestimoniosSection() {
 
   return (
     <section className="relative" style={{ background: BG }}>
-      {/* 4 ondas suaves de café — como el boceto */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
-        <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "220px" }}>
-          <path
-            d="M0,0 L1440,0
-               C1430,5  1370,188 1270,188
-               C1195,188 1140,10  1065,10
-               C990,10   950,205  835,205
-               C755,205  705,8    638,8
-               C570,8    528,192  415,192
-               C340,192  292,12   220,12
-               C150,12   105,175  50,175
-               C18,175   0,62     0,0 Z"
-            fill={CAFE}
-          />
-        </svg>
-      </div>
-      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "252px" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-20 md:py-28" style={{ paddingTop: "140px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -533,33 +529,26 @@ export default function Home() {
           zIndex: 1,
         }} />
 
-
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
-        <div className="relative z-10 h-full max-w-[1440px] mx-auto px-10 md:px-16 flex items-center" style={{ minHeight: "100vh" }}>
+        <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
           {/* TEXT — centrado dentro de su columna */}
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-28 z-20 relative">
+          <div className="flex-1 flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
 
-            {/* Headline — 2 líneas exactas, palabras intactas */}
-            <h1 ref={headlineRef} className="mb-8 w-full"
+            {/* Headline */}
+            <h1 ref={headlineRef} className="mb-6 md:mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(2.8rem, 4.2vw, 4.4rem)",
+                fontSize: "clamp(2.0rem, 5.5vw, 4.4rem)",
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
-                lineHeight: 1.10,
+                lineHeight: 1.15,
               }}>
-              {/* Línea 1 — siempre 2 palabras */}
-              <span style={{ display: "block", whiteSpace: "nowrap" }}>
-                {"Nuestra prioridad"}
-              </span>
-              {/* Línea 2 */}
-              <span style={{ display: "block", whiteSpace: "nowrap" }}>
-                {"es tu tranquilidad legal."}
-              </span>
+              <span style={{ display: "block" }}>{"Nuestra prioridad"}</span>
+              <span style={{ display: "block" }}>{"es tu tranquilidad legal."}</span>
             </h1>
 
             {/* Divider café — centrado */}
-            <div ref={dividerRef} className="flex items-center justify-center gap-3 mb-8"
+            <div ref={dividerRef} className="flex items-center justify-center gap-3 mb-6 md:mb-8"
               style={{ opacity: 0, transformOrigin: "center" }}>
               <div style={{ width: "48px", height: "1px", background: CAFE }} />
               <div style={{ width: "6px", height: "6px", background: CAFE, transform: "rotate(45deg)" }} />
@@ -570,20 +559,20 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.08rem", color: MUTED, lineHeight: 2.0,
-              maxWidth: "480px", marginBottom: "52px",
+              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: MUTED, lineHeight: 1.85,
+              maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SG Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
               ofreciéndole asesoría experta, acompañamiento integral y soluciones efectivas en cada etapa de su proceso legal.
             </p>
 
-            {/* CTAs — texto grande, negro, legibles */}
-            <div ref={ctaRef} className="flex items-center justify-center gap-12 flex-wrap">
+            {/* CTAs */}
+            <div ref={ctaRef} className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
               <a href="#contacto"
                 className="inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.88rem", letterSpacing: "0.14em",
+                  fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
                   color: TEXT, fontWeight: 700, opacity: 0,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
@@ -593,7 +582,7 @@ export default function Home() {
               <a href="#areas"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.88rem", letterSpacing: "0.14em",
+                  fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
                   color: TEXT, fontWeight: 700, opacity: 0,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
@@ -604,7 +593,7 @@ export default function Home() {
 
           {/* ESTATUA — derecha, monumental */}
           <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
-            style={{ width: "clamp(340px, 46vw, 660px)", height: "100vh" }}>
+            style={{ width: "clamp(280px, 46vw, 660px)", height: "100vh" }}>
 
             {/* Ambiente cálido café */}
             <div style={{
@@ -694,7 +683,15 @@ export default function Home() {
 
         </div>
 
-        {/* Sin ola inferior — las gotas se agregan al inicio de TestimoniosSection */}
+          {/* Ola inferior: espejo exacto de la superior (café → blanco) */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", transform: "translateY(100%)" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
+            <path
+              d="M0,0 L1440,0 C1420,50 1360,22 1280,45 C1100,100 860,25 720,55 C580,90 420,0 0,30 Z"
+              fill={CAFE} />
+          </svg>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
@@ -707,26 +704,17 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <section id="nosotros" className="relative" style={{ background: "#000000" }}>
 
-        {/* ── Drips arriba: blanco del testimonios entrando en negro ── */}
+        {/* Ola superior: blanco entrando en negro */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
-          <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "220px" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-99%)" }}>
             <path
-              d="M0,0 L1440,0
-                 C1430,5  1370,188 1270,188
-                 C1195,188 1140,10  1065,10
-                 C990,10   950,205  835,205
-                 C755,205  705,8    638,8
-                 C570,8    528,192  415,192
-                 C340,192  292,12   220,12
-                 C150,12   105,175  50,175
-                 C18,175   0,62     0,0 Z"
-              fill={BG}
-            />
+              d="M0,100 L0,60 C360,100 580,5 720,40 C860,72 1080,5 1280,50 C1360,74 1420,48 1440,55 L1440,100 Z"
+              fill="#000000" />
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20" style={{ paddingTop: "252px", paddingBottom: "252px" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px", paddingBottom: "140px" }}>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12">
             <div className="flex items-center gap-3 mb-5">
               <div style={{ width: "28px", height: "1px", background: CAFE }} />
@@ -781,22 +769,13 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* ── Drips abajo: negro entrando en la sección de contacto ── */}
+        {/* Ola inferior: negro entrando en contacto */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none", transform: "translateY(99%)" }}>
-          <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "220px" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
             <path
-              d="M0,0 L1440,0
-                 C1430,5  1370,188 1270,188
-                 C1195,188 1140,10  1065,10
-                 C990,10   950,205  835,205
-                 C755,205  705,8    638,8
-                 C570,8    528,192  415,192
-                 C340,192  292,12   220,12
-                 C150,12   105,175  50,175
-                 C18,175   0,62     0,0 Z"
-              fill="#000000"
-            />
+              d="M0,0 L0,40 C360,0 580,95 720,60 C860,28 1080,95 1280,50 C1360,26 1420,52 1440,45 L1440,0 Z"
+              fill="#000000" />
           </svg>
         </div>
       </section>
@@ -804,10 +783,9 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           CONTACTO
       ══════════════════════════════════════════════════════════ */}
-      <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "112px" }}>
-        {/* espacio para los drips negros de Nosotros que bajan aquí */}
+      <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
 
-        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20" style={{ paddingTop: "252px" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px" }}>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{
@@ -862,7 +840,7 @@ export default function Home() {
               style={{ background: BG2, borderTop: `3px solid ${CAFE}` }}>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-7" data-testid="form-contact">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <FormField id="name"  label="NOMBRE COMPLETO" placeholder="Juan Pérez"     required />
                   <FormField id="phone" label="TELÉFONO"        placeholder="300 123 4567"   required />
                 </div>

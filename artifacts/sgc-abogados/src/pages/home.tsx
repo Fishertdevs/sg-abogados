@@ -399,21 +399,13 @@ export default function Home() {
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
                 lineHeight: 1.10,
               }}>
-              {/* Línea 1 */}
-              <span style={{ display: "block" }}>
-                {["Nuestra", "prioridad", "es", "tu"].map((word, wi) => (
-                  <span key={`w1-${wi}`} className="char inline-block" style={{ marginRight: "0.25em", whiteSpace: "nowrap" }}>
-                    {word}
-                  </span>
-                ))}
+              {/* Línea 1 — siempre 2 palabras */}
+              <span style={{ display: "block", whiteSpace: "nowrap" }}>
+                {"Nuestra prioridad"}
               </span>
               {/* Línea 2 */}
-              <span style={{ display: "block" }}>
-                {["tranquilidad", "legal."].map((word, wi) => (
-                  <span key={`w2-${wi}`} className="char inline-block" style={{ marginRight: "0.25em", whiteSpace: "nowrap" }}>
-                    {word}
-                  </span>
-                ))}
+              <span style={{ display: "block", whiteSpace: "nowrap" }}>
+                {"es tu tranquilidad legal."}
               </span>
             </h1>
 
@@ -509,20 +501,22 @@ export default function Home() {
           <ChevronDown size={12} strokeWidth={1.5} />
         </motion.div>
 
-        {/* Ola inferior: hero → áreas (blanco → café) */}
-        <div style={{ position: "absolute", bottom: "-1px", left: 0, right: 0, zIndex: 10, lineHeight: 0 }}>
-          <svg viewBox="0 0 1440 90" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "90px" }}>
-            <path d="M0,30 C180,80 360,0 540,45 C720,90 900,10 1080,55 C1260,90 1350,20 1440,40 L1440,90 L0,90 Z"
-              fill={CAFE} />
-          </svg>
-        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="py-28 relative overflow-hidden" style={{ background: CAFE }}>
+      <section id="areas" className="pb-28 relative" style={{ background: CAFE, paddingTop: "110px" }}>
+
+        {/* Ola superior: sube hacia el hero (café sobre blanco) — 3 crestas */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-100%)" }}>
+            <path
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              fill={CAFE} />
+          </svg>
+        </div>
 
         {/* Textura sutil */}
         <div style={{

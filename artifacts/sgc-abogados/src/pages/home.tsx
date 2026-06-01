@@ -8,7 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import courthouseImg from "@assets/courthouse_illustration.png";
+import courthouseImg from "@assets/image-Photoroom_(6)_1780277624557.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
 const BG    = "#ffffff";
@@ -294,7 +294,7 @@ function TestimoniosSection() {
 
           {/* ── LEFT: label + título + reseña carousel ── */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
-            variants={fadeUp} className="flex flex-col">
+            variants={fadeUp} className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
             <span style={{
@@ -313,13 +313,13 @@ function TestimoniosSection() {
             {/* Subtítulo */}
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
-              color: MUTED, lineHeight: 1.7, marginBottom: "40px",
+              color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
               La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
             </p>
 
             {/* Línea separadora */}
-            <div style={{ width: "100%", height: "1px", background: `rgba(107,58,42,0.12)`, marginBottom: "36px" }} />
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
 
             {/* Reseña activa */}
             <AnimatePresence mode="wait">
@@ -327,33 +327,35 @@ function TestimoniosSection() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.38 }}>
+                transition={{ duration: 0.38 }}
+                className="flex flex-col items-center">
 
                 {/* Comillas decorativas */}
                 <span style={{
-                  fontFamily: "'Playfair Display', serif", fontSize: "4rem",
-                  color: `${CAFE}28`, lineHeight: 0.5, display: "block",
-                  marginBottom: "16px",
+                  fontFamily: "'Playfair Display', serif", fontSize: "1.2rem",
+                  color: CAFE, lineHeight: 1, display: "block",
+                  marginBottom: "10px",
                 }}>"</span>
 
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
                   color: TEXT, lineHeight: 1.88, marginBottom: "28px",
-                  fontStyle: "italic",
+                  fontStyle: "italic", textAlign: "center",
                 }}>{t.quote}</p>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div style={{ width: "28px", height: "1px", background: CAFE, opacity: 0.5 }} />
-                  <div>
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
+                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                  <div style={{ textAlign: "center" }}>
                     <p style={{
                       fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
                       color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
                     }}>{t.author}</p>
                     <p style={{
                       fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
-                      color: MUTED, marginTop: "3px",
+                      color: TEXT, marginTop: "3px",
                     }}>{t.role}</p>
                   </div>
+                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -393,23 +395,6 @@ function TestimoniosSection() {
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
               />
-            </div>
-
-            {/* Badge decorativo */}
-            <div style={{
-              position: "absolute", bottom: "28px", left: "-20px",
-              background: CAFE, color: "#fff",
-              borderRadius: "12px", padding: "16px 22px",
-              boxShadow: "0 8px 32px rgba(107,58,42,0.22)",
-            }}>
-              <p style={{
-                fontFamily: "'Cinzel', serif", fontSize: "1.5rem",
-                fontWeight: 700, lineHeight: 1, marginBottom: "4px",
-              }}>+500</p>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "0.82rem",
-                opacity: 0.85, letterSpacing: "0.06em",
-              }}>casos resueltos</p>
             </div>
           </motion.div>
 

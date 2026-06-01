@@ -289,21 +289,24 @@ function TestimoniosSection() {
 
   return (
     <section className="relative" style={{ background: BG }}>
-      {/* Gotas de café derritiéndose desde la sección de Áreas hacia abajo */}
+      {/* Pintura café derramándose — anchas manchas, valles estrechos */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
         <svg viewBox="0 0 1440 240" preserveAspectRatio="none"
           style={{ display: "block", width: "100%", height: "240px" }}>
           <path
             d="M0,0 L1440,0
-               C1400,0 1350,178 1265,178 C1185,178 1155,4 1068,4
-               C965,4 918,220 788,220 C658,220 608,6 508,6
-               C408,6 358,185 268,185 C178,185 128,3 68,3
-               C34,3 12,0 0,0 Z"
+               C1440,90 1310,190 1210,190
+               C1170,190 1090,10  1075,10
+               C1055,10  910,225  685,225
+               C545,225  520,6    500,6
+               C475,6    290,188  155,188
+               C95,188   18,0     0,0
+               Z"
             fill={CAFE}
           />
         </svg>
       </div>
-      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "268px" }}>
+      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "265px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}

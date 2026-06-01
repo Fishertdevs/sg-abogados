@@ -289,24 +289,25 @@ function TestimoniosSection() {
 
   return (
     <section className="relative" style={{ background: BG }}>
-      {/* Pintura café derramándose — anchas manchas, valles estrechos */}
+      {/* 4 ondas suaves de café — como el boceto */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
-        <svg viewBox="0 0 1440 240" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "240px" }}>
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: "220px" }}>
           <path
             d="M0,0 L1440,0
-               C1440,90 1310,190 1210,190
-               C1170,190 1090,10  1075,10
-               C1055,10  910,225  685,225
-               C545,225  520,6    500,6
-               C475,6    290,188  155,188
-               C95,188   18,0     0,0
-               Z"
+               C1430,5  1370,188 1270,188
+               C1195,188 1140,10  1065,10
+               C990,10   950,205  835,205
+               C755,205  705,8    638,8
+               C570,8    528,192  415,192
+               C340,192  292,12   220,12
+               C150,12   105,175  50,175
+               C18,175   0,62     0,0 Z"
             fill={CAFE}
           />
         </svg>
       </div>
-      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "265px" }}>
+      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "252px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -704,16 +705,37 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="py-28 relative" style={{ background: BG2 }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${CAFE}35, transparent 55%)` }} />
+      <section id="nosotros" className="relative" style={{ background: "#000000" }}>
 
-        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
+        {/* ── Drips arriba: blanco del testimonios entrando en negro ── */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
+          <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "220px" }}>
+            <path
+              d="M0,0 L1440,0
+                 C1430,5  1370,188 1270,188
+                 C1195,188 1140,10  1065,10
+                 C990,10   950,205  835,205
+                 C755,205  705,8    638,8
+                 C570,8    528,192  415,192
+                 C340,192  292,12   220,12
+                 C150,12   105,175  50,175
+                 C18,175   0,62     0,0 Z"
+              fill={BG}
+            />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20" style={{ paddingTop: "252px", paddingBottom: "252px" }}>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12">
-            <SecLabel text="QUIÉNES SOMOS" />
+            <div className="flex items-center gap-3 mb-5">
+              <div style={{ width: "28px", height: "1px", background: CAFE }} />
+              <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", color: CAFE, letterSpacing: "0.5em" }}>QUIÉNES SOMOS</span>
+            </div>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
+              color: "#ffffff", fontWeight: 500, fontStyle: "italic",
             }}>Sobre Nosotros</h2>
           </motion.div>
 
@@ -722,7 +744,7 @@ export default function Home() {
             <div>
               <blockquote style={{
                 fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.18rem", color: TEXT, lineHeight: 1.84,
+                fontSize: "1.18rem", color: "#ffffff", lineHeight: 1.84,
                 borderLeft: `3px solid ${CAFE}`,
                 paddingLeft: "24px", marginBottom: "38px",
               }}>
@@ -734,14 +756,14 @@ export default function Home() {
               ].map((txt, i) => (
                 <p key={i} style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "0.98rem", color: MUTED, lineHeight: 1.94, marginBottom: "20px",
+                  fontSize: "0.98rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.94, marginBottom: "20px",
                 }}>{txt}</p>
               ))}
             </div>
             <div className="flex flex-col gap-10">
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "0.98rem", color: MUTED, lineHeight: 1.94,
+                fontSize: "0.98rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.94,
               }}>
                 Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.
               </p>
@@ -751,22 +773,41 @@ export default function Home() {
                   fontFamily: "'Cinzel', serif",
                   fontSize: "0.58rem", color: CAFE, letterSpacing: "0.24em",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = CAFE2)}
+                onMouseEnter={e => (e.currentTarget.style.color = "#c49a6c")}
                 onMouseLeave={e => (e.currentTarget.style.color = CAFE)}
                 data-testid="link-nosotros-contacto"
               >AGENDAR CONSULTA</a>
             </div>
           </motion.div>
         </div>
+
+        {/* ── Drips abajo: negro entrando en la sección de contacto ── */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none", transform: "translateY(99%)" }}>
+          <svg viewBox="0 0 1440 220" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "220px" }}>
+            <path
+              d="M0,0 L1440,0
+                 C1430,5  1370,188 1270,188
+                 C1195,188 1140,10  1065,10
+                 C990,10   950,205  835,205
+                 C755,205  705,8    638,8
+                 C570,8    528,192  415,192
+                 C340,192  292,12   220,12
+                 C150,12   105,175  50,175
+                 C18,175   0,62     0,0 Z"
+              fill="#000000"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
           CONTACTO
       ══════════════════════════════════════════════════════════ */}
-      <section id="contacto" className="py-28 relative" style={{ background: BG }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${CAFE}35, transparent 55%)` }} />
+      <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "112px" }}>
+        {/* espacio para los drips negros de Nosotros que bajan aquí */}
 
-        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
+        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20" style={{ paddingTop: "252px" }}>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{

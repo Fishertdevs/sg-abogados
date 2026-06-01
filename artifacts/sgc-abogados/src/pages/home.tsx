@@ -148,7 +148,7 @@ function AreasCarousel() {
       const translateX = pos * (window.innerWidth * 0.72);
       return {
         position: "absolute",
-        width: "min(80vw, 300px)",
+        width: "min(72vw, 270px)",
         transform: `translateX(${translateX}px) scale(${scale})`,
         opacity,
         zIndex: 10 - abs,
@@ -160,10 +160,10 @@ function AreasCarousel() {
     if (abs > 2) return { display: "none" };
     const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
     const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
-    const translateX = pos * 260;
+    const translateX = pos * 234;
     return {
       position: "absolute",
-      width: "300px",
+      width: "270px",
       transform: `translateX(${translateX}px) scale(${scale})`,
       opacity,
       zIndex: 10 - abs,
@@ -189,7 +189,7 @@ function AreasCarousel() {
               <div className="flex flex-col items-center p-6 md:p-8 h-full"
                 style={{
                   background: "#ffffff",
-                  minHeight: isMobile ? "340px" : "380px",
+                  minHeight: isMobile ? "306px" : "342px",
                   borderRadius: "18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
@@ -304,7 +304,7 @@ function TestimoniosSection() {
   return (
     <section className="relative" style={{ background: BG }}>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-20 md:py-28" style={{ paddingTop: "120px" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -313,8 +313,9 @@ function TestimoniosSection() {
 
             {/* Etiqueta */}
             <span style={{
-              fontFamily: "'Cinzel', serif", fontSize: "0.65rem",
-              letterSpacing: "0.22em", color: CAFE, marginBottom: "16px",
+              fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
+              letterSpacing: "0.28em", color: CAFE, marginBottom: "16px",
+              fontWeight: 600,
             }}>TESTIMONIOS</span>
 
             {/* Título */}
@@ -347,9 +348,9 @@ function TestimoniosSection() {
 
                 {/* Comillas decorativas */}
                 <span style={{
-                  fontFamily: "'Playfair Display', serif", fontSize: "1.2rem",
-                  color: CAFE, lineHeight: 1, display: "block",
-                  marginBottom: "10px",
+                  fontFamily: "'Playfair Display', serif", fontSize: "4.5rem",
+                  color: CAFE, lineHeight: 0.8, display: "block",
+                  marginBottom: "16px",
                 }}>"</span>
 
                 <p style={{
@@ -540,7 +541,7 @@ export default function Home() {
             <h1 ref={headlineRef} className="mb-6 md:mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(2.0rem, 5.5vw, 4.4rem)",
+                fontSize: "clamp(1.75rem, 4.0vw, 3.6rem)",
                 color: TEXT, fontStyle: "italic", fontWeight: 500,
                 lineHeight: 1.15,
               }}>
@@ -560,7 +561,7 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: MUTED, lineHeight: 1.85,
+              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: CAFE, lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SG Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
@@ -594,7 +595,7 @@ export default function Home() {
 
           {/* ESTATUA — derecha, monumental */}
           <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
-            style={{ width: "clamp(280px, 46vw, 660px)", height: "100vh" }}>
+            style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh" }}>
 
             {/* Ambiente cálido café */}
             <div style={{
@@ -613,7 +614,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "relative", zIndex: 10,
-                width: "clamp(340px, 40vw, 620px)",
+                width: "clamp(306px, 36vw, 558px)",
                 height: "auto", objectFit: "contain",
                 filter: [
                   "brightness(1.04)",
@@ -665,7 +666,7 @@ export default function Home() {
             className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
-              color: "rgba(255,255,255,0.55)", display: "block", marginBottom: "18px",
+              color: TEXT, display: "block", marginBottom: "18px",
             }}>ESPECIALIDADES JURÍDICAS</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -894,6 +895,82 @@ export default function Home() {
               </form>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          CTA — llamada a la acción final
+      ══════════════════════════════════════════════════════════ */}
+      <section style={{ background: CAFE }} className="relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 md:px-14 py-20 md:py-28 flex flex-col items-center text-center">
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="flex flex-col items-center">
+
+            <motion.span variants={fadeUp} style={{
+              fontFamily: "'Cinzel', serif", fontSize: "0.68rem",
+              letterSpacing: "0.30em", color: "rgba(255,255,255,0.65)",
+              marginBottom: "24px", display: "block",
+            }}>SG ABOGADOS</motion.span>
+
+            <motion.h2 variants={fadeUp} style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
+              color: "#ffffff", fontWeight: 500, fontStyle: "italic",
+              lineHeight: 1.20, marginBottom: "20px",
+            }}>
+              Su tranquilidad legal<br />comienza con una llamada.
+            </motion.h2>
+
+            <motion.div variants={fadeUp} style={{
+              width: "48px", height: "1px",
+              background: "rgba(255,255,255,0.45)", marginBottom: "24px",
+            }} />
+
+            <motion.p variants={fadeUp} style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "1.10rem", color: "rgba(255,255,255,0.82)",
+              lineHeight: 1.78, marginBottom: "44px", maxWidth: "560px",
+            }}>
+              Contáctenos hoy y reciba una consulta inicial personalizada. Estamos listos para escucharle y orientarle en cada etapa de su proceso.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-6">
+              <a href="#contacto"
+                className="transition-all duration-300 px-10 py-4"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.70rem", letterSpacing: "0.22em",
+                  color: CAFE, background: "#ffffff", fontWeight: 700,
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.background = CAFE2;
+                  (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.background = "#ffffff";
+                  (e.currentTarget as HTMLElement).style.color = CAFE;
+                }}
+              >AGENDAR CONSULTA</a>
+
+              <a href="https://wa.me/573001234567" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2.5 transition-all duration-300"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.70rem", letterSpacing: "0.22em",
+                  color: "#ffffff", fontWeight: 600,
+                  borderBottom: "1px solid rgba(255,255,255,0.45)",
+                  paddingBottom: "2px",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.borderBottomColor = "#ffffff")}
+                onMouseLeave={e => (e.currentTarget.style.borderBottomColor = "rgba(255,255,255,0.45)")}
+              >
+                <MessageCircle size={14} strokeWidth={1.5} />
+                ESCRIBIR POR WHATSAPP
+              </a>
+            </motion.div>
+
+          </motion.div>
         </div>
       </section>
 

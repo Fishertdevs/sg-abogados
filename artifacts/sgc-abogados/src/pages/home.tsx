@@ -291,19 +291,19 @@ function TestimoniosSection() {
     <section className="relative" style={{ background: BG }}>
       {/* Gotas de café derritiéndose desde la sección de Áreas hacia abajo */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
-        <svg viewBox="0 0 1440 180" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "180px" }}>
+        <svg viewBox="0 0 1440 240" preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: "240px" }}>
           <path
             d="M0,0 L1440,0
-               C1400,0 1360,42 1290,42 C1220,42 1180,3 1100,3
-               C1000,3 950,155 820,155 C700,155 660,6 560,6
-               C460,6 410,88 320,88 C230,88 180,4 100,4
-               C50,4 20,0 0,0 Z"
+               C1400,0 1350,178 1265,178 C1185,178 1155,4 1068,4
+               C965,4 918,220 788,220 C658,220 608,6 508,6
+               C408,6 358,185 268,185 C178,185 128,3 68,3
+               C34,3 12,0 0,0 Z"
             fill={CAFE}
           />
         </svg>
       </div>
-      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "200px" }}>
+      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28" style={{ paddingTop: "268px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -398,26 +398,10 @@ function TestimoniosSection() {
             viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative flex justify-end">
             <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
-              {/* Glow café sólo en la zona del techo */}
-              <div style={{
-                position: "absolute",
-                top: "-5%", left: "5%", right: "5%", height: "35%",
-                background: "radial-gradient(ellipse 85% 100% at 50% 0%, rgba(107,58,42,0.22) 0%, rgba(107,58,42,0.08) 55%, transparent 85%)",
-                filter: "blur(32px)",
-                pointerEvents: "none",
-                zIndex: 2,
-              }} />
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
-                  position: "relative", zIndex: 1,
                   width: "100%", height: "100%",
                   objectFit: "contain", objectPosition: "center",
-                  filter: [
-                    "brightness(1.03)",
-                    "contrast(1.06)",
-                    "drop-shadow(0 -18px 28px rgba(107,58,42,0.22))",
-                    "drop-shadow(0 -8px 14px rgba(107,58,42,0.14))",
-                  ].join(" "),
                 }}
               />
             </div>

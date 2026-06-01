@@ -518,11 +518,6 @@ export default function Home() {
           </svg>
         </div>
 
-        {/* Textura sutil */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%)",
-        }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 

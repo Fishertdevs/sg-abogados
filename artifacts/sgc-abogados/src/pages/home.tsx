@@ -160,10 +160,10 @@ function AreasCarousel() {
     if (abs > 2) return { display: "none" };
     const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
     const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
-    const translateX = pos * 234;
+    const translateX = pos * 248;
     return {
       position: "absolute",
-      width: "270px",
+      width: "285px",
       transform: `translateX(${translateX}px) scale(${scale})`,
       opacity,
       zIndex: 10 - abs,
@@ -189,7 +189,7 @@ function AreasCarousel() {
               <div className="flex flex-col items-center p-6 md:p-8 h-full"
                 style={{
                   background: "#ffffff",
-                  minHeight: isMobile ? "306px" : "342px",
+                  minHeight: isMobile ? "324px" : "361px",
                   borderRadius: "18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
@@ -346,18 +346,15 @@ function TestimoniosSection() {
                 transition={{ duration: 0.38 }}
                 className="flex flex-col items-center">
 
-                {/* Comillas decorativas */}
-                <span style={{
-                  fontFamily: "'Playfair Display', serif", fontSize: "4.5rem",
-                  color: CAFE, lineHeight: 0.8, display: "block",
-                  marginBottom: "16px",
-                }}>"</span>
-
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
                   color: TEXT, lineHeight: 1.88, marginBottom: "28px",
                   fontStyle: "italic", textAlign: "center",
-                }}>{t.quote}</p>
+                }}>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>\u201c</span>
+                  {t.quote}
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>\u201d</span>
+                </p>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
                   <div style={{ width: "28px", height: "1px", background: CAFE }} />
@@ -561,7 +558,7 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: CAFE, lineHeight: 1.85,
+              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: CAFE2, lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SG Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
@@ -614,7 +611,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "relative", zIndex: 10,
-                width: "clamp(306px, 36vw, 558px)",
+                width: "clamp(328px, 38.5vw, 595px)",
                 height: "auto", objectFit: "contain",
                 filter: [
                   "brightness(1.04)",
@@ -666,7 +663,7 @@ export default function Home() {
             className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
-              color: TEXT, display: "block", marginBottom: "18px",
+              color: "rgba(255,255,255,0.72)", display: "block", marginBottom: "18px",
             }}>ESPECIALIDADES JURÍDICAS</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -902,7 +899,26 @@ export default function Home() {
           CTA — llamada a la acción final
       ══════════════════════════════════════════════════════════ */}
       <section style={{ background: CAFE }} className="relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 md:px-14 py-20 md:py-28 flex flex-col items-center text-center">
+
+        {/* Ola superior — BG (blanco) entra sobre café */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", zIndex: 1 }}>
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "80px" }}>
+            <path d="M0,0 L0,32 C200,70 480,8 720,38 C960,68 1200,12 1440,36 L1440,0 Z"
+              fill={BG} />
+          </svg>
+        </div>
+
+        {/* Ola inferior — footer (#111) sobre café */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", zIndex: 1 }}>
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "80px" }}>
+            <path d="M0,80 L0,44 C240,8 480,72 720,42 C960,12 1200,68 1440,44 L1440,80 Z"
+              fill="#111111" />
+          </svg>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-14 py-24 md:py-36 flex flex-col items-center text-center">
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="flex flex-col items-center">

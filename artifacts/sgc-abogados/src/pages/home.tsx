@@ -8,6 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
+import courthouseImg from "@assets/courthouse_illustration.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
 const BG    = "#ffffff";
@@ -260,6 +261,161 @@ function FormField({ id, label, placeholder, type = "text", required = false }:
         data-testid={`input-${id}`}
       />
     </div>
+  );
+}
+
+/* ─── Testimonios section ────────────────────────────────── */
+const TESTIMONIOS = [
+  {
+    quote: "SG Abogados resolvió mi caso laboral con una rapidez y profesionalismo que superó mis expectativas. Desde el primer día sentí que mi situación era tratada con absoluta seriedad.",
+    author: "Carlos Méndez",
+    role: "Empresario · Bogotá",
+  },
+  {
+    quote: "El acompañamiento fue impecable. Siempre tuve claridad sobre el estado de mi proceso. Un equipo que combina excelencia jurídica con trato verdaderamente humano.",
+    author: "María Fernanda Ruiz",
+    role: "Médica · Medellín",
+  },
+  {
+    quote: "Gracias a SG Abogados logré resolver un conflicto societario que parecía imposible. Su estrategia y conocimiento del derecho marcaron la diferencia.",
+    author: "Andrés Palomino",
+    role: "Director Financiero · Cali",
+  },
+];
+
+function TestimoniosSection() {
+  const [idx, setIdx] = useState(0);
+  const t = TESTIMONIOS[idx];
+
+  return (
+    <section className="relative overflow-hidden" style={{ background: BG }}>
+      <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20 py-28">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* ── LEFT: label + título + reseña carousel ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
+            variants={fadeUp} className="flex flex-col">
+
+            {/* Etiqueta */}
+            <span style={{
+              fontFamily: "'Cinzel', serif", fontSize: "0.65rem",
+              letterSpacing: "0.22em", color: CAFE, marginBottom: "16px",
+            }}>TESTIMONIOS</span>
+
+            {/* Título */}
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
+              color: TEXT, fontWeight: 500, fontStyle: "italic",
+              lineHeight: 1.22, marginBottom: "12px",
+            }}>Por qué elegirnos</h2>
+
+            {/* Subtítulo */}
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+              color: MUTED, lineHeight: 1.7, marginBottom: "40px",
+            }}>
+              La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
+            </p>
+
+            {/* Línea separadora */}
+            <div style={{ width: "100%", height: "1px", background: `rgba(107,58,42,0.12)`, marginBottom: "36px" }} />
+
+            {/* Reseña activa */}
+            <AnimatePresence mode="wait">
+              <motion.div key={idx}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.38 }}>
+
+                {/* Comillas decorativas */}
+                <span style={{
+                  fontFamily: "'Playfair Display', serif", fontSize: "4rem",
+                  color: `${CAFE}28`, lineHeight: 0.5, display: "block",
+                  marginBottom: "16px",
+                }}>"</span>
+
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
+                  color: TEXT, lineHeight: 1.88, marginBottom: "28px",
+                  fontStyle: "italic",
+                }}>{t.quote}</p>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <div style={{ width: "28px", height: "1px", background: CAFE, opacity: 0.5 }} />
+                  <div>
+                    <p style={{
+                      fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
+                      color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
+                    }}>{t.author}</p>
+                    <p style={{
+                      fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
+                      color: MUTED, marginTop: "3px",
+                    }}>{t.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Puntos de paginación */}
+            <div className="flex items-center gap-3 mt-10">
+              {TESTIMONIOS.map((_, i) => (
+                <button key={i} onClick={() => setIdx(i)}
+                  style={{
+                    width: i === idx ? "28px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    background: i === idx ? CAFE : `${CAFE}30`,
+                    border: "none", cursor: "pointer",
+                    transition: "all 0.35s ease",
+                    padding: 0,
+                  }}
+                  aria-label={`Reseña ${i + 1}`}
+                />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── RIGHT: imagen en tarjeta redondeada ── */}
+          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative flex justify-end">
+            <div style={{
+              borderRadius: "20px",
+              overflow: "hidden",
+              width: "100%",
+              maxWidth: "500px",
+              aspectRatio: "3/4",
+              boxShadow: "0 24px 80px rgba(107,58,42,0.13)",
+              background: BG2,
+            }}>
+              <img src={courthouseImg} alt="Edificio judicial ilustración"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+              />
+            </div>
+
+            {/* Badge decorativo */}
+            <div style={{
+              position: "absolute", bottom: "28px", left: "-20px",
+              background: CAFE, color: "#fff",
+              borderRadius: "12px", padding: "16px 22px",
+              boxShadow: "0 8px 32px rgba(107,58,42,0.22)",
+            }}>
+              <p style={{
+                fontFamily: "'Cinzel', serif", fontSize: "1.5rem",
+                fontWeight: 700, lineHeight: 1, marginBottom: "4px",
+              }}>+500</p>
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif", fontSize: "0.82rem",
+                opacity: 0.85, letterSpacing: "0.06em",
+              }}>casos resueltos</p>
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -551,132 +707,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          POR QUÉ ELEGIRNOS — rediseño premium
+          POR QUÉ ELEGIRNOS — TESTIMONIOS split layout
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-32 relative overflow-hidden" style={{ background: BG }}>
-
-        {/* Ambient cálido inferior */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: "55%",
-          background: `radial-gradient(ellipse 80% 60% at 50% 110%, ${CAFE}0D 0%, transparent 70%)`,
-          pointerEvents: "none",
-        }} />
-
-        <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
-
-          {/* ── Header centrado como hero ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-center mb-24">
-            <span style={{
-              fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
-              color: `${CAFE}99`, display: "block", marginBottom: "18px",
-            }}>NUESTRA PROPUESTA</span>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.2rem, 3.8vw, 3.2rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic", marginBottom: "20px",
-            }}>Por qué elegirnos</h2>
-            <CafeDivider />
-          </motion.div>
-
-          {/* ── 4 pilares: 2 col × 2 rows, premium ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}
-            variants={stagger} className="grid sm:grid-cols-2 gap-px"
-            style={{ background: `rgba(107,58,42,0.08)` }}>
-            {[
-              {
-                num: "01", roman: "I",
-                title: "Experiencia",
-                desc: "Años de práctica jurídica especializada que nos permiten anticipar escenarios, construir estrategias sólidas y defender sus intereses con rigor técnico.",
-              },
-              {
-                num: "02", roman: "II",
-                title: "Compromiso",
-                desc: "Asumimos cada caso como propio. Nuestra dedicación y el rigor ético que la ley exige son la base de cada actuación que emprendemos en su nombre.",
-              },
-              {
-                num: "03", roman: "III",
-                title: "Acompañamiento",
-                desc: "Trato personalizado y cercano en cada etapa del proceso. Usted siempre sabrá el estado real de su caso, con transparencia y sin sorpresas.",
-              },
-              {
-                num: "04", roman: "IV",
-                title: "Resultados",
-                desc: "Nos enfocamos en la eficacia real. Buscamos la resolución más favorable en el menor tiempo posible, sin perder de vista la calidad de cada gestión.",
-              },
-            ].map((f, i) => (
-              <motion.div key={i} variants={fadeUp}
-                className="relative flex flex-col p-12 py-16 transition-all duration-400 group"
-                style={{ background: BG, minHeight: "320px" }}
-                onMouseEnter={e => (e.currentTarget.style.background = BG2)}
-                onMouseLeave={e => (e.currentTarget.style.background = BG)}
-              >
-                {/* Watermark número grande */}
-                <span style={{
-                  position: "absolute", top: "20px", right: "28px",
-                  fontFamily: "'Cinzel', serif", fontSize: "7rem", fontWeight: 800,
-                  color: `${CAFE}08`, lineHeight: 1, userSelect: "none",
-                  transition: "color 0.4s",
-                }}>{f.roman}</span>
-
-                {/* Número pequeño café */}
-                <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.68rem", fontWeight: 700,
-                  color: CAFE, letterSpacing: "0.18em", marginBottom: "16px",
-                }}>{f.num}</span>
-
-                {/* Línea de acento */}
-                <div className="transition-all duration-500"
-                  style={{
-                    width: "32px", height: "2px", background: CAFE,
-                    marginBottom: "20px",
-                  }}
-                  ref={el => {
-                    if (!el) return;
-                    const parent = el.closest(".group");
-                    if (parent) {
-                      parent.addEventListener("mouseenter", () => el.style.width = "56px");
-                      parent.addEventListener("mouseleave", () => el.style.width = "32px");
-                    }
-                  }}
-                />
-
-                {/* Título */}
-                <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "1.05rem", fontWeight: 700,
-                  color: TEXT, letterSpacing: "0.06em", marginBottom: "18px",
-                  textTransform: "uppercase",
-                }}>{f.title}</h3>
-
-                {/* Descripción */}
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.05rem", color: MUTED, lineHeight: 1.90,
-                }}>{f.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* ── CTA inferior ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="flex flex-col items-center mt-20 gap-5">
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
-              fontSize: "1.15rem", color: MUTED, letterSpacing: "0.02em",
-            }}>Su caso merece el mejor equipo jurídico.</p>
-            <a href="#contacto"
-              style={{
-                fontFamily: "'Cinzel', serif", fontSize: "0.88rem",
-                letterSpacing: "0.14em", fontWeight: 700, color: TEXT,
-                transition: "color 0.3s",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
-              onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
-            >AGENDAR CONSULTA</a>
-          </motion.div>
-
-        </div>
-      </section>
+      <TestimoniosSection />
 
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS

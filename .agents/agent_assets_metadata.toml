@@ -18,3 +18,9 @@ id = "vLond3pEh6B5Pengia6yX"
 uri = "file://attached_assets/generated_images/premium_law_firm_hero_023f.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "ugXUbhoL3-y1nV1DcnCR7"
+uri = "file://artifacts/sgc-abogados/src/assets/courthouse_illustration.png"
+type = "image"
+title = "courthouse black white illustration"

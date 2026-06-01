@@ -8,7 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import courthouseImg from "@assets/image-Photoroom_(6)_1780277624557.png";
+import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
 const BG    = "#ffffff";

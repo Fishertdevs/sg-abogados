@@ -383,13 +383,29 @@ function TestimoniosSection() {
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative flex justify-end">
-            <div style={{
-              width: "100%",
-              maxWidth: "500px",
-              aspectRatio: "3/4",
-            }}>
+            <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
+              {/* Glow café detrás */}
+              <div style={{
+                position: "absolute",
+                inset: "-10%",
+                borderRadius: "50%",
+                background: "radial-gradient(ellipse 80% 70% at 50% 60%, rgba(107,58,42,0.13) 0%, rgba(107,58,42,0.05) 50%, transparent 75%)",
+                filter: "blur(48px)",
+                pointerEvents: "none",
+              }} />
               <img src={courthouseImg} alt="Edificio judicial ilustración"
-                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
+                style={{
+                  position: "relative", zIndex: 1,
+                  width: "100%", height: "100%",
+                  objectFit: "contain", objectPosition: "center",
+                  filter: [
+                    "brightness(1.03)",
+                    "contrast(1.06)",
+                    "drop-shadow(0 0 40px rgba(107,58,42,0.18))",
+                    "drop-shadow(0 0 18px rgba(107,58,42,0.10))",
+                    "drop-shadow(0 24px 48px rgba(0,0,0,0.10))",
+                  ].join(" "),
+                }}
               />
             </div>
           </motion.div>
@@ -679,9 +695,9 @@ export default function Home() {
 
         {/* Ola inferior: áreas → por qué elegirnos (café → blanco) */}
         <div style={{ position: "absolute", bottom: "-1px", left: 0, right: 0, zIndex: 10, lineHeight: 0 }}>
-          <svg viewBox="0 0 1440 90" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "90px" }}>
-            <path d="M0,55 C200,10 400,80 600,35 C800,0 1000,70 1200,30 C1320,8 1390,60 1440,45 L1440,90 L0,90 Z"
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "120px" }}>
+            <path d="M0,80 C80,30 200,110 380,18 C520,-10 640,95 780,25 C880,0 970,88 1100,22 C1200,-8 1340,90 1440,55 L1440,120 L0,120 Z"
               fill={BG} />
           </svg>
         </div>

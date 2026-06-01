@@ -166,10 +166,11 @@ function AreasCarousel() {
           return (
             <div key={i} style={cardStyle(pos)}
               onClick={() => pos !== 0 && setActive(i)}>
-              <div className="flex flex-col p-8 h-full"
+              <div className="flex flex-col items-center p-8 h-full"
                 style={{
                   background: "#ffffff",
                   minHeight: "380px",
+                  borderRadius: "18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
                     : "0 8px 30px rgba(0,0,0,0.18)",
@@ -178,7 +179,8 @@ function AreasCarousel() {
                 {/* Roman number */}
                 <span style={{
                   fontFamily: "'Cinzel', serif", fontSize: "2.8rem", fontWeight: 700,
-                  color: `${CAFE}18`, lineHeight: 1, marginBottom: "4px",
+                  color: TEXT, lineHeight: 1, marginBottom: "4px",
+                  textAlign: "center", width: "100%",
                 }}>{area.roman}</span>
 
                 {/* Accent line */}
@@ -188,16 +190,18 @@ function AreasCarousel() {
                 <h3 style={{
                   fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
                   color: TEXT, letterSpacing: "0.07em", marginBottom: "14px",
+                  textAlign: "center", width: "100%",
                 }}>{area.title}</h3>
 
                 {/* Description */}
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "0.88rem", color: MUTED, lineHeight: 1.80, marginBottom: "18px",
+                  fontSize: "0.88rem", color: TEXT, lineHeight: 1.80, marginBottom: "18px",
+                  textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
                 {/* Items */}
-                <ul className="flex flex-col gap-2 mt-auto">
+                <ul className="flex flex-col gap-2 mt-auto w-full">
                   {area.items.slice(0, 4).map((item, j) => (
                     <li key={j} className="flex items-start gap-2">
                       <div style={{
@@ -206,7 +210,7 @@ function AreasCarousel() {
                       }} />
                       <span style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "0.80rem", color: "rgba(17,17,17,0.50)", lineHeight: 1.5,
+                        fontSize: "0.80rem", color: TEXT, lineHeight: 1.5,
                       }}>{item}</span>
                     </li>
                   ))}
@@ -233,29 +237,6 @@ function AreasCarousel() {
         ))}
       </div>
 
-      {/* Prev / Next arrows */}
-      <div className="flex items-center gap-6">
-        <button onClick={() => go(-1)}
-          style={{
-            background: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer",
-            width: "44px", height: "44px", borderRadius: "50%",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            color: "#ffffff", fontSize: "1.2rem", transition: "background 0.3s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
-          onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-        >‹</button>
-        <button onClick={() => go(1)}
-          style={{
-            background: "rgba(255,255,255,0.12)", border: "none", cursor: "pointer",
-            width: "44px", height: "44px", borderRadius: "50%",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            color: "#ffffff", fontSize: "1.2rem", transition: "background 0.3s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
-          onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-        >›</button>
-      </div>
     </div>
   );
 }
@@ -527,6 +508,15 @@ export default function Home() {
           <div style={{ width: "1px", height: "36px", background: `linear-gradient(to bottom, transparent, ${CAFE}40)` }} />
           <ChevronDown size={12} strokeWidth={1.5} />
         </motion.div>
+
+        {/* Ola inferior: hero → áreas (blanco → café) */}
+        <div style={{ position: "absolute", bottom: "-1px", left: 0, right: 0, zIndex: 10, lineHeight: 0 }}>
+          <svg viewBox="0 0 1440 90" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "90px" }}>
+            <path d="M0,30 C180,80 360,0 540,45 C720,90 900,10 1080,55 C1260,90 1350,20 1440,40 L1440,90 L0,90 Z"
+              fill={CAFE} />
+          </svg>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
@@ -565,13 +555,21 @@ export default function Home() {
           <AreasCarousel />
 
         </div>
+
+        {/* Ola inferior: áreas → por qué elegirnos (café → blanco) */}
+        <div style={{ position: "absolute", bottom: "-1px", left: 0, right: 0, zIndex: 10, lineHeight: 0 }}>
+          <svg viewBox="0 0 1440 90" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "90px" }}>
+            <path d="M0,55 C200,10 400,80 600,35 C800,0 1000,70 1200,30 C1320,8 1390,60 1440,45 L1440,90 L0,90 Z"
+              fill={BG} />
+          </svg>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════
           POR QUÉ ELEGIRNOS
       ══════════════════════════════════════════════════════════ */}
       <section className="py-28 relative" style={{ background: BG }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: `linear-gradient(to right, ${CAFE}35, transparent 55%)` }} />
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16">

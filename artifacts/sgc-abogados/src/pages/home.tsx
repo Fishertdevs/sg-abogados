@@ -384,16 +384,12 @@ function TestimoniosSection() {
             viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative flex justify-end">
             <div style={{
-              borderRadius: "20px",
-              overflow: "hidden",
               width: "100%",
               maxWidth: "500px",
               aspectRatio: "3/4",
-              boxShadow: "0 24px 80px rgba(107,58,42,0.13)",
-              background: BG2,
             }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
               />
             </div>
           </motion.div>

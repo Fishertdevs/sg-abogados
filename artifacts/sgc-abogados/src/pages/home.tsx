@@ -304,17 +304,7 @@ function TestimoniosSection() {
   return (
     <section className="relative" style={{ background: BG }}>
 
-      {/* Ola superior: espejo exacto de la ola superior de Áreas (café → blanco) */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-100%)" }}>
-          <path
-            d="M0,100 L0,30 C420,0 580,90 720,55 C860,25 1100,100 1280,45 C1360,22 1420,50 1440,40 L1440,100 Z"
-            fill={CAFE} />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-20 md:py-28" style={{ paddingTop: "140px" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-20 md:py-28" style={{ paddingTop: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -695,6 +685,16 @@ export default function Home() {
         </div>
 
       </section>
+
+      {/* ── Ola inferior de Áreas: divisor en flujo normal (café visible sobre blanco) ── */}
+      <div style={{ background: BG, lineHeight: 0, marginTop: "-1px" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: "100px" }}>
+          <path
+            d="M0,0 L1440,0 L1440,40 C1420,50 1360,22 1280,45 C1100,100 860,25 720,55 C580,90 420,0 0,30 Z"
+            fill={CAFE} />
+        </svg>
+      </div>
 
       {/* ═══════════════════════════════════════════════════════
           POR QUÉ ELEGIRNOS — TESTIMONIOS split layout

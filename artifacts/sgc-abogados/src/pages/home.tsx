@@ -379,11 +379,6 @@ export default function Home() {
           zIndex: 1,
         }} />
 
-        {/* Separador inferior */}
-        <div className="absolute bottom-0 inset-x-0 pointer-events-none" style={{
-          height: "1px", zIndex: 6,
-          background: `linear-gradient(to right, transparent, ${CAFE}28 40%, transparent)`,
-        }} />
 
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
         <div className="relative z-10 h-full max-w-[1440px] mx-auto px-10 md:px-16 flex items-center" style={{ minHeight: "100vh" }}>
@@ -434,7 +429,7 @@ export default function Home() {
                 className="inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.95rem", letterSpacing: "0.14em",
+                  fontSize: "0.88rem", letterSpacing: "0.14em",
                   color: TEXT, fontWeight: 700, opacity: 0,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
@@ -444,8 +439,8 @@ export default function Home() {
               <a href="#areas"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.90rem", letterSpacing: "0.14em",
-                  color: TEXT, fontWeight: 600, opacity: 0,
+                  fontSize: "0.88rem", letterSpacing: "0.14em",
+                  color: TEXT, fontWeight: 700, opacity: 0,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
                 onMouseLeave={e => (e.currentTarget.style.color = TEXT)}

@@ -396,10 +396,8 @@ function TestimoniosSection() {
             </div>
           </motion.div>
 
-          {/* ── RIGHT: imagen en tarjeta redondeada ── */}
-          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.7, ease: "easeOut" }}
-            className="relative flex justify-end">
+          {/* ── RIGHT: imagen estática ── */}
+          <div className="relative flex justify-end">
             <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
@@ -408,7 +406,7 @@ function TestimoniosSection() {
                 }}
               />
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
@@ -663,7 +661,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 
           {/* Header */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
@@ -723,12 +721,8 @@ export default function Home() {
           {/* Grid: imagen izquierda + contenido centrado derecha */}
           <div className="grid lg:grid-cols-2 gap-0 items-center">
 
-            {/* ── COLUMNA IZQUIERDA: ilustración ── */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
+            <div
               className="hidden lg:flex items-center justify-center relative"
               style={{ minHeight: "560px" }}
             >
@@ -750,7 +744,7 @@ export default function Home() {
                   position: "relative", zIndex: 1,
                 }}
               />
-            </motion.div>
+            </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
             <motion.div

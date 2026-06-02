@@ -21,13 +21,10 @@ const MUTED = "rgba(17,17,17,0.52)";
 
 /* ─── Framer Motion variants ─────────────────────────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 32, transition: { duration: 0.38, ease: "easeIn" } },
-  show:   { opacity: 1, y: 0,  transition: { duration: 0.78, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 36 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.82, ease: [0.16, 1, 0.3, 1] } },
 };
-const stagger = {
-  hidden: { transition: { staggerChildren: 0.06, staggerDirection: -1 } },
-  show:   { transition: { staggerChildren: 0.10 } },
-};
+const stagger = { show: { transition: { staggerChildren: 0.10 } } };
 
 /* ─── Practice areas ─────────────────────────────────────── */
 const AREAS = [
@@ -312,7 +309,7 @@ function TestimoniosSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
             variants={stagger} className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
@@ -750,7 +747,7 @@ export default function Home() {
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
             <motion.div
-              initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={stagger}
+              initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
               className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12"
             >
               {/* Título */}
@@ -825,7 +822,7 @@ export default function Home() {
       <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px" }}>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp} className="mb-14">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -837,7 +834,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row gap-16">
 
             {/* Info */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
               className="flex-none flex flex-col gap-8" style={{ width: "min(100%, 300px)" }}>
 
               <div className="flex flex-col gap-6">
@@ -874,7 +871,7 @@ export default function Home() {
             {/* Formulario */}
             <motion.div
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 p-10"
               style={{ background: BG2, borderTop: `3px solid ${CAFE}` }}>
 
@@ -959,7 +956,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-14 py-24 md:py-36 flex flex-col items-center text-center">
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={stagger}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="flex flex-col items-center">
 
             <motion.span variants={fadeUp} style={{

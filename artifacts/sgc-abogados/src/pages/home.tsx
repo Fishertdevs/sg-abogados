@@ -8,7 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-law-office.png"; // attached_assets/
+import nosotrosImg from "@assets/image_1780364014187.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
@@ -282,7 +282,7 @@ function FormField({ id, label, placeholder, type = "text", required = false }:
 /* ─── Testimonios section ────────────────────────────────── */
 const TESTIMONIOS = [
   {
-    quote: "SG Abogados resolvió mi caso laboral con una rapidez y profesionalismo que superó mis expectativas. Desde el primer día sentí que mi situación era tratada con absoluta seriedad.",
+    quote: "SGC Abogados resolvió mi caso laboral con una rapidez y profesionalismo que superó mis expectativas. Desde el primer día sentí que mi situación era tratada con absoluta seriedad.",
     author: "Carlos Méndez",
     role: "Empresario · Bogotá",
   },
@@ -292,7 +292,7 @@ const TESTIMONIOS = [
     role: "Médica · Medellín",
   },
   {
-    quote: "Gracias a SG Abogados logré resolver un conflicto societario que parecía imposible. Su estrategia y conocimiento del derecho marcaron la diferencia.",
+    quote: "Gracias a SGC Abogados logré resolver un conflicto societario que parecía imposible. Su estrategia y conocimiento del derecho marcaron la diferencia.",
     author: "Andrés Palomino",
     role: "Director Financiero · Cali",
   },
@@ -477,7 +477,7 @@ export default function Home() {
             <span style={{
               fontFamily: "'Cinzel', serif",
               color: TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
-            }}>SG ABOGADOS</span>
+            }}>SGC ABOGADOS</span>
           </a>
 
           <nav className="hidden md:flex items-center gap-10">
@@ -562,7 +562,7 @@ export default function Home() {
               fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: "#2a1208", lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
-              Bienvenido a SG Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
+              Bienvenido a SGC Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
               ofreciéndole asesoría experta, acompañamiento integral y soluciones efectivas en cada etapa de su proceso legal.
             </p>
 
@@ -606,7 +606,7 @@ export default function Home() {
 
             <motion.img
               src={justiceStatueImg}
-              alt="Diosa de la Justicia, Themis — SG Abogados"
+              alt="Diosa de la Justicia, Themis — SGC Abogados"
               initial={{ opacity: 0, y: 28, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.5, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
@@ -715,129 +715,103 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto" style={{ paddingTop: "120px", paddingBottom: "120px" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
 
-          {/* Grid: imagen izquierda + contenido derecha */}
-          <div className="grid lg:grid-cols-2 gap-0 items-stretch">
+          {/* Grid: imagen izquierda + contenido centrado derecha */}
+          <div className="grid lg:grid-cols-2 gap-0 items-center">
 
-            {/* ── COLUMNA IZQUIERDA: imagen ── */}
+            {/* ── COLUMNA IZQUIERDA: ilustración ── */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
-              style={{ minHeight: "620px" }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:flex items-center justify-center relative"
+              style={{ minHeight: "560px" }}
             >
-              {/* Marco decorativo */}
+              {/* Resplandor café detrás */}
               <div style={{
-                position: "absolute", inset: "28px 0 28px 40px",
-                border: `1px solid ${CAFE}30`, zIndex: 2, pointerEvents: "none",
+                position: "absolute", inset: 0,
+                background: `radial-gradient(ellipse 70% 60% at 50% 50%, ${CAFE}18 0%, transparent 70%)`,
+                pointerEvents: "none",
               }} />
 
-              {/* Imagen */}
+              {/* Ilustración */}
               <img
                 src={nosotrosImg}
-                alt="Oficina jurídica SG Abogados"
+                alt="Palacio de Justicia — SGC Abogados"
                 style={{
-                  position: "absolute", inset: "0 28px 0 0",
-                  width: "calc(100% - 28px)", height: "100%",
-                  objectFit: "cover", objectPosition: "center",
-                  filter: "brightness(0.88) contrast(1.12) saturate(0.08) grayscale(1)",
+                  width: "90%", height: "auto",
+                  objectFit: "contain",
+                  filter: "brightness(0.92) contrast(1.15) grayscale(1) invert(1)",
+                  position: "relative", zIndex: 1,
                 }}
               />
-
-              {/* Gradiente lateral derecho para fusionar con el contenido */}
-              <div style={{
-                position: "absolute", top: 0, right: 0, bottom: 0, width: "80px",
-                background: "linear-gradient(to right, transparent, #000000)",
-                zIndex: 3,
-              }} />
-
-              {/* Etiqueta flotante inferior */}
-              <div style={{
-                position: "absolute", bottom: "40px", left: "60px", zIndex: 4,
-                borderLeft: `2px solid ${CAFE}`,
-                paddingLeft: "14px",
-              }}>
-                <p style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.52rem",
-                  color: "rgba(255,255,255,0.50)", letterSpacing: "0.30em",
-                  marginBottom: "4px",
-                }}>SG ABOGADOS</p>
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic",
-                  fontSize: "0.95rem", color: "rgba(255,255,255,0.75)",
-                }}>Bogotá, Colombia</p>
-              </div>
             </motion.div>
 
-            {/* ── COLUMNA DERECHA: contenido ── */}
+            {/* ── COLUMNA DERECHA: contenido centrado ── */}
             <motion.div
               initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-              className="flex flex-col justify-center px-6 md:px-14 lg:px-16"
+              className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12"
             >
-              {/* Eyebrow */}
-              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-7">
-                <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
-                  color: CAFE, letterSpacing: "0.38em", fontWeight: 600,
-                }}>QUIÉNES SOMOS</span>
-              </motion.div>
-
               {/* Título */}
               <motion.h2 variants={fadeUp} style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
                 color: "#ffffff", fontWeight: 500, fontStyle: "italic",
-                lineHeight: 1.18, marginBottom: "28px",
+                lineHeight: 1.18, marginBottom: "22px",
               }}>Sobre Nosotros</motion.h2>
 
-              {/* Separador */}
-              <motion.div variants={fadeUp} style={{
-                width: "48px", height: "1px", background: CAFE, marginBottom: "32px",
-              }} />
+              {/* Separador centrado */}
+              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
+                <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
+                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: CAFE }} />
+                <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
+              </motion.div>
 
               {/* Cita */}
               <motion.blockquote variants={fadeUp} style={{
                 fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.10rem", color: "#ffffff", lineHeight: 1.82,
+                fontSize: "1.12rem", color: "#ffffff", lineHeight: 1.82,
                 borderLeft: `2px solid ${CAFE}`,
                 paddingLeft: "22px", marginBottom: "32px",
+                textAlign: "left",
               }}>
                 "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
               </motion.blockquote>
 
               {/* Párrafos */}
               {[
-                "SG Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
+                "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                 "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
                 "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.",
               ].map((txt, i) => (
                 <motion.p key={i} variants={fadeUp} style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.02rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
-                  marginBottom: i < 2 ? "18px" : "36px",
+                  fontSize: "1.05rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
+                  marginBottom: i < 2 ? "18px" : "40px",
+                  textAlign: "center",
                 }}>{txt}</motion.p>
               ))}
 
-              {/* CTA */}
+              {/* CTA — estilo hero */}
               <motion.a variants={fadeUp}
                 href="#contacto"
-                className="inline-flex items-center gap-3 self-start transition-all duration-300 group"
+                className="inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.62rem", color: CAFE, letterSpacing: "0.26em", fontWeight: 600,
-                  borderBottom: `1px solid ${CAFE}40`, paddingBottom: "3px",
+                  fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
+                  letterSpacing: "0.14em", color: "#ffffff", fontWeight: 700,
+                  borderBottom: "1px solid rgba(255,255,255,0.35)",
+                  paddingBottom: "4px",
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.color = "#c49a6c";
-                  (e.currentTarget as HTMLElement).style.borderBottomColor = "#c49a6c";
+                  (e.currentTarget as HTMLElement).style.color = CAFE;
+                  (e.currentTarget as HTMLElement).style.borderBottomColor = CAFE;
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.color = CAFE;
-                  (e.currentTarget as HTMLElement).style.borderBottomColor = `${CAFE}40`;
+                  (e.currentTarget as HTMLElement).style.color = "#ffffff";
+                  (e.currentTarget as HTMLElement).style.borderBottomColor = "rgba(255,255,255,0.35)";
                 }}
                 data-testid="link-nosotros-contacto"
               >AGENDAR CONSULTA</motion.a>
@@ -1004,7 +978,7 @@ export default function Home() {
               fontFamily: "'Cinzel', serif", fontSize: "0.68rem",
               letterSpacing: "0.30em", color: "rgba(255,255,255,0.65)",
               marginBottom: "24px", display: "block",
-            }}>SG ABOGADOS</motion.span>
+            }}>SGC ABOGADOS</motion.span>
 
             <motion.h2 variants={fadeUp} style={{
               fontFamily: "'Playfair Display', serif",
@@ -1080,7 +1054,7 @@ export default function Home() {
             <span style={{
               fontFamily: "'Cinzel', serif",
               color: "#ffffff", letterSpacing: "0.28em", fontSize: "0.88rem", fontWeight: 600,
-            }}>SG ABOGADOS</span>
+            }}>SGC ABOGADOS</span>
           </div>
 
           <div className="flex items-center gap-4 mb-6">
@@ -1136,13 +1110,13 @@ export default function Home() {
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: "0.76rem", color: "rgba(255,255,255,0.25)", marginTop: "4px",
-          }}>&copy; {new Date().getFullYear()} SG Abogados.</p>
+          }}>&copy; {new Date().getFullYear()} SGC Abogados.</p>
         </div>
       </footer>
 
       {/* ── FLOATING WHATSAPP ─── */}
       <a
-        href={`https://wa.me/573001234567?text=${encodeURIComponent("Estimados señores de SG Abogados, me dirijo a ustedes con el propósito de solicitar una consulta jurídica. Agradezco su atención y quedo en espera de su respuesta.")}`}
+        href={`https://wa.me/573001234567?text=${encodeURIComponent("Estimados señores de SGC Abogados, me dirijo a ustedes con el propósito de solicitar una consulta jurídica. Agradezco su atención y quedo en espera de su respuesta.")}`}
         target="_blank" rel="noopener noreferrer"
         data-testid="link-whatsapp"
         className="fixed bottom-6 right-6 w-[52px] h-[52px] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-50 group"

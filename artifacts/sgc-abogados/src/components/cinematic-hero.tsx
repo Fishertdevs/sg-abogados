@@ -246,7 +246,7 @@ export default function CinematicHero() {
               fontSize: "0.58rem", color: GOLD, letterSpacing: "0.44em",
               fontFamily: "'Cormorant Garamond', serif",
             }}>
-              SG ABOGADOS · BOGOTÁ, COLOMBIA
+              SGC ABOGADOS · BOGOTÁ, COLOMBIA
             </span>
           </div>
 
@@ -379,7 +379,7 @@ export default function CinematicHero() {
           >
             <img
               src={justiceStatueImg}
-              alt="Estatua de la Justicia — SG Abogados"
+              alt="Estatua de la Justicia — SGC Abogados"
               style={{
                 width: "clamp(340px, 36vw, 540px)",
                 height: "auto",

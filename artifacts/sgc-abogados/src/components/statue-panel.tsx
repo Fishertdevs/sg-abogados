@@ -192,7 +192,7 @@ export default function StatuePanel() {
       >
         <img
           src={justiceStatueImg}
-          alt="Diosa de la Justicia, Themis — SG Abogados"
+          alt="Diosa de la Justicia, Themis — SGC Abogados"
           style={{
             width: "clamp(270px, 32vw, 510px)",
             height: "auto",

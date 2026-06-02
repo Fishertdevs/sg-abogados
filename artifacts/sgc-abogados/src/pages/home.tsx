@@ -4,9 +4,6 @@ import { gsap } from "gsap";
 import {
   Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
-import { Input }    from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/nosotros-marble-sculpture.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
@@ -257,28 +254,6 @@ function AreasCarousel() {
   );
 }
 
-/* ─── Form field ─────────────────────────────────────────── */
-function FormField({ id, label, placeholder, type = "text", required = false }:
-  { id: string; label: string; placeholder: string; type?: string; required?: boolean }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} style={{
-        fontFamily: "'Cinzel', serif",
-        fontSize: "0.48rem", letterSpacing: "0.30em", color: CAFE2,
-      }}>{label}</label>
-      <Input id={id} type={type} placeholder={placeholder} required={required}
-        className="rounded-none border-0 border-b bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-        style={{
-          borderBottom: `1px solid rgba(17,17,17,0.18)`,
-          color: TEXT, fontSize: "0.9rem", boxShadow: "none",
-          fontFamily: "'Cormorant Garamond', serif",
-        }}
-        data-testid={`input-${id}`}
-      />
-    </div>
-  );
-}
-
 /* ─── Testimonios section ────────────────────────────────── */
 const TESTIMONIOS = [
   {
@@ -309,35 +284,34 @@ function TestimoniosSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
-            variants={stagger} className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
-            <motion.span variants={fadeUp} style={{
+            <span style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
               letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
               fontWeight: 600, display: "block",
-            }}>TESTIMONIOS</motion.span>
+            }}>TESTIMONIOS</span>
 
             {/* Título */}
-            <motion.h2 variants={fadeUp} style={{
+            <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
               lineHeight: 1.22, marginBottom: "12px",
-            }}>Por qué elegirnos</motion.h2>
+            }}>Por qué elegirnos</h2>
 
             {/* Subtítulo */}
-            <motion.p variants={fadeUp} style={{
+            <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
               La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
-            </motion.p>
+            </p>
 
             {/* Línea separadora */}
-            <motion.div variants={fadeUp} style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
 
             {/* Reseña activa */}
             <AnimatePresence mode="wait">
@@ -376,7 +350,7 @@ function TestimoniosSection() {
             </AnimatePresence>
 
             {/* Puntos de paginación */}
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mt-10">
+            <div className="flex items-center gap-3 mt-10">
               {TESTIMONIOS.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
                   style={{
@@ -391,8 +365,8 @@ function TestimoniosSection() {
                   aria-label={`Reseña ${i + 1}`}
                 />
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* ── RIGHT: imagen estática ── */}
           <div className="relative flex justify-end">
@@ -414,7 +388,6 @@ function TestimoniosSection() {
 
 /* ─── Main page ──────────────────────────────────────────── */
 export default function Home() {
-  const { toast } = useToast();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subRef      = useRef<HTMLParagraphElement>(null);
@@ -443,12 +416,6 @@ export default function Home() {
       tl.fromTo(Array.from(ctaRef.current.children),
         { opacity: 0, y: 14 }, { opacity: 1, y: 0, stagger: 0.13, duration: 0.75 }, 2.0);
   }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: "Mensaje enviado", description: "Nos pondremos en contacto con usted lo más pronto posible." });
-    (e.target as HTMLFormElement).reset();
-  };
 
   const navLinks = [
     { name: "INICIO",   href: "#inicio"   },
@@ -603,12 +570,9 @@ export default function Home() {
               filter: "blur(60px)",
             }} />
 
-            <motion.img
+            <img
               src={justiceStatueImg}
               alt="Diosa de la Justicia, Themis — SGC Abogados"
-              initial={{ opacity: 0, y: 28, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.5, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "relative", zIndex: 10,
                 width: "clamp(328px, 38.5vw, 595px)",
@@ -622,6 +586,7 @@ export default function Home() {
                   "drop-shadow(0 20px 50px rgba(0,0,0,0.08))",
                 ].join(" "),
                 alignSelf: "flex-end",
+                willChange: "transform",
               }}
             />
           </div>
@@ -659,8 +624,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 
           {/* Header */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="text-center mb-16">
+          <div className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
@@ -676,7 +640,7 @@ export default function Home() {
               <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.55)" }} />
               <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />
             </div>
-          </motion.div>
+          </div>
 
           {/* Carrusel */}
           <AreasCarousel />
@@ -746,24 +710,21 @@ export default function Home() {
             </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <motion.div
-              initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-              className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12"
-            >
+            <div className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12">
               {/* Título */}
-              <motion.h2 variants={fadeUp} style={{
+              <h2 style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
                 color: "#ffffff", fontWeight: 500, fontStyle: "italic",
                 lineHeight: 1.18, marginBottom: "22px",
-              }}>Sobre Nosotros</motion.h2>
+              }}>Sobre Nosotros</h2>
 
               {/* Separador centrado */}
-              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
+              <div className="flex items-center gap-3 mb-10">
                 <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: CAFE }} />
                 <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
-              </motion.div>
+              </div>
 
               {/* Párrafos */}
               {[
@@ -771,16 +732,16 @@ export default function Home() {
                 "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
                 "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.",
               ].map((txt, i) => (
-                <motion.p key={i} variants={fadeUp} style={{
+                <p key={i} style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "1.05rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
                   marginBottom: i < 2 ? "18px" : "40px",
                   textAlign: "center",
-                }}>{txt}</motion.p>
+                }}>{txt}</p>
               ))}
 
               {/* CTA — estilo hero */}
-              <motion.a variants={fadeUp}
+              <a
                 href="#contacto"
                 className="inline-flex items-center transition-colors duration-300"
                 style={{
@@ -799,9 +760,9 @@ export default function Home() {
                   (e.currentTarget as HTMLElement).style.borderBottomColor = "rgba(255,255,255,0.35)";
                 }}
                 data-testid="link-nosotros-contacto"
-              >AGENDAR CONSULTA</motion.a>
+              >AGENDAR CONSULTA</a>
 
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -822,21 +783,19 @@ export default function Home() {
       <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px" }}>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+          <div className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
             }}>Contacto</h2>
-          </motion.div>
+          </div>
 
           <div className="flex flex-col lg:flex-row gap-16">
 
             {/* Info */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-              className="flex-none flex flex-col gap-8" style={{ width: "min(100%, 300px)" }}>
-
+            <div className="flex-none flex flex-col gap-8" style={{ width: "min(100%, 300px)" }}>
               <div className="flex flex-col gap-6">
                 {[
                   { icon: Phone,         label: "TELÉFONO",  value: "+57 (300) 123-4567",    href: "tel:+573001234567"            },
@@ -866,67 +825,71 @@ export default function Home() {
                   Lun–Vie · 8am–6pm · Con cita previa
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Formulario */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex-1 p-10"
-              style={{ background: BG2, borderTop: `3px solid ${CAFE}` }}>
+            {/* Tarjeta de ubicación con mapa */}
+            <div className="flex-1" style={{ borderTop: `3px solid ${CAFE}`, background: BG2 }}>
+              <div className="p-8 flex flex-col gap-5">
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-7" data-testid="form-contact">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <FormField id="name"  label="NOMBRE COMPLETO" placeholder="Juan Pérez"     required />
-                  <FormField id="phone" label="TELÉFONO"        placeholder="300 123 4567"   required />
-                </div>
-                <FormField id="email" label="CORREO ELECTRÓNICO" type="email" placeholder="juan@ejemplo.com" required />
-
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="area" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: CAFE2 }}>
-                    ÁREA DE CONSULTA
-                  </label>
-                  <select id="area" required data-testid="select-area"
-                    className="w-full py-2 focus:outline-none"
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      borderBottom: `1px solid rgba(17,17,17,0.18)`,
-                      borderTop: "none", borderLeft: "none", borderRight: "none",
-                      color: TEXT, background: "transparent", boxShadow: "none", fontSize: "0.9rem",
-                    }}>
-                    <option value="" style={{ background: BG2 }}>Seleccione un área</option>
-                    {AREAS.map(a => <option key={a.title} value={a.title} style={{ background: BG2 }}>{a.title}</option>)}
-                  </select>
+                {/* Encabezado tarjeta */}
+                <div className="flex items-center gap-3">
+                  <div style={{
+                    width: "42px", height: "42px", borderRadius: "50%",
+                    background: `${CAFE}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                  }}>
+                    <MapPin size={18} strokeWidth={1.5} style={{ color: CAFE }} />
+                  </div>
+                  <h3 style={{
+                    fontFamily: "'Cinzel', serif", fontSize: "0.82rem",
+                    letterSpacing: "0.14em", color: TEXT, fontWeight: 700,
+                  }}>Ubicación</h3>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label htmlFor="message" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.48rem", letterSpacing: "0.30em", color: CAFE2 }}>
-                    SU CONSULTA
-                  </label>
-                  <Textarea id="message" required placeholder="Describa brevemente su situación..."
-                    className="rounded-none border-0 border-b resize-none min-h-[90px] bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                {/* Dirección */}
+                <div style={{ paddingLeft: "54px" }}>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+                    color: CAFE, fontWeight: 600, marginBottom: "4px",
+                  }}>SGC Abogados — Oficina 421</p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT, lineHeight: 1.7 }}>
+                    Cl 12 B 8-23<br />
+                    Bogotá, Colombia
+                  </p>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.84rem", color: MUTED, marginTop: "4px" }}>
+                    Lun–Vie · 8am–6pm · Con cita previa
+                  </p>
+                  <a
+                    href="https://maps.google.com/?q=Calle+12B+8-23,+Bogota,+Colombia"
+                    target="_blank" rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      borderBottom: `1px solid rgba(17,17,17,0.18)`, boxShadow: "none",
-                      color: TEXT, fontSize: "0.9rem",
+                      fontFamily: "'Cormorant Garamond', serif", fontSize: "0.84rem",
+                      color: CAFE, display: "inline-block", marginTop: "8px",
+                      textDecoration: "underline", textUnderlineOffset: "3px",
                     }}
-                    data-testid="textarea-message" />
+                    onMouseEnter={e => (e.currentTarget.style.color = CAFE2)}
+                    onMouseLeave={e => (e.currentTarget.style.color = CAFE)}
+                  >
+                    Ver en Google Maps →
+                  </a>
                 </div>
 
-                <button type="submit" data-testid="button-submit"
-                  className="w-full py-4 transition-colors duration-300"
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    background: "none", color: CAFE,
-                    fontSize: "0.58rem", letterSpacing: "0.32em",
-                    border: "none", cursor: "pointer",
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.color = CAFE2)}
-                  onMouseLeave={e => (e.currentTarget.style.color = CAFE)}>
-                  ENVIAR MENSAJE
-                </button>
-              </form>
-            </motion.div>
+                {/* Mapa iframe */}
+                <div style={{ borderRadius: "4px", overflow: "hidden", border: `1px solid rgba(17,17,17,0.10)` }}>
+                  <iframe
+                    title="Ubicación SGC Abogados"
+                    src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogota,+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="280"
+                    style={{ border: 0, display: "block" }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -956,38 +919,37 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-14 py-24 md:py-36 flex flex-col items-center text-center">
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="flex flex-col items-center">
+          <div className="flex flex-col items-center">
 
-            <motion.span variants={fadeUp} style={{
+            <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.68rem",
               letterSpacing: "0.30em", color: "rgba(255,255,255,0.65)",
               marginBottom: "24px", display: "block",
-            }}>SGC ABOGADOS</motion.span>
+            }}>SGC ABOGADOS</span>
 
-            <motion.h2 variants={fadeUp} style={{
+            <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
               lineHeight: 1.20, marginBottom: "20px",
             }}>
               Su tranquilidad legal<br />comienza con una llamada.
-            </motion.h2>
+            </h2>
 
-            <motion.div variants={fadeUp} style={{
+            <div style={{
               width: "48px", height: "1px",
               background: "rgba(255,255,255,0.45)", marginBottom: "24px",
             }} />
 
-            <motion.p variants={fadeUp} style={{
+            <p style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "1.10rem", color: "rgba(255,255,255,0.82)",
               lineHeight: 1.78, marginBottom: "44px", maxWidth: "560px",
             }}>
               Contáctenos hoy y reciba una consulta inicial personalizada. Estamos listos para escucharle y orientarle en cada etapa de su proceso.
-            </motion.p>
+            </p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               <a href="#contacto"
                 className="transition-all duration-300 px-10 py-4"
                 style={{
@@ -1020,9 +982,9 @@ export default function Home() {
                 <MessageCircle size={14} strokeWidth={1.5} />
                 ESCRIBIR POR WHATSAPP
               </a>
-            </motion.div>
+            </div>
 
-          </motion.div>
+          </div>
         </div>
       </section>
 

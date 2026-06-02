@@ -313,33 +313,34 @@ function TestimoniosSection() {
 
           {/* ── LEFT: label + título + reseña carousel ── */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }}
-            variants={fadeUp} className="flex flex-col items-center text-center">
+            variants={stagger} className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
-            <span style={{
-              fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
-              letterSpacing: "0.28em", color: CAFE, marginBottom: "16px",
-              fontWeight: 600,
-            }}>TESTIMONIOS</span>
+            <motion.span variants={fadeUp} style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
+              letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
+              fontWeight: 600, display: "block",
+            }}>TESTIMONIOS</motion.span>
 
             {/* Título */}
-            <h2 style={{
+            <motion.h2 variants={fadeUp} style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
               lineHeight: 1.22, marginBottom: "12px",
-            }}>Por qué elegirnos</h2>
+            }}>Por qué elegirnos</motion.h2>
 
             {/* Subtítulo */}
-            <p style={{
+            <motion.p variants={fadeUp} style={{
               fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
               La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
-            </p>
+            </motion.p>
 
             {/* Línea separadora */}
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
+            <motion.div variants={fadeUp} style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
 
             {/* Reseña activa */}
             <AnimatePresence mode="wait">
@@ -378,7 +379,7 @@ function TestimoniosSection() {
             </AnimatePresence>
 
             {/* Puntos de paginación */}
-            <div className="flex items-center gap-3 mt-10">
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mt-10">
               {TESTIMONIOS.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
                   style={{
@@ -393,7 +394,7 @@ function TestimoniosSection() {
                   aria-label={`Reseña ${i + 1}`}
                 />
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* ── RIGHT: imagen estática ── */}
@@ -664,7 +665,8 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
             className="text-center mb-16">
             <span style={{
-              fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
               color: "#ffffff", display: "block", marginBottom: "18px",
             }}>ESPECIALIDADES JURÍDICAS</span>
             <h2 style={{

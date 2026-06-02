@@ -8,7 +8,7 @@ import { Input }    from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image_1780364014187.png";
+import nosotrosImg from "@assets/nosotros-marble-sculpture.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
@@ -21,10 +21,13 @@ const MUTED = "rgba(17,17,17,0.52)";
 
 /* ─── Framer Motion variants ─────────────────────────────── */
 const fadeUp = {
-  hidden: { opacity: 0, y: 36 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.82, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 32, transition: { duration: 0.38, ease: "easeIn" } },
+  show:   { opacity: 1, y: 0,  transition: { duration: 0.78, ease: [0.16, 1, 0.3, 1] } },
 };
-const stagger = { show: { transition: { staggerChildren: 0.10 } } };
+const stagger = {
+  hidden: { transition: { staggerChildren: 0.06, staggerDirection: -1 } },
+  show:   { transition: { staggerChildren: 0.10 } },
+};
 
 /* ─── Practice areas ─────────────────────────────────────── */
 const AREAS = [
@@ -309,7 +312,7 @@ function TestimoniosSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }}
             variants={fadeUp} className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
@@ -395,7 +398,7 @@ function TestimoniosSection() {
 
           {/* ── RIGHT: imagen en tarjeta redondeada ── */}
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.7, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative flex justify-end">
             <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
@@ -660,7 +663,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 
           {/* Header */}
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp}
             className="text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.22em",
@@ -724,7 +727,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               className="hidden lg:flex items-center justify-center relative"
               style={{ minHeight: "560px" }}
@@ -751,7 +754,7 @@ export default function Home() {
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
             <motion.div
-              initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+              initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={stagger}
               className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12"
             >
               {/* Título */}
@@ -768,17 +771,6 @@ export default function Home() {
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: CAFE }} />
                 <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
               </motion.div>
-
-              {/* Cita */}
-              <motion.blockquote variants={fadeUp} style={{
-                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.12rem", color: "#ffffff", lineHeight: 1.82,
-                borderLeft: `2px solid ${CAFE}`,
-                paddingLeft: "22px", marginBottom: "32px",
-                textAlign: "left",
-              }}>
-                "Un equipo de abogados dedicados a proteger sus derechos con responsabilidad y cercanía."
-              </motion.blockquote>
 
               {/* Párrafos */}
               {[
@@ -837,7 +829,7 @@ export default function Home() {
       <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px" }}>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp} className="mb-14">
             <SecLabel text="CONTÁCTENOS" />
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
@@ -849,7 +841,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row gap-16">
 
             {/* Info */}
-            <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={fadeUp}
               className="flex-none flex flex-col gap-8" style={{ width: "min(100%, 300px)" }}>
 
               <div className="flex flex-col gap-6">
@@ -886,7 +878,7 @@ export default function Home() {
             {/* Formulario */}
             <motion.div
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }} transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 p-10"
               style={{ background: BG2, borderTop: `3px solid ${CAFE}` }}>
 
@@ -971,7 +963,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-14 py-24 md:py-36 flex flex-col items-center text-center">
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.15 }} variants={stagger}
             className="flex flex-col items-center">
 
             <motion.span variants={fadeUp} style={{

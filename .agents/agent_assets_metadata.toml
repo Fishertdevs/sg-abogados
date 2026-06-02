@@ -30,3 +30,9 @@ id = "BJG0Cf3XuiKSApV4AYYqB"
 uri = "file://artifacts/sgc-abogados/src/assets/nosotros-law-office.png"
 type = "image"
 title = "law office bw"
+
+[[generated]]
+id = "mjL_ir-1cCQnKqlxV1kGd"
+uri = "file://attached_assets/nosotros-marble-sculpture.png"
+type = "image"
+title = "marble sculpture bw"

@@ -687,7 +687,7 @@ export default function Home() {
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
               className="hidden lg:flex items-center justify-start relative overflow-hidden"
-              style={{ height: "600px" }}
+              style={{ height: "700px" }}
             >
               {/* Resplandor café detrás */}
               <div style={{
@@ -713,7 +713,7 @@ export default function Home() {
             </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <div className="flex flex-col items-start text-left px-4 md:px-8 lg:px-10">
+            <div className="flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
               {/* Título */}
               <h2 style={{
                 fontFamily: "'Playfair Display', serif",
@@ -738,7 +738,7 @@ export default function Home() {
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "1.05rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
                   marginBottom: i === 0 ? "18px" : "40px",
-                  textAlign: "left",
+                  textAlign: "center",
                 }}>{txt}</p>
               ))}
 

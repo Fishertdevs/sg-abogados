@@ -90,6 +90,11 @@ const SvgFacebook = () => (
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
   </svg>
 );
+const SvgWhatsApp = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
 
 /* ─── Section eyebrow ────────────────────────────────────── */
 function SecLabel({ text }: { text: string }) {
@@ -782,117 +787,79 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           CONTACTO
       ══════════════════════════════════════════════════════════ */}
-      <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
+      <section id="contacto" className="relative" style={{ background: BG }}>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px" }}>
-          <div className="mb-14">
-            <SecLabel text="CONTÁCTENOS" />
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
-            }}>Contacto</h2>
-          </div>
+        {/* Encabezado */}
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "140px", paddingBottom: "56px" }}>
+          <SecLabel text="CONTÁCTENOS" />
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
+            color: TEXT, fontWeight: 500, fontStyle: "italic",
+          }}>Contacto</h2>
+        </div>
 
-          <div className="flex flex-col lg:flex-row gap-16">
+        {/* Dos columnas: info | mapa */}
+        <div className="flex flex-col lg:flex-row" style={{ minHeight: "540px" }}>
 
-            {/* Info */}
-            <div className="flex-none flex flex-col gap-8" style={{ width: "min(100%, 300px)" }}>
-              <div className="flex flex-col gap-6">
-                {[
-                  { icon: Phone,         label: "TELÉFONO",  value: "+57 (300) 123-4567",    href: "tel:+573001234567"            },
-                  { icon: Mail,          label: "CORREO",    value: "contacto@sgabogados.co", href: "mailto:contacto@sgabogados.co" },
-                  { icon: MessageCircle, label: "WHATSAPP",  value: "+57 (300) 123-4567",    href: "https://wa.me/573001234567"   },
-                ].map(({ icon: Icon, label, value, href }, i) => (
-                  <a key={i} href={href} className="flex items-start gap-3">
-                    <div className="w-9 h-9 flex items-center justify-center shrink-0">
-                      <Icon size={14} strokeWidth={1.4} style={{ color: CAFE }} />
-                    </div>
-                    <div>
-                      <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: CAFE2, letterSpacing: "0.28em", marginBottom: "3px" }}>{label}</p>
-                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT }}>{value}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
+          {/* IZQUIERDA: info elegante */}
+          <div
+            className="flex flex-col justify-center px-6 md:px-14 lg:px-20 py-14"
+            style={{ width: "min(100%, 460px)", flexShrink: 0, borderRight: `1px solid rgba(107,58,42,0.14)` }}
+          >
+            <p style={{
+              fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+              fontSize: "clamp(1.05rem, 1.5vw, 1.25rem)",
+              color: CAFE, lineHeight: 1.65, marginBottom: "44px",
+            }}>
+              Estamos aquí para escucharle.<br />Agenda una consulta hoy.
+            </p>
 
-              <div style={{ borderLeft: `3px solid ${CAFE}`, paddingLeft: "20px" }}>
-                <div className="flex items-center gap-2 mb-3">
-                  <MapPin size={12} strokeWidth={1.4} style={{ color: CAFE }} />
-                  <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.46rem", color: CAFE2, letterSpacing: "0.28em" }}>UBICACIÓN</span>
-                </div>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT, marginBottom: "2px" }}>Cl 12 B 8-23, Oficina 421</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: MUTED }}>Bogotá, Colombia</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", marginTop: "8px", fontSize: "0.80rem", color: CAFE }}>
-                  Lun–Vie · 8am–6pm · Con cita previa
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta de ubicación con mapa */}
-            <div className="flex-1" style={{ borderTop: `3px solid ${CAFE}`, background: BG2 }}>
-              <div className="p-8 flex flex-col gap-5">
-
-                {/* Encabezado tarjeta */}
-                <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-7">
+              {[
+                { icon: Phone,         label: "TELÉFONO",  value: "+57 (300) 123-4567",    href: "tel:+573001234567"            },
+                { icon: Mail,          label: "CORREO",    value: "contacto@sgabogados.co", href: "mailto:contacto@sgabogados.co" },
+                { icon: MessageCircle, label: "WHATSAPP",  value: "+57 (300) 123-4567",    href: "https://wa.me/573001234567"   },
+              ].map(({ icon: Icon, label, value, href }, i) => (
+                <a key={i} href={href} className="flex items-center gap-5 transition-opacity duration-200 hover:opacity-70">
                   <div style={{
-                    width: "42px", height: "42px", borderRadius: "50%",
-                    background: `${CAFE}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                    width: "46px", height: "46px", flexShrink: 0,
+                    border: `1px solid rgba(107,58,42,0.22)`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
-                    <MapPin size={18} strokeWidth={1.5} style={{ color: CAFE }} />
+                    <Icon size={15} strokeWidth={1.3} style={{ color: CAFE }} />
                   </div>
-                  <h3 style={{
-                    fontFamily: "'Cinzel', serif", fontSize: "0.82rem",
-                    letterSpacing: "0.14em", color: TEXT, fontWeight: 700,
-                  }}>Ubicación</h3>
-                </div>
-
-                {/* Dirección */}
-                <div style={{ paddingLeft: "54px" }}>
-                  <p style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                    color: CAFE, fontWeight: 600, marginBottom: "4px",
-                  }}>SGC Abogados — Oficina 421</p>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.96rem", color: TEXT, lineHeight: 1.7 }}>
-                    Cl 12 B 8-23<br />
-                    Bogotá, Colombia
-                  </p>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.84rem", color: MUTED, marginTop: "4px" }}>
-                    Lun–Vie · 8am–6pm · Con cita previa
-                  </p>
-                  <a
-                    href="https://maps.google.com/?q=Calle+12B+8-23,+Bogota,+Colombia"
-                    target="_blank" rel="noopener noreferrer"
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "0.84rem",
-                      color: CAFE, display: "inline-block", marginTop: "8px",
-                      textDecoration: "underline", textUnderlineOffset: "3px",
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.color = CAFE2)}
-                    onMouseLeave={e => (e.currentTarget.style.color = CAFE)}
-                  >
-                    Ver en Google Maps →
-                  </a>
-                </div>
-
-                {/* Mapa iframe */}
-                <div style={{ borderRadius: "4px", overflow: "hidden", border: `1px solid rgba(17,17,17,0.10)` }}>
-                  <iframe
-                    title="Ubicación SGC Abogados"
-                    src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogota,+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    width="100%"
-                    height="280"
-                    style={{ border: 0, display: "block" }}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
-                </div>
-
-              </div>
+                  <div>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", color: CAFE2, letterSpacing: "0.28em", marginBottom: "3px" }}>{label}</p>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.08rem", color: TEXT }}>{value}</p>
+                  </div>
+                </a>
+              ))}
             </div>
 
+            <div style={{ marginTop: "40px", paddingTop: "32px", borderTop: `1px solid rgba(107,58,42,0.12)` }}>
+              <div className="flex items-center gap-3 mb-3">
+                <MapPin size={13} strokeWidth={1.3} style={{ color: CAFE }} />
+                <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", color: CAFE2, letterSpacing: "0.28em" }}>UBICACIÓN</span>
+              </div>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.06rem", color: TEXT, marginBottom: "2px" }}>Cl 12 B 8-23, Oficina 421</p>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", color: MUTED }}>Bogotá, Colombia</p>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.84rem", color: CAFE, marginTop: "5px" }}>Lun–Vie · 8am–6pm · Con cita previa</p>
+            </div>
           </div>
+
+          {/* DERECHA: solo el mapa */}
+          <div className="flex-1 relative" style={{ minHeight: "480px" }}>
+            <iframe
+              title="Ubicación SGC Abogados"
+              src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogota,+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block" }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+
         </div>
       </section>
 
@@ -995,26 +962,17 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <footer style={{ background: "#111111" }}>
         <div className="flex flex-col items-center px-8 py-14">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center"
-              style={{ background: "rgba(107,58,42,0.20)" }}>
-              <Scale strokeWidth={1.4} size={16} style={{ color: CAFE }} />
-            </div>
-            <span style={{
-              fontFamily: "'Cinzel', serif",
-              color: "#ffffff", letterSpacing: "0.28em", fontSize: "0.88rem", fontWeight: 600,
-            }}>SGC ABOGADOS</span>
-          </div>
 
-          <div className="flex items-center gap-4 mb-6">
+          {/* Redes: WhatsApp, Instagram, LinkedIn, Facebook */}
+          <div className="flex items-center gap-4 mb-7">
             {[
-              { label: "Facebook",  Icon: SvgFacebook,  href: "#" },
+              { label: "WhatsApp",  Icon: SvgWhatsApp,  href: "https://wa.me/573001234567" },
               { label: "Instagram", Icon: SvgInstagram, href: "#" },
-              { label: "X",         Icon: SvgX,         href: "#" },
               { label: "LinkedIn",  Icon: SvgLinkedIn,  href: "#" },
+              { label: "Facebook",  Icon: SvgFacebook,  href: "#" },
             ].map(({ label, Icon, href }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                aria-label={label} data-testid={`link-social-${label.toLowerCase()}`}
+                aria-label={label}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
                 style={{ background: "#222222", color: "rgba(255,255,255,0.65)" }}
                 onMouseEnter={e => {
@@ -1031,35 +989,40 @@ export default function Home() {
 
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: "italic", fontSize: "0.95rem",
-            color: "rgba(255,255,255,0.40)",
+            fontStyle: "italic", fontSize: "1.05rem",
+            color: "rgba(255,255,255,0.65)",
           }}>Estrategia jurídica con carácter.</p>
         </div>
 
         <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
 
-        <div className="flex flex-col items-center gap-2 px-8 py-6">
+        <div className="flex flex-col items-center gap-3 px-8 py-6">
           <div className="flex items-center gap-4 flex-wrap justify-center">
-            {["Política de Cookies", "Términos y Condiciones", "Política de Privacidad"].map((label, i, arr) => (
+            {[
+              { label: "Política de Cookies",    href: "/cookies"    },
+              { label: "Términos y Condiciones", href: "/terminos"   },
+              { label: "Política de Privacidad", href: "/privacidad" },
+            ].map(({ label, href }, i, arr) => (
               <span key={label} className="flex items-center gap-4">
-                <a href="#"
+                <a href={href}
                   style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "0.78rem", color: "rgba(255,255,255,0.35)", letterSpacing: "0.03em",
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.68rem", color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.70)")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.90)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
                 >{label}</a>
                 {i < arr.length - 1 && (
-                  <span style={{ color: "rgba(255,255,255,0.16)", fontSize: "0.7rem" }}>·</span>
+                  <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.7rem" }}>·</span>
                 )}
               </span>
             ))}
           </div>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "0.76rem", color: "rgba(255,255,255,0.25)", marginTop: "4px",
-          }}>&copy; {new Date().getFullYear()} SGC Abogados.</p>
+            fontFamily: "'Cinzel', serif",
+            fontSize: "0.65rem", color: "rgba(255,255,255,0.45)",
+            letterSpacing: "0.12em", marginTop: "4px",
+          }}>&copy; 2026 SGC Abogados.</p>
         </div>
       </footer>
 

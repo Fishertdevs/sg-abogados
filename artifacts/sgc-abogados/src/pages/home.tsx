@@ -687,7 +687,7 @@ export default function Home() {
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
               className="hidden lg:flex items-center justify-center relative"
-              style={{ minHeight: "560px" }}
+              style={{ minHeight: "720px" }}
             >
               {/* Resplandor café detrás */}
               <div style={{
@@ -701,7 +701,7 @@ export default function Home() {
                 src={nosotrosImg}
                 alt="Palacio de Justicia — SGC Abogados"
                 style={{
-                  width: "90%", height: "auto",
+                  width: "100%", height: "600px",
                   objectFit: "contain",
                   filter: "none",
                   position: "relative", zIndex: 1,

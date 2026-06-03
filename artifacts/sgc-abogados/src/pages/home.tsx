@@ -682,11 +682,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
 
           {/* Grid: imagen izquierda + contenido centrado derecha */}
-          <div className="grid lg:grid-cols-2 gap-0 items-center">
+          <div className="grid gap-0 items-center" style={{ gridTemplateColumns: "58% 42%" }}>
 
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
-              className="hidden lg:flex items-center justify-center relative"
+              className="hidden lg:flex items-center justify-center relative overflow-hidden"
               style={{ height: "520px" }}
             >
               {/* Resplandor café detrás */}
@@ -699,12 +699,12 @@ export default function Home() {
               {/* Ilustración */}
               <img
                 src={nosotrosImg}
-                alt="Palacio de Justicia — SGC Abogados"
+                alt="Pergaminos — SGC Abogados"
                 style={{
-                  width: "auto",
+                  width: "100%",
                   height: "100%",
-                  maxWidth: "100%",
                   objectFit: "contain",
+                  objectPosition: "center",
                   filter: "none",
                   position: "relative", zIndex: 1,
                 }}
@@ -712,7 +712,7 @@ export default function Home() {
             </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <div className="flex flex-col items-center text-center px-4 md:px-10 lg:px-12">
+            <div className="flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
               {/* Título */}
               <h2 style={{
                 fontFamily: "'Playfair Display', serif",

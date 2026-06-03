@@ -713,7 +713,7 @@ export default function Home() {
             </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <div className="flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
+            <div className="flex flex-col items-start text-left px-4 md:px-8 lg:px-10">
               {/* Título */}
               <h2 style={{
                 fontFamily: "'Playfair Display', serif",
@@ -722,24 +722,23 @@ export default function Home() {
                 lineHeight: 1.18, marginBottom: "22px",
               }}>Sobre Nosotros</h2>
 
-              {/* Separador centrado */}
+              {/* Separador */}
               <div className="flex items-center gap-3 mb-10">
                 <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: CAFE }} />
                 <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
               </div>
 
-              {/* Párrafos */}
+              {/* Párrafos — solo 2 */}
               {[
                 "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
-                "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Actuamos con total transparencia sobre las posibilidades reales de su caso.",
-                "Su tranquilidad es nuestra prioridad. Confíe su caso a profesionales que combinan rigor académico con empatía humana.",
+                "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad; confíe su caso a profesionales que combinan rigor académico con empatía humana.",
               ].map((txt, i) => (
                 <p key={i} style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "1.05rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
-                  marginBottom: i < 2 ? "18px" : "40px",
-                  textAlign: "center",
+                  marginBottom: i === 0 ? "18px" : "40px",
+                  textAlign: "left",
                 }}>{txt}</p>
               ))}
 

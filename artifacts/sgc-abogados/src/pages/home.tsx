@@ -5,7 +5,7 @@ import {
   Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-marble-sculpture.png";
+import nosotrosImg from "@assets/image-Photoroom_(7)_1780453891046.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */

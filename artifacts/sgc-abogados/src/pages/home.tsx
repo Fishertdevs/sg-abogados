@@ -703,7 +703,7 @@ export default function Home() {
                 style={{
                   width: "90%", height: "auto",
                   objectFit: "contain",
-                  filter: "brightness(0.92) contrast(1.15) grayscale(1) invert(1)",
+                  filter: "none",
                   position: "relative", zIndex: 1,
                 }}
               />

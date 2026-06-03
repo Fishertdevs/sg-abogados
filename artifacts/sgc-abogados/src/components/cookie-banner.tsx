@@ -27,9 +27,9 @@ export function CookieBanner() {
       style={{
         position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999,
         background: "#ffffff",
-        borderTop: `2px solid rgba(107,58,42,0.20)`,
-        padding: "28px 32px",
-        boxShadow: "0 -4px 32px rgba(0,0,0,0.12)",
+        borderTop: `2px solid ${CAFE}`,
+        padding: "14px 32px",
+        boxShadow: "0 -2px 20px rgba(0,0,0,0.10)",
         animation: "sgcSlideUp 0.4s ease",
       }}
     >
@@ -41,16 +41,19 @@ export function CookieBanner() {
       `}</style>
       <div
         style={{
-          maxWidth: "680px", margin: "0 auto",
-          display: "flex", flexDirection: "column",
-          alignItems: "center", textAlign: "center", gap: "20px",
+          maxWidth: "1100px", margin: "0 auto",
+          display: "flex", flexWrap: "wrap",
+          alignItems: "center", justifyContent: "center",
+          gap: "16px 28px", textAlign: "center",
         }}
       >
         <p style={{
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "1.05rem",
+          fontSize: "0.98rem",
           color: "#333333",
-          lineHeight: 1.65,
+          lineHeight: 1.55,
+          flex: "1 1 420px",
+          textAlign: "center",
         }}>
           Utilizamos cookies para mejorar su experiencia en el sitio.{" "}
           Consulte nuestra{" "}
@@ -62,37 +65,35 @@ export function CookieBanner() {
             Política de Cookies
           </a>.
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexShrink: 0 }}>
           <button
             onClick={dismiss}
             style={{
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.64rem", letterSpacing: "0.16em",
-              color: "#888888",
+              fontSize: "0.62rem", letterSpacing: "0.15em",
+              color: CAFE,
               background: "transparent",
-              border: "1px solid rgba(107,58,42,0.25)",
+              border: `1px solid ${CAFE}`,
               borderRadius: "999px",
               cursor: "pointer",
-              padding: "10px 28px",
+              padding: "8px 22px",
               transition: "all 0.2s",
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = CAFE;
-              e.currentTarget.style.color = CAFE;
+              e.currentTarget.style.background = `${CAFE}12`;
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.borderColor = "rgba(107,58,42,0.25)";
-              e.currentTarget.style.color = "#888888";
+              e.currentTarget.style.background = "transparent";
             }}
           >RECHAZAR</button>
           <button
             onClick={accept}
             style={{
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.68rem", letterSpacing: "0.18em", fontWeight: 700,
+              fontSize: "0.64rem", letterSpacing: "0.16em", fontWeight: 700,
               color: "#ffffff", background: CAFE,
-              padding: "12px 32px",
-              border: "none", cursor: "pointer",
+              padding: "8px 24px",
+              border: `1px solid ${CAFE}`, cursor: "pointer",
               borderRadius: "999px",
               transition: "opacity 0.2s",
             }}

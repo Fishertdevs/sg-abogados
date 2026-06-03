@@ -687,24 +687,23 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "100px", paddingBottom: "100px" }}>
 
           {/* Encabezado centrado */}
-          <div className="flex flex-col items-center text-center mb-16">
-            <div className="flex items-center gap-3 mb-5">
-              <div style={{ width: "28px", height: "1px", background: CAFE }} />
-              <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", color: CAFE, letterSpacing: "0.5em" }}>SOBRE NOSOTROS</span>
-            </div>
+          <div className="flex flex-col items-center text-center mb-8">
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
-              lineHeight: 1.18, marginBottom: "16px",
+              lineHeight: 1.18, marginBottom: "12px",
             }}>Sobre Nosotros</h2>
             <p style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(1.0rem, 1.4vw, 1.15rem)",
-              color: `rgba(255,255,255,0.50)`, fontStyle: "italic",
-              letterSpacing: "0.04em",
-            }}>Derecho con propósito, rigor y empatía humana.</p>
-            <div className="flex items-center gap-3 mt-8">
+              fontSize: "clamp(0.95rem, 1.3vw, 1.08rem)",
+              color: "rgba(255,255,255,0.52)", fontStyle: "italic",
+              letterSpacing: "0.02em", lineHeight: 1.6,
+              maxWidth: "680px",
+            }}>
+              Con más de una década de trayectoria en litigios civiles, derecho comercial y asesoría corporativa, nuestro equipo ofrece representación legal de alto nivel respaldada por el compromiso personal que cada caso exige.
+            </p>
+            <div className="flex items-center gap-3 mt-5">
               <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />
               <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: CAFE }} />
               <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />

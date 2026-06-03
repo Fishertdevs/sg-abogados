@@ -686,8 +686,8 @@ export default function Home() {
 
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
-              className="hidden lg:flex items-center justify-center relative overflow-hidden"
-              style={{ height: "520px" }}
+              className="hidden lg:flex items-center justify-start relative overflow-hidden"
+              style={{ height: "600px" }}
             >
               {/* Resplandor café detrás */}
               <div style={{
@@ -701,12 +701,13 @@ export default function Home() {
                 src={nosotrosImg}
                 alt="Pergaminos — SGC Abogados"
                 style={{
-                  width: "100%",
+                  width: "110%",
                   height: "100%",
                   objectFit: "contain",
-                  objectPosition: "center",
+                  objectPosition: "left center",
                   filter: "none",
                   position: "relative", zIndex: 1,
+                  marginLeft: "-5%",
                 }}
               />
             </div>

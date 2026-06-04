@@ -608,6 +608,16 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Ola de transición hero→áreas: vive en el hero para evitar repaint cruzado */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", zIndex: 15 }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
+            <path
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              fill={CAFE} />
+          </svg>
+        </div>
+
         {/* Scroll cue */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -625,16 +635,6 @@ export default function Home() {
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
       <section id="areas" className="pb-28 relative" style={{ background: CAFE, paddingTop: "110px" }}>
-
-        {/* Ola superior: sube hacia el hero (café sobre blanco) — 3 crestas */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", willChange: "transform", transform: "translateZ(0)" }}>
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-100%)" }}>
-            <path
-              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-              fill={CAFE} />
-          </svg>
-        </div>
 
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">

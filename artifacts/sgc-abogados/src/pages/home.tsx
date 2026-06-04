@@ -579,15 +579,17 @@ export default function Home() {
 
           {/* ESTATUA — derecha, monumental */}
           <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
-            style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh" }}>
+            style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)" }}>
 
-            {/* Ambiente cálido café */}
+            {/* Ambiente cálido café — pre-composited */}
             <div style={{
               position: "absolute",
               width: "480px", height: "480px", borderRadius: "50%",
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+              top: "50%", left: "50%",
+              transform: "translateZ(0) translate(-50%, -50%)",
               background: "radial-gradient(circle, rgba(107,58,42,0.10) 0%, rgba(107,58,42,0.04) 45%, transparent 68%)",
               filter: "blur(60px)",
+              willChange: "filter",
             }} />
 
             <img
@@ -597,16 +599,10 @@ export default function Home() {
                 position: "relative", zIndex: 10,
                 width: "clamp(328px, 38.5vw, 595px)",
                 height: "auto", objectFit: "contain",
-                filter: [
-                  "brightness(1.04)",
-                  "contrast(1.08)",
-                  "saturate(0.80)",
-                  "drop-shadow(0 0 50px rgba(107,58,42,0.18))",
-                  "drop-shadow(0 0 22px rgba(107,58,42,0.12))",
-                  "drop-shadow(0 20px 50px rgba(0,0,0,0.08))",
-                ].join(" "),
+                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(107,58,42,0.16))",
                 alignSelf: "flex-end",
-                willChange: "transform",
+                willChange: "filter",
+                transform: "translateZ(0)",
               }}
             />
           </div>
@@ -631,7 +627,7 @@ export default function Home() {
       <section id="areas" className="pb-28 relative" style={{ background: CAFE, paddingTop: "110px" }}>
 
         {/* Ola superior: sube hacia el hero (café sobre blanco) — 3 crestas */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", willChange: "transform", transform: "translateZ(0)" }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
             style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-100%)" }}>
             <path

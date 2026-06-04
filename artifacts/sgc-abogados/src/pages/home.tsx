@@ -7,6 +7,7 @@ import {
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image-Photoroom_(7)_1780453891046.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
+import faqImg from "@assets/image_1780539126052.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
 const BG    = "#ffffff";
@@ -299,14 +300,15 @@ const FAQS = [
 ];
 
 function FaqSection() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [idx, setIdx] = useState(0);
+  const faq = FAQS[idx];
 
   return (
     <section className="relative" style={{ background: BG }}>
       <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          {/* ── LEFT: label + título + accordion ── */}
+          {/* ── LEFT: label + título + carousel de FAQs ── */}
           <div className="flex flex-col items-center text-center">
 
             <span style={{
@@ -330,42 +332,60 @@ function FaqSection() {
               Las respuestas a las preguntas más comunes de nuestros clientes.
             </p>
 
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
 
-            {/* Accordion */}
-            <div className="w-full text-left">
-              {FAQS.map((faq, i) => (
-                <div key={i} style={{ borderBottom: `1px solid rgba(107,58,42,0.15)` }}>
-                  <button
-                    onClick={() => setOpen(open === i ? null : i)}
-                    className="w-full flex items-center justify-between py-4 gap-4"
-                    style={{ background: "none", border: "none", cursor: "pointer", padding: "16px 0" }}
-                  >
-                    <span style={{
-                      fontFamily: "'Cinzel', serif", fontSize: "0.70rem",
-                      letterSpacing: "0.10em", color: TEXT, fontWeight: 600, textAlign: "left",
-                    }}>{faq.q}</span>
-                    <ChevronDown size={16} strokeWidth={1.5} style={{
-                      color: CAFE, flexShrink: 0,
-                      transform: open === i ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform 0.3s ease",
-                    }} />
-                  </button>
-                  {open === i && (
-                    <p style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "1.06rem",
-                      color: TEXT, lineHeight: 1.80, paddingBottom: "20px", textAlign: "left",
-                    }}>{faq.a}</p>
-                  )}
+            {/* Pregunta + respuesta activa */}
+            <AnimatePresence mode="wait">
+              <motion.div key={idx}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.38 }}
+                className="flex flex-col items-center w-full">
+
+                <p style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
+                  letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
+                  textAlign: "center", marginBottom: "20px", textTransform: "uppercase",
+                }}>{faq.q}</p>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "20px" }}>
+                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                  <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
+                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
                 </div>
+
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
+                  color: TEXT, lineHeight: 1.88, textAlign: "center",
+                }}>{faq.a}</p>
+
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Puntos de paginación */}
+            <div className="flex items-center gap-3 mt-10">
+              {FAQS.map((_, i) => (
+                <button key={i} onClick={() => setIdx(i)}
+                  style={{
+                    width: i === idx ? "28px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    background: i === idx ? CAFE : `${CAFE}30`,
+                    border: "none", cursor: "pointer",
+                    transition: "all 0.35s ease",
+                    padding: 0,
+                  }}
+                  aria-label={`Pregunta ${i + 1}`}
+                />
               ))}
             </div>
           </div>
 
-          {/* ── RIGHT: imagen estática (igual que testimonios) ── */}
+          {/* ── RIGHT: nueva imagen ── */}
           <div className="relative flex justify-end">
             <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
-              <img src={courthouseImg} alt="Edificio judicial — SGC Abogados"
+              <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
                 style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
               />
             </div>

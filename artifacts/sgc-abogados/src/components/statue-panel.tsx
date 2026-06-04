@@ -64,6 +64,12 @@ export default function StatuePanel() {
 
     let raf: number;
     const tick = () => {
+      raf = requestAnimationFrame(tick);
+      // Skip drawing when hero is scrolled out of view
+      if (window.scrollY > window.innerHeight * 0.85 || document.hidden) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const p of ps) {
         p.x += p.vx; p.y += p.vy; p.life++;
@@ -84,7 +90,6 @@ export default function StatuePanel() {
         ctx.fillStyle = `rgba(212,175,55,${p.alpha.toFixed(3)})`;
         ctx.fill();
       }
-      raf = requestAnimationFrame(tick);
     };
     tick();
     return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };

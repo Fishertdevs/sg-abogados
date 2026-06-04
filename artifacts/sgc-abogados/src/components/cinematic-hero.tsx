@@ -137,6 +137,9 @@ export default function CinematicHero() {
     let raf: number;
 
     const tick = () => {
+      raf = requestAnimationFrame(tick);
+      // Skip drawing when hero is scrolled out of view
+      if (window.scrollY > window.innerHeight * 0.85 || document.hidden) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
         p.life++;
@@ -164,7 +167,6 @@ export default function CinematicHero() {
         ctx.fillStyle = `rgba(196,154,24,${p.alpha.toFixed(3)})`;
         ctx.fill();
       });
-      raf = requestAnimationFrame(tick);
     };
     tick();
 

@@ -303,7 +303,7 @@ function FaqSection() {
 
   return (
     <section className="relative" style={{ background: BG }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + accordion ── */}
@@ -373,6 +373,15 @@ function FaqSection() {
 
         </div>
       </div>
+      {/* Ola inferior: blanco → café */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: "100px" }}>
+          <path
+            d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+            fill={CAFE} />
+        </svg>
+      </div>
     </section>
   );
 }
@@ -402,7 +411,7 @@ function TestimoniosSection() {
   return (
     <section className="relative" style={{ background: BG }}>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px" }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + reseña carousel ── */}
@@ -503,6 +512,16 @@ function TestimoniosSection() {
           </div>
 
         </div>
+      </div>
+
+      {/* Ola inferior: blanco → negro */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+          style={{ display: "block", width: "100%", height: "100px" }}>
+          <path
+            d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+            fill="#000000" />
+        </svg>
       </div>
     </section>
   );
@@ -736,7 +755,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="pb-28 relative" style={{ background: CAFE, paddingTop: "110px" }}>
+      <section id="areas" className="relative" style={{ background: CAFE, paddingTop: "40px", paddingBottom: "120px" }}>
 
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
@@ -765,17 +784,17 @@ export default function Home() {
 
         </div>
 
-      </section>
+        {/* Ola inferior: café → blanco */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
+            <path
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              fill={BG} />
+          </svg>
+        </div>
 
-      {/* ── Ola inferior de Áreas: divisor en flujo normal (café visible sobre blanco) ── */}
-      <div style={{ background: BG, lineHeight: 0, marginTop: "-1px" }}>
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "100px" }}>
-          <path
-            d="M0,0 L1440,0 L1440,40 C1420,50 1360,22 1280,45 C1100,100 860,25 720,55 C580,90 420,0 0,30 Z"
-            fill={CAFE} />
-        </svg>
-      </div>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════
           POR QUÉ ELEGIRNOS — TESTIMONIOS split layout
@@ -787,17 +806,7 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <section id="nosotros" className="relative" style={{ background: "#000000" }}>
 
-        {/* Ola superior: blanco entrando en negro */}
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none" }}>
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "100px", transform: "translateY(-99%)" }}>
-            <path
-              d="M0,100 L0,60 C360,100 580,5 720,40 C860,72 1080,5 1280,50 C1360,74 1420,48 1440,55 L1440,100 Z"
-              fill="#000000" />
-          </svg>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "0" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
           {/* Encabezado centrado */}
           <div className="flex flex-col items-center text-center mb-3">
@@ -896,142 +905,156 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Ola inferior: negro entrando en contacto */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 5, lineHeight: 0, pointerEvents: "none", transform: "translateY(99%)" }}>
+        {/* Ola inferior: negro → blanco (FAQ) */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
             style={{ display: "block", width: "100%", height: "100px" }}>
             <path
-              d="M0,0 L0,40 C360,0 580,95 720,60 C860,28 1080,95 1280,50 C1360,26 1420,52 1440,45 L1440,0 Z"
-              fill="#000000" />
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              fill={BG} />
           </svg>
         </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════
-          CONTACTO
-      ══════════════════════════════════════════════════════════ */}
-      <section id="contacto" className="relative" style={{ background: BG, paddingBottom: "80px" }}>
-
-        {/* Encabezado centrado */}
-        <div className="flex flex-col items-center text-center max-w-7xl mx-auto px-6 md:px-14 lg:px-20"
-          style={{ paddingTop: "120px", paddingBottom: "48px" }}>
-          <SecLabel text="CONTÁCTENOS" />
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
-            color: TEXT, fontWeight: 500, fontStyle: "italic",
-          }}>Contacto</h2>
-        </div>
-
-        {/* Card dos columnas */}
-        <div className="max-w-5xl mx-auto px-6 md:px-14" style={{ paddingBottom: "48px" }}>
-          <div className="flex flex-col lg:flex-row"
-            style={{ boxShadow: "0 6px 48px rgba(0,0,0,0.11)", overflow: "hidden" }}>
-
-            {/* IZQUIERDA — panel café */}
-            <div style={{
-              background: CAFE, padding: "52px 40px",
-              width: "min(100%, 300px)", flexShrink: 0, color: "#ffffff",
-            }}>
-              <h3 style={{
-                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
-              }}>Contáctenos</h3>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: "28px",
-              }}>Estamos disponibles para atenderle y orientarle en su proceso.</p>
-              <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.35)", marginBottom: "32px" }} />
-
-              <div className="flex flex-col gap-6">
-                {([
-                  { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia" },
-                  { Icon: SvgEmail,    text: "contacto@sgabogados.co" },
-                  { Icon: SvgPhone,    text: "+57 (300) 123-4567" },
-                  { Icon: SvgWhatsApp, text: "+57 (300) 123-4567" },
-                ] as const).map(({ Icon, text }, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div style={{ color: "rgba(255,255,255,0.80)", marginTop: "2px", flexShrink: 0 }}><Icon /></div>
-                    <p style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                      color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",
-                    }}>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* DERECHA — formulario */}
-            <div style={{ background: "#ffffff", padding: "52px 40px", flex: 1 }}>
-              <h3 style={{
-                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                fontSize: "1.9rem", color: TEXT, fontWeight: 500, marginBottom: "8px",
-              }}>Envíanos un Mensaje</h3>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                color: MUTED, lineHeight: 1.65, marginBottom: "28px",
-              }}>Complete el formulario y le responderemos en menos de 24 horas.</p>
-
-              <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-                {[
-                  { type: "text",  placeholder: "Nombre completo" },
-                  { type: "email", placeholder: "Correo electrónico" },
-                ].map(({ type, placeholder }) => (
-                  <input key={placeholder} type={type} placeholder={placeholder}
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
-                      border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
-                      color: TEXT, background: "#fafafa", outline: "none", width: "100%",
-                    }}
-                  />
-                ))}
-                <textarea placeholder="Su mensaje…" rows={5}
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
-                    border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
-                    color: TEXT, background: "#fafafa", outline: "none",
-                    resize: "vertical", width: "100%",
-                  }}
-                />
-                <div>
-                  <button type="submit"
-                    style={{
-                      fontFamily: "'Cinzel', serif", fontSize: "0.70rem",
-                      letterSpacing: "0.22em", fontWeight: 700,
-                      color: "#ffffff", background: CAFE,
-                      border: "none", cursor: "pointer",
-                      padding: "13px 36px", borderRadius: "999px",
-                      transition: "background 0.2s",
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.background = CAFE2)}
-                    onMouseLeave={e => (e.currentTarget.style.background = CAFE)}
-                  >ENVIAR MENSAJE</button>
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Mapa pequeño centrado */}
-        <div className="max-w-5xl mx-auto px-6 md:px-14">
-          <div style={{ overflow: "hidden", border: `1px solid rgba(107,58,42,0.15)` }}>
-            <iframe
-              title="Ubicación SGC Abogados"
-              src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogota,+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%" height="240"
-              style={{ border: 0, display: "block" }}
-              loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen
-            />
-          </div>
-        </div>
-
       </section>
 
       {/* ═══════════════════════════════════════════════════════
           PREGUNTAS FRECUENTES
       ══════════════════════════════════════════════════════════ */}
       <FaqSection />
+
+      {/* ═══════════════════════════════════════════════════════
+          CONTACTO + CTA — fondo café, sección combinada
+      ══════════════════════════════════════════════════════════ */}
+      <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE }}>
+
+        {/* Ola inferior: café → footer oscuro */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
+            <path
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              fill="#111111" />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "80px", paddingBottom: "180px" }}>
+
+          {/* CTA encabezado */}
+          <div className="flex flex-col items-center text-center" style={{ marginBottom: "56px" }}>
+            <span style={{
+              fontFamily: "'Cinzel', serif", fontSize: "0.68rem",
+              letterSpacing: "0.30em", color: "rgba(255,255,255,0.65)",
+              marginBottom: "20px", display: "block",
+            }}>CONTÁCTENOS</span>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
+              color: "#ffffff", fontWeight: 500, fontStyle: "italic",
+              lineHeight: 1.20, marginBottom: "20px",
+            }}>
+              Su tranquilidad legal<br />comienza con una llamada.
+            </h2>
+            <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.45)", marginBottom: "20px" }} />
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "1.10rem", color: "rgba(255,255,255,0.80)",
+              lineHeight: 1.78, maxWidth: "520px",
+            }}>
+              Contáctenos hoy y reciba una consulta inicial personalizada. Estamos listos para escucharle.
+            </p>
+          </div>
+
+          {/* Card dos columnas */}
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col lg:flex-row"
+              style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden" }}>
+
+              {/* IZQUIERDA — panel café oscuro */}
+              <div style={{
+                background: CAFE2, padding: "52px 40px",
+                width: "min(100%, 300px)", flexShrink: 0, color: "#ffffff",
+              }}>
+                <h3 style={{
+                  fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+                  fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
+                }}>Contáctenos</h3>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+                  color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: "28px",
+                }}>Estamos disponibles para atenderle y orientarle en su proceso.</p>
+                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", marginBottom: "32px" }} />
+
+                <div className="flex flex-col gap-6">
+                  {([
+                    { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia" },
+                    { Icon: SvgEmail,    text: "contacto@sgabogados.co" },
+                    { Icon: SvgPhone,    text: "+57 (300) 123-4567" },
+                    { Icon: SvgWhatsApp, text: "+57 (300) 123-4567" },
+                  ] as const).map(({ Icon, text }, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0 }}><Icon /></div>
+                      <p style={{
+                        fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+                        color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",
+                      }}>{text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* DERECHA — formulario blanco */}
+              <div style={{ background: "#ffffff", padding: "52px 40px", flex: 1 }}>
+                <h3 style={{
+                  fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+                  fontSize: "1.9rem", color: TEXT, fontWeight: 500, marginBottom: "8px",
+                }}>Envíanos un Mensaje</h3>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+                  color: MUTED, lineHeight: 1.65, marginBottom: "28px",
+                }}>Complete el formulario y le responderemos en menos de 24 horas.</p>
+
+                <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
+                  {[
+                    { type: "text",  placeholder: "Nombre completo" },
+                    { type: "email", placeholder: "Correo electrónico" },
+                  ].map(({ type, placeholder }) => (
+                    <input key={placeholder} type={type} placeholder={placeholder}
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+                        border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
+                        color: TEXT, background: "#fafafa", outline: "none", width: "100%",
+                      }}
+                    />
+                  ))}
+                  <textarea placeholder="Su mensaje…" rows={5}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+                      border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
+                      color: TEXT, background: "#fafafa", outline: "none",
+                      resize: "vertical", width: "100%",
+                    }}
+                  />
+                  <div>
+                    <button type="submit"
+                      style={{
+                        fontFamily: "'Cinzel', serif", fontSize: "0.70rem",
+                        letterSpacing: "0.22em", fontWeight: 700,
+                        color: "#ffffff", background: CAFE,
+                        border: "none", cursor: "pointer",
+                        padding: "13px 36px", borderRadius: "999px",
+                        transition: "background 0.2s",
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.background = CAFE2)}
+                      onMouseLeave={e => (e.currentTarget.style.background = CAFE)}
+                    >ENVIAR MENSAJE</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo

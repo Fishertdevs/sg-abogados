@@ -699,7 +699,7 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "80px" }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "0" }}>
 
           {/* Encabezado centrado */}
           <div className="flex flex-col items-center text-center mb-3">
@@ -731,7 +731,7 @@ export default function Home() {
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
               className="hidden lg:flex items-center justify-start relative overflow-hidden"
-              style={{ height: "700px" }}
+              style={{ height: "420px" }}
             >
               {/* Resplandor café detrás */}
               <div style={{

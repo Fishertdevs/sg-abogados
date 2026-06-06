@@ -42,3 +42,9 @@ id = "owsj3lEo4pje58j4WWmQH"
 uri = "file://attached_assets/faq_legal_illustration.png"
 type = "image"
 title = "law book quill scrolls bw"
+
+[[generated]]
+id = "LObpatX0r7DfNcWnIR3Ai"
+uri = "file://attached_assets/faq_balance_justice.png"
+type = "image"
+title = "generated_image"

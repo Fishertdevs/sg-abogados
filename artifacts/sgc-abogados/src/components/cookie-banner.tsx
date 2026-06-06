@@ -56,8 +56,9 @@ export function CookieBanner() {
         style={{
           maxWidth: "1100px", margin: "0 auto",
           display: "flex", flexWrap: "wrap",
-          alignItems: "center", justifyContent: "space-between",
+          alignItems: "center", justifyContent: "center",
           gap: "12px 24px",
+          textAlign: "center",
         }}
       >
         <p style={{

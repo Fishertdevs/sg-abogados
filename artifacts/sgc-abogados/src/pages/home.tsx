@@ -7,7 +7,7 @@ import {
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image-Photoroom_(7)_1780453891046.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
-import faqImg from "@assets/faq_legal_illustration.png";
+import faqImg from "@assets/faq_balance_justice.png";
 
 /* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
 const BG    = "#ffffff";
@@ -960,27 +960,15 @@ export default function Home() {
 
           {/* CTA encabezado */}
           <div className="flex flex-col items-center text-center" style={{ marginBottom: "56px" }}>
-            <span style={{
-              fontFamily: "'Cinzel', serif", fontSize: "0.68rem",
-              letterSpacing: "0.30em", color: "rgba(255,255,255,0.65)",
-              marginBottom: "20px", display: "block",
-            }}>CONTÁCTENOS</span>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
               lineHeight: 1.20, marginBottom: "20px",
             }}>
-              Su tranquilidad legal<br />comienza con una llamada.
+              Estamos para ayudarle.
             </h2>
-            <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.45)", marginBottom: "20px" }} />
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.10rem", color: "rgba(255,255,255,0.80)",
-              lineHeight: 1.78, maxWidth: "520px",
-            }}>
-              Contáctenos hoy y reciba una consulta inicial personalizada. Estamos listos para escucharle.
-            </p>
+            <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.45)" }} />
           </div>
 
           {/* Card dos columnas */}
@@ -1021,53 +1009,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* DERECHA — formulario blanco */}
-              <div style={{ background: "#ffffff", padding: "52px 40px", flex: 1 }}>
-                <h3 style={{
-                  fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                  fontSize: "1.9rem", color: TEXT, fontWeight: 500, marginBottom: "8px",
-                }}>Envíanos un Mensaje</h3>
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                  color: MUTED, lineHeight: 1.65, marginBottom: "28px",
-                }}>Complete el formulario y le responderemos en menos de 24 horas.</p>
-
-                <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-                  {[
-                    { type: "text",  placeholder: "Nombre completo" },
-                    { type: "email", placeholder: "Correo electrónico" },
-                  ].map(({ type, placeholder }) => (
-                    <input key={placeholder} type={type} placeholder={placeholder}
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
-                        border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
-                        color: TEXT, background: "#fafafa", outline: "none", width: "100%",
-                      }}
-                    />
-                  ))}
-                  <textarea placeholder="Su mensaje…" rows={5}
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
-                      border: `1px solid rgba(107,58,42,0.20)`, padding: "12px 16px",
-                      color: TEXT, background: "#fafafa", outline: "none",
-                      resize: "vertical", width: "100%",
-                    }}
-                  />
-                  <div>
-                    <button type="submit"
-                      style={{
-                        fontFamily: "'Cinzel', serif", fontSize: "0.70rem",
-                        letterSpacing: "0.22em", fontWeight: 700,
-                        color: "#ffffff", background: CAFE,
-                        border: "none", cursor: "pointer",
-                        padding: "13px 36px", borderRadius: "999px",
-                        transition: "background 0.2s",
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.background = CAFE2)}
-                      onMouseLeave={e => (e.currentTarget.style.background = CAFE)}
-                    >ENVIAR MENSAJE</button>
-                  </div>
-                </form>
+              {/* DERECHA — mapa interactivo */}
+              <div style={{ flex: 1, minHeight: "420px", overflow: "hidden" }}>
+                <iframe
+                  title="Ubicación SGC Abogados"
+                  src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, display: "block", minHeight: "420px" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
 
             </div>

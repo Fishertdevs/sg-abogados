@@ -106,6 +106,7 @@ function LegalFooter() {
       </div>
       <div style={{ height: "1px", background: "rgba(255,255,255,0.04)", margin: "0 32px" }} />
       <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
+      <div style={{ height: "12px" }} />
     </footer>
   );
 }
@@ -161,7 +162,7 @@ export function H2({ children }: { children: ReactNode }) {
       fontSize: "1.45rem", fontStyle: "italic",
       color: TEXT, fontWeight: 500,
       marginTop: "52px", marginBottom: "18px",
-      textAlign: "center",
+      textAlign: "left",
     }}>{children}</h2>
   );
 }

@@ -5,7 +5,7 @@ import {
   Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros_scrolls.png";
+import nosotrosImg from "@assets/image-Photoroom_(8)_1780715847313.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -986,21 +986,25 @@ export default function Home() {
                   fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
                 }}>Contáctenos</h3>
                 <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                  color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: "10px",
-                }}>Horarios de Atención</p>
-                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", marginBottom: "18px" }} />
-                {[
-                  { day: "Lunes — Viernes", hours: "8:00 am – 6:00 pm" },
-                  { day: "Sábados",         hours: "9:00 am – 1:00 pm" },
-                  { day: "Domingos",        hours: "Cerrado" },
-                ].map(({ day, hours }) => (
-                  <div key={day} style={{ marginBottom: "12px" }}>
-                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.60rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.55)", marginBottom: "2px" }}>{day.toUpperCase()}</p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", color: "rgba(255,255,255,0.90)" }}>{hours}</p>
-                  </div>
-                ))}
-                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", margin: "20px 0 28px" }} />
+                  fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
+                  letterSpacing: "0.16em", color: "rgba(255,255,255,0.60)",
+                  marginBottom: "8px", textAlign: "center",
+                }}>HORARIOS DE ATENCIÓN</p>
+                <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 12px" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "center", textAlign: "center", marginBottom: "16px" }}>
+                  {[
+                    { day: "Lun – Vie", hours: "8:00 am – 6:00 pm" },
+                    { day: "Sábados",   hours: "9:00 am – 1:00 pm" },
+                    { day: "Domingos",  hours: "Cerrado" },
+                  ].map(({ day, hours }) => (
+                    <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>
+                      <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.78rem" }}>{day}</span>
+                      {"  "}
+                      {hours}
+                    </p>
+                  ))}
+                </div>
+                <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 24px" }} />
 
                 <div className="flex flex-col gap-6">
                   {([

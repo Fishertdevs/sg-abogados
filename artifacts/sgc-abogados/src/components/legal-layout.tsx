@@ -1,8 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Scale, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
-const BLUE  = "#1a3d7c";
+const BLUE  = "#1e56b4";
 const TEXT  = "#111111";
 const MUTED = "#777777";
 
@@ -48,8 +48,7 @@ function LegalNav() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2.5">
-          <Scale strokeWidth={1.3} className="w-5 h-5" style={{ color: BLUE }} />
+        <a href="/" className="flex items-center">
           <span style={{
             fontFamily: "'Cinzel', serif",
             color: TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
@@ -122,11 +121,9 @@ function LegalFooter() {
         <p style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: "italic", fontSize: "1.10rem",
-          color: "rgba(0,0,0,0.55)",
+          color: "#333333",
         }}>Estrategia jurídica con carácter.</p>
       </div>
-
-      <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0 32px" }} />
 
       <div className="flex flex-col items-center gap-3 px-8 py-6">
         <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -139,21 +136,21 @@ function LegalFooter() {
               <a href={href}
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.68rem", color: "rgba(0,0,0,0.50)", letterSpacing: "0.14em",
+                  fontSize: "0.68rem", color: "#444444", letterSpacing: "0.14em",
                   textDecoration: "none",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = "rgba(0,0,0,0.85)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,0,0,0.50)")}
+                onMouseEnter={e => (e.currentTarget.style.color = "#111111")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#444444")}
               >{label}</a>
               {i < arr.length - 1 && (
-                <span style={{ color: "rgba(0,0,0,0.18)", fontSize: "0.7rem" }}>·</span>
+                <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
               )}
             </span>
           ))}
         </div>
         <p style={{
           fontFamily: "'Cinzel', serif",
-          fontSize: "0.65rem", color: "rgba(0,0,0,0.38)",
+          fontSize: "0.65rem", color: "#666666",
           letterSpacing: "0.12em", marginTop: "4px",
         }}>&copy; 2026 SGC Abogados.</p>
       </div>

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import {
-  Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
+  Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image_1780773432957.png";
@@ -12,8 +12,8 @@ import faqImg from "@assets/faq_balance_justice.png";
 /* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
 const BG    = "#ffffff";
 const BG2   = "#f0f4fa";
-const CAFE  = "#1a3d7c";        /* azul – acento principal   */
-const CAFE2 = "#102a5a";        /* azul oscuro – hover       */
+const CAFE  = "#1e56b4";        /* azul – acento principal   */
+const CAFE2 = "#163d90";        /* azul oscuro – hover       */
 const TEXT  = "#111111";
 const MUTED = "rgba(17,17,17,0.52)";
 
@@ -196,7 +196,7 @@ function AreasCarousel() {
     <div className="flex flex-col items-center gap-10 w-full">
 
       {/* Card stage */}
-      <div className="relative w-full flex items-center justify-center"
+      <div className="relative w-full flex items-center justify-center overflow-hidden"
         style={{ height: isMobile ? "380px" : "420px" }}>
         {AREAS.map((area, i) => {
           const pos = getPos(i);
@@ -560,7 +560,7 @@ function TestimoniosSection() {
           style={{ display: "block", width: "100%", height: "100px" }}>
           <path
             d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-            fill="#0a1f4e" />
+            fill="#1a3d7c" />
         </svg>
       </div>
     </section>
@@ -609,7 +609,7 @@ export default function Home() {
   const WORDS    = HEADLINE.split(" ");
 
   return (
-    <div className="min-h-[100dvh] flex flex-col" style={{ background: BG, color: TEXT }}>
+    <div className="min-h-[100dvh] flex flex-col" style={{ background: BG, color: TEXT, overflowX: "hidden" }}>
 
       {/* ═══════════════════════════════════════════════════════
           NAVBAR
@@ -619,8 +619,7 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between">
-          <a href="#inicio" className="flex items-center gap-2.5">
-            <Scale strokeWidth={1.3} className="w-5 h-5" style={{ color: CAFE }} />
+          <a href="#inicio" className="flex items-center">
             <span style={{
               fontFamily: "'Cinzel', serif",
               color: TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
@@ -706,7 +705,7 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: "#0a1f4e", lineHeight: 1.85,
+              fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: TEXT, lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SGC Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
@@ -795,7 +794,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="relative" style={{ background: CAFE, paddingTop: "40px", paddingBottom: "120px" }}>
+      <section id="areas" className="relative overflow-hidden" style={{ background: CAFE, paddingTop: "40px", paddingBottom: "120px" }}>
 
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
@@ -844,7 +843,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="relative" style={{ background: "#0a1f4e" }}>
+      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
@@ -859,7 +858,7 @@ export default function Home() {
             <p style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(0.95rem, 1.3vw, 1.08rem)",
-              color: "rgba(255,255,255,0.52)", fontStyle: "italic",
+              color: "rgba(255,255,255,0.92)", fontStyle: "italic",
               letterSpacing: "0.02em", lineHeight: 1.6,
               maxWidth: "680px",
             }}>
@@ -873,7 +872,7 @@ export default function Home() {
           </div>
 
           {/* Grid: imagen izquierda + contenido centrado derecha */}
-          <div className="grid gap-0 items-start" style={{ gridTemplateColumns: "58% 42%" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[58%_42%] gap-0 items-start">
 
             {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
             <div
@@ -992,7 +991,7 @@ export default function Home() {
           </div>
 
           {/* Card dos columnas */}
-          <div className="max-w-xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="flex flex-col lg:flex-row"
               style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
@@ -1098,11 +1097,9 @@ export default function Home() {
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: "italic", fontSize: "1.15rem",
-            color: "rgba(0,0,0,0.55)",
+            color: "#333333",
           }}>Estrategia jurídica con carácter.</p>
         </div>
-
-        <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0 32px" }} />
 
         <div className="flex flex-col items-center gap-3 px-8 py-6">
           <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -1115,21 +1112,21 @@ export default function Home() {
                 <a href={href}
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.68rem", color: "rgba(0,0,0,0.50)", letterSpacing: "0.14em",
+                    fontSize: "0.68rem", color: "#444444", letterSpacing: "0.14em",
                     textDecoration: "none",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(0,0,0,0.85)")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,0,0,0.50)")}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#111111")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "#444444")}
                 >{label}</a>
                 {i < arr.length - 1 && (
-                  <span style={{ color: "rgba(0,0,0,0.18)", fontSize: "0.7rem" }}>·</span>
+                  <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
                 )}
               </span>
             ))}
           </div>
           <p style={{
             fontFamily: "'Cinzel', serif",
-            fontSize: "0.65rem", color: "rgba(0,0,0,0.38)",
+            fontSize: "0.65rem", color: "#666666",
             letterSpacing: "0.12em", marginTop: "4px",
           }}>&copy; 2026 SGC Abogados.</p>
         </div>

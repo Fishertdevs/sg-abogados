@@ -1,6 +1,6 @@
 import { LegalLayout, H2, P, UL, LI } from "@/components/legal-layout";
 
-const BLUE = "#1a3d7c";
+const BLUE = "#1e56b4";
 
 export default function CookiesPage() {
   return (

@@ -1,6 +1,6 @@
 import { LegalLayout, H2, P, UL, LI } from "@/components/legal-layout";
 
-const CAFE = "#6b3a2a";
+const BLUE = "#1a3d7c";
 
 export default function PrivacyPage() {
   return (
@@ -15,7 +15,7 @@ export default function PrivacyPage() {
       <P>
         SGC Abogados, con domicilio en Cl 12 B 8-23, Oficina 421, Bogotá, Colombia.
         Puede contactarnos en{" "}
-        <a href="mailto:contacto@sgabogados.co" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+        <a href="mailto:contacto@sgabogados.co" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
           contacto@sgabogados.co
         </a>.
       </P>
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
       </UL>
       <P>
         Para ejercer estos derechos, escríbanos a{" "}
-        <a href="mailto:contacto@sgabogados.co" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+        <a href="mailto:contacto@sgabogados.co" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
           contacto@sgabogados.co
         </a>.
       </P>

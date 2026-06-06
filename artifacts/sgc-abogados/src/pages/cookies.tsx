@@ -1,6 +1,6 @@
 import { LegalLayout, H2, P, UL, LI } from "@/components/legal-layout";
 
-const CAFE = "#6b3a2a";
+const BLUE = "#1a3d7c";
 
 export default function CookiesPage() {
   return (
@@ -65,7 +65,7 @@ export default function CookiesPage() {
       <H2>Contacto</H2>
       <P>
         Si tiene preguntas sobre el uso de cookies en nuestro sitio, contáctenos en{" "}
-        <a href="mailto:contacto@sgabogados.co" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+        <a href="mailto:contacto@sgabogados.co" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
           contacto@sgabogados.co
         </a>.
       </P>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const CAFE = "#6b3a2a";
+const BLUE = "#1a3d7c";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -11,6 +11,7 @@ export function CookieBanner() {
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, []);
 
   const accept = () => {
@@ -29,7 +30,7 @@ export function CookieBanner() {
     fontWeight: 700,
     padding: "8px 22px",
     borderRadius: "999px",
-    border: `1px solid ${CAFE}`,
+    border: `1px solid ${BLUE}`,
     cursor: "pointer",
     transition: "all 0.2s",
     whiteSpace: "nowrap" as const,
@@ -40,7 +41,7 @@ export function CookieBanner() {
       style={{
         position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999,
         background: "#ffffff",
-        borderTop: `1px solid rgba(107,58,42,0.25)`,
+        borderTop: `1px solid rgba(26,61,124,0.20)`,
         padding: "12px 24px",
         boxShadow: "0 -2px 16px rgba(0,0,0,0.08)",
         animation: "sgcSlideUp 0.4s ease",
@@ -70,23 +71,23 @@ export function CookieBanner() {
           margin: 0,
         }}>
           Utilizamos cookies para mejorar su experiencia.{" "}
-          <a href="/cookies" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+          <a href="/cookies" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
             Política de Cookies
           </a>{" "}y{" "}
-          <a href="/privacidad" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+          <a href="/privacidad" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
             Privacidad
           </a>.
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
           <button
             onClick={dismiss}
-            style={{ ...btnBase, color: "#ffffff", background: CAFE }}
+            style={{ ...btnBase, color: "#ffffff", background: BLUE }}
             onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
             onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
           >RECHAZAR</button>
           <button
             onClick={accept}
-            style={{ ...btnBase, color: "#ffffff", background: CAFE }}
+            style={{ ...btnBase, color: "#ffffff", background: BLUE }}
             onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
             onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
           >ACEPTAR</button>

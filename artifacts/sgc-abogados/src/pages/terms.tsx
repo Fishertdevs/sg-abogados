@@ -1,6 +1,6 @@
 import { LegalLayout, H2, P, UL, LI } from "@/components/legal-layout";
 
-const CAFE = "#6b3a2a";
+const BLUE = "#1a3d7c";
 
 export default function TermsPage() {
   return (
@@ -15,7 +15,7 @@ export default function TermsPage() {
       <P>
         Este sitio web es propiedad de SGC Abogados, con domicilio en Cl 12 B 8-23,
         Oficina 421, Bogotá, Colombia. Para consultas, contáctenos en{" "}
-        <a href="mailto:contacto@sgabogados.co" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+        <a href="mailto:contacto@sgabogados.co" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
           contacto@sgabogados.co
         </a>.
       </P>

@@ -5,7 +5,7 @@ import {
   Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image-Photoroom_(8)_1780715847313.png";
+import nosotrosImg from "@assets/image_1780773432957.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -332,39 +332,49 @@ function FaqSection() {
               Las respuestas a las preguntas más comunes de nuestros clientes.
             </p>
 
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
 
-            {/* Pregunta + respuesta activa */}
-            <AnimatePresence mode="wait">
-              <motion.div key={idx}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.38 }}
-                className="flex flex-col items-center w-full">
+            {/* Card contenedor — pregunta + respuesta */}
+            <div style={{
+              width: "100%",
+              background: "#f0f4fa",
+              borderRadius: "16px",
+              border: "1px solid rgba(26,61,124,0.12)",
+              padding: "26px 28px 22px",
+              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+              marginBottom: "20px",
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.38 }}
+                  className="flex flex-col items-center w-full">
 
-                <p style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
-                  letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
-                  textAlign: "center", marginBottom: "20px", textTransform: "uppercase",
-                }}>{faq.q}</p>
+                  <p style={{
+                    fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
+                    letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
+                    textAlign: "center", marginBottom: "14px", textTransform: "uppercase",
+                  }}>{faq.q}</p>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "20px" }}>
-                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                  <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
-                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "14px" }}>
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                    <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                  </div>
 
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.22rem",
-                  color: TEXT, lineHeight: 1.88, textAlign: "center",
-                }}>{faq.a}</p>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.18rem",
+                    color: TEXT, lineHeight: 1.88, textAlign: "center",
+                  }}>{faq.a}</p>
 
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             {/* Puntos de paginación */}
-            <div className="flex items-center gap-3 mt-10">
+            <div className="flex items-center gap-3">
               {FAQS.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
                   style={{
@@ -462,46 +472,56 @@ function TestimoniosSection() {
             </p>
 
             {/* Línea separadora */}
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "36px" }} />
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
 
-            {/* Reseña activa */}
-            <AnimatePresence mode="wait">
-              <motion.div key={idx}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.38 }}
-                className="flex flex-col items-center">
+            {/* Card contenedor — reseña activa */}
+            <div style={{
+              width: "100%",
+              background: "#f0f4fa",
+              borderRadius: "16px",
+              border: "1px solid rgba(26,61,124,0.12)",
+              padding: "26px 28px 22px",
+              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+              marginBottom: "20px",
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.38 }}
+                  className="flex flex-col items-center">
 
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
-                  color: TEXT, lineHeight: 1.88, marginBottom: "28px",
-                  fontStyle: "italic", textAlign: "center",
-                }}>
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>{'\u201c'}</span>
-                  {t.quote}
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>{'\u201d'}</span>
-                </p>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
+                    color: TEXT, lineHeight: 1.88, marginBottom: "22px",
+                    fontStyle: "italic", textAlign: "center",
+                  }}>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>{'\u201c'}</span>
+                    {t.quote}
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>{'\u201d'}</span>
+                  </p>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
-                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                  <div style={{ textAlign: "center" }}>
-                    <p style={{
-                      fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
-                      color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
-                    }}>{t.author}</p>
-                    <p style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
-                      color: TEXT, marginTop: "3px",
-                    }}>{t.role}</p>
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                    <div style={{ textAlign: "center" }}>
+                      <p style={{
+                        fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
+                        color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
+                      }}>{t.author}</p>
+                      <p style={{
+                        fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
+                        color: TEXT, marginTop: "3px",
+                      }}>{t.role}</p>
+                    </div>
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
                   </div>
-                  <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             {/* Puntos de paginación */}
-            <div className="flex items-center gap-3 mt-10">
+            <div className="flex items-center gap-3">
               {TESTIMONIOS.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
                   style={{
@@ -667,7 +687,7 @@ export default function Home() {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(1.75rem, 4.0vw, 3.6rem)",
-                color: TEXT, fontStyle: "italic", fontWeight: 800,
+                color: TEXT, fontStyle: "normal", fontWeight: 900,
                 lineHeight: 1.15,
               }}>
               <span style={{ display: "block" }}>{"Nuestra prioridad"}</span>
@@ -952,7 +972,7 @@ export default function Home() {
             style={{ display: "block", width: "100%", height: "100px" }}>
             <path
               d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-              fill="#0a1f4e" />
+              fill="#ffffff" />
           </svg>
         </div>
 
@@ -972,7 +992,7 @@ export default function Home() {
           </div>
 
           {/* Card dos columnas */}
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <div className="flex flex-col lg:flex-row"
               style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
@@ -984,6 +1004,7 @@ export default function Home() {
                 <h3 style={{
                   fontFamily: "'Playfair Display', serif", fontStyle: "italic",
                   fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
+                  textAlign: "center",
                 }}>Contáctenos</h3>
                 <p style={{
                   fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
@@ -1006,7 +1027,7 @@ export default function Home() {
                 </div>
                 <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 24px" }} />
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-3">
                   {([
                     { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia" },
                     { Icon: SvgEmail,    text: "contacto@sgabogados.co" },
@@ -1047,7 +1068,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: "#0a1f4e" }}>
+      <footer style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
         <div className="flex flex-col items-center px-8 py-14">
 
           {/* Redes: WhatsApp, Instagram, LinkedIn, Facebook */}
@@ -1061,14 +1082,14 @@ export default function Home() {
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 aria-label={label}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                style={{ background: "#163a6e", color: "rgba(255,255,255,0.65)" }}
+                style={{ background: "#f0f4fa", color: CAFE }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.background = CAFE;
                   (e.currentTarget as HTMLElement).style.color = "#ffffff";
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = "#163a6e";
-                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
+                  (e.currentTarget as HTMLElement).style.background = "#f0f4fa";
+                  (e.currentTarget as HTMLElement).style.color = CAFE;
                 }}
               ><Icon /></a>
             ))}
@@ -1077,11 +1098,11 @@ export default function Home() {
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: "italic", fontSize: "1.15rem",
-            color: "rgba(255,255,255,0.80)",
+            color: "rgba(0,0,0,0.55)",
           }}>Estrategia jurídica con carácter.</p>
         </div>
 
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
+        <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0 32px" }} />
 
         <div className="flex flex-col items-center gap-3 px-8 py-6">
           <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -1094,20 +1115,21 @@ export default function Home() {
                 <a href={href}
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.68rem", color: "rgba(255,255,255,0.55)", letterSpacing: "0.14em",
+                    fontSize: "0.68rem", color: "rgba(0,0,0,0.50)", letterSpacing: "0.14em",
+                    textDecoration: "none",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.90)")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
+                  onMouseEnter={e => (e.currentTarget.style.color = "rgba(0,0,0,0.85)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(0,0,0,0.50)")}
                 >{label}</a>
                 {i < arr.length - 1 && (
-                  <span style={{ color: "rgba(255,255,255,0.18)", fontSize: "0.7rem" }}>·</span>
+                  <span style={{ color: "rgba(0,0,0,0.18)", fontSize: "0.7rem" }}>·</span>
                 )}
               </span>
             ))}
           </div>
           <p style={{
             fontFamily: "'Cinzel', serif",
-            fontSize: "0.65rem", color: "rgba(255,255,255,0.45)",
+            fontSize: "0.65rem", color: "rgba(0,0,0,0.38)",
             letterSpacing: "0.12em", marginTop: "4px",
           }}>&copy; 2026 SGC Abogados.</p>
         </div>

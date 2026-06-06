@@ -5,7 +5,7 @@ import {
   Scale, Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image-Photoroom_(7)_1780453891046.png";
+import nosotrosImg from "@assets/nosotros_scrolls.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -962,9 +962,9 @@ export default function Home() {
           <div className="flex flex-col items-center text-center" style={{ marginBottom: "56px" }}>
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(1.8rem, 4vw, 3.2rem)",
+              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
-              lineHeight: 1.20, marginBottom: "20px",
+              lineHeight: 1.22, marginBottom: "20px",
             }}>
               Estamos para ayudarle.
             </h2>
@@ -972,9 +972,9 @@ export default function Home() {
           </div>
 
           {/* Card dos columnas */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="flex flex-col lg:flex-row"
-              style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden" }}>
+              style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
               {/* IZQUIERDA — panel café oscuro */}
               <div style={{
@@ -987,9 +987,20 @@ export default function Home() {
                 }}>Contáctenos</h3>
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                  color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: "28px",
-                }}>Estamos disponibles para atenderle y orientarle en su proceso.</p>
-                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", marginBottom: "32px" }} />
+                  color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: "10px",
+                }}>Horarios de Atención</p>
+                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", marginBottom: "18px" }} />
+                {[
+                  { day: "Lunes — Viernes", hours: "8:00 am – 6:00 pm" },
+                  { day: "Sábados",         hours: "9:00 am – 1:00 pm" },
+                  { day: "Domingos",        hours: "Cerrado" },
+                ].map(({ day, hours }) => (
+                  <div key={day} style={{ marginBottom: "12px" }}>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.60rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.55)", marginBottom: "2px" }}>{day.toUpperCase()}</p>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.98rem", color: "rgba(255,255,255,0.90)" }}>{hours}</p>
+                  </div>
+                ))}
+                <div style={{ width: "40px", height: "1px", background: "rgba(255,255,255,0.30)", margin: "20px 0 28px" }} />
 
                 <div className="flex flex-col gap-6">
                   {([

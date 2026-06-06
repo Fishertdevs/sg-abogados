@@ -74,6 +74,7 @@ function LegalFooter() {
   return (
     <footer style={{ background: "#111111" }}>
       <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.04)", margin: "0 32px" }} />
       <div className="flex flex-col items-center gap-3 px-8 py-8">
         <div className="flex items-center gap-4 flex-wrap justify-center">
           {[
@@ -103,6 +104,8 @@ function LegalFooter() {
           letterSpacing: "0.12em", marginTop: "4px",
         }}>&copy; 2026 SGC Abogados.</p>
       </div>
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.04)", margin: "0 32px" }} />
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", margin: "0 32px" }} />
     </footer>
   );
 }
@@ -164,12 +167,12 @@ export function H2({ children }: { children: ReactNode }) {
 }
 
 export function P({ children }: { children: ReactNode }) {
-  return <p style={{ marginBottom: "20px" }}>{children}</p>;
+  return <p style={{ marginBottom: "20px", textAlign: "left" }}>{children}</p>;
 }
 
 export function UL({ children }: { children: ReactNode }) {
   return (
-    <ul style={{ paddingLeft: "24px", marginBottom: "20px", listStyleType: "disc" }}>
+    <ul style={{ paddingLeft: "24px", marginBottom: "20px", listStyleType: "disc", textAlign: "left" }}>
       {children}
     </ul>
   );

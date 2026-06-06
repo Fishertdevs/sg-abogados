@@ -80,9 +80,9 @@ export function CookieBanner() {
         <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
           <button
             onClick={dismiss}
-            style={{ ...btnBase, color: CAFE, background: "transparent" }}
-            onMouseEnter={e => { e.currentTarget.style.background = `${CAFE}12`; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+            style={{ ...btnBase, color: "#ffffff", background: CAFE }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
           >RECHAZAR</button>
           <button
             onClick={accept}

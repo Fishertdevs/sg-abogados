@@ -9,11 +9,11 @@ import nosotrosImg from "@assets/image-Photoroom_(8)_1780715847313.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
-/* ─── Paleta oficial: Café · Negro · Blanco ──────────────── */
+/* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
 const BG    = "#ffffff";
-const BG2   = "#f7f2ee";
-const CAFE  = "#6B3A2A";        /* café – acento principal   */
-const CAFE2 = "#4e2b1e";        /* café oscuro – hover       */
+const BG2   = "#f0f4fa";
+const CAFE  = "#1a3d7c";        /* azul – acento principal   */
+const CAFE2 = "#102a5a";        /* azul oscuro – hover       */
 const TEXT  = "#111111";
 const MUTED = "rgba(17,17,17,0.52)";
 
@@ -231,7 +231,7 @@ function AreasCarousel() {
 
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: isMobile ? "0.82rem" : "0.88rem", color: TEXT, lineHeight: 1.70, marginBottom: "14px",
+                  fontSize: isMobile ? "0.95rem" : "1.02rem", color: TEXT, lineHeight: 1.70, marginBottom: "14px",
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
@@ -244,7 +244,7 @@ function AreasCarousel() {
                       }} />
                       <span style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "0.80rem", color: TEXT, lineHeight: 1.5,
+                        fontSize: "0.93rem", color: TEXT, lineHeight: 1.5,
                       }}>{item}</span>
                     </li>
                   ))}
@@ -326,7 +326,7 @@ function FaqSection() {
             }}>Resolvemos sus dudas</h2>
 
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
               Las respuestas a las preguntas más comunes de nuestros clientes.
@@ -356,7 +356,7 @@ function FaqSection() {
                 </div>
 
                 <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
+                  fontFamily: "'Cormorant Garamond', serif", fontSize: "1.22rem",
                   color: TEXT, lineHeight: 1.88, textAlign: "center",
                 }}>{faq.a}</p>
 
@@ -455,7 +455,7 @@ function TestimoniosSection() {
 
             {/* Subtítulo */}
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
               La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
@@ -540,7 +540,7 @@ function TestimoniosSection() {
           style={{ display: "block", width: "100%", height: "100px" }}>
           <path
             d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-            fill="#000000" />
+            fill="#0a1f4e" />
         </svg>
       </div>
     </section>
@@ -650,9 +650,9 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: BG }}>
 
-        {/* Warm café ambient detrás de estatua */}
+        {/* Ambient azul detrás de estatua */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 55% 70% at 78% 58%, rgba(107,58,42,0.07) 0%, transparent 72%)",
+          background: "radial-gradient(ellipse 55% 70% at 78% 58%, rgba(26,61,124,0.07) 0%, transparent 72%)",
           zIndex: 1,
         }} />
 
@@ -667,7 +667,7 @@ export default function Home() {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(1.75rem, 4.0vw, 3.6rem)",
-                color: TEXT, fontStyle: "italic", fontWeight: 500,
+                color: TEXT, fontStyle: "italic", fontWeight: 800,
                 lineHeight: 1.15,
               }}>
               <span style={{ display: "block" }}>{"Nuestra prioridad"}</span>
@@ -686,7 +686,7 @@ export default function Home() {
             <p ref={subRef} style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(0.95rem, 2.5vw, 1.08rem)", color: "#2a1208", lineHeight: 1.85,
+              fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: "#0a1f4e", lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
             }}>
               Bienvenido a SGC Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
@@ -722,13 +722,13 @@ export default function Home() {
           <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
             style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)" }}>
 
-            {/* Ambiente cálido café — pre-composited */}
+            {/* Ambiente azul — pre-composited */}
             <div style={{
               position: "absolute",
               width: "480px", height: "480px", borderRadius: "50%",
               top: "50%", left: "50%",
               transform: "translateZ(0) translate(-50%, -50%)",
-              background: "radial-gradient(circle, rgba(107,58,42,0.10) 0%, rgba(107,58,42,0.04) 45%, transparent 68%)",
+              background: "radial-gradient(circle, rgba(26,61,124,0.10) 0%, rgba(26,61,124,0.04) 45%, transparent 68%)",
               filter: "blur(60px)",
               willChange: "filter",
             }} />
@@ -740,7 +740,7 @@ export default function Home() {
                 position: "relative", zIndex: 10,
                 width: "clamp(328px, 38.5vw, 595px)",
                 height: "auto", objectFit: "contain",
-                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(107,58,42,0.16))",
+                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(26,61,124,0.16))",
                 alignSelf: "flex-end",
                 willChange: "filter",
                 transform: "translateZ(0)",
@@ -824,7 +824,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="relative" style={{ background: "#000000" }}>
+      <section id="nosotros" className="relative" style={{ background: "#0a1f4e" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
@@ -860,7 +860,7 @@ export default function Home() {
               className="hidden lg:flex items-center justify-start relative overflow-hidden"
               style={{ height: "420px" }}
             >
-              {/* Resplandor café detrás */}
+              {/* Resplandor azul detrás */}
               <div style={{
                 position: "absolute", inset: 0,
                 background: `radial-gradient(ellipse 70% 60% at 50% 50%, ${CAFE}18 0%, transparent 70%)`,
@@ -893,7 +893,7 @@ export default function Home() {
               ].map((txt, i) => (
                 <p key={i} style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.05rem", color: "rgba(255,255,255,0.68)", lineHeight: 1.94,
+                  fontSize: "1.16rem", color: "rgba(255,255,255,0.80)", lineHeight: 1.94,
                   marginBottom: i === 0 ? "18px" : "40px",
                   textAlign: "center",
                 }}>{txt}</p>
@@ -952,7 +952,7 @@ export default function Home() {
             style={{ display: "block", width: "100%", height: "100px" }}>
             <path
               d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-              fill="#111111" />
+              fill="#0a1f4e" />
           </svg>
         </div>
 
@@ -1047,7 +1047,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: "#111111" }}>
+      <footer style={{ background: "#0a1f4e" }}>
         <div className="flex flex-col items-center px-8 py-14">
 
           {/* Redes: WhatsApp, Instagram, LinkedIn, Facebook */}
@@ -1061,13 +1061,13 @@ export default function Home() {
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 aria-label={label}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                style={{ background: "#222222", color: "rgba(255,255,255,0.65)" }}
+                style={{ background: "#163a6e", color: "rgba(255,255,255,0.65)" }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.background = CAFE;
                   (e.currentTarget as HTMLElement).style.color = "#ffffff";
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = "#222222";
+                  (e.currentTarget as HTMLElement).style.background = "#163a6e";
                   (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)";
                 }}
               ><Icon /></a>
@@ -1076,8 +1076,8 @@ export default function Home() {
 
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: "italic", fontSize: "1.05rem",
-            color: "rgba(255,255,255,0.65)",
+            fontStyle: "italic", fontSize: "1.15rem",
+            color: "rgba(255,255,255,0.80)",
           }}>Estrategia jurídica con carácter.</p>
         </div>
 

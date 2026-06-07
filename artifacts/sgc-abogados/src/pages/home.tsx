@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-scrolls-clean.png";
+import nosotrosImg from "@assets/image_1780857071944.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -902,7 +902,8 @@ export default function Home() {
                   height: "100%",
                   objectFit: "contain",
                   objectPosition: "left center",
-                  filter: "grayscale(1) contrast(1.05)",
+                  filter: "grayscale(1) brightness(1.15) contrast(1.1)",
+                  mixBlendMode: "screen",
                   position: "relative", zIndex: 1,
                   marginLeft: "-5%",
                 }}

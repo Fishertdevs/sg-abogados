@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image-Photoroom_(9)_1780855625543.png";
+import nosotrosImg from "@assets/image_1780856814231.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -298,10 +298,6 @@ const FAQS = [
   {
     q: "¿Atienden casos en todo Colombia?",
     a: "Sí, nuestra firma atiende casos en todo el territorio colombiano. Ofrecemos asesoría presencial en Bogotá y atención virtual para clientes en otras ciudades o en el exterior. La distancia no es un obstáculo para proteger sus derechos.",
-  },
-  {
-    q: "¿Manejan pagos en cuotas o planes de honorarios?",
-    a: "Sí, entendemos que cada situación financiera es diferente y buscamos que eso no sea un obstáculo. Ofrecemos planes de pago flexibles adaptados a sus posibilidades. Garantizamos así que todos tengan acceso a una representación legal de calidad.",
   },
 ];
 

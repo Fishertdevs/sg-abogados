@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-pergaminos-quill.png";
+import nosotrosImg from "@assets/nosotros-pergaminos-bw.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -405,7 +405,7 @@ function FaqSection() {
 
           {/* ── RIGHT: nueva imagen ── */}
           <div className="relative flex justify-end">
-            <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
+            <div style={{ position: "relative", width: "90%", maxWidth: "450px", aspectRatio: "3/4" }}>
               <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
                 style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
               />

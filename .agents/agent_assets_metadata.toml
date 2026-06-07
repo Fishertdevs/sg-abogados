@@ -72,3 +72,9 @@ id = "_O2MbG5RATAWNhqM33let"
 uri = "file://attached_assets/nosotros-pergaminos-quill.png"
 type = "image"
 title = "law parchment scrolls quill"
+
+[[generated]]
+id = "4AD1931fD90GXzdxbYecz"
+uri = "file://attached_assets/nosotros-pergaminos-bw.png"
+type = "image"
+title = "law parchment scrolls quill black white"

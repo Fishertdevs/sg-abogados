@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-pergaminos-bw.png";
+import nosotrosImg from "@assets/image-Photoroom_(9)_1780855625543.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -285,7 +285,7 @@ function AreasCarousel() {
 const FAQS = [
   {
     q: "¿Cuánto cuesta la consulta inicial?",
-    a: "La primera consulta tiene un costo accesible y le permite conocer la viabilidad de su caso. Contáctenos para conocer las tarifas vigentes según el área jurídica de su situación.",
+    a: "La primera consulta tiene un costo accesible y le permite conocer la viabilidad de su caso. Las tarifas varían según el área jurídica y la complejidad de la situación. Contáctenos y le orientaremos con toda la información que necesita.",
   },
   {
     q: "¿Cuánto tiempo puede durar mi proceso legal?",
@@ -293,15 +293,15 @@ const FAQS = [
   },
   {
     q: "¿Qué documentos necesito para iniciar?",
-    a: "Por lo general, se requiere su documento de identidad, los contratos o acuerdos relacionados con el caso, y cualquier comunicación o evidencia relevante. El equipo le indicará exactamente qué necesita según su situación.",
+    a: "Se requiere su documento de identidad, los contratos o acuerdos relacionados con el caso y cualquier comunicación relevante. Cada situación puede requerir documentos adicionales según su naturaleza. El equipo le indicará exactamente qué necesita desde el primer momento.",
   },
   {
     q: "¿Atienden casos en todo Colombia?",
-    a: "Sí. Atendemos en todo el país: presencialmente en Bogotá y de forma virtual para otras ciudades o el exterior.",
+    a: "Sí, nuestra firma atiende casos en todo el territorio colombiano. Ofrecemos asesoría presencial en Bogotá y atención virtual para clientes en otras ciudades o en el exterior. La distancia no es un obstáculo para proteger sus derechos.",
   },
   {
     q: "¿Manejan pagos en cuotas o planes de honorarios?",
-    a: "Sí. Ofrecemos planes de pago flexibles para que todos puedan acceder a una representación legal de calidad.",
+    a: "Sí, entendemos que cada situación financiera es diferente y buscamos que eso no sea un obstáculo. Ofrecemos planes de pago flexibles adaptados a sus posibilidades. Garantizamos así que todos tengan acceso a una representación legal de calidad.",
   },
 ];
 
@@ -1041,8 +1041,8 @@ export default function Home() {
                   {[
                     { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia", href: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia", external: true  },
                     { Icon: SvgEmail,    text: "contacto@sgabogados.co",  href: "mailto:contacto@sgabogados.co", external: false },
-                    { Icon: SvgPhone,    text: "+57 (300) 123-4567",      href: "tel:+573001234567",            external: false },
-                    { Icon: SvgWhatsApp, text: "+57 (300) 123-4567",      href: WA_HREF,                        external: true  },
+                    { Icon: SvgPhone,    text: "+57 (319) 651-9645",      href: "tel:+573196519645",            external: false },
+                    { Icon: SvgWhatsApp, text: "+57 (319) 651-9645",      href: WA_HREF,                        external: true  },
                   ].map(({ Icon, text, href, external }, i) => (
                     <a key={i} href={href}
                       target={external ? "_blank" : undefined}

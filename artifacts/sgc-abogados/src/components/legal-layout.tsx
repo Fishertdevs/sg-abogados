@@ -57,18 +57,30 @@ function LegalNav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map(l => (
-            <a key={l.name} href={l.href}
-              className="transition-colors duration-300"
-              style={{
-                fontFamily: "'Cinzel', serif",
-                fontSize: "0.78rem", letterSpacing: "0.18em",
-                color: TEXT, fontWeight: 600, textDecoration: "none",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
-              onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
-            >{l.name}</a>
-          ))}
+          {navLinks.map(l => {
+            const linkStyle: React.CSSProperties = {
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.78rem", letterSpacing: "0.18em",
+              color: TEXT, fontWeight: 600, textDecoration: "none",
+            };
+            const enter = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = BLUE);
+            const leave = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = TEXT);
+            return l.href === "/" ? (
+              <Link key={l.name} href={l.href}
+                className="transition-colors duration-300"
+                style={linkStyle}
+                onMouseEnter={enter}
+                onMouseLeave={leave}
+              >{l.name}</Link>
+            ) : (
+              <a key={l.name} href={l.href}
+                className="transition-colors duration-300"
+                style={linkStyle}
+                onMouseEnter={enter}
+                onMouseLeave={leave}
+              >{l.name}</a>
+            );
+          })}
         </nav>
 
         <button className="md:hidden p-2"
@@ -81,11 +93,21 @@ function LegalNav() {
       {menuOpen && (
         <div className="md:hidden px-8 py-6 flex flex-col gap-6"
           style={{ background: "rgba(255,255,255,0.98)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-          {navLinks.map(l => (
-            <a key={l.name} href={l.href}
-              style={{ fontFamily: "'Cinzel', serif", fontSize: "0.78rem", letterSpacing: "0.22em", color: TEXT, textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}>{l.name}</a>
-          ))}
+          {navLinks.map(l => {
+            const mobileStyle: React.CSSProperties = {
+              fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
+              letterSpacing: "0.22em", color: TEXT, textDecoration: "none",
+            };
+            return l.href === "/" ? (
+              <Link key={l.name} href={l.href}
+                style={mobileStyle}
+                onClick={() => setMenuOpen(false)}>{l.name}</Link>
+            ) : (
+              <a key={l.name} href={l.href}
+                style={mobileStyle}
+                onClick={() => setMenuOpen(false)}>{l.name}</a>
+            );
+          })}
         </div>
       )}
     </motion.header>

@@ -17,6 +17,11 @@ const CAFE2 = "#163d90";        /* azul oscuro – hover       */
 const TEXT  = "#111111";
 const MUTED = "rgba(17,17,17,0.52)";
 
+/* ─── WhatsApp contact ───────────────────────────────────── */
+const WA_PHONE = "573001234567";
+const WA_MSG   = "Cordial saludo. Espero que se encuentren muy bien. Me dirijo a ustedes para solicitar información y orientación sobre un caso legal. Agradezco su atención y quedo en espera de su respuesta. Muchas gracias.";
+const WA_HREF  = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_MSG)}`;
+
 /* ─── Framer Motion variants ─────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -1027,19 +1032,26 @@ export default function Home() {
                 <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 24px" }} />
 
                 <div className="flex flex-col gap-3">
-                  {([
-                    { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia" },
-                    { Icon: SvgEmail,    text: "contacto@sgabogados.co" },
-                    { Icon: SvgPhone,    text: "+57 (300) 123-4567" },
-                    { Icon: SvgWhatsApp, text: "+57 (300) 123-4567" },
-                  ] as const).map(({ Icon, text }, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0 }}><Icon /></div>
+                  {[
+                    { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia", href: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia", external: true  },
+                    { Icon: SvgEmail,    text: "contacto@sgabogados.co",  href: "mailto:contacto@sgabogados.co", external: false },
+                    { Icon: SvgPhone,    text: "+57 (300) 123-4567",      href: "tel:+573001234567",            external: false },
+                    { Icon: SvgWhatsApp, text: "+57 (300) 123-4567",      href: WA_HREF,                        external: true  },
+                  ].map(({ Icon, text, href, external }, i) => (
+                    <a key={i} href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      style={{ textDecoration: "none" }}
+                      className="flex items-start gap-4 group"
+                    >
+                      <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0, transition: "color 0.2s" }}
+                        className="group-hover:text-white"><Icon /></div>
                       <p style={{
                         fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
                         color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",
-                      }}>{text}</p>
-                    </div>
+                        transition: "color 0.2s",
+                      }} className="group-hover:text-white">{text}</p>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -1067,13 +1079,13 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+      <footer style={{ background: "#ffffff" }}>
         <div className="flex flex-col items-center px-8 py-14">
 
           {/* Redes: WhatsApp, Instagram, LinkedIn, Facebook */}
           <div className="flex items-center gap-4 mb-7">
             {[
-              { label: "WhatsApp",  Icon: SvgWhatsApp,  href: "https://wa.me/573001234567" },
+              { label: "WhatsApp",  Icon: SvgWhatsApp,  href: WA_HREF },
               { label: "Instagram", Icon: SvgInstagram, href: "#" },
               { label: "LinkedIn",  Icon: SvgLinkedIn,  href: "#" },
               { label: "Facebook",  Icon: SvgFacebook,  href: "#" },
@@ -1097,7 +1109,7 @@ export default function Home() {
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: "italic", fontSize: "1.15rem",
-            color: "#333333",
+            color: "#111111",
           }}>Estrategia jurídica con carácter.</p>
         </div>
 
@@ -1112,21 +1124,21 @@ export default function Home() {
                 <a href={href}
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.68rem", color: "#444444", letterSpacing: "0.14em",
+                    fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
                     textDecoration: "none",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#111111")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#444444")}
+                  onMouseEnter={e => (e.currentTarget.style.color = "#000000")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "#111111")}
                 >{label}</a>
                 {i < arr.length - 1 && (
-                  <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
+                  <span style={{ color: "rgba(0,0,0,0.35)", fontSize: "0.7rem" }}>·</span>
                 )}
               </span>
             ))}
           </div>
           <p style={{
             fontFamily: "'Cinzel', serif",
-            fontSize: "0.65rem", color: "#666666",
+            fontSize: "0.65rem", color: "#111111",
             letterSpacing: "0.12em", marginTop: "4px",
           }}>&copy; 2026 SGC Abogados.</p>
         </div>
@@ -1134,7 +1146,7 @@ export default function Home() {
 
       {/* ── FLOATING WHATSAPP ─── */}
       <a
-        href={`https://wa.me/573001234567?text=${encodeURIComponent("Estimados señores de SGC Abogados, me dirijo a ustedes con el propósito de solicitar una consulta jurídica. Agradezco su atención y quedo en espera de su respuesta.")}`}
+        href={WA_HREF}
         target="_blank" rel="noopener noreferrer"
         data-testid="link-whatsapp"
         className="fixed bottom-6 right-6 w-[52px] h-[52px] rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-50 group"

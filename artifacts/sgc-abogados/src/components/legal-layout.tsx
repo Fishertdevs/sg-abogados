@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { Link } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -48,12 +49,12 @@ function LegalNav() {
       className="fixed top-0 left-0 right-0 z-50"
     >
       <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between">
-        <a href="/" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <span style={{
             fontFamily: "'Cinzel', serif",
             color: TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
           }}>SGC ABOGADOS</span>
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-10">
           {navLinks.map(l => (
@@ -121,27 +122,29 @@ function LegalFooter() {
         <p style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: "italic", fontSize: "1.10rem",
-          color: "#333333",
+          color: "#111111",
         }}>Estrategia jurídica con carácter.</p>
       </div>
+
+      <div style={{ width: "100%", height: "1px", background: BLUE }} />
 
       <div className="flex flex-col items-center gap-3 px-8 py-6">
         <div className="flex items-center gap-4 flex-wrap justify-center">
           {[
-            { label: "Política de Cookies",    href: "/cookies"    },
-            { label: "Términos y Condiciones", href: "/terminos"   },
-            { label: "Política de Privacidad", href: "/privacidad" },
-          ].map(({ label, href }, i, arr) => (
+            { label: "Política de Cookies",    to: "/cookies"    },
+            { label: "Términos y Condiciones", to: "/terminos"   },
+            { label: "Política de Privacidad", to: "/privacidad" },
+          ].map(({ label, to }, i, arr) => (
             <span key={label} className="flex items-center gap-4">
-              <a href={href}
+              <Link href={to}
                 style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: "0.68rem", color: "#444444", letterSpacing: "0.14em",
+                  fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
                   textDecoration: "none",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#111111")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#444444")}
-              >{label}</a>
+                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
+                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
+              >{label}</Link>
               {i < arr.length - 1 && (
                 <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
               )}
@@ -150,7 +153,7 @@ function LegalFooter() {
         </div>
         <p style={{
           fontFamily: "'Cinzel', serif",
-          fontSize: "0.65rem", color: "#666666",
+          fontSize: "0.65rem", color: "#111111",
           letterSpacing: "0.12em", marginTop: "4px",
         }}>&copy; 2026 SGC Abogados.</p>
       </div>

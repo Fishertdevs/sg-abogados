@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "wouter";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import {
@@ -1113,23 +1114,25 @@ export default function Home() {
           }}>Estrategia jurídica con carácter.</p>
         </div>
 
+        <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.10)" }} />
+
         <div className="flex flex-col items-center gap-3 px-8 py-6">
           <div className="flex items-center gap-4 flex-wrap justify-center">
             {[
-              { label: "Política de Cookies",    href: "/cookies"    },
-              { label: "Términos y Condiciones", href: "/terminos"   },
-              { label: "Política de Privacidad", href: "/privacidad" },
-            ].map(({ label, href }, i, arr) => (
+              { label: "Política de Cookies",    to: "/cookies"    },
+              { label: "Términos y Condiciones", to: "/terminos"   },
+              { label: "Política de Privacidad", to: "/privacidad" },
+            ].map(({ label, to }, i, arr) => (
               <span key={label} className="flex items-center gap-4">
-                <a href={href}
+                <Link href={to}
                   style={{
                     fontFamily: "'Cinzel', serif",
                     fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
                     textDecoration: "none",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#000000")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "#111111")}
-                >{label}</a>
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
+                >{label}</Link>
                 {i < arr.length - 1 && (
                   <span style={{ color: "rgba(0,0,0,0.35)", fontSize: "0.7rem" }}>·</span>
                 )}

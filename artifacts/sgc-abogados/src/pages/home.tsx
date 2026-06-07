@@ -993,15 +993,24 @@ export default function Home() {
 
           {/* Card dos columnas */}
           <div className="max-w-4xl mx-auto">
+            <style>{`
+              @media (max-width: 640px) {
+                .sgc-contact-panel { padding: 28px 24px !important; width: 100% !important; }
+                .sgc-contact-title { font-size: 1.3rem !important; }
+                .sgc-contact-hours { font-size: 0.80rem !important; }
+                .sgc-contact-info  { font-size: 0.82rem !important; }
+                .sgc-map-wrap      { min-height: 240px !important; }
+              }
+            `}</style>
             <div className="flex flex-col lg:flex-row"
               style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
               {/* IZQUIERDA — panel café oscuro */}
-              <div style={{
+              <div className="sgc-contact-panel" style={{
                 background: CAFE2, padding: "52px 40px",
                 width: "min(100%, 300px)", flexShrink: 0, color: "#ffffff",
               }}>
-                <h3 style={{
+                <h3 className="sgc-contact-title" style={{
                   fontFamily: "'Playfair Display', serif", fontStyle: "italic",
                   fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
                   textAlign: "center",
@@ -1018,7 +1027,7 @@ export default function Home() {
                     { day: "Sábados",   hours: "9:00 am – 1:00 pm" },
                     { day: "Domingos",  hours: "Cerrado" },
                   ].map(({ day, hours }) => (
-                    <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>
+                    <p key={day} className="sgc-contact-hours" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>
                       <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.78rem" }}>{day}</span>
                       {"  "}
                       {hours}
@@ -1042,18 +1051,18 @@ export default function Home() {
                     >
                       <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0, transition: "color 0.2s" }}
                         className="group-hover:text-white"><Icon /></div>
-                      <p style={{
+                      <p className="group-hover:text-white sgc-contact-info" style={{
                         fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
                         color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",
                         transition: "color 0.2s",
-                      }} className="group-hover:text-white">{text}</p>
+                      }}>{text}</p>
                     </a>
                   ))}
                 </div>
               </div>
 
               {/* DERECHA — mapa interactivo */}
-              <div style={{ flex: 1, minHeight: "420px", overflow: "hidden" }}>
+              <div className="sgc-map-wrap" style={{ flex: 1, minHeight: "420px", overflow: "hidden" }}>
                 <iframe
                   title="Ubicación SGC Abogados"
                   src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
@@ -1075,12 +1084,19 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
-      <footer style={{ background: "#ffffff" }}>
+      <motion.footer
+        style={{ background: "#ffffff" }}
+        initial={{ opacity: 0, y: 36 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+      >
         <style>{`
           @media (max-width:640px){
             .sgc-footer-top { padding: 28px 20px 20px !important; }
-            .sgc-footer-bottom { padding: 12px 20px !important; }
+            .sgc-footer-bottom { padding: 12px 20px 88px !important; }
             .sgc-footer-tagline { font-size: 0.95rem !important; }
+            .sgc-footer-link { font-size: 0.58rem !important; letter-spacing: 0.10em !important; }
           }
         `}</style>
         <div className="sgc-footer-top flex flex-col items-center px-8 py-14">
@@ -1125,8 +1141,9 @@ export default function Home() {
               { label: "Política de Cookies",    to: "/cookies"    },
               { label: "Política de Privacidad", to: "/privacidad" },
             ].map(({ label, to }, i, arr) => (
-              <span key={label} className="flex items-center gap-4">
+              <span key={label} className="flex items-center gap-3">
                 <Link href={to}
+                  className="sgc-footer-link"
                   style={{
                     fontFamily: "'Cinzel', serif",
                     fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
@@ -1144,6 +1161,7 @@ export default function Home() {
           {/* Fila 2: Términos y Condiciones (centrado) */}
           <div className="flex justify-center">
             <Link href="/terminos"
+              className="sgc-footer-link"
               style={{
                 fontFamily: "'Cinzel', serif",
                 fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
@@ -1159,7 +1177,7 @@ export default function Home() {
             letterSpacing: "0.12em", marginTop: "4px",
           }}>&copy; 2026 SGC Abogados.</p>
         </div>
-      </footer>
+      </motion.footer>
 
       {/* ── FLOATING WHATSAPP ─── */}
       <a

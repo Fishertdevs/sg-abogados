@@ -139,7 +139,13 @@ function LegalNav() {
 
 function LegalFooter() {
   return (
-    <footer style={{ background: "#ffffff" }}>
+    <motion.footer
+      style={{ background: "#ffffff" }}
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+    >
       <style>{`
         @media (max-width:640px){
           .sgc-lf-top { padding: 28px 20px 20px !important; }
@@ -220,7 +226,7 @@ function LegalFooter() {
           letterSpacing: "0.12em", marginTop: "4px",
         }}>&copy; 2026 SGC Abogados.</p>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
 

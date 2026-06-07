@@ -850,7 +850,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c", scrollMarginTop: "72px" }}>
+      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c", scrollMarginTop: "90px" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
@@ -886,13 +886,6 @@ export default function Home() {
               className="hidden lg:flex items-center justify-start relative overflow-hidden"
               style={{ height: "420px" }}
             >
-              {/* Resplandor azul detrás */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: `radial-gradient(ellipse 70% 60% at 50% 50%, ${CAFE}18 0%, transparent 70%)`,
-                pointerEvents: "none",
-              }} />
-
               {/* Ilustración */}
               <img
                 src={nosotrosImg}
@@ -1083,7 +1076,14 @@ export default function Home() {
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
       <footer style={{ background: "#ffffff" }}>
-        <div className="flex flex-col items-center px-8 py-14">
+        <style>{`
+          @media (max-width:640px){
+            .sgc-footer-top { padding: 28px 20px 20px !important; }
+            .sgc-footer-bottom { padding: 12px 20px !important; }
+            .sgc-footer-tagline { font-size: 0.95rem !important; }
+          }
+        `}</style>
+        <div className="sgc-footer-top flex flex-col items-center px-8 py-14">
 
           {/* Redes: WhatsApp, Instagram, LinkedIn, Facebook */}
           <div className="flex items-center gap-4 mb-7">
@@ -1109,7 +1109,7 @@ export default function Home() {
             ))}
           </div>
 
-          <p style={{
+          <p className="sgc-footer-tagline" style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: "italic", fontSize: "1.15rem",
             color: "#111111",
@@ -1118,11 +1118,11 @@ export default function Home() {
 
         <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.10)" }} />
 
-        <div className="flex flex-col items-center gap-3 px-8 py-6">
-          <div className="flex items-center gap-4 flex-wrap justify-center">
+        <div className="sgc-footer-bottom flex flex-col items-center gap-2 px-8 py-6">
+          {/* Fila 1: Política de Cookies · Política de Privacidad */}
+          <div className="flex items-center gap-4 justify-center">
             {[
               { label: "Política de Cookies",    to: "/cookies"    },
-              { label: "Términos y Condiciones", to: "/terminos"   },
               { label: "Política de Privacidad", to: "/privacidad" },
             ].map(({ label, to }, i, arr) => (
               <span key={label} className="flex items-center gap-4">
@@ -1140,6 +1140,18 @@ export default function Home() {
                 )}
               </span>
             ))}
+          </div>
+          {/* Fila 2: Términos y Condiciones (centrado) */}
+          <div className="flex justify-center">
+            <Link href="/terminos"
+              style={{
+                fontFamily: "'Cinzel', serif",
+                fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
+              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
+            >Términos y Condiciones</Link>
           </div>
           <p style={{
             fontFamily: "'Cinzel', serif",

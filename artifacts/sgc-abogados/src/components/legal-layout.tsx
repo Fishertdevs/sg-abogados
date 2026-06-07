@@ -117,8 +117,15 @@ function LegalNav() {
 function LegalFooter() {
   return (
     <footer style={{ background: "#ffffff" }}>
+      <style>{`
+        @media (max-width:640px){
+          .sgc-lf-top { padding: 28px 20px 20px !important; }
+          .sgc-lf-bottom { padding: 12px 20px !important; }
+          .sgc-lf-tagline { font-size: 0.95rem !important; }
+        }
+      `}</style>
       <div style={{ width: "100%", height: "3px", background: BLUE }} />
-      <div className="flex flex-col items-center px-8 py-14">
+      <div className="sgc-lf-top flex flex-col items-center px-8 py-14">
         <div className="flex items-center gap-4 mb-7">
           {[
             { label: "WhatsApp",  Icon: SvgWhatsApp,  href: "https://wa.me/573196519645" },
@@ -142,7 +149,7 @@ function LegalFooter() {
           ))}
         </div>
 
-        <p style={{
+        <p className="sgc-lf-tagline" style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: "italic", fontSize: "1.10rem",
           color: "#111111",
@@ -151,11 +158,11 @@ function LegalFooter() {
 
       <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.10)" }} />
 
-      <div className="flex flex-col items-center gap-3 px-8 py-6">
-        <div className="flex items-center gap-4 flex-wrap justify-center">
+      <div className="sgc-lf-bottom flex flex-col items-center gap-2 px-8 py-6">
+        {/* Fila 1: Política de Cookies · Política de Privacidad */}
+        <div className="flex items-center gap-4 justify-center">
           {[
             { label: "Política de Cookies",    to: "/cookies"    },
-            { label: "Términos y Condiciones", to: "/terminos"   },
             { label: "Política de Privacidad", to: "/privacidad" },
           ].map(({ label, to }, i, arr) => (
             <span key={label} className="flex items-center gap-4">
@@ -173,6 +180,18 @@ function LegalFooter() {
               )}
             </span>
           ))}
+        </div>
+        {/* Fila 2: Términos y Condiciones (centrado) */}
+        <div className="flex justify-center">
+          <Link href="/terminos"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
+              textDecoration: "none",
+            }}
+            onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
+            onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
+          >Términos y Condiciones</Link>
         </div>
         <p style={{
           fontFamily: "'Cinzel', serif",

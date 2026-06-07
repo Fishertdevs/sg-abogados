@@ -121,7 +121,7 @@ function LegalFooter() {
       <div className="flex flex-col items-center px-8 py-14">
         <div className="flex items-center gap-4 mb-7">
           {[
-            { label: "WhatsApp",  Icon: SvgWhatsApp,  href: "https://wa.me/573001234567" },
+            { label: "WhatsApp",  Icon: SvgWhatsApp,  href: "https://wa.me/573196519645" },
             { label: "Instagram", Icon: SvgInstagram, href: "#" },
             { label: "LinkedIn",  Icon: SvgLinkedIn,  href: "#" },
             { label: "Facebook",  Icon: SvgFacebook,  href: "#" },

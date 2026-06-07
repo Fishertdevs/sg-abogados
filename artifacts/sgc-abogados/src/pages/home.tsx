@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-ai-v3.png";
+import nosotrosImg from "@assets/nosotros-pergaminos-quill.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -19,7 +19,7 @@ const TEXT  = "#111111";
 const MUTED = "rgba(17,17,17,0.52)";
 
 /* ─── WhatsApp contact ───────────────────────────────────── */
-const WA_PHONE = "573001234567";
+const WA_PHONE = "573196519645";
 const WA_MSG   = "Cordial saludo. Espero que se encuentren muy bien. Me dirijo a ustedes para solicitar información y orientación sobre un caso legal. Agradezco su atención y quedo en espera de su respuesta. Muchas gracias.";
 const WA_HREF  = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_MSG)}`;
 
@@ -297,11 +297,11 @@ const FAQS = [
   },
   {
     q: "¿Atienden casos en todo Colombia?",
-    a: "Sí. Nuestra firma atiende casos en todo el territorio colombiano. Ofrecemos asesoría presencial en Bogotá y virtual para clientes en otras ciudades o en el exterior.",
+    a: "Sí. Atendemos en todo el país: presencialmente en Bogotá y de forma virtual para otras ciudades o el exterior.",
   },
   {
     q: "¿Manejan pagos en cuotas o planes de honorarios?",
-    a: "Sí. Entendemos que cada situación financiera es diferente. Ofrecemos planes de pago flexibles para garantizar que todos tengan acceso a una representación legal de calidad.",
+    a: "Sí. Ofrecemos planes de pago flexibles para que todos puedan acceder a una representación legal de calidad.",
   },
 ];
 

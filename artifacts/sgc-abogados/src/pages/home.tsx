@@ -293,7 +293,7 @@ const FAQS = [
   },
   {
     q: "¿Qué documentos necesito para iniciar?",
-    a: "Generalmente se necesita su documento de identidad, contratos relacionados y cualquier comunicación o evidencia relevante. Cada caso puede requerir documentos adicionales según su naturaleza. El equipo le indicará exactamente qué traer desde el primer momento.",
+    a: "Necesita su documento de identidad, contratos del caso y evidencia relevante. Cada proceso puede requerir documentación adicional según su naturaleza. Nuestro equipo le indicará exactamente qué traer.",
   },
   {
     q: "¿Atienden casos en todo Colombia?",
@@ -898,11 +898,11 @@ export default function Home() {
                 src={nosotrosImg}
                 alt="Pergaminos — SGC Abogados"
                 style={{
-                  width: "110%",
+                  width: "121%",
                   height: "100%",
                   objectFit: "contain",
                   objectPosition: "left center",
-                  filter: "none",
+                  filter: "grayscale(1) contrast(1.05)",
                   position: "relative", zIndex: 1,
                   marginLeft: "-5%",
                 }}

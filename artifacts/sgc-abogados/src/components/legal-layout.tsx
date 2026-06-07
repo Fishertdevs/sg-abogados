@@ -192,7 +192,7 @@ function LegalFooter() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
-                  textDecoration: "none",
+                  textDecoration: "none", whiteSpace: "nowrap",
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
                 onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
@@ -208,7 +208,7 @@ function LegalFooter() {
             style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
-              textDecoration: "none",
+              textDecoration: "none", whiteSpace: "nowrap",
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
             onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
@@ -332,10 +332,10 @@ export function H2({ children }: { children: ReactNode }) {
   );
 }
 
-export function P({ children }: { children: ReactNode }) {
+export function P({ children, center }: { children: ReactNode; center?: boolean }) {
   return (
     <FadeOnScroll>
-      <p style={{ marginBottom: "20px", textAlign: "left" }}>{children}</p>
+      <p style={{ marginBottom: "20px", textAlign: center ? "center" : "left" }}>{children}</p>
     </FadeOnScroll>
   );
 }

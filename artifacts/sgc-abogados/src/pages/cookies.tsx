@@ -5,7 +5,7 @@ const BLUE = "#1e56b4";
 export default function CookiesPage() {
   return (
     <LegalLayout title="Política de Cookies" lastUpdated="1 de junio de 2026">
-      <P>
+      <P center>
         En SGC Abogados utilizamos cookies para garantizar el correcto funcionamiento
         de nuestro sitio web y para mejorar su experiencia de navegación. Esta política
         explica qué son las cookies, qué tipos utilizamos y cómo puede gestionarlas.

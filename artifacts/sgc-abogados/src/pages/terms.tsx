@@ -5,7 +5,7 @@ const BLUE = "#1e56b4";
 export default function TermsPage() {
   return (
     <LegalLayout title="Términos y Condiciones" lastUpdated="1 de junio de 2026">
-      <P>
+      <P center>
         El acceso y uso del sitio web de SGC Abogados implica la aceptación plena de
         los presentes Términos y Condiciones. Le rogamos que los lea detenidamente antes
         de continuar navegando.

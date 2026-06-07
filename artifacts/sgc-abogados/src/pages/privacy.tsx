@@ -5,7 +5,7 @@ const BLUE = "#1e56b4";
 export default function PrivacyPage() {
   return (
     <LegalLayout title="Política de Privacidad" lastUpdated="1 de junio de 2026">
-      <P>
+      <P center>
         En SGC Abogados respetamos su privacidad y nos comprometemos a proteger sus
         datos personales. Esta política describe qué información recopilamos, cómo la
         usamos y cuáles son sus derechos como titular de los datos.

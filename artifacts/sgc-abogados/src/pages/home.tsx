@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/nosotros-ai-generated.png";
+import nosotrosImg from "@assets/nosotros-ai-v2.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -307,6 +307,14 @@ const FAQS = [
 
 function FaqSection() {
   const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIdx(prev => (prev + 1) % FAQS.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
   const faq = FAQS[idx];
 
   return (
@@ -379,20 +387,17 @@ function FaqSection() {
               </AnimatePresence>
             </div>
 
-            {/* Puntos de paginación */}
+            {/* Indicadores de posición — solo visuales, sin controles */}
             <div className="flex items-center gap-3">
               {FAQS.map((_, i) => (
-                <button key={i} onClick={() => setIdx(i)}
+                <div key={i}
                   style={{
                     width: i === idx ? "28px" : "8px",
                     height: "8px",
                     borderRadius: "4px",
                     background: i === idx ? CAFE : `${CAFE}30`,
-                    border: "none", cursor: "pointer",
                     transition: "all 0.35s ease",
-                    padding: 0,
                   }}
-                  aria-label={`Pregunta ${i + 1}`}
                 />
               ))}
             </div>

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Link } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -94,7 +94,8 @@ function LegalNav() {
 
 function LegalFooter() {
   return (
-    <footer style={{ background: "#ffffff", borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+    <footer style={{ background: "#ffffff" }}>
+      <div style={{ width: "100%", height: "3px", background: BLUE }} />
       <div className="flex flex-col items-center px-8 py-14">
         <div className="flex items-center gap-4 mb-7">
           {[
@@ -126,7 +127,7 @@ function LegalFooter() {
         }}>Estrategia jurídica con carácter.</p>
       </div>
 
-      <div style={{ width: "100%", height: "1px", background: BLUE }} />
+      <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.10)" }} />
 
       <div className="flex flex-col items-center gap-3 px-8 py-6">
         <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -168,11 +169,15 @@ interface LegalLayoutProps {
 }
 
 export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh", background: "#ffffff", display: "flex", flexDirection: "column" }}>
       <LegalNav />
 
-      <main style={{ flex: 1, maxWidth: "780px", margin: "0 auto", padding: "120px 32px 100px", width: "100%" }}>
+      <main style={{ flex: 1, maxWidth: "780px", margin: "0 auto", padding: "120px 32px 60px", width: "100%" }}>
         <p style={{
           fontFamily: "'Cinzel', serif", fontSize: "0.62rem",
           color: BLUE, letterSpacing: "0.22em", marginBottom: "16px",
@@ -197,6 +202,23 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
           fontSize: "1.06rem", color: TEXT, lineHeight: 1.88,
         }}>
           {children}
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: "60px", paddingBottom: "20px" }}>
+          <Link href="/"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.70rem",
+              letterSpacing: "0.22em",
+              color: BLUE,
+              textDecoration: "none",
+              borderBottom: `1px solid ${BLUE}`,
+              paddingBottom: "3px",
+              transition: "opacity 0.2s",
+            }}
+            onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.opacity = "0.65")}
+            onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.opacity = "1")}
+          >← VOLVER AL INICIO</Link>
         </div>
       </main>
 

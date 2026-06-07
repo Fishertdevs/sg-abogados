@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image_1780856814231.png";
+import nosotrosImg from "@assets/image_1780857071944.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -293,7 +293,7 @@ const FAQS = [
   },
   {
     q: "¿Qué documentos necesito para iniciar?",
-    a: "Se requiere su documento de identidad, los contratos o acuerdos relacionados con el caso y cualquier comunicación relevante. Cada situación puede requerir documentos adicionales según su naturaleza. El equipo le indicará exactamente qué necesita desde el primer momento.",
+    a: "Generalmente se necesita su documento de identidad, contratos relacionados y cualquier comunicación o evidencia relevante. Cada caso puede requerir documentos adicionales según su naturaleza. El equipo le indicará exactamente qué traer desde el primer momento.",
   },
   {
     q: "¿Atienden casos en todo Colombia?",

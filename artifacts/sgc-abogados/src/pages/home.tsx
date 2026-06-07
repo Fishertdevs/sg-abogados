@@ -6,7 +6,7 @@ import {
   Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
 } from "lucide-react";
 import justiceStatueImg from "@assets/image_1779927370844.png";
-import nosotrosImg from "@assets/image_1780857071944.png";
+import nosotrosImg from "@assets/image_1780858385741.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/faq_balance_justice.png";
 
@@ -850,7 +850,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c" }}>
+      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c", scrollMarginTop: "72px" }}>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
@@ -898,7 +898,7 @@ export default function Home() {
                 src={nosotrosImg}
                 alt="Pergaminos — SGC Abogados"
                 style={{
-                  width: "121%",
+                  width: "133%",
                   height: "100%",
                   objectFit: "contain",
                   objectPosition: "left center",

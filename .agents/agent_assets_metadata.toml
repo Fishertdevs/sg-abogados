@@ -60,3 +60,9 @@ id = "Goz1iFuB1CsPAGO3Q-WXE"
 uri = "file://attached_assets/nosotros-ai-generated.png"
 type = "image"
 title = "law book quill engraving bw"
+
+[[generated]]
+id = "Fa85GKCuivpsSloQacwdM"
+uri = "file://attached_assets/nosotros-ai-v3.png"
+type = "image"
+title = "lady justice engraving bw"

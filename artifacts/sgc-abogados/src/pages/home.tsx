@@ -1062,7 +1062,7 @@ export default function Home() {
                           <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
                         </svg>
                       )}
-                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.14em", color: "rgba(0,0,0,0.38)", textTransform: "uppercase" }}>{item.label}</span>
+                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.42)" }}>{item.label}</span>
                     </div>
 
                     {/* Valor principal */}
@@ -1070,7 +1070,7 @@ export default function Home() {
                       <a href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
                         style={{ textDecoration: "none" }}>
-                        <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", fontWeight: 600, color: TEXT, lineHeight: 1.3 }}>{item.value}</p>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 700, color: CAFE2, lineHeight: 1.3 }}>{item.value}</p>
                       </a>
                     )}
 
@@ -1084,7 +1084,7 @@ export default function Home() {
                       <a href={item.link.href} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
                         className="flex items-center gap-1"
-                        style={{ textDecoration: "none", fontFamily: "'Cinzel', serif", fontSize: "0.50rem", letterSpacing: "0.12em", color: CAFE, textTransform: "uppercase", marginTop: "5px" }}>
+                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "4px" }}>
                         {item.link.text}
                         <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
                       </a>

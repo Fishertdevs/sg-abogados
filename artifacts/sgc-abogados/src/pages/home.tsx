@@ -319,7 +319,7 @@ function FaqSection() {
         @media (max-width: 640px) {
           .sgc-faq-section {
             background-image: url('${faqImg}');
-            background-size: 55%;
+            background-size: 48%;
             background-repeat: no-repeat;
             background-position: right bottom;
           }
@@ -332,9 +332,24 @@ function FaqSection() {
             background: rgba(240,244,250,0.97) !important;
           }
           .sgc-faq-title { font-size: 1.45rem !important; white-space: nowrap !important; }
+          .sgc-faq-subtitle {
+            font-size: 0.82rem !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            margin-bottom: 20px !important;
+          }
           .sgc-faq-q { font-size: 0.58rem !important; margin-bottom: 5px !important; text-align: center !important; }
           .sgc-faq-deco { margin-bottom: 5px !important; }
-          .sgc-faq-a { font-size: 0.85rem !important; line-height: 1.5 !important; text-align: left !important; }
+          .sgc-faq-a {
+            font-size: 0.82rem !important;
+            line-height: 1.5 !important;
+            text-align: center !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 3 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+          }
         }
       `}</style>
 
@@ -361,7 +376,7 @@ function FaqSection() {
               lineHeight: 1.22, marginBottom: "12px",
             }}>Resolvemos sus dudas</h2>
 
-            <p style={{
+            <p className="sgc-faq-subtitle" style={{
               fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
@@ -1004,12 +1019,12 @@ export default function Home() {
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 900px; margin: 0 auto; padding: 60px 40px 180px; }
+          .sgc-cc2-outer      { max-width: 900px; margin: 0 auto; padding: 100px 40px 180px; }
           .sgc-cc2-cta        { text-align: center; margin-bottom: 48px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 290px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
           .sgc-cc2-left       { background: ${CAFE2}; padding: 36px 30px; display: flex; flex-direction: column; }
-          .sgc-cc2-map        { height: 460px; }
-          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 700; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 8px; }
+          .sgc-cc2-map        { align-self: stretch; min-height: 460px; }
+          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 8px; }
           .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 14px; }
           .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; color: rgba(255,255,255,0.78); line-height: 1.55; }
           .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 18px 0; }
@@ -1023,9 +1038,9 @@ export default function Home() {
           @media (max-width: 640px) {
             .sgc-cc2-outer        { padding: 20px 16px 60px !important; }
             .sgc-cc2-cta          { display: none !important; }
-            .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; }
+            .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; padding-bottom: 10px !important; }
             .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
-            .sgc-cc2-map          { height: 110px !important; max-height: 110px !important; overflow: hidden !important; }
+            .sgc-cc2-map          { height: 110px !important; max-height: 110px !important; overflow: hidden !important; margin: 0 10px !important; border-radius: 8px !important; }
             .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
             .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
             .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }
@@ -1045,11 +1060,16 @@ export default function Home() {
           {/* CTA — solo escritorio */}
           <div className="sgc-cc2-cta">
             <h2 style={{
-              fontFamily: "'Playfair Display', serif", fontSize: "2.6rem",
-              fontStyle: "italic", fontWeight: 600, color: "#ffffff",
-              lineHeight: 1.2, marginBottom: "16px",
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
+              fontStyle: "italic", fontWeight: 500, color: "#ffffff",
+              lineHeight: 1.2, marginBottom: "18px",
             }}>Estamos para ayudarle.</h2>
-            <div style={{ width: "48px", height: "2px", background: "rgba(255,255,255,0.40)", margin: "0 auto" }} />
+            <div className="flex items-center justify-center gap-3">
+              <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />
+              <div style={{ width: "5px", height: "5px", borderRadius: "50%", background: "rgba(255,255,255,0.55)" }} />
+              <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />
+            </div>
           </div>
 
           {/* Tarjeta: panel izquierdo + mapa derecho */}
@@ -1150,7 +1170,7 @@ export default function Home() {
                 title="Ubicación SGC Abogados"
                 src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
                 width="100%" height="100%"
-                style={{ border: 0, display: "block", height: "100%" }}
+                style={{ border: 0, display: "block", height: "100%", minHeight: "460px" }}
                 allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

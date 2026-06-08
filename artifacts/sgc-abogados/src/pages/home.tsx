@@ -314,16 +314,16 @@ function FaqSection() {
   const faq = FAQS[idx];
 
   return (
-    <section className="sgc-faq-section relative" style={{ background: BG }}>
+    <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
       <style>{`
         @media (max-width: 640px) {
           .sgc-faq-section {
             background-image: url('${faqImg}');
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: right center;
+            background-position: center center;
           }
-          .sgc-faq-overlay { display: block !important; }
+          .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }
           .sgc-faq-card { padding: 10px 14px 8px !important; margin-bottom: 8px !important; border-radius: 10px !important; }
           .sgc-faq-title { font-size: 1.45rem !important; white-space: nowrap !important; }
@@ -1020,12 +1020,13 @@ export default function Home() {
             .sgc-cc2-cta          { display: none !important; }
             .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; }
             .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
-            .sgc-cc2-map          { min-height: 220px !important; }
+            .sgc-cc2-map          { min-height: 110px !important; }
             .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
             .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
             .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }
+            .sgc-cc2-closed       { color: rgba(0,0,0,0.40) !important; }
             .sgc-cc2-divider-line { background: rgba(0,0,0,0.09) !important; margin: 12px 0 !important; }
-            .sgc-cc2-item         { padding: 5px 0 !important; }
+            .sgc-cc2-item         { padding: 5px 0 !important; justify-content: center !important; }
             .sgc-cc2-icon         { color: ${CAFE} !important; opacity: 0.85; }
             .sgc-cc2-label        { color: rgba(0,0,0,0.42) !important; }
             .sgc-cc2-value        { color: rgba(0,0,0,0.90) !important; font-size: 0.95rem !important; font-weight: 500 !important; text-align: center; width: 100%; }
@@ -1063,7 +1064,8 @@ export default function Home() {
               ].map(({ day, h }) => (
                 <p key={day} className="sgc-cc2-hour-p">
                   <span style={{ opacity: 0.65 }}>{day}:</span>{" "}
-                  <span style={{ fontWeight: h === "Cerrado" ? 400 : 600,
+                  <span className={h === "Cerrado" ? "sgc-cc2-closed" : ""}
+                    style={{ fontWeight: h === "Cerrado" ? 400 : 600,
                     color: h === "Cerrado" ? "rgba(255,255,255,0.40)" : "inherit" }}>{h}</span>
                 </p>
               ))}

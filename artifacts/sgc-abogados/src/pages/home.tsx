@@ -1075,11 +1075,11 @@ export default function Home() {
                 {
                   Icon: SvgLocation,
                   label: "Ubicación",
-                  value: "Cl. 12 B #8-23, Oficina 421",
+                  value: "Cl 12 B 8-23, Oficina 421",
                   detail: "Bogotá, Colombia",
-                  linkHref: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia",
-                  linkText: "Ver en Google Maps",
-                  external: true,
+                  linkHref: null,
+                  linkText: null,
+                  external: false,
                   mainHref: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia",
                 },
                 {
@@ -1094,13 +1094,23 @@ export default function Home() {
                 },
                 {
                   Icon: SvgPhone,
-                  label: "Teléfono / WhatsApp",
-                  value: "+57 (319) 651-9645",
+                  label: "Teléfono",
+                  value: "+57 (300) 123-4567",
                   detail: null,
                   linkHref: null,
                   linkText: null,
                   external: false,
-                  mainHref: "tel:+573196519645",
+                  mainHref: "tel:+573001234567",
+                },
+                {
+                  Icon: SvgWhatsApp,
+                  label: "WhatsApp",
+                  value: "+57 (300) 123-4567",
+                  detail: null,
+                  linkHref: null,
+                  linkText: null,
+                  external: true,
+                  mainHref: "https://wa.me/573001234567",
                 },
               ].map((item, i) => (
                 <div key={i} className="sgc-cc2-item">

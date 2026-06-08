@@ -987,7 +987,7 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE }}>
 
-        {/* Ola inferior: café → footer oscuro */}
+        {/* Ola inferior: café → blanco */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
             style={{ display: "block", width: "100%", height: "100px" }}>
@@ -997,151 +997,143 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="sgc-cc2-outer max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "60px", paddingBottom: "180px" }}>
-          <style>{`
-            @media (max-width: 640px) {
-              .sgc-cc2-outer { padding-top: 20px !important; padding-bottom: 60px !important; }
-              .sgc-cc2-head { padding: 16px 16px 10px !important; text-align: center !important; }
-              .sgc-cc2-divider { margin: 0 auto 10px !important; }
-              .sgc-cc2-wrap { padding: 6px 16px 0 !important; }
-              .sgc-cc2-title { font-size: 1.9rem !important; }
-              .sgc-cc2-map { height: 220px !important; margin-top: 6px !important; }
-              .sgc-cc2-item { padding: 5px 0 !important; }
-              .sgc-cc2-value-link { display: block !important; text-align: center !important; }
-              .sgc-cc2-value { font-size: 0.95rem !important; font-weight: 500 !important; color: rgba(0,0,0,0.90) !important; }
-              .sgc-cc2-detail { text-align: center !important; color: rgba(0,0,0,0.80) !important; }
-              .sgc-cc2-maplink { display: inline-flex !important; width: 100% !important; justify-content: center !important; }
-              .sgc-cc2-hours { text-align: center !important; gap: 1px !important; }
-              .sgc-cc2-hour-p { color: rgba(0,0,0,0.90) !important; }
-            }
-          `}</style>
+        <style>{`
+          /* ── desktop (default) ── */
+          .sgc-cc2-outer      { max-width: 1080px; margin: 0 auto; padding: 60px 40px 180px; }
+          .sgc-cc2-cta        { text-align: center; margin-bottom: 48px; }
+          .sgc-cc2-card       { display: grid; grid-template-columns: 310px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
+          .sgc-cc2-left       { background: ${CAFE2}; padding: 40px 36px; display: flex; flex-direction: column; }
+          .sgc-cc2-map        { min-height: 460px; }
+          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: #ffffff; font-style: italic; line-height: 1.1; margin-bottom: 8px; }
+          .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 14px; }
+          .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; color: rgba(255,255,255,0.78); line-height: 1.55; }
+          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 18px 0; }
+          .sgc-cc2-item       { padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; }
+          .sgc-cc2-icon       { color: rgba(255,255,255,0.70); flex-shrink: 0; margin-top: 3px; }
+          .sgc-cc2-label      { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-bottom: 3px; }
+          .sgc-cc2-value      { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #ffffff; line-height: 1.3; }
+          .sgc-cc2-detail     { font-family: 'Cormorant Garamond', serif; font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-top: 1px; }
+          .sgc-cc2-maplink    { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; color: rgba(255,255,255,0.60); font-style: italic; text-decoration: none; margin-top: 3px; display: inline-flex; align-items: center; gap: 3px; }
+          /* ── mobile ── */
+          @media (max-width: 640px) {
+            .sgc-cc2-outer        { padding: 20px 16px 60px !important; }
+            .sgc-cc2-cta          { display: none !important; }
+            .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; }
+            .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
+            .sgc-cc2-map          { min-height: 220px !important; }
+            .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
+            .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
+            .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }
+            .sgc-cc2-divider-line { background: rgba(0,0,0,0.09) !important; margin: 12px 0 !important; }
+            .sgc-cc2-item         { padding: 5px 0 !important; }
+            .sgc-cc2-icon         { color: ${CAFE} !important; opacity: 0.85; }
+            .sgc-cc2-label        { color: rgba(0,0,0,0.42) !important; }
+            .sgc-cc2-value        { color: rgba(0,0,0,0.90) !important; font-size: 0.95rem !important; font-weight: 500 !important; text-align: center; width: 100%; }
+            .sgc-cc2-detail       { color: rgba(0,0,0,0.60) !important; text-align: center; width: 100%; }
+            .sgc-cc2-maplink      { color: ${CAFE} !important; width: 100%; justify-content: center; }
+          }
+        `}</style>
 
-          {/* Card blanca */}
-          <div style={{ background: "#ffffff", borderRadius: "16px", boxShadow: "0 10px 56px rgba(0,0,0,0.26)", overflow: "hidden" }}>
+        <div className="sgc-cc2-outer">
 
-            {/* Cabecera */}
-            <div className="sgc-cc2-head" style={{ padding: "32px 32px 20px" }}>
-              <h2 className="sgc-cc2-title" style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "2.4rem", fontWeight: 700, color: TEXT,
-                lineHeight: 1.1, marginBottom: "8px",
-              }}>Contáctenos</h2>
-              <div className="sgc-cc2-divider" style={{ width: "40px", height: "2px", background: CAFE, marginBottom: "10px" }} />
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                color: "rgba(0,0,0,0.50)", fontStyle: "italic", lineHeight: 1.45,
-              }}>Estamos para ayudarle. Escríbanos y le responderemos pronto.</p>
-            </div>
+          {/* CTA — solo escritorio */}
+          <div className="sgc-cc2-cta">
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "2.8rem",
+              fontStyle: "italic", fontWeight: 400, color: "#ffffff",
+              lineHeight: 1.2, marginBottom: "16px",
+            }}>Estamos para ayudarle.</p>
+            <div style={{ width: "48px", height: "2px", background: "rgba(255,255,255,0.40)", margin: "0 auto" }} />
+          </div>
 
-            <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
+          {/* Tarjeta: panel izquierdo + mapa derecho */}
+          <div className="sgc-cc2-card">
 
-            {/* Ítems de contacto */}
-            <div className="sgc-cc2-wrap" style={{ padding: "24px 32px 0", display: "flex", flexDirection: "column", gap: "0" }}>
+            {/* Panel izquierdo: info */}
+            <div className="sgc-cc2-left">
 
+              <h2 className="sgc-cc2-title">Contáctenos</h2>
+
+              {/* Horarios */}
+              <p className="sgc-cc2-sched-head">HORARIOS DE ATENCIÓN</p>
+              {[
+                { day: "Lun – Vie", h: "8:00 am – 6:00 pm" },
+                { day: "Sábados",   h: "9:00 am – 1:00 pm" },
+                { day: "Domingos",  h: "Cerrado" },
+              ].map(({ day, h }) => (
+                <p key={day} className="sgc-cc2-hour-p">
+                  <span style={{ opacity: 0.65 }}>{day}:</span>{" "}
+                  <span style={{ fontWeight: h === "Cerrado" ? 400 : 600,
+                    color: h === "Cerrado" ? "rgba(255,255,255,0.40)" : "inherit" }}>{h}</span>
+                </p>
+              ))}
+
+              <div className="sgc-cc2-divider-line" />
+
+              {/* Ítems de contacto */}
               {[
                 {
                   Icon: SvgLocation,
                   label: "Ubicación",
                   value: "Cl. 12 B #8-23, Oficina 421",
                   detail: "Bogotá, Colombia",
-                  link: { href: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia", text: "Haz clic para ver en Google Maps" },
+                  linkHref: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia",
+                  linkText: "Ver en Google Maps",
                   external: true,
+                  mainHref: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia",
                 },
                 {
                   Icon: SvgEmail,
-                  label: "Correo",
+                  label: "Correo electrónico",
                   value: "contacto@sgabogados.co",
                   detail: null,
-                  link: { href: "mailto:contacto@sgabogados.co", text: null },
+                  linkHref: null,
+                  linkText: null,
                   external: false,
+                  mainHref: "mailto:contacto@sgabogados.co",
                 },
                 {
                   Icon: SvgPhone,
                   label: "Teléfono / WhatsApp",
                   value: "+57 (319) 651-9645",
                   detail: null,
-                  link: { href: "tel:+573196519645", text: null },
+                  linkHref: null,
+                  linkText: null,
                   external: false,
-                },
-                {
-                  Icon: null,
-                  label: "Horarios de Atención",
-                  value: null,
-                  detail: null,
-                  link: null,
-                  external: false,
-                  hours: [
-                    { day: "Lunes – Viernes", h: "8:00 am – 6:00 pm" },
-                    { day: "Sábados",          h: "9:00 am – 1:00 pm" },
-                    { day: "Domingos",         h: "Cerrado" },
-                  ],
+                  mainHref: "tel:+573196519645",
                 },
               ].map((item, i) => (
-                <div key={i}>
-                  {i > 0 && <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0" }} />}
-                  <div className="sgc-cc2-item" style={{ padding: "16px 0" }}>
-
-                    {/* Label */}
-                    <div className="flex items-center gap-2" style={{ marginBottom: "6px" }}>
-                      {item.Icon && (
-                        <div style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}><item.Icon /></div>
-                      )}
-                      {!item.Icon && (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}>
-                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8"/>
-                          <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                <div key={i} className="sgc-cc2-item">
+                  <div className="sgc-cc2-icon"><item.Icon /></div>
+                  <div style={{ flex: 1 }}>
+                    <p className="sgc-cc2-label">{item.label}</p>
+                    <a href={item.mainHref} target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                      style={{ textDecoration: "none" }}>
+                      <p className="sgc-cc2-value">{item.value}</p>
+                    </a>
+                    {item.detail && <p className="sgc-cc2-detail">{item.detail}</p>}
+                    {item.linkText && item.linkHref && (
+                      <a href={item.linkHref} target="_blank" rel="noopener noreferrer"
+                        className="sgc-cc2-maplink">
+                        {item.linkText}
+                        <svg width="9" height="9" viewBox="0 0 14 14" fill="none">
+                          <path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
                         </svg>
-                      )}
-                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.42)" }}>{item.label}</span>
-                    </div>
-
-                    {/* Valor principal */}
-                    {item.value && (
-                      <a className="sgc-cc2-value-link" href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
-                        rel={item.external ? "noopener noreferrer" : undefined}
-                        style={{ textDecoration: "none" }}>
-                        <p className="sgc-cc2-value" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 700, color: CAFE2, lineHeight: 1.3 }}>{item.value}</p>
                       </a>
-                    )}
-
-                    {/* Detalle */}
-                    {item.detail && (
-                      <p className="sgc-cc2-detail" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.50)", marginTop: "2px" }}>{item.detail}</p>
-                    )}
-
-                    {/* Link textual */}
-                    {item.link?.text && (
-                      <a href={item.link.href} target={item.external ? "_blank" : undefined}
-                        rel={item.external ? "noopener noreferrer" : undefined}
-                        className="sgc-cc2-maplink flex items-center gap-1"
-                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "4px" }}>
-                        {item.link.text}
-                        <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
-                      </a>
-                    )}
-
-                    {/* Horarios */}
-                    {"hours" in item && item.hours && (
-                      <div className="sgc-cc2-hours" style={{ display: "flex", flexDirection: "column", gap: "3px", marginTop: "2px" }}>
-                        {item.hours.map(({ day, h }) => (
-                          <p key={day} className="sgc-cc2-hour-p" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>
-                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.30)" : TEXT, fontWeight: 500 }}>{h}</span>
-                          </p>
-                        ))}
-                      </div>
                     )}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Mapa — ancho completo */}
-            <div className="sgc-cc2-map" style={{ height: "300px", marginTop: "16px" }}>
+            {/* Panel derecho: mapa */}
+            <div className="sgc-cc2-map">
               <iframe
                 title="Ubicación SGC Abogados"
                 src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
                 width="100%" height="100%"
-                style={{ border: 0, display: "block" }}
+                style={{ border: 0, display: "block", minHeight: "460px" }}
                 allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

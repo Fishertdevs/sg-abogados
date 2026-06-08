@@ -990,13 +990,13 @@ export default function Home() {
           <div style={{ background: "#ffffff", borderRadius: "16px", boxShadow: "0 10px 56px rgba(0,0,0,0.26)", overflow: "hidden" }}>
 
             {/* Cabecera */}
-            <div className="sgc-cc2-head" style={{ padding: "32px 32px 20px" }}>
+            <div className="sgc-cc2-head" style={{ padding: "24px 32px 14px", textAlign: "center" }}>
               <h2 className="sgc-cc2-title" style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "2.4rem", fontWeight: 700, color: TEXT,
                 lineHeight: 1.1, marginBottom: "8px",
               }}>Contáctenos</h2>
-              <div style={{ width: "40px", height: "2px", background: CAFE, marginBottom: "10px" }} />
+              <div style={{ width: "40px", height: "2px", background: CAFE, margin: "0 auto 10px" }} />
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
                 color: "rgba(0,0,0,0.50)", fontStyle: "italic", lineHeight: 1.45,
@@ -1006,7 +1006,7 @@ export default function Home() {
             <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
 
             {/* Ítems de contacto */}
-            <div className="sgc-cc2-wrap" style={{ padding: "24px 32px 0", display: "flex", flexDirection: "column", gap: "0" }}>
+            <div className="sgc-cc2-wrap" style={{ padding: "12px 32px 0", display: "flex", flexDirection: "column", gap: "0" }}>
 
               {[
                 {
@@ -1049,10 +1049,10 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i}>
                   {i > 0 && <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0" }} />}
-                  <div style={{ padding: "10px 0", textAlign: "center" }}>
+                  <div style={{ padding: "7px 0", textAlign: "left" }}>
 
                     {/* Label */}
-                    <div className="flex items-center justify-center gap-2" style={{ marginBottom: "4px" }}>
+                    <div className="flex items-center gap-2" style={{ marginBottom: "4px" }}>
                       {item.Icon && (
                         <div style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}><item.Icon /></div>
                       )}
@@ -1083,7 +1083,7 @@ export default function Home() {
                     {item.link?.text && (
                       <a href={item.link.href} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center gap-1 justify-center"
+                        className="inline-flex items-center gap-1"
                         style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "3px" }}>
                         {item.link.text}
                         <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>

@@ -1006,7 +1006,7 @@ export default function Home() {
             <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
 
             {/* Ítems de contacto */}
-            <div className="sgc-cc2-wrap" style={{ padding: "12px 32px 0", display: "flex", flexDirection: "column", gap: "0" }}>
+            <div className="sgc-cc2-wrap" style={{ padding: "6px 24px 0", display: "flex", flexDirection: "column", gap: "0" }}>
 
               {[
                 {
@@ -1049,10 +1049,10 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i}>
                   {i > 0 && <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0" }} />}
-                  <div style={{ padding: "7px 0", textAlign: "left" }}>
+                  <div style={{ padding: "5px 0" }}>
 
-                    {/* Label */}
-                    <div className="flex items-center gap-2" style={{ marginBottom: "4px" }}>
+                    {/* Label — izquierda */}
+                    <div className="flex items-center gap-2" style={{ marginBottom: "2px" }}>
                       {item.Icon && (
                         <div style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}><item.Icon /></div>
                       )}
@@ -1065,34 +1065,34 @@ export default function Home() {
                       <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.55)" }}>{item.label}</span>
                     </div>
 
-                    {/* Valor principal */}
+                    {/* Valor principal — centrado */}
                     {item.value && (
                       <a href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        style={{ textDecoration: "none" }}>
+                        style={{ textDecoration: "none", display: "block", textAlign: "center" }}>
                         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 500, color: "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>{item.value}</p>
                       </a>
                     )}
 
-                    {/* Detalle */}
+                    {/* Detalle — centrado */}
                     {item.detail && (
-                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.80)", marginTop: "1px" }}>{item.detail}</p>
+                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.80)", marginTop: "1px", textAlign: "center" }}>{item.detail}</p>
                     )}
 
-                    {/* Link textual */}
+                    {/* Link textual — centrado */}
                     {item.link?.text && (
                       <a href={item.link.href} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center gap-1"
-                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "3px" }}>
+                        className="inline-flex items-center gap-1 w-full justify-center"
+                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "2px" }}>
                         {item.link.text}
                         <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
                       </a>
                     )}
 
-                    {/* Horarios */}
+                    {/* Horarios — centrado */}
                     {"hours" in item && item.hours && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "2px", marginTop: "2px" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "1px", marginTop: "2px", textAlign: "center" }}>
                         {item.hours.map(({ day, h }) => (
                           <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>
                             {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.40)" : "rgba(0,0,0,0.90)", fontWeight: 500 }}>{h}</span>
@@ -1106,7 +1106,7 @@ export default function Home() {
             </div>
 
             {/* Mapa — ancho completo */}
-            <div className="sgc-cc2-map" style={{ height: "300px", marginTop: "16px" }}>
+            <div className="sgc-cc2-map" style={{ height: "260px", marginTop: "6px" }}>
               <iframe
                 title="Ubicación SGC Abogados"
                 src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"

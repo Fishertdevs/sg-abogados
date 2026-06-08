@@ -976,13 +976,13 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "60px", paddingBottom: "180px" }}>
+        <div className="max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "20px", paddingBottom: "40px" }}>
           <style>{`
             @media (max-width: 640px) {
               .sgc-cc2-map { height: 220px !important; }
-              .sgc-cc2-wrap { padding: 24px 20px 0 !important; }
+              .sgc-cc2-wrap { padding: 6px 16px 0 !important; }
               .sgc-cc2-title { font-size: 1.9rem !important; }
-              .sgc-cc2-head { padding: 22px 20px 16px !important; }
+              .sgc-cc2-head { padding: 16px 16px 10px !important; }
             }
           `}</style>
 

@@ -976,111 +976,129 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "80px", paddingBottom: "180px" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-8" style={{ paddingTop: "72px", paddingBottom: "180px" }}>
+          <style>{`
+            @media (max-width: 640px) {
+              .sgc-ccard-title    { font-size: 2.0rem !important; }
+              .sgc-ccard-sub      { font-size: 0.90rem !important; }
+              .sgc-ccard-body     { padding: 28px 20px 0 !important; flex-direction: column !important; gap: 20px !important; }
+              .sgc-ccard-col      { border-right: none !important; padding-right: 0 !important; }
+              .sgc-ccard-col + .sgc-ccard-col { padding-left: 0 !important; border-top: 1px solid rgba(0,0,0,0.07); padding-top: 20px !important; }
+              .sgc-ccard-lbl      { font-size: 0.50rem !important; }
+              .sgc-ccard-place    { font-size: 0.95rem !important; }
+              .sgc-ccard-detail   { font-size: 0.80rem !important; }
+              .sgc-ccard-maplink  { font-size: 0.68rem !important; }
+              .sgc-ccard-map      { height: 240px !important; }
+              .sgc-ccard-header   { padding: 28px 20px 20px !important; }
+            }
+          `}</style>
 
-          {/* CTA encabezado */}
-          <div className="flex flex-col items-center text-center" style={{ marginBottom: "56px" }}>
-            <h2 className="sgc-contact-section-h2" style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
-              color: "#ffffff", fontWeight: 500, fontStyle: "italic",
-              lineHeight: 1.22, marginBottom: "20px",
-            }}>
-              Estamos para ayudarle.
-            </h2>
-            <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.45)" }} />
-          </div>
+          {/* Card blanca principal */}
+          <div style={{ background: "#ffffff", borderRadius: "20px", boxShadow: "0 12px 64px rgba(0,0,0,0.28)", overflow: "hidden" }}>
 
-          {/* Card dos columnas */}
-          <div className="max-w-4xl mx-auto">
-            <style>{`
-              @media (max-width: 640px) {
-                .sgc-contact-section-h2 { font-size: 1.45rem !important; white-space: nowrap !important; }
-                .sgc-contact-panel  { padding: 20px 18px !important; width: 100% !important; flex-shrink: unset !important; }
-                .sgc-contact-title  { font-size: 1.2rem !important; margin-bottom: 6px !important; }
-                .sgc-contact-hours  { font-size: 0.72rem !important; }
-                .sgc-contact-info   { font-size: 0.72rem !important; line-height: 1.4 !important; }
-                .sgc-contact-gap    { gap: 7px !important; }
-                .sgc-contact-row    { gap: 8px !important; align-items: flex-start !important; }
-                .sgc-map-wrap       { min-height: 240px !important; flex: none !important; height: 240px !important; }
-              }
-            `}</style>
-            <div className="flex flex-col lg:flex-row"
-              style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
-
-              {/* ARRIBA/IZQUIERDA — panel café oscuro */}
-              <div className="sgc-contact-panel" style={{
-                background: CAFE2, padding: "52px 40px",
-                width: "300px", flexShrink: 0, color: "#ffffff",
-              }}>
-                <h3 className="sgc-contact-title" style={{
-                  fontFamily: "'Playfair Display', serif", fontStyle: "italic",
-                  fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
-                  textAlign: "center",
-                }}>Contáctenos</h3>
-                <p className="sgc-contact-label" style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
-                  letterSpacing: "0.16em", color: "rgba(255,255,255,0.60)",
-                  marginBottom: "8px", textAlign: "center",
-                }}>HORARIOS DE ATENCIÓN</p>
-                <div className="sgc-contact-divs" style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 12px" }} />
-                <div className="sgc-contact-divs" style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "center", textAlign: "center", marginBottom: "16px" }}>
-                  {[
-                    { day: "Lun – Vie", hours: "8:00 am – 6:00 pm" },
-                    { day: "Sábados",   hours: "9:00 am – 1:00 pm" },
-                    { day: "Domingos",  hours: "Cerrado" },
-                  ].map(({ day, hours }) => (
-                    <p key={day} className="sgc-contact-hours" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.4 }}>
-                      <span style={{ color: "rgba(255,255,255,0.50)", fontSize: "0.78rem" }}>{day}</span>
-                      {"  "}
-                      {hours}
-                    </p>
-                  ))}
-                </div>
-                <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 24px" }} />
-
-                <div className="sgc-contact-gap flex flex-col gap-3">
-                  {[
-                    { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia", href: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia", external: true  },
-                    { Icon: SvgEmail,    text: "contacto@sgabogados.co",  href: "mailto:contacto@sgabogados.co", external: false },
-                    { Icon: SvgPhone,    text: "+57 (319) 651-9645",      href: "tel:+573196519645",            external: false },
-                    { Icon: SvgWhatsApp, text: "+57 (319) 651-9645",      href: WA_HREF,                        external: true  },
-                  ].map(({ Icon, text, href, external }, i) => (
-                    <a key={i} href={href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                      style={{ textDecoration: "none" }}
-                      className="sgc-contact-row flex items-start gap-4 group"
-                    >
-                      <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0, transition: "color 0.2s" }}
-                        className="sgc-contact-icon group-hover:text-white"><Icon /></div>
-                      <p className="group-hover:text-white sgc-contact-info" style={{
-                        fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                        color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",
-                        transition: "color 0.2s",
-                      }}>{text}</p>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* DERECHA — mapa interactivo */}
-              <div className="sgc-map-wrap" style={{ flex: 1, minHeight: "420px", overflow: "hidden" }}>
-                <iframe
-                  title="Ubicación SGC Abogados"
-                  src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, display: "block", minHeight: "420px" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
+            {/* Cabecera */}
+            <div className="sgc-ccard-header flex flex-col items-center text-center" style={{ padding: "48px 40px 36px" }}>
+              <h2 className="sgc-ccard-title" style={{
+                fontFamily: "'Playfair Display', serif", fontStyle: "italic",
+                fontSize: "2.6rem", fontWeight: 500, color: TEXT,
+                marginBottom: "10px", lineHeight: 1.15,
+              }}>Contáctenos</h2>
+              <div style={{ width: "40px", height: "2px", background: CAFE, marginBottom: "14px" }} />
+              <p className="sgc-ccard-sub" style={{
+                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem",
+                color: "rgba(0,0,0,0.55)", fontStyle: "italic", lineHeight: 1.5,
+              }}>Estamos para ayudarle. Escríbanos y le responderemos pronto.</p>
             </div>
-          </div>
 
+            {/* Separador */}
+            <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0 32px" }} />
+
+            {/* Info: dos columnas */}
+            <div className="sgc-ccard-body flex flex-row" style={{ padding: "36px 40px 0", gap: "0" }}>
+
+              {/* Columna izquierda — ubicación + contacto */}
+              <div className="sgc-ccard-col flex flex-col gap-5" style={{ flex: 1, paddingRight: "36px", borderRight: "1px solid rgba(0,0,0,0.07)" }}>
+
+                {/* Ubicación */}
+                <div>
+                  <div className="flex items-center gap-2" style={{ marginBottom: "6px" }}>
+                    <div style={{ color: CAFE, flexShrink: 0 }}><SvgLocation /></div>
+                    <span className="sgc-ccard-lbl" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.54rem", letterSpacing: "0.16em", color: "rgba(0,0,0,0.40)", textTransform: "uppercase" }}>Ubicación</span>
+                  </div>
+                  <a href="https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                    <p className="sgc-ccard-place" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", fontWeight: 600, color: TEXT, marginBottom: "2px" }}>Cl. 12 B #8-23, Oficina 421</p>
+                    <p className="sgc-ccard-detail" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.4 }}>Bogotá, Colombia</p>
+                    <span className="sgc-ccard-maplink flex items-center gap-1" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.54rem", letterSpacing: "0.12em", color: CAFE, marginTop: "4px", textTransform: "uppercase" }}>
+                      Ver en Maps
+                      <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+                    </span>
+                  </a>
+                </div>
+
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.06)" }} />
+
+                {/* Email */}
+                <div>
+                  <div className="flex items-center gap-2" style={{ marginBottom: "4px" }}>
+                    <div style={{ color: CAFE, flexShrink: 0 }}><SvgEmail /></div>
+                    <span className="sgc-ccard-lbl" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.54rem", letterSpacing: "0.16em", color: "rgba(0,0,0,0.40)", textTransform: "uppercase" }}>Correo</span>
+                  </div>
+                  <a href="mailto:contacto@sgabogados.co" style={{ textDecoration: "none" }}>
+                    <p className="sgc-ccard-place" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem", color: TEXT }}>contacto@sgabogados.co</p>
+                  </a>
+                </div>
+
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.06)" }} />
+
+                {/* Teléfono & WhatsApp */}
+                <div>
+                  <div className="flex items-center gap-2" style={{ marginBottom: "4px" }}>
+                    <div style={{ color: CAFE, flexShrink: 0 }}><SvgPhone /></div>
+                    <span className="sgc-ccard-lbl" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.54rem", letterSpacing: "0.16em", color: "rgba(0,0,0,0.40)", textTransform: "uppercase" }}>Teléfono / WhatsApp</span>
+                  </div>
+                  <a href="tel:+573196519645" style={{ textDecoration: "none" }}>
+                    <p className="sgc-ccard-place" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem", color: TEXT }}>+57 (319) 651-9645</p>
+                  </a>
+                </div>
+              </div>
+
+              {/* Columna derecha — horarios */}
+              <div className="sgc-ccard-col flex flex-col" style={{ flex: 1, paddingLeft: "36px" }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: "14px" }}>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style={{ color: CAFE, flexShrink: 0 }}>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8"/>
+                    <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
+                  <span className="sgc-ccard-lbl" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.54rem", letterSpacing: "0.16em", color: "rgba(0,0,0,0.40)", textTransform: "uppercase" }}>Horarios de Atención</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                  {[
+                    { day: "Lunes – Viernes", hours: "8:00 am – 6:00 pm" },
+                    { day: "Sábados",          hours: "9:00 am – 1:00 pm" },
+                    { day: "Domingos",         hours: "Cerrado" },
+                  ].map(({ day, hours }) => (
+                    <div key={day} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: "1px dashed rgba(0,0,0,0.08)", paddingBottom: "10px" }}>
+                      <span className="sgc-ccard-detail" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.60rem", letterSpacing: "0.10em", color: "rgba(0,0,0,0.50)", textTransform: "uppercase" }}>{day}</span>
+                      <span className="sgc-ccard-place" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem", color: hours === "Cerrado" ? "rgba(0,0,0,0.35)" : TEXT, fontWeight: hours === "Cerrado" ? 400 : 500 }}>{hours}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mapa — ancho completo */}
+            <div className="sgc-ccard-map" style={{ marginTop: "32px", height: "380px" }}>
+              <iframe
+                title="Ubicación SGC Abogados"
+                src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
+                width="100%" height="100%"
+                style={{ border: 0, display: "block" }}
+                allowFullScreen loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+          </div>
         </div>
       </section>
 

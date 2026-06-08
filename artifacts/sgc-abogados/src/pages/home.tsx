@@ -995,23 +995,17 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <style>{`
               @media (max-width: 640px) {
-                .sgc-contact-panel  { padding: 20px 16px !important; width: 160px !important; min-width: 160px !important; flex-shrink: 0 !important; }
-                .sgc-contact-title  { font-size: 1.0rem !important; margin-bottom: 6px !important; }
-                .sgc-contact-label  { font-size: 0.44rem !important; letter-spacing: 0.10em !important; margin-bottom: 5px !important; }
-                .sgc-contact-divs   { margin-bottom: 10px !important; }
-                .sgc-contact-hours  { font-size: 0.65rem !important; }
-                .sgc-contact-hours span { font-size: 0.58rem !important; }
-                .sgc-contact-info   { font-size: 0.65rem !important; line-height: 1.35 !important; }
-                .sgc-contact-row    { gap: 6px !important; }
-                .sgc-contact-icon   { width: 14px !important; height: 14px !important; margin-top: 1px !important; }
-                .sgc-contact-gap    { gap: 8px !important; }
-                .sgc-map-wrap       { min-height: 200px !important; }
+                .sgc-contact-panel  { padding: 28px 24px !important; width: 100% !important; flex-shrink: unset !important; }
+                .sgc-contact-title  { font-size: 1.35rem !important; }
+                .sgc-contact-hours  { font-size: 0.80rem !important; }
+                .sgc-contact-info   { font-size: 0.80rem !important; }
+                .sgc-map-wrap       { min-height: 260px !important; flex: none !important; height: 260px !important; }
               }
             `}</style>
-            <div className="flex flex-row"
+            <div className="flex flex-col lg:flex-row"
               style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
-              {/* IZQUIERDA — panel café oscuro */}
+              {/* ARRIBA/IZQUIERDA — panel café oscuro */}
               <div className="sgc-contact-panel" style={{
                 background: CAFE2, padding: "52px 40px",
                 width: "300px", flexShrink: 0, color: "#ffffff",
@@ -1099,9 +1093,9 @@ export default function Home() {
       >
         <style>{`
           @media (max-width:640px){
-            .sgc-footer-top { padding: 28px 20px 20px !important; }
-            .sgc-footer-bottom { padding: 12px 20px 88px !important; }
-            .sgc-footer-tagline { font-size: 0.95rem !important; }
+            .sgc-footer-top    { padding: 28px 20px 18px !important; }
+            .sgc-footer-bottom { padding: 10px 20px 18px !important; }
+            .sgc-footer-tagline { font-size: 0.92rem !important; }
             .sgc-footer-link { font-size: 0.58rem !important; letter-spacing: 0.10em !important; }
           }
         `}</style>

@@ -148,12 +148,10 @@ function LegalFooter() {
     >
       <style>{`
         @media (max-width:640px){
-          .sgc-lf-top    { padding: 28px 16px 20px !important; }
+          .sgc-lf-top    { padding: 28px 16px 18px !important; }
           .sgc-lf-bottom { padding: 10px 12px 16px !important; }
           .sgc-lf-tagline { font-size: 0.90rem !important; }
-          .sgc-lf-links-row { flex-direction: column !important; align-items: center !important; gap: 4px !important; }
-          .sgc-lf-link  { font-size: 0.54rem !important; letter-spacing: 0.08em !important; white-space: normal !important; }
-          .sgc-lf-dot   { display: none !important; }
+          .sgc-lf-link  { font-size: 0.52rem !important; letter-spacing: 0.07em !important; }
         }
       `}</style>
       <div style={{ width: "100%", height: "3px", background: BLUE }} />

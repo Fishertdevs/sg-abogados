@@ -968,15 +968,15 @@ export default function Home() {
 
         {/* Ola inferior: café → footer oscuro */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "100px" }}>
+          <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "50px" }}>
             <path
-              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              d="M0,50 L0,35 C420,50 580,5 720,22 C860,37 1100,0 1280,27 C1360,39 1420,25 1440,30 L1440,50 Z"
               fill="#ffffff" />
           </svg>
         </div>
 
-        <div className="max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "20px", paddingBottom: "40px" }}>
+        <div className="max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "20px", paddingBottom: "60px" }}>
           <style>{`
             @media (max-width: 640px) {
               .sgc-cc2-map { height: 220px !important; }

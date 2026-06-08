@@ -314,99 +314,122 @@ function FaqSection() {
   const faq = FAQS[idx];
 
   return (
-    <section className="relative overflow-hidden" style={{
-      background: BG,
-      backgroundImage: `url(${faqImg})`,
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "right center",
-    }}>
-      {/* Gradiente lateral suave — solo cubre la zona del texto, sin afectar la imagen */}
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
+    <section className="sgc-faq-section relative" style={{ background: BG }}>
+      <style>{`
+        @media (max-width: 640px) {
+          .sgc-faq-section {
+            background-image: url('${faqImg}');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+          }
+          .sgc-faq-overlay { display: block !important; }
+          .sgc-faq-img-col { display: none !important; }
+          .sgc-faq-card { padding: 10px 14px 8px !important; margin-bottom: 8px !important; border-radius: 10px !important; }
+          .sgc-faq-title { font-size: 1.45rem !important; white-space: nowrap !important; }
+          .sgc-faq-q { font-size: 0.58rem !important; margin-bottom: 5px !important; }
+          .sgc-faq-deco { margin-bottom: 5px !important; }
+          .sgc-faq-a { font-size: 0.85rem !important; line-height: 1.45 !important; }
+        }
+      `}</style>
 
-      <div className="relative max-w-2xl mx-auto px-6 md:px-14" style={{ paddingTop: "36px", paddingBottom: "80px", zIndex: 1 }}>
+      {/* Overlay gradiente — visible solo en móvil */}
+      <div className="sgc-faq-overlay" style={{ display: "none", position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
 
-        {/* Label + título + subtítulo */}
-        <div className="flex flex-col items-center text-center" style={{ marginBottom: "16px" }}>
-          <span style={{
-            fontFamily: "'Cinzel', serif",
-            fontSize: "clamp(0.65rem, 2vw, 0.82rem)",
-            letterSpacing: "0.14em", color: CAFE, marginBottom: "10px",
-            fontWeight: 600, display: "block",
-          }}>PREGUNTAS FRECUENTES</span>
+      <div className="relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(1.45rem, 4vw, 2.8rem)",
-            color: TEXT, fontWeight: 500, fontStyle: "italic",
-            lineHeight: 1.15, marginBottom: "8px",
-            whiteSpace: "nowrap",
-          }}>Resolvemos sus dudas</h2>
+          {/* ── LEFT: label + título + carousel de FAQs ── */}
+          <div className="flex flex-col items-center text-center">
 
-          <p style={{
-            fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-            color: TEXT, lineHeight: 1.6, marginBottom: "14px",
-          }}>
-            Las respuestas a las preguntas más comunes de nuestros clientes.
-          </p>
+            <span style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
+              letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
+              fontWeight: 600, display: "block",
+            }}>PREGUNTAS FRECUENTES</span>
 
-          <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "14px" }} />
+            <h2 className="sgc-faq-title" style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
+              color: TEXT, fontWeight: 500, fontStyle: "italic",
+              lineHeight: 1.22, marginBottom: "12px",
+            }}>Resolvemos sus dudas</h2>
+
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
+              color: TEXT, lineHeight: 1.7, marginBottom: "40px",
+            }}>
+              Las respuestas a las preguntas más comunes de nuestros clientes.
+            </p>
+
+            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
+
+            {/* Card contenedor — pregunta + respuesta */}
+            <div className="sgc-faq-card" style={{
+              width: "100%",
+              background: "#f0f4fa",
+              borderRadius: "16px",
+              border: "1px solid rgba(26,61,124,0.12)",
+              padding: "26px 28px 22px",
+              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+              marginBottom: "20px",
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.div key={idx}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.38 }}
+                  className="flex flex-col items-center w-full">
+
+                  <p className="sgc-faq-q" style={{
+                    fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
+                    letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
+                    textAlign: "center", marginBottom: "14px", textTransform: "uppercase",
+                  }}>{faq.q}</p>
+
+                  <div className="sgc-faq-deco" style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "14px" }}>
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                    <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
+                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                  </div>
+
+                  <p className="sgc-faq-a" style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.18rem",
+                    color: TEXT, lineHeight: 1.88, textAlign: "center",
+                  }}>{faq.a}</p>
+
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Indicadores de posición */}
+            <div className="flex items-center gap-3">
+              {FAQS.map((_, i) => (
+                <div key={i}
+                  style={{
+                    width: i === idx ? "28px" : "8px",
+                    height: "8px",
+                    borderRadius: "4px",
+                    background: i === idx ? CAFE : `${CAFE}30`,
+                    transition: "all 0.35s ease",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT: imagen ── */}
+          <div className="sgc-faq-img-col relative flex justify-end">
+            <div style={{ position: "relative", width: "90%", maxWidth: "450px", aspectRatio: "3/4" }}>
+              <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
+                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
+              />
+            </div>
+          </div>
+
         </div>
-
-        {/* Card contenedor — pregunta + respuesta */}
-        <div style={{
-          width: "100%",
-          background: "rgba(240,244,250,0.93)",
-          borderRadius: "10px",
-          border: "1px solid rgba(26,61,124,0.12)",
-          padding: "10px 14px 8px",
-          boxShadow: "0 4px 16px rgba(26,61,124,0.07)",
-          marginBottom: "8px",
-        }}>
-          <AnimatePresence mode="wait">
-            <motion.div key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.38 }}
-              className="flex flex-col items-center w-full">
-
-              <p style={{
-                fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
-                letterSpacing: "0.09em", color: CAFE, fontWeight: 700,
-                textAlign: "center", marginBottom: "5px", textTransform: "uppercase",
-              }}>{faq.q}</p>
-
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center", marginBottom: "5px" }}>
-                <div style={{ width: "18px", height: "1px", background: CAFE }} />
-                <div style={{ width: "3px", height: "3px", background: CAFE, transform: "rotate(45deg)" }} />
-                <div style={{ width: "18px", height: "1px", background: CAFE }} />
-              </div>
-
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "0.85rem",
-                color: TEXT, lineHeight: 1.45, textAlign: "center",
-              }}>{faq.a}</p>
-
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Indicadores de posición */}
-        <div className="flex items-center justify-center gap-3">
-          {FAQS.map((_, i) => (
-            <div key={i}
-              style={{
-                width: i === idx ? "24px" : "7px",
-                height: "7px",
-                borderRadius: "4px",
-                background: i === idx ? CAFE : `${CAFE}30`,
-                transition: "all 0.35s ease",
-              }}
-            />
-          ))}
-        </div>
-
       </div>
       {/* Ola inferior: blanco → café */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
@@ -966,21 +989,30 @@ export default function Home() {
 
         {/* Ola inferior: café → footer oscuro */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
-          <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "50px" }}>
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "100px" }}>
             <path
-              d="M0,50 L0,35 C420,50 580,5 720,22 C860,37 1100,0 1280,27 C1360,39 1420,25 1440,30 L1440,50 Z"
+              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
               fill="#ffffff" />
           </svg>
         </div>
 
-        <div className="max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "20px", paddingBottom: "60px" }}>
+        <div className="sgc-cc2-outer max-w-lg mx-auto px-4 sm:px-6" style={{ paddingTop: "60px", paddingBottom: "180px" }}>
           <style>{`
             @media (max-width: 640px) {
-              .sgc-cc2-map { height: 220px !important; }
+              .sgc-cc2-outer { padding-top: 20px !important; padding-bottom: 60px !important; }
+              .sgc-cc2-head { padding: 16px 16px 10px !important; text-align: center !important; }
+              .sgc-cc2-divider { margin: 0 auto 10px !important; }
               .sgc-cc2-wrap { padding: 6px 16px 0 !important; }
               .sgc-cc2-title { font-size: 1.9rem !important; }
-              .sgc-cc2-head { padding: 16px 16px 10px !important; }
+              .sgc-cc2-map { height: 220px !important; margin-top: 6px !important; }
+              .sgc-cc2-item { padding: 5px 0 !important; }
+              .sgc-cc2-value-link { display: block !important; text-align: center !important; }
+              .sgc-cc2-value { font-size: 0.95rem !important; font-weight: 500 !important; color: rgba(0,0,0,0.90) !important; }
+              .sgc-cc2-detail { text-align: center !important; color: rgba(0,0,0,0.80) !important; }
+              .sgc-cc2-maplink { display: inline-flex !important; width: 100% !important; justify-content: center !important; }
+              .sgc-cc2-hours { text-align: center !important; gap: 1px !important; }
+              .sgc-cc2-hour-p { color: rgba(0,0,0,0.90) !important; }
             }
           `}</style>
 
@@ -988,13 +1020,13 @@ export default function Home() {
           <div style={{ background: "#ffffff", borderRadius: "16px", boxShadow: "0 10px 56px rgba(0,0,0,0.26)", overflow: "hidden" }}>
 
             {/* Cabecera */}
-            <div className="sgc-cc2-head" style={{ padding: "24px 32px 14px", textAlign: "center" }}>
+            <div className="sgc-cc2-head" style={{ padding: "32px 32px 20px" }}>
               <h2 className="sgc-cc2-title" style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "2.4rem", fontWeight: 700, color: TEXT,
                 lineHeight: 1.1, marginBottom: "8px",
               }}>Contáctenos</h2>
-              <div style={{ width: "40px", height: "2px", background: CAFE, margin: "0 auto 10px" }} />
+              <div className="sgc-cc2-divider" style={{ width: "40px", height: "2px", background: CAFE, marginBottom: "10px" }} />
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
                 color: "rgba(0,0,0,0.50)", fontStyle: "italic", lineHeight: 1.45,
@@ -1004,7 +1036,7 @@ export default function Home() {
             <div style={{ height: "1px", background: "rgba(0,0,0,0.07)" }} />
 
             {/* Ítems de contacto */}
-            <div className="sgc-cc2-wrap" style={{ padding: "6px 24px 0", display: "flex", flexDirection: "column", gap: "0" }}>
+            <div className="sgc-cc2-wrap" style={{ padding: "24px 32px 0", display: "flex", flexDirection: "column", gap: "0" }}>
 
               {[
                 {
@@ -1047,10 +1079,10 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i}>
                   {i > 0 && <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0" }} />}
-                  <div style={{ padding: "5px 0" }}>
+                  <div className="sgc-cc2-item" style={{ padding: "16px 0" }}>
 
-                    {/* Label — izquierda */}
-                    <div className="flex items-center gap-2" style={{ marginBottom: "2px" }}>
+                    {/* Label */}
+                    <div className="flex items-center gap-2" style={{ marginBottom: "6px" }}>
                       {item.Icon && (
                         <div style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}><item.Icon /></div>
                       )}
@@ -1060,40 +1092,40 @@ export default function Home() {
                           <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
                         </svg>
                       )}
-                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.55)" }}>{item.label}</span>
+                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.42)" }}>{item.label}</span>
                     </div>
 
-                    {/* Valor principal — centrado */}
+                    {/* Valor principal */}
                     {item.value && (
-                      <a href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
+                      <a className="sgc-cc2-value-link" href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        style={{ textDecoration: "none", display: "block", textAlign: "center" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 500, color: "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>{item.value}</p>
+                        style={{ textDecoration: "none" }}>
+                        <p className="sgc-cc2-value" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 700, color: CAFE2, lineHeight: 1.3 }}>{item.value}</p>
                       </a>
                     )}
 
-                    {/* Detalle — centrado */}
+                    {/* Detalle */}
                     {item.detail && (
-                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.80)", marginTop: "1px", textAlign: "center" }}>{item.detail}</p>
+                      <p className="sgc-cc2-detail" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.50)", marginTop: "2px" }}>{item.detail}</p>
                     )}
 
-                    {/* Link textual — centrado */}
+                    {/* Link textual */}
                     {item.link?.text && (
                       <a href={item.link.href} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center gap-1 w-full justify-center"
-                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "2px" }}>
+                        className="sgc-cc2-maplink flex items-center gap-1"
+                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "4px" }}>
                         {item.link.text}
                         <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
                       </a>
                     )}
 
-                    {/* Horarios — centrado */}
+                    {/* Horarios */}
                     {"hours" in item && item.hours && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "1px", marginTop: "2px", textAlign: "center" }}>
+                      <div className="sgc-cc2-hours" style={{ display: "flex", flexDirection: "column", gap: "3px", marginTop: "2px" }}>
                         {item.hours.map(({ day, h }) => (
-                          <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>
-                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.40)" : "rgba(0,0,0,0.90)", fontWeight: 500 }}>{h}</span>
+                          <p key={day} className="sgc-cc2-hour-p" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>
+                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.30)" : TEXT, fontWeight: 500 }}>{h}</span>
                           </p>
                         ))}
                       </div>
@@ -1104,7 +1136,7 @@ export default function Home() {
             </div>
 
             {/* Mapa — ancho completo */}
-            <div className="sgc-cc2-map" style={{ height: "260px", marginTop: "6px" }}>
+            <div className="sgc-cc2-map" style={{ height: "300px", marginTop: "16px" }}>
               <iframe
                 title="Ubicación SGC Abogados"
                 src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"

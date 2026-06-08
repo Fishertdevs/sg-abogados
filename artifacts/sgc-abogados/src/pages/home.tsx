@@ -980,7 +980,7 @@ export default function Home() {
 
           {/* CTA encabezado */}
           <div className="flex flex-col items-center text-center" style={{ marginBottom: "56px" }}>
-            <h2 style={{
+            <h2 className="sgc-contact-section-h2" style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
@@ -995,11 +995,14 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <style>{`
               @media (max-width: 640px) {
-                .sgc-contact-panel  { padding: 28px 24px !important; width: 100% !important; flex-shrink: unset !important; }
-                .sgc-contact-title  { font-size: 1.35rem !important; }
-                .sgc-contact-hours  { font-size: 0.80rem !important; }
-                .sgc-contact-info   { font-size: 0.80rem !important; }
-                .sgc-map-wrap       { min-height: 260px !important; flex: none !important; height: 260px !important; }
+                .sgc-contact-section-h2 { font-size: 1.45rem !important; white-space: nowrap !important; }
+                .sgc-contact-panel  { padding: 20px 18px !important; width: 100% !important; flex-shrink: unset !important; }
+                .sgc-contact-title  { font-size: 1.2rem !important; margin-bottom: 6px !important; }
+                .sgc-contact-hours  { font-size: 0.72rem !important; }
+                .sgc-contact-info   { font-size: 0.72rem !important; line-height: 1.4 !important; }
+                .sgc-contact-gap    { gap: 7px !important; }
+                .sgc-contact-row    { gap: 8px !important; align-items: flex-start !important; }
+                .sgc-map-wrap       { min-height: 240px !important; flex: none !important; height: 240px !important; }
               }
             `}</style>
             <div className="flex flex-col lg:flex-row"

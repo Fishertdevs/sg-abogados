@@ -151,7 +151,7 @@ function LegalFooter() {
           .sgc-lf-top    { padding: 28px 16px 18px !important; }
           .sgc-lf-bottom { padding: 10px 12px 16px !important; }
           .sgc-lf-tagline { font-size: 0.90rem !important; }
-          .sgc-lf-link  { font-size: 0.52rem !important; letter-spacing: 0.07em !important; }
+          .sgc-lf-link  { font-size: 0.58rem !important; letter-spacing: 0.10em !important; }
         }
       `}</style>
       <div style={{ width: "100%", height: "3px", background: BLUE }} />

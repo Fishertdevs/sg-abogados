@@ -1070,7 +1070,7 @@ export default function Home() {
                       <a href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
                         style={{ textDecoration: "none" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 700, color: CAFE2, lineHeight: 1.3 }}>{item.value}</p>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 500, color: "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>{item.value}</p>
                       </a>
                     )}
 

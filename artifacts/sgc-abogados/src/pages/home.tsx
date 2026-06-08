@@ -1049,10 +1049,10 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i}>
                   {i > 0 && <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", margin: "0" }} />}
-                  <div style={{ padding: "16px 0" }}>
+                  <div style={{ padding: "10px 0", textAlign: "center" }}>
 
                     {/* Label */}
-                    <div className="flex items-center gap-2" style={{ marginBottom: "6px" }}>
+                    <div className="flex items-center justify-center gap-2" style={{ marginBottom: "4px" }}>
                       {item.Icon && (
                         <div style={{ color: CAFE, flexShrink: 0, opacity: 0.85 }}><item.Icon /></div>
                       )}
@@ -1062,7 +1062,7 @@ export default function Home() {
                           <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
                         </svg>
                       )}
-                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.42)" }}>{item.label}</span>
+                      <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.56rem", letterSpacing: "0.06em", color: "rgba(0,0,0,0.55)" }}>{item.label}</span>
                     </div>
 
                     {/* Valor principal */}
@@ -1070,21 +1070,21 @@ export default function Home() {
                       <a href={item.link?.href ?? "#"} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
                         style={{ textDecoration: "none" }}>
-                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 500, color: "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>{item.value}</p>
+                        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", fontWeight: 500, color: "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>{item.value}</p>
                       </a>
                     )}
 
                     {/* Detalle */}
                     {item.detail && (
-                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.50)", marginTop: "2px" }}>{item.detail}</p>
+                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: "rgba(0,0,0,0.80)", marginTop: "1px" }}>{item.detail}</p>
                     )}
 
                     {/* Link textual */}
                     {item.link?.text && (
                       <a href={item.link.href} target={item.external ? "_blank" : undefined}
                         rel={item.external ? "noopener noreferrer" : undefined}
-                        className="flex items-center gap-1"
-                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "4px" }}>
+                        className="inline-flex items-center gap-1 justify-center"
+                        style={{ textDecoration: "none", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.88rem", color: CAFE, fontStyle: "italic", marginTop: "3px" }}>
                         {item.link.text}
                         <svg width="9" height="9" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10M12 2 2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
                       </a>
@@ -1092,10 +1092,10 @@ export default function Home() {
 
                     {/* Horarios */}
                     {"hours" in item && item.hours && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "3px", marginTop: "2px" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "2px", marginTop: "2px" }}>
                         {item.hours.map(({ day, h }) => (
-                          <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>
-                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.30)" : TEXT, fontWeight: 500 }}>{h}</span>
+                          <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.90)", lineHeight: 1.4 }}>
+                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.40)" : "rgba(0,0,0,0.90)", fontWeight: 500 }}>{h}</span>
                           </p>
                         ))}
                       </div>

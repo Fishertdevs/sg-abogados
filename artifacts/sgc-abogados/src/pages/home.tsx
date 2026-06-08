@@ -314,101 +314,99 @@ function FaqSection() {
   const faq = FAQS[idx];
 
   return (
-    <section className="relative" style={{ background: BG }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative overflow-hidden" style={{
+      background: BG,
+      backgroundImage: `url(${faqImg})`,
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "right center",
+    }}>
+      {/* Overlay semitransparente para legibilidad */}
+      <div style={{ position: "absolute", inset: 0, background: "rgba(245,242,235,0.88)", pointerEvents: "none" }} />
 
-          {/* ── LEFT: label + título + carousel de FAQs ── */}
-          <div className="flex flex-col items-center text-center">
+      <div className="relative max-w-2xl mx-auto px-6 md:px-14" style={{ paddingTop: "36px", paddingBottom: "80px", zIndex: 1 }}>
 
-            <span style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
-              letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
-              fontWeight: 600, display: "block",
-            }}>PREGUNTAS FRECUENTES</span>
+        {/* Label + título + subtítulo */}
+        <div className="flex flex-col items-center text-center" style={{ marginBottom: "16px" }}>
+          <span style={{
+            fontFamily: "'Cinzel', serif",
+            fontSize: "clamp(0.65rem, 2vw, 0.82rem)",
+            letterSpacing: "0.14em", color: CAFE, marginBottom: "10px",
+            fontWeight: 600, display: "block",
+          }}>PREGUNTAS FRECUENTES</span>
 
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
-              lineHeight: 1.22, marginBottom: "12px",
-            }}>Resolvemos sus dudas</h2>
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(1.45rem, 4vw, 2.8rem)",
+            color: TEXT, fontWeight: 500, fontStyle: "italic",
+            lineHeight: 1.15, marginBottom: "8px",
+            whiteSpace: "nowrap",
+          }}>Resolvemos sus dudas</h2>
 
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
-              color: TEXT, lineHeight: 1.7, marginBottom: "40px",
-            }}>
-              Las respuestas a las preguntas más comunes de nuestros clientes.
-            </p>
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+            color: TEXT, lineHeight: 1.6, marginBottom: "14px",
+          }}>
+            Las respuestas a las preguntas más comunes de nuestros clientes.
+          </p>
 
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
-
-            {/* Card contenedor — pregunta + respuesta */}
-            <div style={{
-              width: "100%",
-              background: "#f0f4fa",
-              borderRadius: "16px",
-              border: "1px solid rgba(26,61,124,0.12)",
-              padding: "26px 28px 22px",
-              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
-              marginBottom: "20px",
-            }}>
-              <AnimatePresence mode="wait">
-                <motion.div key={idx}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.38 }}
-                  className="flex flex-col items-center w-full">
-
-                  <p style={{
-                    fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
-                    letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
-                    textAlign: "center", marginBottom: "14px", textTransform: "uppercase",
-                  }}>{faq.q}</p>
-
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "14px" }}>
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                    <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                  </div>
-
-                  <p style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.18rem",
-                    color: TEXT, lineHeight: 1.88, textAlign: "center",
-                  }}>{faq.a}</p>
-
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Indicadores de posición — solo visuales, sin controles */}
-            <div className="flex items-center gap-3">
-              {FAQS.map((_, i) => (
-                <div key={i}
-                  style={{
-                    width: i === idx ? "28px" : "8px",
-                    height: "8px",
-                    borderRadius: "4px",
-                    background: i === idx ? CAFE : `${CAFE}30`,
-                    transition: "all 0.35s ease",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* ── RIGHT: nueva imagen ── */}
-          <div className="relative flex justify-end">
-            <div style={{ position: "relative", width: "90%", maxWidth: "450px", aspectRatio: "3/4" }}>
-              <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
-                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
-              />
-            </div>
-          </div>
-
+          <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "14px" }} />
         </div>
+
+        {/* Card contenedor — pregunta + respuesta */}
+        <div style={{
+          width: "100%",
+          background: "rgba(240,244,250,0.92)",
+          borderRadius: "14px",
+          border: "1px solid rgba(26,61,124,0.12)",
+          padding: "16px 20px 14px",
+          boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+          marginBottom: "14px",
+        }}>
+          <AnimatePresence mode="wait">
+            <motion.div key={idx}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.38 }}
+              className="flex flex-col items-center w-full">
+
+              <p style={{
+                fontFamily: "'Cinzel', serif", fontSize: "0.66rem",
+                letterSpacing: "0.10em", color: CAFE, fontWeight: 700,
+                textAlign: "center", marginBottom: "8px", textTransform: "uppercase",
+              }}>{faq.q}</p>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", justifyContent: "center", marginBottom: "8px" }}>
+                <div style={{ width: "22px", height: "1px", background: CAFE }} />
+                <div style={{ width: "4px", height: "4px", background: CAFE, transform: "rotate(45deg)" }} />
+                <div style={{ width: "22px", height: "1px", background: CAFE }} />
+              </div>
+
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
+                color: TEXT, lineHeight: 1.6, textAlign: "center",
+              }}>{faq.a}</p>
+
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Indicadores de posición */}
+        <div className="flex items-center justify-center gap-3">
+          {FAQS.map((_, i) => (
+            <div key={i}
+              style={{
+                width: i === idx ? "24px" : "7px",
+                height: "7px",
+                borderRadius: "4px",
+                background: i === idx ? CAFE : `${CAFE}30`,
+                transition: "all 0.35s ease",
+              }}
+            />
+          ))}
+        </div>
+
       </div>
       {/* Ola inferior: blanco → café */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>

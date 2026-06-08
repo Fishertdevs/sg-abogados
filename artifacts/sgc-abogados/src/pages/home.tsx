@@ -1092,12 +1092,11 @@ export default function Home() {
 
                     {/* Horarios */}
                     {"hours" in item && item.hours && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginTop: "2px" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "3px", marginTop: "2px" }}>
                         {item.hours.map(({ day, h }) => (
-                          <div key={day} className="flex justify-between">
-                            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: "rgba(0,0,0,0.45)" }}>{day}</span>
-                            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem", color: h === "Cerrado" ? "rgba(0,0,0,0.30)" : TEXT, fontWeight: 500 }}>{h}</span>
-                          </div>
+                          <p key={day} style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", color: h === "Cerrado" ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.70)", lineHeight: 1.4 }}>
+                            {day}: <span style={{ color: h === "Cerrado" ? "rgba(0,0,0,0.30)" : TEXT, fontWeight: 500 }}>{h}</span>
+                          </p>
                         ))}
                       </div>
                     )}

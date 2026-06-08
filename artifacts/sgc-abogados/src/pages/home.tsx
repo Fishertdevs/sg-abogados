@@ -995,33 +995,39 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <style>{`
               @media (max-width: 640px) {
-                .sgc-contact-panel { padding: 28px 24px !important; width: 100% !important; }
-                .sgc-contact-title { font-size: 1.3rem !important; }
-                .sgc-contact-hours { font-size: 0.80rem !important; }
-                .sgc-contact-info  { font-size: 0.82rem !important; }
-                .sgc-map-wrap      { min-height: 240px !important; }
+                .sgc-contact-panel  { padding: 20px 16px !important; width: 160px !important; min-width: 160px !important; flex-shrink: 0 !important; }
+                .sgc-contact-title  { font-size: 1.0rem !important; margin-bottom: 6px !important; }
+                .sgc-contact-label  { font-size: 0.44rem !important; letter-spacing: 0.10em !important; margin-bottom: 5px !important; }
+                .sgc-contact-divs   { margin-bottom: 10px !important; }
+                .sgc-contact-hours  { font-size: 0.65rem !important; }
+                .sgc-contact-hours span { font-size: 0.58rem !important; }
+                .sgc-contact-info   { font-size: 0.65rem !important; line-height: 1.35 !important; }
+                .sgc-contact-row    { gap: 6px !important; }
+                .sgc-contact-icon   { width: 14px !important; height: 14px !important; margin-top: 1px !important; }
+                .sgc-contact-gap    { gap: 8px !important; }
+                .sgc-map-wrap       { min-height: 200px !important; }
               }
             `}</style>
-            <div className="flex flex-col lg:flex-row"
+            <div className="flex flex-row"
               style={{ boxShadow: "0 8px 60px rgba(0,0,0,0.30)", overflow: "hidden", borderRadius: "18px" }}>
 
               {/* IZQUIERDA — panel café oscuro */}
               <div className="sgc-contact-panel" style={{
                 background: CAFE2, padding: "52px 40px",
-                width: "min(100%, 300px)", flexShrink: 0, color: "#ffffff",
+                width: "300px", flexShrink: 0, color: "#ffffff",
               }}>
                 <h3 className="sgc-contact-title" style={{
                   fontFamily: "'Playfair Display', serif", fontStyle: "italic",
                   fontSize: "1.75rem", color: "#ffffff", fontWeight: 500, marginBottom: "10px",
                   textAlign: "center",
                 }}>Contáctenos</h3>
-                <p style={{
+                <p className="sgc-contact-label" style={{
                   fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
                   letterSpacing: "0.16em", color: "rgba(255,255,255,0.60)",
                   marginBottom: "8px", textAlign: "center",
                 }}>HORARIOS DE ATENCIÓN</p>
-                <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 12px" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "center", textAlign: "center", marginBottom: "16px" }}>
+                <div className="sgc-contact-divs" style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 12px" }} />
+                <div className="sgc-contact-divs" style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "center", textAlign: "center", marginBottom: "16px" }}>
                   {[
                     { day: "Lun – Vie", hours: "8:00 am – 6:00 pm" },
                     { day: "Sábados",   hours: "9:00 am – 1:00 pm" },
@@ -1036,7 +1042,7 @@ export default function Home() {
                 </div>
                 <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.25)", margin: "0 auto 24px" }} />
 
-                <div className="flex flex-col gap-3">
+                <div className="sgc-contact-gap flex flex-col gap-3">
                   {[
                     { Icon: SvgLocation, text: "Cl 12 B 8-23, Oficina 421\nBogotá, Colombia", href: "https://maps.google.com/?q=Calle+12B+8-23,+Bogot%C3%A1,+Colombia", external: true  },
                     { Icon: SvgEmail,    text: "contacto@sgabogados.co",  href: "mailto:contacto@sgabogados.co", external: false },
@@ -1047,10 +1053,10 @@ export default function Home() {
                       target={external ? "_blank" : undefined}
                       rel={external ? "noopener noreferrer" : undefined}
                       style={{ textDecoration: "none" }}
-                      className="flex items-start gap-4 group"
+                      className="sgc-contact-row flex items-start gap-4 group"
                     >
                       <div style={{ color: "rgba(255,255,255,0.75)", marginTop: "2px", flexShrink: 0, transition: "color 0.2s" }}
-                        className="group-hover:text-white"><Icon /></div>
+                        className="sgc-contact-icon group-hover:text-white"><Icon /></div>
                       <p className="group-hover:text-white sgc-contact-info" style={{
                         fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
                         color: "rgba(255,255,255,0.90)", lineHeight: 1.6, whiteSpace: "pre-line",

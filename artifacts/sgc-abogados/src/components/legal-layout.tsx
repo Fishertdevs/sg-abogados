@@ -148,9 +148,12 @@ function LegalFooter() {
     >
       <style>{`
         @media (max-width:640px){
-          .sgc-lf-top { padding: 28px 20px 20px !important; }
-          .sgc-lf-bottom { padding: 12px 20px !important; }
-          .sgc-lf-tagline { font-size: 0.95rem !important; }
+          .sgc-lf-top    { padding: 28px 16px 20px !important; }
+          .sgc-lf-bottom { padding: 10px 12px 16px !important; }
+          .sgc-lf-tagline { font-size: 0.90rem !important; }
+          .sgc-lf-links-row { flex-direction: column !important; align-items: center !important; gap: 4px !important; }
+          .sgc-lf-link  { font-size: 0.54rem !important; letter-spacing: 0.08em !important; white-space: normal !important; }
+          .sgc-lf-dot   { display: none !important; }
         }
       `}</style>
       <div style={{ width: "100%", height: "3px", background: BLUE }} />
@@ -188,33 +191,35 @@ function LegalFooter() {
       <div style={{ width: "100%", height: "1px", background: "rgba(0,0,0,0.10)" }} />
 
       <div className="sgc-lf-bottom flex flex-col items-center gap-2 px-8 py-6">
-        <div className="flex items-center gap-4 justify-center">
+        <div className="sgc-lf-links-row flex items-center gap-4 justify-center">
           {[
             { label: "Política de Cookies",    to: "/cookies"    },
             { label: "Política de Privacidad", to: "/privacidad" },
           ].map(({ label, to }, i, arr) => (
-            <span key={label} className="flex items-center gap-4">
+            <span key={label} className="flex items-center gap-3">
               <Link href={to}
+                className="sgc-lf-link"
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
-                  textDecoration: "none", whiteSpace: "nowrap",
+                  textDecoration: "none",
                 }}
                 onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
                 onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}
               >{label}</Link>
               {i < arr.length - 1 && (
-                <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
+                <span className="sgc-lf-dot" style={{ color: "rgba(0,0,0,0.25)", fontSize: "0.7rem" }}>·</span>
               )}
             </span>
           ))}
         </div>
         <div className="flex justify-center">
           <Link href="/terminos"
+            className="sgc-lf-link"
             style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "0.68rem", color: "#111111", letterSpacing: "0.14em",
-              textDecoration: "none", whiteSpace: "nowrap",
+              textDecoration: "none",
             }}
             onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#000000")}
             onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "#111111")}

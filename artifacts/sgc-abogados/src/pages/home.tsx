@@ -321,8 +321,8 @@ function FaqSection() {
       backgroundRepeat: "no-repeat",
       backgroundPosition: "right center",
     }}>
-      {/* Overlay semitransparente para legibilidad */}
-      <div style={{ position: "absolute", inset: 0, background: "rgba(245,242,235,0.88)", pointerEvents: "none" }} />
+      {/* Gradiente lateral suave — solo cubre la zona del texto, sin afectar la imagen */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
 
       <div className="relative max-w-2xl mx-auto px-6 md:px-14" style={{ paddingTop: "36px", paddingBottom: "80px", zIndex: 1 }}>
 
@@ -356,36 +356,36 @@ function FaqSection() {
         {/* Card contenedor — pregunta + respuesta */}
         <div style={{
           width: "100%",
-          background: "rgba(240,244,250,0.92)",
-          borderRadius: "14px",
+          background: "rgba(240,244,250,0.93)",
+          borderRadius: "10px",
           border: "1px solid rgba(26,61,124,0.12)",
-          padding: "16px 20px 14px",
-          boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
-          marginBottom: "14px",
+          padding: "10px 14px 8px",
+          boxShadow: "0 4px 16px rgba(26,61,124,0.07)",
+          marginBottom: "8px",
         }}>
           <AnimatePresence mode="wait">
             <motion.div key={idx}
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.38 }}
               className="flex flex-col items-center w-full">
 
               <p style={{
-                fontFamily: "'Cinzel', serif", fontSize: "0.66rem",
-                letterSpacing: "0.10em", color: CAFE, fontWeight: 700,
-                textAlign: "center", marginBottom: "8px", textTransform: "uppercase",
+                fontFamily: "'Cinzel', serif", fontSize: "0.58rem",
+                letterSpacing: "0.09em", color: CAFE, fontWeight: 700,
+                textAlign: "center", marginBottom: "5px", textTransform: "uppercase",
               }}>{faq.q}</p>
 
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", justifyContent: "center", marginBottom: "8px" }}>
-                <div style={{ width: "22px", height: "1px", background: CAFE }} />
-                <div style={{ width: "4px", height: "4px", background: CAFE, transform: "rotate(45deg)" }} />
-                <div style={{ width: "22px", height: "1px", background: CAFE }} />
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center", marginBottom: "5px" }}>
+                <div style={{ width: "18px", height: "1px", background: CAFE }} />
+                <div style={{ width: "3px", height: "3px", background: CAFE, transform: "rotate(45deg)" }} />
+                <div style={{ width: "18px", height: "1px", background: CAFE }} />
               </div>
 
               <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: "1.0rem",
-                color: TEXT, lineHeight: 1.6, textAlign: "center",
+                fontFamily: "'Cormorant Garamond', serif", fontSize: "0.85rem",
+                color: TEXT, lineHeight: 1.45, textAlign: "center",
               }}>{faq.a}</p>
 
             </motion.div>

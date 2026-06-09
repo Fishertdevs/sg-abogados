@@ -1009,17 +1009,17 @@ export default function Home() {
 
         {/* Ola inferior: café → blanco */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-            style={{ display: "block", width: "100%", height: "100px" }}>
+          <svg viewBox="0 0 1440 55" preserveAspectRatio="none"
+            style={{ display: "block", width: "100%", height: "55px" }}>
             <path
-              d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
+              d="M0,55 L0,38 C420,55 580,5 720,25 C860,42 1100,0 1280,30 C1360,43 1420,28 1440,33 L1440,55 Z"
               fill="#ffffff" />
           </svg>
         </div>
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 900px; margin: 0 auto; padding: 100px 40px 180px; }
+          .sgc-cc2-outer      { max-width: 900px; margin: 0 auto; padding: 100px 40px 90px; }
           .sgc-cc2-cta        { text-align: center; margin-bottom: 48px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 290px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
           .sgc-cc2-left       { background: ${CAFE2}; padding: 36px 30px; display: flex; flex-direction: column; }

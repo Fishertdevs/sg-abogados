@@ -1040,7 +1040,8 @@ export default function Home() {
             .sgc-cc2-cta          { display: none !important; }
             .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; padding-bottom: 10px !important; }
             .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
-            .sgc-cc2-map          { height: 220px !important; max-height: 220px !important; overflow: hidden !important; margin: 0 10px !important; border-radius: 8px !important; }
+            .sgc-cc2-map          { height: 220px !important; max-height: 220px !important; overflow: hidden !important; margin: 0 10px !important; border-radius: 8px !important; min-height: 0 !important; }
+            .sgc-cc2-map iframe   { height: 220px !important; max-height: 220px !important; min-height: 0 !important; width: 100% !important; }
             .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
             .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
             .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }

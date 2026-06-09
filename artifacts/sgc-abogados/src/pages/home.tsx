@@ -899,7 +899,26 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="relative overflow-hidden" style={{ background: "#1a3d7c", scrollMarginTop: "90px" }}>
+      <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{ backgroundColor: "#1a3d7c", scrollMarginTop: "90px" }}>
+        <style>{`
+          @media (max-width: 640px) {
+            .sgc-nos-section {
+              background-image: url('${nosotrosImg}');
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+            .sgc-nos-section::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: rgba(26,61,124,0.83);
+              pointer-events: none;
+              z-index: 0;
+            }
+            .sgc-nos-section > * { position: relative; z-index: 1; }
+          }
+        `}</style>
 
         <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 

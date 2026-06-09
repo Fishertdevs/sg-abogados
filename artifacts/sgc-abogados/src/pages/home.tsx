@@ -319,10 +319,19 @@ function FaqSection() {
         @media (max-width: 640px) {
           .sgc-faq-section {
             background-image: url('${faqImg}');
-            background-size: 48%;
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: right bottom;
+            background-position: center center;
           }
+          .sgc-faq-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.82);
+            pointer-events: none;
+            z-index: 0;
+          }
+          .sgc-faq-section > * { position: relative; z-index: 1; }
           .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }
           .sgc-faq-card {
@@ -331,13 +340,12 @@ function FaqSection() {
             border-radius: 10px !important;
             background: rgba(240,244,250,0.97) !important;
           }
-          .sgc-faq-title { font-size: 1.45rem !important; white-space: nowrap !important; }
+          .sgc-faq-title { font-size: 1.45rem !important; text-align: center !important; }
           .sgc-faq-subtitle {
-            font-size: 0.82rem !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
+            font-size: 0.80rem !important;
+            text-align: center !important;
             margin-bottom: 20px !important;
+            white-space: normal !important;
           }
           .sgc-faq-q { font-size: 0.58rem !important; margin-bottom: 5px !important; text-align: center !important; }
           .sgc-faq-deco { margin-bottom: 5px !important; }
@@ -1008,7 +1016,7 @@ export default function Home() {
       <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE }}>
 
         {/* Ola inferior: café → blanco */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+        <div className="sgc-cc2-wave" style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
           <svg viewBox="0 0 1440 55" preserveAspectRatio="none"
             style={{ display: "block", width: "100%", height: "55px" }}>
             <path
@@ -1036,6 +1044,7 @@ export default function Home() {
           .sgc-cc2-maplink    { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; color: rgba(255,255,255,0.60); font-style: italic; text-decoration: none; margin-top: 3px; display: inline-flex; align-items: center; gap: 3px; }
           /* ── mobile ── */
           @media (max-width: 640px) {
+            .sgc-cc2-wave svg      { height: 28px !important; }
             .sgc-cc2-outer        { padding: 20px 16px 20px !important; }
             .sgc-cc2-cta          { display: none !important; }
             .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; padding-bottom: 10px !important; }

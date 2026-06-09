@@ -1036,11 +1036,11 @@ export default function Home() {
           .sgc-cc2-maplink    { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; color: rgba(255,255,255,0.60); font-style: italic; text-decoration: none; margin-top: 3px; display: inline-flex; align-items: center; gap: 3px; }
           /* ── mobile ── */
           @media (max-width: 640px) {
-            .sgc-cc2-outer        { padding: 20px 16px 60px !important; }
+            .sgc-cc2-outer        { padding: 20px 16px 20px !important; }
             .sgc-cc2-cta          { display: none !important; }
             .sgc-cc2-card         { grid-template-columns: 1fr !important; border-radius: 14px !important; padding-bottom: 10px !important; }
             .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
-            .sgc-cc2-map          { height: 110px !important; max-height: 110px !important; overflow: hidden !important; margin: 0 10px !important; border-radius: 8px !important; }
+            .sgc-cc2-map          { height: 220px !important; max-height: 220px !important; overflow: hidden !important; margin: 0 10px !important; border-radius: 8px !important; }
             .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
             .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
             .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }
@@ -1170,7 +1170,7 @@ export default function Home() {
                 title="Ubicación SGC Abogados"
                 src="https://maps.google.com/maps?q=Calle+12B+%238-23,+Bogot%C3%A1,+Colombia&output=embed&z=16"
                 width="100%" height="100%"
-                style={{ border: 0, display: "block", height: "100%", minHeight: "460px" }}
+                style={{ border: 0, display: "block", height: "100%" }}
                 allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

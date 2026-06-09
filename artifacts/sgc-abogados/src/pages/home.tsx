@@ -496,6 +496,19 @@ function TestimoniosSection() {
 
   return (
     <section className="relative" style={{ background: BG }}>
+      <style>{`
+        @media (max-width: 640px) {
+          .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
+          .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }
+          .sgc-test-sub     { font-size: 0.82rem !important; margin-bottom: 20px !important; line-height: 1.55 !important; }
+          .sgc-test-card    { padding: 14px 14px 12px !important; border-radius: 10px !important; margin-bottom: 14px !important; }
+          .sgc-test-quote   { font-size: 0.82rem !important; line-height: 1.65 !important; margin-bottom: 14px !important;
+                              display: -webkit-box !important; -webkit-line-clamp: 5 !important;
+                              -webkit-box-orient: vertical !important; overflow: hidden !important; }
+          .sgc-test-author  { font-size: 0.65rem !important; }
+          .sgc-test-role    { font-size: 0.80rem !important; }
+        }
+      `}</style>
 
       <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-16 md:py-24" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -504,7 +517,7 @@ function TestimoniosSection() {
           <div className="flex flex-col items-center text-center">
 
             {/* Etiqueta */}
-            <span style={{
+            <span className="sgc-test-label" style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
               letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
@@ -512,7 +525,7 @@ function TestimoniosSection() {
             }}>TESTIMONIOS</span>
 
             {/* Título */}
-            <h2 style={{
+            <h2 className="sgc-test-title" style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
               color: TEXT, fontWeight: 500, fontStyle: "italic",
@@ -520,7 +533,7 @@ function TestimoniosSection() {
             }}>Por qué elegirnos</h2>
 
             {/* Subtítulo */}
-            <p style={{
+            <p className="sgc-test-sub" style={{
               fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
               color: TEXT, lineHeight: 1.7, marginBottom: "40px",
             }}>
@@ -531,7 +544,7 @@ function TestimoniosSection() {
             <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
 
             {/* Card contenedor — reseña activa */}
-            <div style={{
+            <div className="sgc-test-card" style={{
               width: "100%",
               background: "#f0f4fa",
               borderRadius: "16px",
@@ -548,7 +561,7 @@ function TestimoniosSection() {
                   transition={{ duration: 0.38 }}
                   className="flex flex-col items-center">
 
-                  <p style={{
+                  <p className="sgc-test-quote" style={{
                     fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
                     color: TEXT, lineHeight: 1.88, marginBottom: "22px",
                     fontStyle: "italic", textAlign: "center",
@@ -561,11 +574,11 @@ function TestimoniosSection() {
                   <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
                     <div style={{ width: "28px", height: "1px", background: CAFE }} />
                     <div style={{ textAlign: "center" }}>
-                      <p style={{
+                      <p className="sgc-test-author" style={{
                         fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
                         color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
                       }}>{t.author}</p>
-                      <p style={{
+                      <p className="sgc-test-role" style={{
                         fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
                         color: TEXT, marginTop: "3px",
                       }}>{t.role}</p>
@@ -626,6 +639,7 @@ function TestimoniosSection() {
 /* ─── Main page ──────────────────────────────────────────── */
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [nosCardIdx, setNosCardIdx] = useState(0);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subRef      = useRef<HTMLParagraphElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
@@ -920,7 +934,8 @@ export default function Home() {
             .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 36px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-content  { align-items: flex-start !important; text-align: left !important; padding-left: 0 !important; padding-right: 0 !important; }
-            .sgc-nos-para     { text-align: left !important; font-size: 0.90rem !important; line-height: 1.7 !important; color: rgba(255,255,255,0.88) !important; }
+            .sgc-nos-para     { display: none !important; }
+            .sgc-nos-cards    { display: block !important; width: 100% !important; }
             .sgc-nos-cta      { align-self: flex-start !important; }
           }
         `}</style>
@@ -991,6 +1006,46 @@ export default function Home() {
                   textAlign: "center",
                 }}>{txt}</p>
               ))}
+
+              {/* Tarjetas móvil — Misión / Visión / Compromiso (ocultas en desktop) */}
+              <div className="sgc-nos-cards" style={{ display: "none", width: "100%", marginBottom: "20px" }}>
+                <AnimatePresence mode="wait">
+                  <motion.div key={nosCardIdx}
+                    initial={{ opacity: 0, x: 32 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -32 }}
+                    transition={{ duration: 0.32 }}
+                    style={{
+                      background: "rgba(255,255,255,0.11)",
+                      border: "1px solid rgba(255,255,255,0.22)",
+                      borderRadius: "14px",
+                      padding: "18px 16px 16px",
+                      marginBottom: "14px",
+                    }}>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.50)", marginBottom: "6px" }}>
+                      {["MISIÓN", "VISIÓN", "COMPROMISO"][nosCardIdx]}
+                    </p>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: "rgba(255,255,255,0.88)", lineHeight: 1.72, textAlign: "left" }}>
+                      {[
+                        "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
+                        "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad.",
+                        "Confíe su caso a profesionales que combinan rigor académico con empatía humana y compromiso personal con la excelencia jurídica.",
+                      ][nosCardIdx]}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+                <div style={{ display: "flex", gap: "8px", justifyContent: "flex-start", alignItems: "center" }}>
+                  {[0, 1, 2].map(i => (
+                    <button key={i} onClick={() => setNosCardIdx(i)} style={{
+                      width: i === nosCardIdx ? "24px" : "7px",
+                      height: "7px", borderRadius: "4px",
+                      background: i === nosCardIdx ? "#ffffff" : "rgba(255,255,255,0.30)",
+                      border: "none", cursor: "pointer",
+                      transition: "all 0.3s ease", padding: 0,
+                    }} aria-label={`Tarjeta ${i + 1}`} />
+                  ))}
+                </div>
+              </div>
 
               {/* CTA — estilo hero */}
               <a

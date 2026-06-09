@@ -917,13 +917,18 @@ export default function Home() {
               z-index: 0;
             }
             .sgc-nos-section > * { position: relative; z-index: 1; }
+            .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 36px !important; }
+            .sgc-nos-header   { margin-bottom: 14px !important; }
+            .sgc-nos-content  { align-items: flex-start !important; text-align: left !important; padding-left: 0 !important; padding-right: 0 !important; }
+            .sgc-nos-para     { text-align: left !important; font-size: 0.90rem !important; line-height: 1.7 !important; color: rgba(255,255,255,0.88) !important; }
+            .sgc-nos-cta      { align-self: flex-start !important; }
           }
         `}</style>
 
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
+        <div className="sgc-nos-inner max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "100px" }}>
 
           {/* Encabezado centrado */}
-          <div className="flex flex-col items-center text-center mb-3">
+          <div className="sgc-nos-header flex flex-col items-center text-center mb-3">
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
@@ -972,17 +977,17 @@ export default function Home() {
             </div>
 
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <div className="flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
+            <div className="sgc-nos-content flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
 
               {/* Párrafos — solo 2 */}
               {[
                 "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                 "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad; confíe su caso a profesionales que combinan rigor académico con empatía humana.",
               ].map((txt, i) => (
-                <p key={i} style={{
+                <p key={i} className="sgc-nos-para" style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: "1.16rem", color: "rgba(255,255,255,0.80)", lineHeight: 1.94,
-                  marginBottom: i === 0 ? "18px" : "40px",
+                  marginBottom: i === 0 ? "18px" : "32px",
                   textAlign: "center",
                 }}>{txt}</p>
               ))}
@@ -990,7 +995,7 @@ export default function Home() {
               {/* CTA — estilo hero */}
               <a
                 href="#contacto"
-                className="inline-flex items-center transition-colors duration-300"
+                className="sgc-nos-cta inline-flex items-center transition-colors duration-300"
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "clamp(0.72rem, 2vw, 0.88rem)",

@@ -327,7 +327,15 @@ function FaqSection() {
             object-position: center !important;
             z-index: 0 !important;
           }
-          .sgc-faq-section > * { position: relative; z-index: 1; }
+          .sgc-faq-section::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: rgba(255,255,255,0.74) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
+          }
+          .sgc-faq-section > * { position: relative; z-index: 2; }
           .sgc-faq-inner { padding-top: 16px !important; }
           .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }

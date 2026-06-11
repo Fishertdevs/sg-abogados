@@ -321,7 +321,7 @@ function FaqSection() {
             background-image: url('${faqImg}');
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: top center;
+            background-position: bottom center;
           }
           .sgc-faq-section::before {
             content: '';
@@ -498,9 +498,25 @@ function TestimoniosSection() {
   const t = TESTIMONIOS[idx];
 
   return (
-    <section className="relative" style={{ background: BG }}>
+    <section className="sgc-test-section relative" style={{ background: BG }}>
       <style>{`
         @media (max-width: 640px) {
+          .sgc-test-section {
+            background-image: url('${courthouseImg}') !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+            background-position: bottom center !important;
+          }
+          .sgc-test-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.80);
+            pointer-events: none;
+            z-index: 0;
+          }
+          .sgc-test-section > * { position: relative; z-index: 1; }
+          .sgc-test-img-col { display: none !important; }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }
           .sgc-test-sub     { font-size: 0.82rem !important; margin-bottom: 20px !important; line-height: 1.55 !important; }
@@ -612,7 +628,7 @@ function TestimoniosSection() {
           </div>
 
           {/* ── RIGHT: imagen estática ── */}
-          <div className="relative flex justify-end">
+          <div className="sgc-test-img-col relative flex justify-end">
             <div style={{ position: "relative", width: "100%", maxWidth: "500px", aspectRatio: "3/4" }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
@@ -950,12 +966,11 @@ export default function Home() {
             .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-title    { font-size: 1.45rem !important; }
-            .sgc-nos-lead     { text-align: justify !important; }
+            .sgc-nos-lead     { text-align: center !important; }
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
             .sgc-nos-cta          { align-self: center !important; }
-            .sgc-nos-bottom-wave  { display: none !important; }
           }
         `}</style>
 
@@ -1050,7 +1065,7 @@ export default function Home() {
                     <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: CAFE, marginBottom: "6px", textAlign: "center" }}>
                       {["MISIÓN", "VISIÓN", "COMPROMISO"][nosCardIdx]}
                     </p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: TEXT, lineHeight: 1.72, textAlign: "justify" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: TEXT, lineHeight: 1.72, textAlign: "center" }}>
                       {[
                         "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                         "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad.",

@@ -939,10 +939,10 @@ export default function Home() {
               position: absolute;
               inset: 0;
               background: linear-gradient(to bottom,
-                rgba(26,61,124,0.72) 0%,
-                rgba(26,61,124,0.80) 40%,
-                rgba(26,61,124,0.97) 52%,
-                rgba(26,61,124,1.00) 100%);
+                rgba(26,61,124,1.00) 0%,
+                rgba(26,61,124,1.00) 48%,
+                rgba(26,61,124,0.82) 62%,
+                rgba(26,61,124,0.68) 100%);
               pointer-events: none;
               z-index: 0;
             }
@@ -1039,6 +1039,11 @@ export default function Home() {
                       padding: "18px 16px 16px",
                       marginBottom: "14px",
                       boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+                      height: "190px",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
                     }}>
                     <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: CAFE, marginBottom: "6px", textAlign: "center" }}>
                       {["MISIÓN", "VISIÓN", "COMPROMISO"][nosCardIdx]}

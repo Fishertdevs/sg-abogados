@@ -321,7 +321,7 @@ function FaqSection() {
             background-image: url('${faqImg}');
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center center;
+            background-position: top center;
           }
           .sgc-faq-section::before {
             content: '';

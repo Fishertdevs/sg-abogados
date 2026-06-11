@@ -317,7 +317,6 @@ function FaqSection() {
     <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
       <style>{`
         @media (max-width: 640px) {
-          .sgc-faq-section { background-color: #e9e5dd !important; }
           .sgc-faq-bg-img {
             display: block !important;
             position: absolute !important;
@@ -328,15 +327,8 @@ function FaqSection() {
             object-position: center !important;
             z-index: 0 !important;
           }
-          .sgc-faq-bg-overlay {
-            display: block !important;
-            position: absolute !important;
-            inset: 0 !important;
-            background: rgba(233,229,221,0.78) !important;
-            z-index: 1 !important;
-            pointer-events: none !important;
-          }
-          .sgc-faq-section > * { position: relative; z-index: 2; }
+          .sgc-faq-section > * { position: relative; z-index: 1; }
+          .sgc-faq-inner { padding-top: 16px !important; }
           .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }
           .sgc-faq-card {
@@ -371,11 +363,10 @@ function FaqSection() {
 
       {/* Imagen de fondo full-cover — solo móvil */}
       <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" style={{ display: "none" }} alt="" />
-      <div className="sgc-faq-bg-overlay" style={{ display: "none" }} />
       {/* Overlay gradiente — visible solo en desktop */}
       <div className="sgc-faq-overlay" style={{ display: "none", position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
+      <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + carousel de FAQs ── */}
@@ -510,16 +501,18 @@ function TestimoniosSection() {
       <style>{`
         @media (max-width: 640px) {
           .sgc-test-img-col {
-            width: 100% !important;
-            max-width: 100% !important;
+            margin-left: -1.5rem !important;
+            margin-right: -1.5rem !important;
+            width: calc(100% + 3rem) !important;
           }
           .sgc-test-img-col > div {
             max-width: 100% !important;
+            width: 100% !important;
             aspect-ratio: 4/3 !important;
           }
           .sgc-test-img-col img {
             object-fit: cover !important;
-            object-position: center top !important;
+            object-position: center center !important;
           }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }
@@ -970,7 +963,7 @@ export default function Home() {
             .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-title    { font-size: 1.45rem !important; }
-            .sgc-nos-lead     { text-align: center !important; }
+            .sgc-nos-lead     { text-align: justify !important; hyphens: auto !important; }
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
@@ -995,10 +988,7 @@ export default function Home() {
               letterSpacing: "0.02em", lineHeight: 1.8,
               maxWidth: "680px",
             }}>
-              Con más de una década de trayectoria en litigios civiles,<br/>
-              derecho comercial y asesoría corporativa,<br/>
-              nuestro equipo ofrece representación legal de alto nivel<br/>
-              respaldada por el compromiso personal que cada caso exige.
+              Con más de una década de trayectoria en litigios civiles, derecho comercial y asesoría corporativa, nuestro equipo ofrece representación legal de alto nivel respaldada por el compromiso personal que cada caso exige.
             </p>
             <div className="flex items-center gap-3 mt-5">
               <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />

@@ -318,6 +318,7 @@ function FaqSection() {
       <style>{`
         @media (max-width: 640px) {
           .sgc-faq-section {
+            background-color: #e9e5dd !important;
             background-image: url('${faqImg}');
             background-size: cover;
             background-repeat: no-repeat;

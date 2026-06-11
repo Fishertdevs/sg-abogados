@@ -339,6 +339,13 @@ function FaqSection() {
             margin-bottom: 8px !important;
             border-radius: 10px !important;
             background: rgba(240,244,250,0.97) !important;
+            height: 210px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            align-items: center !important;
+          }
+          .sgc-faq-card > div {
+            width: 100% !important;
           }
           .sgc-faq-title { font-size: 1.45rem !important; text-align: center !important; }
           .sgc-faq-subtitle {
@@ -914,7 +921,7 @@ export default function Home() {
           @media (max-width: 640px) {
             .sgc-nos-section {
               background-image: url('${nosotrosImg}');
-              background-size: 100% 50%;
+              background-size: cover;
               background-repeat: no-repeat;
               background-position: top center;
             }
@@ -922,17 +929,21 @@ export default function Home() {
               content: '';
               position: absolute;
               inset: 0;
-              background: rgba(26,61,124,0.83);
+              background: linear-gradient(to bottom,
+                rgba(26,61,124,0.72) 0%,
+                rgba(26,61,124,0.80) 40%,
+                rgba(26,61,124,0.97) 52%,
+                rgba(26,61,124,1.00) 100%);
               pointer-events: none;
               z-index: 0;
             }
             .sgc-nos-section > * { position: relative; z-index: 1; }
             .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
-            .sgc-nos-content  { align-items: flex-start !important; text-align: left !important; padding-left: 0 !important; padding-right: 0 !important; }
+            .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
-            .sgc-nos-cta      { align-self: flex-start !important; }
+            .sgc-nos-cta      { align-self: center !important; }
           }
         `}</style>
 
@@ -1012,16 +1023,17 @@ export default function Home() {
                     exit={{ opacity: 0, x: -32 }}
                     transition={{ duration: 0.32 }}
                     style={{
-                      background: "rgba(255,255,255,0.11)",
-                      border: "1px solid rgba(255,255,255,0.22)",
+                      background: "rgba(240,244,250,0.97)",
+                      border: "1px solid rgba(26,61,124,0.12)",
                       borderRadius: "14px",
                       padding: "18px 16px 16px",
                       marginBottom: "14px",
+                      boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
                     }}>
-                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: "rgba(255,255,255,0.50)", marginBottom: "6px" }}>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: CAFE, marginBottom: "6px", textAlign: "center" }}>
                       {["MISIÓN", "VISIÓN", "COMPROMISO"][nosCardIdx]}
                     </p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: "rgba(255,255,255,0.88)", lineHeight: 1.72, textAlign: "left" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: TEXT, lineHeight: 1.72, textAlign: "center" }}>
                       {[
                         "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                         "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad.",

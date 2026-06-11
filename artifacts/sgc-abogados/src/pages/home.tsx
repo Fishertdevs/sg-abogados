@@ -516,11 +516,15 @@ function TestimoniosSection() {
           .sgc-test-img-col > div {
             max-width: 100% !important;
             width: 100% !important;
-            aspect-ratio: 4/3 !important;
+            height: 340px !important;
+            aspect-ratio: unset !important;
           }
           .sgc-test-img-col img {
             object-fit: cover !important;
-            object-position: center center !important;
+            object-position: top center !important;
+          }
+          .sgc-test-section > div {
+            padding-bottom: 100px !important;
           }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }

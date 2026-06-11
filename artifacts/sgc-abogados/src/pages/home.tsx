@@ -954,7 +954,8 @@ export default function Home() {
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
-            .sgc-nos-cta      { align-self: center !important; }
+            .sgc-nos-cta          { align-self: center !important; }
+            .sgc-nos-bottom-wave  { display: none !important; }
           }
         `}</style>
 
@@ -1098,7 +1099,7 @@ export default function Home() {
         </div>
 
         {/* Ola inferior: negro → blanco (FAQ) */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
+        <div className="sgc-nos-bottom-wave" style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
             style={{ display: "block", width: "100%", height: "100px" }}>
             <path

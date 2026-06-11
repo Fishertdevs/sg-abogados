@@ -350,13 +350,9 @@ function FaqSection() {
           .sgc-faq-q { font-size: 0.58rem !important; margin-bottom: 5px !important; text-align: center !important; }
           .sgc-faq-deco { margin-bottom: 5px !important; }
           .sgc-faq-a {
-            font-size: 0.82rem !important;
+            font-size: 0.72rem !important;
             line-height: 1.5 !important;
             text-align: center !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3 !important;
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
           }
         }
       `}</style>
@@ -918,9 +914,9 @@ export default function Home() {
           @media (max-width: 640px) {
             .sgc-nos-section {
               background-image: url('${nosotrosImg}');
-              background-size: cover;
+              background-size: 100% 50%;
               background-repeat: no-repeat;
-              background-position: center center;
+              background-position: top center;
             }
             .sgc-nos-section::before {
               content: '';
@@ -931,7 +927,7 @@ export default function Home() {
               z-index: 0;
             }
             .sgc-nos-section > * { position: relative; z-index: 1; }
-            .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 36px !important; }
+            .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-content  { align-items: flex-start !important; text-align: left !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
@@ -1034,7 +1030,7 @@ export default function Home() {
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                <div style={{ display: "flex", gap: "8px", justifyContent: "flex-start", alignItems: "center" }}>
+                <div style={{ display: "flex", gap: "8px", justifyContent: "center", alignItems: "center" }}>
                   {[0, 1, 2].map(i => (
                     <button key={i} onClick={() => setNosCardIdx(i)} style={{
                       width: i === nosCardIdx ? "24px" : "7px",

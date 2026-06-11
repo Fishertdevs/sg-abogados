@@ -63,6 +63,7 @@ export function CookieBanner() {
           gap: 8px;
           flex-shrink: 0;
         }
+        .sgc-cookie-br { display: none; }
         .sgc-cookie-btn {
           font-family: 'Cinzel', serif;
           font-size: 0.63rem;
@@ -80,26 +81,33 @@ export function CookieBanner() {
         @media (max-width: 640px) {
           .sgc-cookie-wrap {
             padding: 8px 12px;
-            gap: 6px 10px;
+            gap: 4px 8px;
+            flex-direction: column;
+            align-items: center;
           }
           .sgc-cookie-text {
-            font-size: 0.80rem;
+            font-size: 0.78rem;
             flex: 1 1 100%;
+            text-align: center;
+          }
+          .sgc-cookie-br { display: block; }
+          .sgc-cookie-btns {
+            gap: 6px;
           }
           .sgc-cookie-btn {
-            font-size: 0.58rem;
-            padding: 5px 14px;
+            font-size: 0.48rem;
+            padding: 3px 10px;
+            letter-spacing: 0.12em;
           }
         }
       `}</style>
       <div className="sgc-cookie-wrap">
         <p className="sgc-cookie-text">
-          Utilizamos cookies para mejorar su experiencia.{" "}
+          Utilizamos cookies para mejorar su experiencia.
+          <br className="sgc-cookie-br" />
+          {" "}
           <a href="/cookies" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
-            Política de Cookies
-          </a>{" "}y{" "}
-          <a href="/privacidad" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
-            Privacidad
+            Política de Cookies y Privacidad
           </a>.
         </p>
         <div className="sgc-cookie-btns">

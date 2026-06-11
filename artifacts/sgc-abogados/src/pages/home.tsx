@@ -644,6 +644,11 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [nosCardIdx, setNosCardIdx] = useState(0);
   const headlineRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => setNosCardIdx(p => (p + 1) % 3), 4500);
+    return () => clearInterval(timer);
+  }, []);
   const subRef      = useRef<HTMLParagraphElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
   const dividerRef  = useRef<HTMLDivElement>(null);
@@ -868,7 +873,11 @@ export default function Home() {
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
       <section id="areas" className="relative overflow-hidden" style={{ background: CAFE, paddingTop: "40px", paddingBottom: "120px" }}>
-
+        <style>{`
+          @media (max-width: 640px) {
+            .sgc-areas-title { font-size: 1.45rem !important; }
+          }
+        `}</style>
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 
@@ -879,7 +888,7 @@ export default function Home() {
               fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
               color: "#ffffff", display: "block", marginBottom: "18px",
             }}>ESPECIALIDADES JURÍDICAS</span>
-            <h2 style={{
+            <h2 className="sgc-areas-title" style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.6vw, 2.9rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic", marginBottom: "18px",
@@ -923,7 +932,7 @@ export default function Home() {
               background-image: url('${nosotrosImg}');
               background-size: cover;
               background-repeat: no-repeat;
-              background-position: top center;
+              background-position: bottom center;
             }
             .sgc-nos-section::before {
               content: '';
@@ -938,8 +947,9 @@ export default function Home() {
               z-index: 0;
             }
             .sgc-nos-section > * { position: relative; z-index: 1; }
-            .sgc-nos-inner    { padding-top: 32px !important; padding-bottom: 120px !important; }
+            .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
+            .sgc-nos-title    { font-size: 1.45rem !important; }
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
@@ -951,7 +961,7 @@ export default function Home() {
 
           {/* Encabezado centrado */}
           <div className="sgc-nos-header flex flex-col items-center text-center mb-3">
-            <h2 style={{
+            <h2 className="sgc-nos-title" style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(2.0rem, 3.2vw, 2.9rem)",
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
@@ -1138,7 +1148,7 @@ export default function Home() {
             .sgc-cc2-left         { background: #ffffff !important; padding: 16px 16px 8px !important; }
             .sgc-cc2-map          { height: 110px !important; max-height: 110px !important; min-height: 0 !important; overflow: hidden !important; margin: 0 !important; border-radius: 0 !important; width: 100% !important; }
             .sgc-cc2-map iframe   { height: 110px !important; max-height: 110px !important; min-height: 0 !important; width: 100% !important; display: block !important; }
-            .sgc-cc2-title        { font-size: 1.9rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
+            .sgc-cc2-title        { font-size: 1.45rem !important; color: #111111 !important; font-style: normal !important; text-align: center; }
             .sgc-cc2-sched-head   { color: rgba(0,0,0,0.42) !important; text-align: center; margin-top: 8px !important; }
             .sgc-cc2-hour-p       { color: rgba(0,0,0,0.75) !important; text-align: center; }
             .sgc-cc2-closed       { color: rgba(0,0,0,0.40) !important; }

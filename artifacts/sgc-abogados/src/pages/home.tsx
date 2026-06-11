@@ -971,7 +971,7 @@ export default function Home() {
             .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-title    { font-size: 1.45rem !important; }
-            .sgc-nos-lead     { text-align: justify !important; hyphens: auto !important; }
+            .sgc-nos-lead     { text-align: justify !important; hyphens: none !important; overflow-wrap: break-word !important; }
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }

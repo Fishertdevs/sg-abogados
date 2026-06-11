@@ -317,22 +317,26 @@ function FaqSection() {
     <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
       <style>{`
         @media (max-width: 640px) {
-          .sgc-faq-section {
-            background-color: #e9e5dd !important;
-            background-image: url('${faqImg}');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: bottom center;
+          .sgc-faq-section { background-color: #e9e5dd !important; }
+          .sgc-faq-bg-img {
+            display: block !important;
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            z-index: 0 !important;
           }
-          .sgc-faq-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.82);
-            pointer-events: none;
-            z-index: 0;
+          .sgc-faq-bg-overlay {
+            display: block !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: rgba(233,229,221,0.78) !important;
+            z-index: 1 !important;
+            pointer-events: none !important;
           }
-          .sgc-faq-section > * { position: relative; z-index: 1; }
+          .sgc-faq-section > * { position: relative; z-index: 2; }
           .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }
           .sgc-faq-card {
@@ -365,7 +369,10 @@ function FaqSection() {
         }
       `}</style>
 
-      {/* Overlay gradiente — visible solo en móvil */}
+      {/* Imagen de fondo full-cover — solo móvil */}
+      <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" style={{ display: "none" }} alt="" />
+      <div className="sgc-faq-bg-overlay" style={{ display: "none" }} />
+      {/* Overlay gradiente — visible solo en desktop */}
       <div className="sgc-faq-overlay" style={{ display: "none", position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
@@ -502,22 +509,18 @@ function TestimoniosSection() {
     <section className="sgc-test-section relative" style={{ background: BG }}>
       <style>{`
         @media (max-width: 640px) {
-          .sgc-test-section {
-            background-image: url('${courthouseImg}') !important;
-            background-size: cover !important;
-            background-repeat: no-repeat !important;
-            background-position: bottom center !important;
+          .sgc-test-img-col {
+            width: 100% !important;
+            max-width: 100% !important;
           }
-          .sgc-test-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.80);
-            pointer-events: none;
-            z-index: 0;
+          .sgc-test-img-col > div {
+            max-width: 100% !important;
+            aspect-ratio: 4/3 !important;
           }
-          .sgc-test-section > * { position: relative; z-index: 1; }
-          .sgc-test-img-col { display: none !important; }
+          .sgc-test-img-col img {
+            object-fit: cover !important;
+            object-position: center top !important;
+          }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }
           .sgc-test-sub     { font-size: 0.82rem !important; margin-bottom: 20px !important; line-height: 1.55 !important; }
@@ -989,10 +992,13 @@ export default function Home() {
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(0.95rem, 1.3vw, 1.08rem)",
               color: "rgba(255,255,255,0.92)", fontStyle: "italic",
-              letterSpacing: "0.02em", lineHeight: 1.6,
+              letterSpacing: "0.02em", lineHeight: 1.8,
               maxWidth: "680px",
             }}>
-              Con más de una década de trayectoria en litigios civiles, derecho comercial y asesoría corporativa, nuestro equipo ofrece representación legal de alto nivel respaldada por el compromiso personal que cada caso exige.
+              Con más de una década de trayectoria en litigios civiles,<br/>
+              derecho comercial y asesoría corporativa,<br/>
+              nuestro equipo ofrece representación legal de alto nivel<br/>
+              respaldada por el compromiso personal que cada caso exige.
             </p>
             <div className="flex items-center gap-3 mt-5">
               <div style={{ width: "40px", height: "1px", background: `${CAFE}70` }} />

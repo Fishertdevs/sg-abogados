@@ -940,9 +940,9 @@ export default function Home() {
               inset: 0;
               background: linear-gradient(to bottom,
                 rgba(26,61,124,1.00) 0%,
-                rgba(26,61,124,1.00) 48%,
-                rgba(26,61,124,0.82) 62%,
-                rgba(26,61,124,0.68) 100%);
+                rgba(26,61,124,0.88) 16%,
+                rgba(26,61,124,0.72) 30%,
+                rgba(26,61,124,0.60) 100%);
               pointer-events: none;
               z-index: 0;
             }
@@ -950,6 +950,7 @@ export default function Home() {
             .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-title    { font-size: 1.45rem !important; }
+            .sgc-nos-lead     { text-align: justify !important; }
             .sgc-nos-content  { align-items: center !important; text-align: center !important; padding-left: 0 !important; padding-right: 0 !important; }
             .sgc-nos-para     { display: none !important; }
             .sgc-nos-cards    { display: block !important; width: 100% !important; }
@@ -967,7 +968,7 @@ export default function Home() {
               color: "#ffffff", fontWeight: 500, fontStyle: "italic",
               lineHeight: 1.18, marginBottom: "12px",
             }}>Sobre Nosotros</h2>
-            <p style={{
+            <p className="sgc-nos-lead" style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(0.95rem, 1.3vw, 1.08rem)",
               color: "rgba(255,255,255,0.92)", fontStyle: "italic",
@@ -1048,7 +1049,7 @@ export default function Home() {
                     <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.52rem", letterSpacing: "0.12em", color: CAFE, marginBottom: "6px", textAlign: "center" }}>
                       {["MISIÓN", "VISIÓN", "COMPROMISO"][nosCardIdx]}
                     </p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: TEXT, lineHeight: 1.72, textAlign: "center" }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "0.90rem", color: TEXT, lineHeight: 1.72, textAlign: "justify" }}>
                       {[
                         "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
                         "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad.",

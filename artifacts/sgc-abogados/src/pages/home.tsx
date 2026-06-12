@@ -1155,16 +1155,16 @@ export default function Home() {
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 100px 40px 90px; }
-          .sgc-cc2-cta        { text-align: center; margin-bottom: 48px; }
+          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 36px 40px 40px; }
+          .sgc-cc2-cta        { text-align: center; margin-bottom: 22px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
-          .sgc-cc2-left       { background: ${CAFE2}; padding: 36px 30px; display: flex; flex-direction: column; }
-          .sgc-cc2-map        { align-self: stretch; min-height: 340px; }
-          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 8px; }
-          .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 14px; }
-          .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; color: rgba(255,255,255,0.78); line-height: 1.55; }
-          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 18px 0; }
-          .sgc-cc2-item       { padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; }
+          .sgc-cc2-left       { background: ${CAFE2}; padding: 22px 28px; display: flex; flex-direction: column; }
+          .sgc-cc2-map        { align-self: stretch; min-height: 200px; max-height: 380px; }
+          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 4px; }
+          .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 4px; margin-top: 8px; }
+          .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.88rem; color: rgba(255,255,255,0.78); line-height: 1.4; }
+          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 10px 0; }
+          .sgc-cc2-item       { padding: 4px 0; display: flex; align-items: flex-start; gap: 10px; }
           .sgc-cc2-icon       { color: rgba(255,255,255,0.70); flex-shrink: 0; margin-top: 3px; }
           .sgc-cc2-label      { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-bottom: 3px; }
           .sgc-cc2-value      { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #ffffff; line-height: 1.3; }

@@ -1159,7 +1159,7 @@ export default function Home() {
           .sgc-cc2-cta        { text-align: center; margin-bottom: 48px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
           .sgc-cc2-left       { background: ${CAFE2}; padding: 36px 30px; display: flex; flex-direction: column; }
-          .sgc-cc2-map        { align-self: stretch; min-height: 460px; }
+          .sgc-cc2-map        { align-self: stretch; min-height: 340px; }
           .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 8px; }
           .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 14px; }
           .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; color: rgba(255,255,255,0.78); line-height: 1.55; }

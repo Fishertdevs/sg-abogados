@@ -1155,7 +1155,7 @@ export default function Home() {
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 72px 40px 80px; }
+          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 56px 40px 64px; }
           .sgc-cc2-cta        { text-align: center; margin-bottom: 14px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
           .sgc-cc2-left       { background: ${CAFE2}; padding: 16px 24px; display: flex; flex-direction: column; align-items: stretch; }

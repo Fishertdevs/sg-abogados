@@ -1155,16 +1155,16 @@ export default function Home() {
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 20px 40px 80px; }
+          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 52px 40px 80px; }
           .sgc-cc2-cta        { text-align: center; margin-bottom: 14px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
-          .sgc-cc2-left       { background: ${CAFE2}; padding: 16px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+          .sgc-cc2-left       { background: ${CAFE2}; padding: 16px 24px; display: flex; flex-direction: column; align-items: stretch; }
           .sgc-cc2-map        { align-self: stretch; min-height: 180px; }
           .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.1; margin-bottom: 2px; text-align: center; }
           .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 2px; margin-top: 6px; text-align: center; }
           .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: rgba(255,255,255,0.78); line-height: 1.3; text-align: center; }
-          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 7px 0; }
-          .sgc-cc2-item       { padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; }
+          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 7px 0; width: 100%; }
+          .sgc-cc2-item       { padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; text-align: left; }
           .sgc-cc2-icon       { color: rgba(255,255,255,0.70); flex-shrink: 0; margin-top: 2px; }
           .sgc-cc2-label      { font-family: 'Cinzel', serif; font-size: 0.48rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-bottom: 1px; }
           .sgc-cc2-value      { font-family: 'Cormorant Garamond', serif; font-size: 0.98rem; font-weight: 600; color: #ffffff; line-height: 1.2; }

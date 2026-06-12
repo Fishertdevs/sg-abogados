@@ -373,11 +373,24 @@ function FaqSection() {
       <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" style={{ display: "none" }} alt="" />
       <div className="sgc-faq-overlay" style={{ display: "none" }} />
 
-      <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Imagen de fondo — derecha de la sección, detrás del contenido */}
+      <div className="sgc-faq-img-col" style={{
+        position: "absolute",
+        top: 0, right: 0, bottom: 0,
+        width: "50%",
+        backgroundImage: `url(${faqImg})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center right",
+        zIndex: 0,
+        pointerEvents: "none",
+      }} aria-hidden="true" />
+
+      <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px", position: "relative", zIndex: 1 }}>
+        <div className="flex items-center">
 
           {/* ── LEFT: label + título + carousel de FAQs ── */}
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center" style={{ width: "50%", flexShrink: 0 }}>
 
             <span style={{
               fontFamily: "'Cinzel', serif",
@@ -455,17 +468,6 @@ function FaqSection() {
                 />
               ))}
             </div>
-          </div>
-
-          {/* ── RIGHT: imagen como fondo ── */}
-          <div className="sgc-faq-img-col relative flex justify-end">
-            <div style={{
-              width: "90%", maxWidth: "450px", aspectRatio: "3/4",
-              backgroundImage: `url(${faqImg})`,
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }} role="img" aria-label="SGC Abogados — Preguntas frecuentes" />
           </div>
 
         </div>

@@ -1155,20 +1155,20 @@ export default function Home() {
 
         <style>{`
           /* ── desktop (default) ── */
-          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 36px 40px 40px; }
-          .sgc-cc2-cta        { text-align: center; margin-bottom: 22px; }
+          .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 20px 40px 24px; }
+          .sgc-cc2-cta        { text-align: center; margin-bottom: 14px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
-          .sgc-cc2-left       { background: ${CAFE2}; padding: 22px 28px; display: flex; flex-direction: column; }
-          .sgc-cc2-map        { align-self: stretch; min-height: 200px; max-height: 380px; }
-          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.15; margin-bottom: 4px; }
-          .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 4px; margin-top: 8px; }
-          .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.88rem; color: rgba(255,255,255,0.78); line-height: 1.4; }
-          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 10px 0; }
-          .sgc-cc2-item       { padding: 4px 0; display: flex; align-items: flex-start; gap: 10px; }
-          .sgc-cc2-icon       { color: rgba(255,255,255,0.70); flex-shrink: 0; margin-top: 3px; }
-          .sgc-cc2-label      { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-bottom: 3px; }
-          .sgc-cc2-value      { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #ffffff; line-height: 1.3; }
-          .sgc-cc2-detail     { font-family: 'Cormorant Garamond', serif; font-size: 0.88rem; color: rgba(255,255,255,0.65); margin-top: 1px; }
+          .sgc-cc2-left       { background: ${CAFE2}; padding: 16px 24px; display: flex; flex-direction: column; }
+          .sgc-cc2-map        { align-self: stretch; min-height: 180px; }
+          .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.1; margin-bottom: 2px; }
+          .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 2px; margin-top: 6px; }
+          .sgc-cc2-hour-p     { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: rgba(255,255,255,0.78); line-height: 1.3; }
+          .sgc-cc2-divider-line { height: 1px; background: rgba(255,255,255,0.20); margin: 7px 0; }
+          .sgc-cc2-item       { padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; }
+          .sgc-cc2-icon       { color: rgba(255,255,255,0.70); flex-shrink: 0; margin-top: 2px; }
+          .sgc-cc2-label      { font-family: 'Cinzel', serif; font-size: 0.48rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.50); margin-bottom: 1px; }
+          .sgc-cc2-value      { font-family: 'Cormorant Garamond', serif; font-size: 0.98rem; font-weight: 600; color: #ffffff; line-height: 1.2; }
+          .sgc-cc2-detail     { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0px; }
           .sgc-cc2-maplink    { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; color: rgba(255,255,255,0.60); font-style: italic; text-decoration: none; margin-top: 3px; display: inline-flex; align-items: center; gap: 3px; }
           /* ── mobile ── */
           @media (max-width: 640px) {
@@ -1199,9 +1199,9 @@ export default function Home() {
           <div className="sgc-cc2-cta">
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
+              fontSize: "clamp(1.5rem, 2.4vw, 2.0rem)",
               fontStyle: "italic", fontWeight: 500, color: "#ffffff",
-              lineHeight: 1.2, marginBottom: "18px",
+              lineHeight: 1.1, marginBottom: "10px",
             }}>Estamos para ayudarle.</h2>
             <div className="flex items-center justify-center gap-3">
               <div style={{ width: "48px", height: "1px", background: "rgba(255,255,255,0.35)" }} />

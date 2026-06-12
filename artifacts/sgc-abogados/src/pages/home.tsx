@@ -316,29 +316,27 @@ function FaqSection() {
   return (
     <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
       <style>{`
+        /* ── desktop: imagen como fondo ── */
+        .sgc-faq-bg-img {
+          display: block;
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center right;
+          z-index: 0;
+          opacity: 0.18;
+        }
+        .sgc-faq-section > * { position: relative; z-index: 2; }
+        .sgc-faq-img-col { display: none !important; }
+        .sgc-faq-overlay { display: block !important; }
         @media (max-width: 640px) {
           .sgc-faq-bg-img {
-            display: block !important;
-            position: absolute !important;
-            inset: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
+            opacity: 0.12 !important;
             object-position: center !important;
-            z-index: 0 !important;
           }
-          .sgc-faq-section::before {
-            content: '' !important;
-            position: absolute !important;
-            inset: 0 !important;
-            background: rgba(255,255,255,0.74) !important;
-            z-index: 1 !important;
-            pointer-events: none !important;
-          }
-          .sgc-faq-section > * { position: relative; z-index: 2; }
           .sgc-faq-inner { padding-top: 16px !important; }
-          .sgc-faq-overlay { display: none !important; }
-          .sgc-faq-img-col { display: none !important; }
           .sgc-faq-card {
             padding: 10px 14px 8px !important;
             margin-bottom: 8px !important;
@@ -369,13 +367,13 @@ function FaqSection() {
         }
       `}</style>
 
-      {/* Imagen de fondo full-cover — solo móvil */}
-      <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" style={{ display: "none" }} alt="" />
-      {/* Overlay gradiente — visible solo en desktop */}
-      <div className="sgc-faq-overlay" style={{ display: "none", position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.72) 0%, rgba(245,242,235,0.30) 60%, transparent 100%)", pointerEvents: "none" }} />
+      {/* Imagen de fondo full-cover */}
+      <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" alt="" />
+      {/* Overlay para legibilidad */}
+      <div className="sgc-faq-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(245,242,235,0.85) 0%, rgba(245,242,235,0.60) 55%, rgba(245,242,235,0.30) 100%)", pointerEvents: "none", zIndex: 1 }} />
 
       <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 gap-16 items-center">
 
           {/* ── LEFT: label + título + carousel de FAQs ── */}
           <div className="flex flex-col items-center text-center">

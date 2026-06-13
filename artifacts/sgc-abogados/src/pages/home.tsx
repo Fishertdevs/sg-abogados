@@ -317,28 +317,8 @@ function FaqSection() {
     <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
       <style>{`
         @media (max-width: 640px) {
-          .sgc-faq-bg-img {
-            display: block !important;
-            position: absolute !important;
-            inset: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            object-position: center !important;
-            z-index: 0 !important;
-          }
-          .sgc-faq-section::before {
-            content: '' !important;
-            position: absolute !important;
-            inset: 0 !important;
-            background: rgba(255,255,255,0.74) !important;
-            z-index: 1 !important;
-            pointer-events: none !important;
-          }
-          .sgc-faq-section > * { position: relative; z-index: 2; }
-          .sgc-faq-inner { padding-top: 16px !important; }
-          .sgc-faq-overlay { display: none !important; }
           .sgc-faq-img-col { display: none !important; }
+          .sgc-faq-inner { padding-top: 16px !important; }
           .sgc-faq-card {
             padding: 10px 14px 8px !important;
             margin-bottom: 8px !important;
@@ -349,9 +329,7 @@ function FaqSection() {
             display: flex !important;
             align-items: center !important;
           }
-          .sgc-faq-card > div {
-            width: 100% !important;
-          }
+          .sgc-faq-card > div { width: 100% !important; }
           .sgc-faq-title { font-size: 1.45rem !important; text-align: center !important; }
           .sgc-faq-subtitle {
             font-size: 0.80rem !important;
@@ -369,28 +347,11 @@ function FaqSection() {
         }
       `}</style>
 
-      {/* Imagen de fondo — solo móvil */}
-      <img src={faqImg} aria-hidden="true" className="sgc-faq-bg-img" style={{ display: "none" }} alt="" />
-      <div className="sgc-faq-overlay" style={{ display: "none" }} />
-
-      {/* Imagen de fondo — derecha de la sección, detrás del contenido */}
-      <div className="sgc-faq-img-col" style={{
-        position: "absolute",
-        top: 0, right: 0, bottom: 0,
-        width: "50%",
-        backgroundImage: `url(${faqImg})`,
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center right",
-        zIndex: 0,
-        pointerEvents: "none",
-      }} aria-hidden="true" />
-
-      <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px", position: "relative", zIndex: 1 }}>
-        <div className="flex items-center">
+      <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── LEFT: label + título + carousel de FAQs ── */}
-          <div className="flex flex-col items-center text-center" style={{ width: "50%", flexShrink: 0 }}>
+          <div className="flex flex-col items-center text-center">
 
             <span style={{
               fontFamily: "'Cinzel', serif",
@@ -468,6 +429,19 @@ function FaqSection() {
                 />
               ))}
             </div>
+          </div>
+
+          {/* ── RIGHT: imagen (CSS background-image, misma posición y tamaño) ── */}
+          <div className="sgc-faq-img-col relative flex justify-end">
+            <div style={{
+              width: "90%",
+              maxWidth: "450px",
+              aspectRatio: "3/4",
+              backgroundImage: `url(${faqImg})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }} role="img" aria-label="SGC Abogados — Preguntas frecuentes" />
           </div>
 
         </div>

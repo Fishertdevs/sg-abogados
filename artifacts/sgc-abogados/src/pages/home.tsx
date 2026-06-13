@@ -334,19 +334,19 @@ function FaqSection() {
         className="hidden lg:block"
         style={{
           position: "absolute",
-          top: 0, right: 0,
+          top: "-10%", right: 0,
           width: "44%",
-          height: "100%",
+          height: "120%",
           objectFit: "cover",
           objectPosition: "top center",
           pointerEvents: "none",
           zIndex: 1,
           maskImage: `
-            linear-gradient(to bottom, black 0%, black 72%, transparent 100%),
+            linear-gradient(to bottom, black 0%, black 72%, transparent 83%),
             linear-gradient(to right,  transparent 0%, black 18%)
           `,
           WebkitMaskImage: `
-            linear-gradient(to bottom, black 0%, black 72%, transparent 100%),
+            linear-gradient(to bottom, black 0%, black 72%, transparent 83%),
             linear-gradient(to right,  transparent 0%, black 18%)
           `,
           maskComposite: "intersect",

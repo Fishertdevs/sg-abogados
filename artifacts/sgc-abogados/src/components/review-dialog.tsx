@@ -57,10 +57,6 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
 
     setStatus("sending");
 
-    // Open the WhatsApp tab synchronously (inside the user gesture) so the
-    // popup blocker doesn't stop it; we set its URL once the request resolves.
-    const waTab = window.open("", "_blank");
-
     try {
       const { whatsappUrl } = await submitReview({
         name: name.trim(),
@@ -69,18 +65,19 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
         stars,
       });
 
-      if (whatsappUrl && waTab && !waTab.closed) {
-        waTab.location.href = whatsappUrl;
-      } else if (whatsappUrl) {
-        // Fallback if the pre-opened tab was blocked.
-        window.location.href = whatsappUrl;
-      } else if (waTab && !waTab.closed) {
-        waTab.close();
+      // Open WhatsApp only once we actually have a valid wa.me URL. We avoid
+      // pre-opening a blank tab because an empty tab resolves to the current
+      // origin and can show a "connection refused" error page.
+      if (whatsappUrl) {
+        const waTab = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        // If the popup was blocked, navigate the current tab as a fallback.
+        if (!waTab) {
+          window.location.href = whatsappUrl;
+        }
       }
 
       setStatus("done");
     } catch (err) {
-      if (waTab && !waTab.closed) waTab.close();
       setStatus("idle");
       setError(
         err instanceof Error

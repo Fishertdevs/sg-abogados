@@ -8,7 +8,7 @@ import {
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image_1780858385741.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
-import faqImg from "@assets/faq_balance_justice.png";
+import faqImg from "@assets/image-Photoroom_(10)_1781316791990.png";
 
 /* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
 const BG    = "#ffffff";
@@ -325,7 +325,20 @@ function FaqSection() {
   const faq = FAQS[idx];
 
   return (
-    <section className="sgc-faq-section relative" style={{ backgroundColor: BG }}>
+    <section className="sgc-faq-section relative overflow-hidden" style={{ backgroundColor: BG }}>
+      {/* Fondo imagen — solo mitad derecha, oculto en mobile */}
+      <div className="hidden lg:block" style={{
+        position: "absolute", top: 0, right: 0, bottom: 0, width: "50%",
+        backgroundImage: `url(${faqImg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.55) 40%, black 70%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.55) 40%, black 70%)",
+        opacity: 0.22,
+        pointerEvents: "none",
+        zIndex: 0,
+      }} />
       <style>{`
         @media (max-width: 640px) {
           .sgc-faq-img-col { display: none !important; }
@@ -442,14 +455,8 @@ function FaqSection() {
             </div>
           </div>
 
-          {/* ── RIGHT: imagen ── */}
-          <div className="sgc-faq-img-col relative flex justify-end">
-            <div style={{ position: "relative", width: "90%", maxWidth: "450px", aspectRatio: "3/4" }}>
-              <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
-                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
-              />
-            </div>
-          </div>
+          {/* ── RIGHT: espacio reservado (imagen como fondo de sección) ── */}
+          <div className="sgc-faq-img-col" />
 
         </div>
       </div>

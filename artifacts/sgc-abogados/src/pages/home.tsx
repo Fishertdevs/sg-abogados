@@ -342,11 +342,11 @@ function FaqSection() {
           pointerEvents: "none",
           zIndex: 1,
           maskImage: `
-            linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%),
+            linear-gradient(to bottom, black 0%, black 72%, transparent 100%),
             linear-gradient(to right,  transparent 0%, black 18%)
           `,
           WebkitMaskImage: `
-            linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%),
+            linear-gradient(to bottom, black 0%, black 72%, transparent 100%),
             linear-gradient(to right,  transparent 0%, black 18%)
           `,
           maskComposite: "intersect",

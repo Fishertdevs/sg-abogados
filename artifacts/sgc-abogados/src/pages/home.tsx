@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
+import { useQuery } from "@tanstack/react-query";
 import {
-  Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown,
+  Menu, X, MessageCircle, Phone, Mail, MapPin, ChevronDown, Star, PenLine,
 } from "lucide-react";
+import { ReviewDialog } from "@/components/review-dialog";
+import { fetchApprovedReviews } from "@/lib/reviews-api";
 import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image_1780858385741.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
@@ -487,27 +490,57 @@ function FaqSection() {
   );
 }
 
-const TESTIMONIOS = [
+interface Testimonio {
+  quote: string;
+  author: string;
+  role: string | null;
+  stars: number;
+}
+
+const TESTIMONIOS: Testimonio[] = [
   {
     quote: "SGC Abogados resolvió mi caso laboral con una rapidez y profesionalismo que superó mis expectativas. Desde el primer día sentí que mi situación era tratada con absoluta seriedad.",
     author: "Carlos Méndez",
     role: "Empresario · Bogotá",
+    stars: 5,
   },
   {
     quote: "El acompañamiento fue impecable. Siempre tuve claridad sobre el estado de mi proceso. Un equipo que combina excelencia jurídica con trato verdaderamente humano.",
     author: "María Fernanda Ruiz",
     role: "Médica · Medellín",
+    stars: 5,
   },
   {
     quote: "Gracias a SGC Abogados logré resolver un conflicto societario que parecía imposible. Su estrategia y conocimiento del derecho marcaron la diferencia.",
     author: "Andrés Palomino",
     role: "Director Financiero · Cali",
+    stars: 5,
   },
 ];
 
 function TestimoniosSection() {
   const [idx, setIdx] = useState(0);
-  const t = TESTIMONIOS[idx];
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  // Approved reviews come from the serverless API. If it's unavailable
+  // (e.g. the Vite dev preview), we silently fall back to the static list.
+  const { data: approved } = useQuery({
+    queryKey: ["approved-reviews"],
+    queryFn: fetchApprovedReviews,
+    staleTime: 60_000,
+    retry: false,
+  });
+
+  const dynamic: Testimonio[] = (approved ?? []).map((r) => ({
+    quote: r.quote,
+    author: r.name,
+    role: r.role,
+    stars: r.stars,
+  }));
+
+  const reviews: Testimonio[] = dynamic.length > 0 ? dynamic : TESTIMONIOS;
+  const safeIdx = Math.min(idx, reviews.length - 1);
+  const t = reviews[safeIdx];
 
   return (
     <section className="sgc-test-section relative" style={{ background: BG }}>
@@ -591,12 +624,20 @@ function TestimoniosSection() {
               marginBottom: "20px",
             }}>
               <AnimatePresence mode="wait">
-                <motion.div key={idx}
+                <motion.div key={safeIdx}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.38 }}
                   className="flex flex-col items-center">
+
+                  {/* Estrellas de la reseña */}
+                  <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={18} strokeWidth={1.5} color={CAFE}
+                        fill={s <= t.stars ? CAFE : "transparent"} />
+                    ))}
+                  </div>
 
                   <p className="sgc-test-quote" style={{
                     fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
@@ -628,13 +669,13 @@ function TestimoniosSection() {
 
             {/* Puntos de paginación */}
             <div className="flex items-center gap-3">
-              {TESTIMONIOS.map((_, i) => (
+              {reviews.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)}
                   style={{
-                    width: i === idx ? "28px" : "8px",
+                    width: i === safeIdx ? "28px" : "8px",
                     height: "8px",
                     borderRadius: "4px",
-                    background: i === idx ? CAFE : `${CAFE}30`,
+                    background: i === safeIdx ? CAFE : `${CAFE}30`,
                     border: "none", cursor: "pointer",
                     transition: "all 0.35s ease",
                     padding: 0,
@@ -643,21 +684,48 @@ function TestimoniosSection() {
                 />
               ))}
             </div>
+
+            {/* Botón: subir reseña */}
+            <button
+              onClick={() => setDialogOpen(true)}
+              style={{
+                marginTop: "28px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                fontFamily: "'Cinzel', serif",
+                fontSize: "0.74rem",
+                letterSpacing: "0.1em",
+                fontWeight: 600,
+                color: "#fff",
+                background: CAFE,
+                border: "none",
+                borderRadius: "11px",
+                padding: "13px 28px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = CAFE2)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = CAFE)}
+            >
+              <PenLine size={17} strokeWidth={2} />
+              SUBIR RESEÑA
+            </button>
           </div>
 
           {/* ── RIGHT: imagen estática ── */}
-          <div className="sgc-test-img-col relative flex justify-end">
+          <div className="sgc-test-img-col relative flex justify-center lg:justify-end">
             <div style={{
-              position: "relative", width: "100%", maxWidth: "680px", aspectRatio: "3/4",
-              maskImage: "linear-gradient(to bottom, black 50%, transparent 90%), linear-gradient(to right, transparent 0%, black 8%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 50%, transparent 90%), linear-gradient(to right, transparent 0%, black 8%)",
+              position: "relative", width: "100%", maxWidth: "820px", aspectRatio: "4/5",
+              maskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
               maskComposite: "intersect",
               WebkitMaskComposite: "source-in",
             }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
                   width: "100%", height: "100%",
-                  objectFit: "contain", objectPosition: "center",
+                  objectFit: "cover", objectPosition: "top center",
                 }}
               />
             </div>
@@ -675,6 +743,8 @@ function TestimoniosSection() {
             fill="#1a3d7c" />
         </svg>
       </div>
+
+      <ReviewDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
     </section>
   );
 }
@@ -1216,12 +1286,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* ══════════════════════════���════════════════════════════
           PREGUNTAS FRECUENTES
       ══════════════════════════════════════════════════════════ */}
       <FaqSection />
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* ═════════════════════════════════════════════════════��═
           CONTACTO + CTA — fondo café, sección combinada
       ══════════════════════════════════════════════════════════ */}
       <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE, scrollMarginTop: "72px" }}>
@@ -1401,7 +1471,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* ═══��═══════════════════════════════════════════════════
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
       <motion.footer

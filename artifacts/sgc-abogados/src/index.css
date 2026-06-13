@@ -225,3 +225,9 @@
   box-shadow: none !important;
   border-color: rgba(196, 154, 24, 0.6) !important;
 }
+
+@keyframes sgc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -658,7 +658,7 @@ function TestimoniosSection() {
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
                   width: "100%", height: "100%",
-                  objectFit: "contain", objectPosition: "bottom right",
+                  objectFit: "contain", objectPosition: "bottom center",
                 }}
               />
             </div>
@@ -1222,7 +1222,7 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <FaqSection />
 
-      {/* ═════════════════════════════════════════════════════��═
+      {/* ══════════════════��══════════════════════════════════��═
           CONTACTO + CTA — fondo café, sección combinada
       ══════════════════════════════════════════════════════════ */}
       <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE, scrollMarginTop: "72px" }}>

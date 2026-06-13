@@ -330,12 +330,12 @@ function FaqSection() {
       <div className="hidden lg:block" style={{
         position: "absolute", top: 0, right: 0, bottom: 0, width: "50%",
         backgroundImage: `url(${faqImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundSize: "contain",
+        backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
-        maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.55) 40%, black 70%)",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.55) 40%, black 70%)",
-        opacity: 0.22,
+        maskImage: "linear-gradient(to right, transparent 0%, black 30%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 30%)",
+        opacity: 0.55,
         pointerEvents: "none",
         zIndex: 0,
       }} />

@@ -767,7 +767,7 @@ export default function Home() {
               top: 0 !important;
               left: 0 !important;
               right: 0 !important;
-              bottom: 100px !important;
+              bottom: 0 !important;
               pointer-events: none !important;
               z-index: 1 !important;
               overflow: hidden !important;
@@ -784,6 +784,8 @@ export default function Home() {
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
+            .sgc-hero-line1 { display: block !important; transform: translateX(-10%) !important; }
+            .sgc-hero-line2 { display: block !important; transform: translateX(10%) !important; }
           }
         `}</style>
 
@@ -807,8 +809,8 @@ export default function Home() {
                 color: TEXT, fontStyle: "normal", fontWeight: 900,
                 lineHeight: 1.15,
               }}>
-              <span style={{ display: "block" }}>{"Nuestra prioridad"}</span>
-              <span style={{ display: "block" }}>{"es tu tranquilidad legal."}</span>
+              <span className="sgc-hero-line1" style={{ display: "block" }}>{"Nuestra prioridad es"}</span>
+              <span className="sgc-hero-line2" style={{ display: "block" }}>{"tu tranquilidad legal."}</span>
             </h1>
 
             {/* Divider café — centrado */}

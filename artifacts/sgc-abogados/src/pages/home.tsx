@@ -779,6 +779,8 @@ export default function Home() {
               pointer-events: none !important;
               z-index: 1 !important;
               overflow: hidden !important;
+              -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 95%) !important;
+              mask-image: linear-gradient(to bottom, black 75%, transparent 95%) !important;
             }
             .sgc-hero-img img { display: none !important; }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }

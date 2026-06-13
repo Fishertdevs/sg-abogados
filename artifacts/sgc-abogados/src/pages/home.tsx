@@ -864,7 +864,7 @@ export default function Home() {
               width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)",
               ...(isMobile ? {
                 backgroundImage: `url(${justiceStatueImg})`,
-                backgroundSize: "130%",
+                backgroundSize: "cover",
                 backgroundPosition: "center top",
                 backgroundRepeat: "no-repeat",
                 backgroundColor: BG,

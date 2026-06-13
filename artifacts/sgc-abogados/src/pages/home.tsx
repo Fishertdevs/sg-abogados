@@ -509,6 +509,10 @@ function TestimoniosSection() {
           }
           .sgc-test-section > div {
             padding-bottom: 0 !important;
+            padding-top: 28px !important;
+          }
+          .sgc-test-section .grid {
+            gap: 12px !important;
           }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }

@@ -185,10 +185,10 @@ function AreasCarousel() {
     if (abs > 2) return { display: "none" };
     const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
     const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
-    const translateX = pos * 215;
+    const translateX = pos * 265;
     return {
       position: "absolute",
-      width: "240px",
+      width: "290px",
       transform: `translateX(${translateX}px) scale(${scale})`,
       opacity,
       zIndex: 10 - abs,
@@ -201,9 +201,9 @@ function AreasCarousel() {
   return (
     <div className="flex flex-col items-center gap-10 w-full">
 
-      {/* Card stage */}
-      <div className="relative w-full flex items-center justify-center overflow-hidden"
-        style={{ height: isMobile ? "340px" : "360px" }}>
+      {/* Card stage — overflow-x clips side cards, overflow-y visible so top/bottom rounding shows */}
+      <div className="relative w-full flex items-center justify-center"
+        style={{ height: isMobile ? "380px" : "440px", overflowX: "hidden", overflowY: "visible" }}>
         {AREAS.map((area, i) => {
           const pos = getPos(i);
           const maxVisible = isMobile ? 1 : 2;
@@ -211,37 +211,38 @@ function AreasCarousel() {
           return (
             <div key={i} style={cardStyle(pos)}
               onClick={() => pos !== 0 && setActive(i)}>
-              <div className="flex flex-col items-center p-6 md:p-8 h-full"
+              <div className="flex flex-col items-center h-full"
                 style={{
                   background: "#ffffff",
-                  minHeight: isMobile ? "300px" : "320px",
-                  borderRadius: "18px",
+                  minHeight: isMobile ? "340px" : "400px",
+                  borderRadius: "20px",
+                  padding: "20px 18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
                     : "0 8px 30px rgba(0,0,0,0.18)",
                 }}>
 
                 <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.2rem" : "2.8rem", fontWeight: 700,
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.0rem" : "2.3rem", fontWeight: 700,
                   color: TEXT, lineHeight: 1, marginBottom: "4px",
                   textAlign: "center", width: "100%",
                 }}>{area.roman}</span>
 
-                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "14px" }} />
+                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "10px" }} />
 
                 <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.78rem" : "0.88rem", fontWeight: 700,
-                  color: TEXT, letterSpacing: "0.07em", marginBottom: "12px",
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.72rem" : "0.80rem", fontWeight: 700,
+                  color: TEXT, letterSpacing: "0.07em", marginBottom: "10px",
                   textAlign: "center", width: "100%",
                 }}>{area.title}</h3>
 
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: isMobile ? "0.95rem" : "1.02rem", color: TEXT, lineHeight: 1.70, marginBottom: "14px",
+                  fontSize: isMobile ? "0.92rem" : "0.97rem", color: TEXT, lineHeight: 1.65, marginBottom: "12px",
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
-                <ul className="flex flex-col gap-2 mt-auto w-full">
+                <ul className="flex flex-col gap-1.5 mt-auto w-full">
                   {area.items.slice(0, isMobile ? 3 : 4).map((item, j) => (
                     <li key={j} className="flex items-start gap-2">
                       <div style={{
@@ -250,7 +251,7 @@ function AreasCarousel() {
                       }} />
                       <span style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "0.93rem", color: TEXT, lineHeight: 1.5,
+                        fontSize: "0.88rem", color: TEXT, lineHeight: 1.45,
                       }}>{item}</span>
                     </li>
                   ))}

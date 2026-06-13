@@ -656,7 +656,14 @@ function TestimoniosSection() {
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [nosCardIdx, setNosCardIdx] = useState(0);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 640);
   const headlineRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 640);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setNosCardIdx(p => (p + 1) % 3), 4500);
@@ -772,18 +779,7 @@ export default function Home() {
               z-index: 1 !important;
               overflow: hidden !important;
             }
-            .sgc-hero-img img {
-              position: absolute !important;
-              top: 0 !important;
-              left: 50% !important;
-              transform: translateX(-50%) !important;
-              width: auto !important;
-              min-width: 140% !important;
-              height: 100% !important;
-              object-fit: cover !important;
-              object-position: center top !important;
-              opacity: 0.22 !important;
-            }
+            .sgc-hero-img img { display: none !important; }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
@@ -863,7 +859,17 @@ export default function Home() {
 
           {/* ESTATUA — derecha, monumental */}
           <div className="sgc-hero-img hidden md:flex flex-none items-end justify-center relative pointer-events-none"
-            style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)" }}>
+            style={{
+              width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)",
+              ...(isMobile ? {
+                backgroundImage: `url(${justiceStatueImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center top",
+                backgroundRepeat: "no-repeat",
+                backgroundColor: BG,
+                opacity: 0.22,
+              } : {}),
+            }}>
 
             {/* Ambiente azul — pre-composited */}
             <div style={{

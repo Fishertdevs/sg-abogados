@@ -185,10 +185,10 @@ function AreasCarousel() {
     if (abs > 2) return { display: "none" };
     const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
     const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
-    const translateX = pos * 248;
+    const translateX = pos * 215;
     return {
       position: "absolute",
-      width: "285px",
+      width: "240px",
       transform: `translateX(${translateX}px) scale(${scale})`,
       opacity,
       zIndex: 10 - abs,
@@ -203,7 +203,7 @@ function AreasCarousel() {
 
       {/* Card stage */}
       <div className="relative w-full flex items-center justify-center overflow-hidden"
-        style={{ height: isMobile ? "380px" : "420px" }}>
+        style={{ height: isMobile ? "340px" : "360px" }}>
         {AREAS.map((area, i) => {
           const pos = getPos(i);
           const maxVisible = isMobile ? 1 : 2;
@@ -214,7 +214,7 @@ function AreasCarousel() {
               <div className="flex flex-col items-center p-6 md:p-8 h-full"
                 style={{
                   background: "#ffffff",
-                  minHeight: isMobile ? "324px" : "361px",
+                  minHeight: isMobile ? "300px" : "320px",
                   borderRadius: "18px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
@@ -876,7 +876,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="relative overflow-hidden" style={{ background: CAFE, paddingTop: "40px", paddingBottom: "120px" }}>
+      <section id="areas" className="relative overflow-hidden" style={{ background: CAFE, paddingTop: "80px", paddingBottom: "120px" }}>
         <style>{`
           @media (max-width: 640px) {
             .sgc-areas-title { font-size: 1.45rem !important; }
@@ -1018,35 +1018,27 @@ export default function Home() {
 
               {/* Carrusel desktop — mismo mecanismo que Áreas de Práctica */}
               <div className="hidden lg:block" style={{ width: "100%", marginBottom: "28px" }}>
-                <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: "420px" }}>
+                <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: "360px" }}>
                   {NOS_ITEMS.map((item, i) => {
                     let d = i - nosCardIdx;
                     if (d >  NOS_ITEMS.length / 2) d -= NOS_ITEMS.length;
                     if (d < -NOS_ITEMS.length / 2) d += NOS_ITEMS.length;
                     const abs = Math.abs(d);
-                    if (abs > 2) return null;
-                    const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
-                    const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
-                    const translateX = d * 248;
                     const st: React.CSSProperties = {
                       position: "absolute",
-                      width: "285px",
-                      transform: `translateX(${translateX}px) scale(${scale})`,
-                      opacity,
-                      zIndex: 10 - abs,
-                      transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
-                      cursor: abs === 0 ? "default" : "pointer",
-                      pointerEvents: abs > 2 ? "none" : "auto",
+                      width: "420px",
+                      opacity: abs === 0 ? 1 : 0,
+                      zIndex: abs === 0 ? 10 : 0,
+                      pointerEvents: abs === 0 ? "auto" : "none",
+                      transition: "opacity 0.55s cubic-bezier(0.16,1,0.3,1)",
                     };
                     return (
-                      <div key={i} style={st} onClick={() => d !== 0 && setNosCardIdx(i)}>
-                        <div className="flex flex-col items-center p-6 md:p-8 h-full" style={{
+                      <div key={i} style={st}>
+                        <div className="flex flex-col items-center px-10 py-8" style={{
                           background: "#ffffff",
-                          minHeight: "361px",
+                          minHeight: "320px",
                           borderRadius: "18px",
-                          boxShadow: d === 0
-                            ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
-                            : "0 8px 30px rgba(0,0,0,0.18)",
+                          boxShadow: "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)",
                         }}>
                           <span style={{
                             fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
@@ -1056,7 +1048,7 @@ export default function Home() {
                           <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "18px" }} />
                           <p style={{
                             fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: "1.05rem", color: TEXT, lineHeight: 1.82,
+                            fontSize: "1.12rem", color: TEXT, lineHeight: 1.90,
                             textAlign: "center", width: "100%",
                           }}>{item.text}</p>
                         </div>

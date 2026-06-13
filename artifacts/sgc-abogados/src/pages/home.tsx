@@ -326,19 +326,27 @@ function FaqSection() {
 
   return (
     <section className="sgc-faq-section relative overflow-hidden" style={{ backgroundColor: BG }}>
-      {/* Fondo imagen — solo mitad derecha, oculto en mobile */}
-      <div className="hidden lg:block" style={{
-        position: "absolute", top: 0, right: 0, bottom: 0, width: "50%",
-        backgroundImage: `url(${faqImg})`,
-        backgroundSize: "contain",
-        backgroundPosition: "center right",
-        backgroundRepeat: "no-repeat",
-        maskImage: "linear-gradient(to right, transparent 0%, black 30%)",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 30%)",
-        opacity: 0.55,
-        pointerEvents: "none",
-        zIndex: 0,
-      }} />
+      {/* Imagen derecha — solo desktop */}
+      <img
+        src={faqImg}
+        alt=""
+        aria-hidden="true"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          top: "50%", right: "2%",
+          transform: "translateY(-50%)",
+          width: "42%",
+          height: "auto",
+          objectFit: "contain",
+          opacity: 0.40,
+          pointerEvents: "none",
+          zIndex: 1,
+          maskImage: "linear-gradient(to right, transparent 0%, black 20%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 20%)",
+          filter: "invert(1) grayscale(1) contrast(1.4)",
+        }}
+      />
       <style>{`
         @media (max-width: 640px) {
           .sgc-faq-img-col { display: none !important; }

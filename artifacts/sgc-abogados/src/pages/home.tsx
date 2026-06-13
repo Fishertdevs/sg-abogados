@@ -774,10 +774,14 @@ export default function Home() {
             }
             .sgc-hero-img img {
               position: absolute !important;
-              inset: 0 !important;
-              width: 100% !important;
+              top: 0 !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              width: auto !important;
+              min-width: 140% !important;
               height: 100% !important;
-              object-fit: fill !important;
+              object-fit: cover !important;
+              object-position: center top !important;
               opacity: 0.22 !important;
             }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }

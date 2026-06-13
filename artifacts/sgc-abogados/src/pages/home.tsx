@@ -761,10 +761,26 @@ export default function Home() {
       <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: BG }}>
         <style>{`
           @media (max-width: 640px) {
-            .sgc-hero-wrap  { flex-direction: column !important; align-items: center !important; min-height: 100vh !important; padding-top: 70px !important; }
-            .sgc-hero-text  { padding-top: 0 !important; padding-bottom: 28px !important; order: 2; }
-            .sgc-hero-img   { display: flex !important; width: 100% !important; height: 44vw !important; min-height: 180px !important; max-height: 260px !important; order: 1; justify-content: center !important; align-items: flex-end !important; }
-            .sgc-hero-img img { width: 72vw !important; max-width: 280px !important; height: auto !important; }
+            .sgc-hero-img {
+              display: flex !important;
+              position: absolute !important;
+              inset: 0 !important;
+              width: 100% !important;
+              height: 100% !important;
+              align-items: flex-end !important;
+              justify-content: center !important;
+              pointer-events: none !important;
+              z-index: 1 !important;
+            }
+            .sgc-hero-img img {
+              width: 80vw !important;
+              max-width: 320px !important;
+              height: auto !important;
+              opacity: 0.18 !important;
+              object-fit: contain !important;
+              align-self: flex-end !important;
+            }
+            .sgc-hero-text { z-index: 2 !important; position: relative !important; }
           }
         `}</style>
 

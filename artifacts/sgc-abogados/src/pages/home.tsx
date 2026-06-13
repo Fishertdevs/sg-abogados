@@ -648,17 +648,17 @@ function TestimoniosSection() {
           {/* ── RIGHT: imagen estática (full-bleed a la derecha) ── */}
           <div className="sgc-test-img-col relative flex justify-end">
             <div style={{
-              position: "relative", width: "100%", maxWidth: "none", height: "100%", minHeight: "560px",
+              position: "relative", width: "100%", maxWidth: "none", height: "100%", minHeight: "600px",
               marginRight: "calc(50% - 50vw)",
-              maskImage: "linear-gradient(to bottom, black 66%, transparent 97%), linear-gradient(to right, transparent 0%, black 5%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 66%, transparent 97%), linear-gradient(to right, transparent 0%, black 5%)",
+              maskImage: "linear-gradient(to bottom, black 70%, transparent 98%), linear-gradient(to right, transparent 0%, black 4%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 98%), linear-gradient(to right, transparent 0%, black 4%)",
               maskComposite: "intersect",
               WebkitMaskComposite: "source-in",
             }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
                   width: "100%", height: "100%",
-                  objectFit: "cover", objectPosition: "top center",
+                  objectFit: "contain", objectPosition: "bottom right",
                 }}
               />
             </div>

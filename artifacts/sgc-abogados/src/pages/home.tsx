@@ -203,7 +203,7 @@ function AreasCarousel() {
 
       {/* Card stage — overflow-x clips side cards, overflow-y visible so top/bottom rounding shows */}
       <div className="relative w-full flex items-center justify-center"
-        style={{ height: isMobile ? "380px" : "440px", overflowX: "hidden", overflowY: "visible" }}>
+        style={{ height: isMobile ? "340px" : "390px", overflowX: "hidden", overflowY: "visible" }}>
         {AREAS.map((area, i) => {
           const pos = getPos(i);
           const maxVisible = isMobile ? 1 : 2;
@@ -211,47 +211,46 @@ function AreasCarousel() {
           return (
             <div key={i} style={cardStyle(pos)}
               onClick={() => pos !== 0 && setActive(i)}>
-              <div className="flex flex-col items-center h-full"
+              <div className="flex flex-col items-center"
                 style={{
                   background: "#ffffff",
-                  minHeight: isMobile ? "340px" : "400px",
                   borderRadius: "20px",
-                  padding: "20px 18px",
+                  padding: "14px 14px 16px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
                     : "0 8px 30px rgba(0,0,0,0.18)",
                 }}>
 
                 <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.0rem" : "2.3rem", fontWeight: 700,
-                  color: TEXT, lineHeight: 1, marginBottom: "4px",
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "1.8rem" : "2.0rem", fontWeight: 700,
+                  color: TEXT, lineHeight: 1, marginBottom: "3px",
                   textAlign: "center", width: "100%",
                 }}>{area.roman}</span>
 
-                <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "10px" }} />
+                <div style={{ width: "28px", height: "2px", background: CAFE, marginBottom: "6px" }} />
 
                 <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.72rem" : "0.80rem", fontWeight: 700,
-                  color: TEXT, letterSpacing: "0.07em", marginBottom: "10px",
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.68rem" : "0.75rem", fontWeight: 700,
+                  color: TEXT, letterSpacing: "0.07em", marginBottom: "7px",
                   textAlign: "center", width: "100%",
                 }}>{area.title}</h3>
 
                 <p style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: isMobile ? "0.92rem" : "0.97rem", color: TEXT, lineHeight: 1.65, marginBottom: "12px",
+                  fontSize: isMobile ? "0.88rem" : "0.93rem", color: TEXT, lineHeight: 1.55, marginBottom: "10px",
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
-                <ul className="flex flex-col gap-1.5 mt-auto w-full">
+                <ul className="flex flex-col gap-1 w-full">
                   {area.items.slice(0, isMobile ? 3 : 4).map((item, j) => (
-                    <li key={j} className="flex items-start gap-2">
+                    <li key={j} className="flex items-start gap-1.5">
                       <div style={{
                         width: "4px", height: "4px", background: CAFE,
-                        transform: "rotate(45deg)", marginTop: "6px", flexShrink: 0,
+                        transform: "rotate(45deg)", marginTop: "5px", flexShrink: 0,
                       }} />
                       <span style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "0.88rem", color: TEXT, lineHeight: 1.45,
+                        fontSize: "0.85rem", color: TEXT, lineHeight: 1.4,
                       }}>{item}</span>
                     </li>
                   ))}

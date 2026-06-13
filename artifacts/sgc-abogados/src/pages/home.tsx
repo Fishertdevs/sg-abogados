@@ -645,12 +645,13 @@ function TestimoniosSection() {
             </div>
           </div>
 
-          {/* ── RIGHT: imagen estática ── */}
-          <div className="sgc-test-img-col relative flex justify-center lg:justify-end">
+          {/* ── RIGHT: imagen estática (full-bleed a la derecha) ── */}
+          <div className="sgc-test-img-col relative flex justify-end">
             <div style={{
-              position: "relative", width: "100%", maxWidth: "820px", aspectRatio: "4/5",
-              maskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
+              position: "relative", width: "100%", maxWidth: "none", height: "100%", minHeight: "560px",
+              marginRight: "calc(50% - 50vw)",
+              maskImage: "linear-gradient(to bottom, black 66%, transparent 97%), linear-gradient(to right, transparent 0%, black 5%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 66%, transparent 97%), linear-gradient(to right, transparent 0%, black 5%)",
               maskComposite: "intersect",
               WebkitMaskComposite: "source-in",
             }}>

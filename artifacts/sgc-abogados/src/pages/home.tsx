@@ -215,6 +215,7 @@ function AreasCarousel() {
                 style={{
                   background: "#ffffff",
                   borderRadius: "20px",
+                  minHeight: isMobile ? "310px" : "350px",
                   padding: "14px 14px 16px",
                   boxShadow: pos === 0
                     ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"

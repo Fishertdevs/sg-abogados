@@ -304,7 +304,7 @@ const FAQS = [
 const NOS_ITEMS = [
   { label: "MISIÓN",      text: "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego." },
   { label: "VISIÓN",      text: "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad; confíe su caso a profesionales que combinan rigor académico con empatía humana." },
-  { label: "COMPROMISO",  text: "Confíe su caso a profesionales que combinan rigor académico con empatía humana y compromiso personal con la excelencia jurídica." },
+  { label: "COMPROMISO",  text: "Creemos que la justicia no es solo un resultado; es el camino recorrido junto a usted. Cada caso recibe atención personalizada, comunicación transparente y el mismo nivel de dedicación, sin importar su complejidad." },
 ];
 
 function FaqSection() {
@@ -1037,8 +1037,8 @@ export default function Home() {
                         <div className="flex flex-col items-center px-10 py-8" style={{
                           background: "#ffffff",
                           minHeight: "320px",
-                          borderRadius: "18px",
-                          boxShadow: "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)",
+                          borderRadius: "28px",
+                          boxShadow: "none",
                         }}>
                           <span style={{
                             fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,

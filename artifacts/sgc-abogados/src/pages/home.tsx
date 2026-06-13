@@ -338,12 +338,19 @@ function FaqSection() {
           width: "44%",
           height: "100%",
           objectFit: "cover",
-          objectPosition: "center top",
-          opacity: 0.30,
+          objectPosition: "top center",
           pointerEvents: "none",
           zIndex: 1,
-          maskImage: "linear-gradient(to right, transparent 0%, black 18%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 18%)",
+          maskImage: `
+            linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%),
+            linear-gradient(to right,  transparent 0%, black 18%)
+          `,
+          WebkitMaskImage: `
+            linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%),
+            linear-gradient(to right,  transparent 0%, black 18%)
+          `,
+          maskComposite: "intersect",
+          WebkitMaskComposite: "source-in",
         }}
       />
       <style>{`

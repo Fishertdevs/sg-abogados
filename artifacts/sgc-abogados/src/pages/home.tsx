@@ -864,6 +864,9 @@ export default function Home() {
           <div className="sgc-hero-img hidden md:flex flex-none items-end justify-center relative pointer-events-none"
             style={{
               width: "clamp(280px, 46vw, 650px)", height: "100vh", transform: "translateZ(0)",
+              overflow: "hidden",
+              maskImage: "linear-gradient(to bottom, black 60%, transparent 92%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 92%)",
               ...(isMobile ? {
                 backgroundImage: `url(${justiceStatueImg})`,
                 backgroundSize: "cover",

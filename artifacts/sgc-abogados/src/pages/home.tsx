@@ -775,7 +775,7 @@ export default function Home() {
               left: 0 !important;
               right: 0 !important;
               width: 100% !important;
-              height: calc(100% - 90px) !important;
+              height: 100% !important;
               pointer-events: none !important;
               z-index: 1 !important;
               overflow: hidden !important;
@@ -865,7 +865,7 @@ export default function Home() {
               ...(isMobile ? {
                 backgroundImage: `url(${justiceStatueImg})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center top",
+                backgroundPosition: "center bottom",
                 backgroundRepeat: "no-repeat",
                 backgroundColor: BG,
                 opacity: 0.22,

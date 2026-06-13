@@ -889,13 +889,15 @@ export default function Home() {
         <style>{`
           @media (max-width: 640px) {
             .sgc-areas-title { font-size: 1.45rem !important; }
+            #areas { padding-top: 32px !important; }
+            .sgc-areas-header { margin-bottom: 24px !important; }
           }
         `}</style>
 
         <div className="max-w-7xl mx-auto px-8 md:px-14 lg:px-20">
 
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="sgc-areas-header text-center mb-16">
             <span style={{
               fontFamily: "'Cinzel', serif",
               fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",

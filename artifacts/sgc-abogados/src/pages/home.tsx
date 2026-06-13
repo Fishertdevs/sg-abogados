@@ -762,23 +762,25 @@ export default function Home() {
         <style>{`
           @media (max-width: 640px) {
             .sgc-hero-img {
-              display: flex !important;
+              display: block !important;
               position: absolute !important;
               inset: 0 !important;
               width: 100% !important;
               height: 100% !important;
-              align-items: flex-end !important;
-              justify-content: center !important;
               pointer-events: none !important;
               z-index: 1 !important;
+              overflow: hidden !important;
             }
             .sgc-hero-img img {
-              width: 80vw !important;
-              max-width: 320px !important;
-              height: auto !important;
-              opacity: 0.18 !important;
-              object-fit: contain !important;
-              align-self: flex-end !important;
+              position: absolute !important;
+              bottom: 0 !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              width: 100% !important;
+              height: 100% !important;
+              object-fit: cover !important;
+              object-position: top center !important;
+              opacity: 0.22 !important;
             }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
           }

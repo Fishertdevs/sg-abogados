@@ -242,17 +242,20 @@ function AreasCarousel() {
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
-                <ul className="flex flex-col gap-1 w-full">
-                  {area.items.slice(0, isMobile ? 3 : 4).map((item, j) => (
-                    <li key={j} className="flex items-start gap-1.5">
-                      <div style={{
-                        width: "4px", height: "4px", background: CAFE,
-                        transform: "rotate(45deg)", marginTop: "5px", flexShrink: 0,
-                      }} />
-                      <span style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "0.85rem", color: TEXT, lineHeight: 1.4,
-                      }}>{item}</span>
+                <ul className="flex flex-col w-full" style={{ marginTop: "4px" }}>
+                  {area.items.slice(0, isMobile ? 3 : 4).map((item, j, arr) => (
+                    <li key={j}>
+                      {j > 0 && <div style={{ width: "100%", height: "1px", background: `${CAFE}22`, marginBottom: "6px" }} />}
+                      <div className="flex items-center gap-2" style={{ paddingBottom: "6px" }}>
+                        <div style={{
+                          width: "4px", height: "4px", background: CAFE,
+                          transform: "rotate(45deg)", flexShrink: 0,
+                        }} />
+                        <span style={{
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: "0.88rem", color: TEXT, lineHeight: 1.4,
+                        }}>{item}</span>
+                      </div>
                     </li>
                   ))}
                 </ul>

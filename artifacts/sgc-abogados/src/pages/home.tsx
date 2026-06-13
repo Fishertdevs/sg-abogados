@@ -339,12 +339,11 @@ function FaqSection() {
           height: "100%",
           objectFit: "cover",
           objectPosition: "center top",
-          opacity: 0.25,
+          opacity: 0.30,
           pointerEvents: "none",
           zIndex: 1,
-          maskImage: "linear-gradient(to right, transparent 0%, black 20%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 20%)",
-          filter: "invert(1) grayscale(1) contrast(1.3)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 18%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 18%)",
         }}
       />
       <style>{`

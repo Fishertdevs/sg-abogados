@@ -777,8 +777,7 @@ export default function Home() {
               inset: 0 !important;
               width: 100% !important;
               height: 100% !important;
-              object-fit: cover !important;
-              object-position: top center !important;
+              object-fit: fill !important;
               opacity: 0.22 !important;
             }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }

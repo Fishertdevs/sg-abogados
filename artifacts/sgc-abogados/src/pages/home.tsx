@@ -759,6 +759,14 @@ export default function Home() {
           HERO — título centrado, sin eyebrow ni stats
       ══════════════════════════════════════════════════════════ */}
       <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: BG }}>
+        <style>{`
+          @media (max-width: 640px) {
+            .sgc-hero-wrap  { flex-direction: column !important; align-items: center !important; min-height: 100vh !important; padding-top: 70px !important; }
+            .sgc-hero-text  { padding-top: 0 !important; padding-bottom: 28px !important; order: 2; }
+            .sgc-hero-img   { display: flex !important; width: 100% !important; height: 44vw !important; min-height: 180px !important; max-height: 260px !important; order: 1; justify-content: center !important; align-items: flex-end !important; }
+            .sgc-hero-img img { width: 72vw !important; max-width: 280px !important; height: auto !important; }
+          }
+        `}</style>
 
         {/* Ambient azul detrás de estatua */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -767,10 +775,10 @@ export default function Home() {
         }} />
 
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
-        <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
+        <div className="sgc-hero-wrap relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
           {/* TEXT — centrado dentro de su columna */}
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
+          <div className="sgc-hero-text flex-1 flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
 
             {/* Headline */}
             <h1 ref={headlineRef} className="mb-6 md:mb-8 w-full"
@@ -829,7 +837,7 @@ export default function Home() {
           </div>
 
           {/* ESTATUA — derecha, monumental */}
-          <div className="hidden md:flex flex-none items-end justify-center relative pointer-events-none"
+          <div className="sgc-hero-img hidden md:flex flex-none items-end justify-center relative pointer-events-none"
             style={{ width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)" }}>
 
             {/* Ambiente azul — pre-composited */}

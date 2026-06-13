@@ -326,15 +326,6 @@ function FaqSection() {
 
   return (
     <section className="sgc-faq-section relative overflow-hidden" style={{ backgroundColor: BG }}>
-      {/* Ola superior: cubre el gap entre la sección anterior y la imagen */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none", zIndex: 3 }}>
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "48px" }}>
-          <path
-            d="M0,0 L1440,0 L1440,60 C1420,50 1360,78 1280,55 C1100,0 860,75 720,45 C580,10 420,100 0,70 Z"
-            fill={CAFE}
-          />
-        </svg>
-      </div>
       {/* Imagen derecha — ocupa toda la altura de la sección, solo desktop */}
       <img
         src={faqImg}

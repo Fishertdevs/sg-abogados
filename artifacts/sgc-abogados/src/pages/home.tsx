@@ -242,7 +242,8 @@ function AreasCarousel() {
                   textAlign: "center", width: "100%",
                 }}>{area.desc}</p>
 
-                <ul className="flex flex-col w-full" style={{ marginTop: "4px" }}>
+                <div style={{ width: "100%", height: "1px", background: `${CAFE}28`, margin: "12px 0 10px" }} />
+                <ul className="flex flex-col w-full">
                   {area.items.slice(0, isMobile ? 3 : 4).map((item, j, arr) => (
                     <li key={j}>
                       {j > 0 && <div style={{ width: "100%", height: "1px", background: `${CAFE}22`, marginBottom: "6px" }} />}

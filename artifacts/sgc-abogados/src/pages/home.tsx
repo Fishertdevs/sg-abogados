@@ -764,18 +764,17 @@ export default function Home() {
             .sgc-hero-img {
               display: block !important;
               position: absolute !important;
-              inset: 0 !important;
-              width: 100% !important;
-              height: 100% !important;
+              top: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              bottom: 100px !important;
               pointer-events: none !important;
               z-index: 1 !important;
               overflow: hidden !important;
             }
             .sgc-hero-img img {
               position: absolute !important;
-              bottom: 0 !important;
-              left: 50% !important;
-              transform: translateX(-50%) !important;
+              inset: 0 !important;
               width: 100% !important;
               height: 100% !important;
               object-fit: cover !important;
@@ -783,7 +782,7 @@ export default function Home() {
               opacity: 0.22 !important;
             }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
-            .sgc-hero-sub  { text-align: left !important; font-size: 0.95rem !important; padding: 0 !important; }
+            .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
           }
         `}</style>

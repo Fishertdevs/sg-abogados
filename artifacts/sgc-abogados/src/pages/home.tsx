@@ -223,7 +223,7 @@ function AreasCarousel() {
                 }}>
 
                 <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "1.8rem" : "2.0rem", fontWeight: 700,
+                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.2rem" : "2.8rem", fontWeight: 700,
                   color: TEXT, lineHeight: 1, marginBottom: "3px",
                   textAlign: "center", width: "100%",
                 }}>{area.roman}</span>

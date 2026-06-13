@@ -784,8 +784,9 @@ export default function Home() {
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
-            .sgc-hero-line1 { display: block !important; transform: translateX(-10%) !important; }
-            .sgc-hero-line2 { display: block !important; transform: translateX(10%) !important; }
+            .sgc-hero-h1    { font-size: 1.6rem !important; white-space: nowrap !important; }
+            .sgc-hero-line1 { display: block !important; transform: translateX(-8%) !important; }
+            .sgc-hero-line2 { display: block !important; transform: translateX(8%) !important; }
           }
         `}</style>
 
@@ -802,7 +803,7 @@ export default function Home() {
           <div className="sgc-hero-text flex-1 flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
 
             {/* Headline */}
-            <h1 ref={headlineRef} className="mb-6 md:mb-8 w-full"
+            <h1 ref={headlineRef} className="sgc-hero-h1 mb-6 md:mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(1.75rem, 4.0vw, 3.6rem)",

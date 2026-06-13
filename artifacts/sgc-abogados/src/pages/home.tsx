@@ -326,27 +326,25 @@ function FaqSection() {
 
   return (
     <section className="sgc-faq-section relative overflow-hidden" style={{ backgroundColor: BG }}>
-      {/* Imagen derecha — solo desktop */}
-      <img
-        src={faqImg}
-        alt=""
-        aria-hidden="true"
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          top: "50%", right: "2%",
-          transform: "translateY(-50%)",
-          width: "42%",
-          height: "auto",
-          objectFit: "contain",
-          opacity: 0.40,
-          pointerEvents: "none",
-          zIndex: 1,
-          maskImage: "linear-gradient(to right, transparent 0%, black 20%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 20%)",
-          filter: "invert(1) grayscale(1) contrast(1.4)",
-        }}
-      />
+      {/* Panel derecho estilo Nosotros — solo desktop */}
+      <div className="hidden lg:block" style={{
+        position: "absolute", top: 0, right: 0, bottom: 0, width: "46%",
+        backgroundImage: `url(${faqImg})`,
+        backgroundSize: "contain",
+        backgroundPosition: "center right",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#1a3d7c",
+        maskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+        pointerEvents: "none",
+        zIndex: 0,
+      }}>
+        {/* Overlay degradado igual que Nosotros */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to bottom, rgba(26,61,124,0.55) 0%, rgba(26,61,124,0.30) 50%, rgba(26,61,124,0.55) 100%)",
+        }} />
+      </div>
       <style>{`
         @media (max-width: 640px) {
           .sgc-faq-img-col { display: none !important; }

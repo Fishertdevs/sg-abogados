@@ -492,7 +492,6 @@ function TestimoniosSection() {
     <section className="sgc-test-section relative" style={{ background: BG }}>
       <style>{`
         @media (max-width: 640px) {
-          .sgc-test-section { display: none !important; }
           .sgc-test-img-col {
             margin-left: -1.5rem !important;
             margin-right: -1.5rem !important;
@@ -509,7 +508,7 @@ function TestimoniosSection() {
             object-position: top center !important;
           }
           .sgc-test-section > div {
-            padding-bottom: 100px !important;
+            padding-bottom: 40px !important;
           }
           .sgc-test-label   { font-size: 0.58rem !important; margin-bottom: 10px !important; }
           .sgc-test-title   { font-size: 1.45rem !important; margin-bottom: 8px !important; }

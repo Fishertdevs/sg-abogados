@@ -774,7 +774,8 @@ export default function Home() {
               top: 0 !important;
               left: 0 !important;
               right: 0 !important;
-              bottom: 0 !important;
+              width: 100% !important;
+              height: calc(100% - 90px) !important;
               pointer-events: none !important;
               z-index: 1 !important;
               overflow: hidden !important;

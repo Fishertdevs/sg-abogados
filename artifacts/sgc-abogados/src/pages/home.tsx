@@ -301,6 +301,12 @@ const FAQS = [
   },
 ];
 
+const NOS_ITEMS = [
+  { label: "MISIÓN",      text: "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego." },
+  { label: "VISIÓN",      text: "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad; confíe su caso a profesionales que combinan rigor académico con empatía humana." },
+  { label: "COMPROMISO",  text: "Confíe su caso a profesionales que combinan rigor académico con empatía humana y compromiso personal con la excelencia jurídica." },
+];
+
 function FaqSection() {
   const [idx, setIdx] = useState(0);
 
@@ -1010,18 +1016,68 @@ export default function Home() {
             {/* ── COLUMNA DERECHA: contenido centrado ── */}
             <div className="sgc-nos-content flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
 
-              {/* Párrafos — solo 2 */}
-              {[
-                "SGC Abogados nace de la convicción de que el ejercicio del derecho debe ser, ante todo, humano. Entendemos que detrás de cada expediente hay historias de vida, patrimonio y tranquilidad en juego.",
-                "Nos alejamos de la frialdad corporativa para ofrecer un acompañamiento donde usted es escuchado y comprendido. Su tranquilidad es nuestra prioridad; confíe su caso a profesionales que combinan rigor académico con empatía humana.",
-              ].map((txt, i) => (
-                <p key={i} className="sgc-nos-para" style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.16rem", color: "rgba(255,255,255,0.80)", lineHeight: 1.94,
-                  marginBottom: i === 0 ? "18px" : "32px",
-                  textAlign: "center",
-                }}>{txt}</p>
-              ))}
+              {/* Carrusel desktop — mismo mecanismo que Áreas de Práctica */}
+              <div className="hidden lg:block" style={{ width: "100%", marginBottom: "28px" }}>
+                <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: "420px" }}>
+                  {NOS_ITEMS.map((item, i) => {
+                    let d = i - nosCardIdx;
+                    if (d >  NOS_ITEMS.length / 2) d -= NOS_ITEMS.length;
+                    if (d < -NOS_ITEMS.length / 2) d += NOS_ITEMS.length;
+                    const abs = Math.abs(d);
+                    if (abs > 2) return null;
+                    const scale   = abs === 0 ? 1 : abs === 1 ? 0.80 : 0.64;
+                    const opacity = abs === 0 ? 1 : abs === 1 ? 0.50 : 0.22;
+                    const translateX = d * 248;
+                    const st: React.CSSProperties = {
+                      position: "absolute",
+                      width: "285px",
+                      transform: `translateX(${translateX}px) scale(${scale})`,
+                      opacity,
+                      zIndex: 10 - abs,
+                      transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
+                      cursor: abs === 0 ? "default" : "pointer",
+                      pointerEvents: abs > 2 ? "none" : "auto",
+                    };
+                    return (
+                      <div key={i} style={st} onClick={() => d !== 0 && setNosCardIdx(i)}>
+                        <div className="flex flex-col items-center p-6 md:p-8 h-full" style={{
+                          background: "#ffffff",
+                          minHeight: "361px",
+                          borderRadius: "18px",
+                          boxShadow: d === 0
+                            ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
+                            : "0 8px 30px rgba(0,0,0,0.18)",
+                        }}>
+                          <span style={{
+                            fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
+                            color: TEXT, letterSpacing: "0.12em", marginBottom: "10px",
+                            textAlign: "center", width: "100%",
+                          }}>{item.label}</span>
+                          <div style={{ width: "36px", height: "2px", background: CAFE, marginBottom: "18px" }} />
+                          <p style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: "1.05rem", color: TEXT, lineHeight: 1.82,
+                            textAlign: "center", width: "100%",
+                          }}>{item.text}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex items-center gap-2.5 justify-center">
+                  {NOS_ITEMS.map((_, i) => (
+                    <button key={i} onClick={() => setNosCardIdx(i)}
+                      style={{
+                        width: i === nosCardIdx ? "24px" : "8px",
+                        height: "8px", borderRadius: "4px",
+                        background: i === nosCardIdx ? "#ffffff" : "rgba(255,255,255,0.30)",
+                        border: "none", cursor: "pointer", padding: 0,
+                        transition: "all 0.35s ease",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
 
               {/* Tarjetas móvil — Misión / Visión / Compromiso (ocultas en desktop) */}
               <div className="sgc-nos-cards" style={{ display: "none", width: "100%", marginBottom: "20px" }}>

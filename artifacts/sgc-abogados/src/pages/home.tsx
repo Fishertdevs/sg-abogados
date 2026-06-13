@@ -1045,57 +1045,41 @@ export default function Home() {
           </div>
 
           {/* Grid: imagen izquierda + contenido centrado derecha */}
-          <div className="grid grid-cols-1 lg:grid-cols-[58%_42%] gap-0 items-start">
+          <div className="sgc-nos-content flex flex-col items-center text-center">
 
-            {/* ── COLUMNA IZQUIERDA: ilustración estática ── */}
-            <div
-              className="hidden lg:flex items-center justify-start relative overflow-hidden"
-              style={{ height: "420px" }}
-            >
-              {/* Ilustración */}
-              <img
-                src={nosotrosImg}
-                alt="Pergaminos — SGC Abogados"
-                style={{
-                  width: "133%",
-                  height: "100%",
-                  objectFit: "contain",
-                  objectPosition: "left center",
-                  filter: "grayscale(1) brightness(1.15) contrast(1.1)",
-                  mixBlendMode: "screen",
-                  position: "relative", zIndex: 1,
-                  marginLeft: "-5%",
-                }}
-              />
-            </div>
-
-            {/* ── COLUMNA DERECHA: contenido centrado ── */}
-            <div className="sgc-nos-content flex flex-col items-center text-center px-4 md:px-8 lg:px-10">
-
-              {/* Carrusel desktop — mismo mecanismo que Áreas de Práctica */}
+              {/* Carrusel desktop — animaciones translateX+escala igual que Áreas de Práctica */}
               <div className="hidden lg:block" style={{ width: "100%", marginBottom: "28px" }}>
-                <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ height: "360px" }}>
+                <div className="relative w-full flex items-center justify-center"
+                  style={{ height: "390px", overflowX: "hidden", overflowY: "visible" }}>
                   {NOS_ITEMS.map((item, i) => {
                     let d = i - nosCardIdx;
                     if (d >  NOS_ITEMS.length / 2) d -= NOS_ITEMS.length;
                     if (d < -NOS_ITEMS.length / 2) d += NOS_ITEMS.length;
                     const abs = Math.abs(d);
+                    if (abs > 1) return null;
+                    const scale   = abs === 0 ? 1 : 0.80;
+                    const opacity = abs === 0 ? 1 : 0.45;
+                    const translateX = d * 320;
                     const st: React.CSSProperties = {
                       position: "absolute",
-                      width: "420px",
-                      opacity: abs === 0 ? 1 : 0,
-                      zIndex: abs === 0 ? 10 : 0,
-                      pointerEvents: abs === 0 ? "auto" : "none",
-                      transition: "opacity 0.55s cubic-bezier(0.16,1,0.3,1)",
+                      width: "480px",
+                      transform: `translateX(${translateX}px) scale(${scale})`,
+                      opacity,
+                      zIndex: 10 - abs,
+                      transition: "all 0.55s cubic-bezier(0.16,1,0.3,1)",
+                      cursor: abs === 0 ? "default" : "pointer",
+                      pointerEvents: "auto",
                     };
                     return (
-                      <div key={i} style={st}>
+                      <div key={i} style={st} onClick={() => abs !== 0 && setNosCardIdx(i)}>
                         <div className="flex flex-col items-center px-10 py-8" style={{
                           background: "rgba(240,244,250,0.97)",
                           border: "1px solid rgba(26,61,124,0.12)",
-                          minHeight: "320px",
+                          minHeight: "340px",
                           borderRadius: "14px",
-                          boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+                          boxShadow: abs === 0
+                            ? "0 24px 70px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.14)"
+                            : "0 8px 30px rgba(0,0,0,0.14)",
                         }}>
                           <span style={{
                             fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
@@ -1113,7 +1097,7 @@ export default function Home() {
                     );
                   })}
                 </div>
-                <div className="flex items-center gap-2.5 justify-center">
+                <div className="flex items-center gap-2.5 justify-center" style={{ marginTop: "16px" }}>
                   {NOS_ITEMS.map((_, i) => (
                     <button key={i} onClick={() => setNosCardIdx(i)}
                       style={{
@@ -1197,7 +1181,6 @@ export default function Home() {
               >AGENDAR CONSULTA</a>
 
             </div>
-          </div>
         </div>
 
         {/* Ola inferior: negro → blanco (FAQ) */}

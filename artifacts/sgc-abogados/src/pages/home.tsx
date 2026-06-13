@@ -774,9 +774,13 @@ export default function Home() {
             }
             .sgc-hero-img img {
               position: absolute !important;
-              inset: 0 !important;
-              width: 100% !important;
+              top: 0 !important;
+              left: 50% !important;
+              transform: translateX(-50%) scale(1.5) !important;
+              transform-origin: top center !important;
+              width: auto !important;
               height: 100% !important;
+              min-width: 100% !important;
               object-fit: cover !important;
               object-position: top center !important;
               opacity: 0.22 !important;

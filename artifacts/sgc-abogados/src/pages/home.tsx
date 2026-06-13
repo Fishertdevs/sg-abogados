@@ -783,6 +783,8 @@ export default function Home() {
               opacity: 0.22 !important;
             }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
+            .sgc-hero-sub  { text-align: left !important; font-size: 0.95rem !important; padding: 0 !important; }
+            .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
           }
         `}</style>
 
@@ -819,7 +821,7 @@ export default function Home() {
             </div>
 
             {/* Texto de bienvenida profesional */}
-            <p ref={subRef} style={{
+            <p ref={subRef} className="sgc-hero-sub" style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: TEXT, lineHeight: 1.85,
@@ -830,7 +832,7 @@ export default function Home() {
             </p>
 
             {/* CTAs */}
-            <div ref={ctaRef} className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+            <div ref={ctaRef} className="sgc-hero-ctas flex items-center justify-center gap-8 md:gap-12 flex-wrap">
               <a href="#contacto"
                 className="inline-flex items-center transition-colors duration-300"
                 style={{

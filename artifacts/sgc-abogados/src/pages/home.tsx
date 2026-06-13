@@ -991,28 +991,22 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
-      <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{ backgroundColor: "#1a3d7c", scrollMarginTop: "90px" }}>
+      <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{
+          backgroundColor: "#1a3d7c",
+          backgroundImage: `url('${nosotrosImg}')`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom center",
+          scrollMarginTop: "90px",
+        }}>
+        {/* Overlay azul global */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
+          background: "linear-gradient(to bottom, rgba(26,61,124,1.00) 0%, rgba(26,61,124,0.88) 16%, rgba(26,61,124,0.72) 30%, rgba(26,61,124,0.60) 100%)",
+        }} />
         <style>{`
+          .sgc-nos-section > * { position: relative; z-index: 1; }
           @media (max-width: 640px) {
-            .sgc-nos-section {
-              background-image: url('${nosotrosImg}');
-              background-size: cover;
-              background-repeat: no-repeat;
-              background-position: bottom center;
-            }
-            .sgc-nos-section::before {
-              content: '';
-              position: absolute;
-              inset: 0;
-              background: linear-gradient(to bottom,
-                rgba(26,61,124,1.00) 0%,
-                rgba(26,61,124,0.88) 16%,
-                rgba(26,61,124,0.72) 30%,
-                rgba(26,61,124,0.60) 100%);
-              pointer-events: none;
-              z-index: 0;
-            }
-            .sgc-nos-section > * { position: relative; z-index: 1; }
             .sgc-nos-inner    { padding-top: 14px !important; padding-bottom: 120px !important; }
             .sgc-nos-header   { margin-bottom: 14px !important; }
             .sgc-nos-title    { font-size: 1.45rem !important; }
@@ -1097,10 +1091,11 @@ export default function Home() {
                     return (
                       <div key={i} style={st}>
                         <div className="flex flex-col items-center px-10 py-8" style={{
-                          background: "#ffffff",
+                          background: "rgba(240,244,250,0.97)",
+                          border: "1px solid rgba(26,61,124,0.12)",
                           minHeight: "320px",
-                          borderRadius: "28px",
-                          boxShadow: "none",
+                          borderRadius: "14px",
+                          boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
                         }}>
                           <span style={{
                             fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,

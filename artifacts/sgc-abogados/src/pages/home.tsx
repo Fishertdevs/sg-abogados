@@ -785,9 +785,9 @@ export default function Home() {
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
             .sgc-hero-h1    { font-size: 1.6rem !important; white-space: nowrap !important; }
-            .sgc-hero-line1 { display: block !important; transform: translateX(-8%) !important; }
-            .sgc-hero-line2 { display: block !important; transform: translateX(8%) !important; }
           }
+          .sgc-hero-line1 { display: block; transform: translateX(-8%); }
+          .sgc-hero-line2 { display: block; transform: translateX(8%); }
         `}</style>
 
         {/* Ambient azul detrás de estatua */}
@@ -864,7 +864,7 @@ export default function Home() {
               width: "clamp(252px, 41vw, 594px)", height: "100vh", transform: "translateZ(0)",
               ...(isMobile ? {
                 backgroundImage: `url(${justiceStatueImg})`,
-                backgroundSize: "cover",
+                backgroundSize: "130%",
                 backgroundPosition: "center top",
                 backgroundRepeat: "no-repeat",
                 backgroundColor: BG,

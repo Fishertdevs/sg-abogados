@@ -492,6 +492,7 @@ function TestimoniosSection() {
     <section className="sgc-test-section relative" style={{ background: BG }}>
       <style>{`
         @media (max-width: 640px) {
+          .sgc-test-section { display: none !important; }
           .sgc-test-img-col {
             margin-left: -1.5rem !important;
             margin-right: -1.5rem !important;

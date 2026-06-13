@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import CookiesPage from "@/pages/cookies";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
+import AdminPage from "@/pages/admin";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/cookies" component={CookiesPage} />
       <Route path="/privacidad" component={PrivacyPage} />
       <Route path="/terminos" component={TermsPage} />
+      <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
     </Switch>
   );

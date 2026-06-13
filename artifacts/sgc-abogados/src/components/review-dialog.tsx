@@ -56,15 +56,31 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
     }
 
     setStatus("sending");
+
+    // Open the WhatsApp tab synchronously (inside the user gesture) so the
+    // popup blocker doesn't stop it; we set its URL once the request resolves.
+    const waTab = window.open("", "_blank");
+
     try {
-      await submitReview({
+      const { whatsappUrl } = await submitReview({
         name: name.trim(),
         role: role.trim(),
         quote: quote.trim(),
         stars,
       });
+
+      if (whatsappUrl && waTab && !waTab.closed) {
+        waTab.location.href = whatsappUrl;
+      } else if (whatsappUrl) {
+        // Fallback if the pre-opened tab was blocked.
+        window.location.href = whatsappUrl;
+      } else if (waTab && !waTab.closed) {
+        waTab.close();
+      }
+
       setStatus("done");
     } catch (err) {
+      if (waTab && !waTab.closed) waTab.close();
       setStatus("idle");
       setError(
         err instanceof Error

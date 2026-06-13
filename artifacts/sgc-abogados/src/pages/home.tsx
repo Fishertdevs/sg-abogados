@@ -863,7 +863,7 @@ export default function Home() {
           {/* ESTATUA — derecha, monumental */}
           <div className="sgc-hero-img hidden md:flex flex-none items-end justify-center relative pointer-events-none"
             style={{
-              width: "clamp(320px, 52vw, 780px)", height: "100vh", transform: "translateZ(0)",
+              width: "clamp(280px, 46vw, 650px)", height: "100vh", transform: "translateZ(0)",
               ...(isMobile ? {
                 backgroundImage: `url(${justiceStatueImg})`,
                 backgroundSize: "cover",
@@ -890,7 +890,7 @@ export default function Home() {
               alt="Diosa de la Justicia, Themis — SGC Abogados"
               style={{
                 position: "relative", zIndex: 10,
-                width: "clamp(420px, 50vw, 760px)",
+                width: "clamp(360px, 44vw, 660px)",
                 height: "auto", objectFit: "contain",
                 filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(26,61,124,0.16))",
                 alignSelf: "flex-end",

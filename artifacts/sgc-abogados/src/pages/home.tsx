@@ -330,8 +330,8 @@ function FaqSection() {
       <div className="hidden lg:block" style={{
         position: "absolute", top: 0, right: 0, bottom: 0, width: "46%",
         backgroundImage: `url(${faqImg})`,
-        backgroundSize: "contain",
-        backgroundPosition: "center right",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
         backgroundColor: "#1a3d7c",
         maskImage: "linear-gradient(to right, transparent 0%, black 22%)",

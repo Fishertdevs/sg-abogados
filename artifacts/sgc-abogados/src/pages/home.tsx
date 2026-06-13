@@ -431,17 +431,13 @@ function FaqSection() {
             </div>
           </div>
 
-          {/* ── RIGHT: imagen (CSS background-image, misma posición y tamaño) ── */}
+          {/* ── RIGHT: imagen ── */}
           <div className="sgc-faq-img-col relative flex justify-end">
-            <div style={{
-              width: "90%",
-              maxWidth: "450px",
-              aspectRatio: "3/4",
-              backgroundImage: `url(${faqImg})`,
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            }} role="img" aria-label="SGC Abogados — Preguntas frecuentes" />
+            <div style={{ position: "relative", width: "90%", maxWidth: "450px", aspectRatio: "3/4" }}>
+              <img src={faqImg} alt="SGC Abogados — Preguntas frecuentes"
+                style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }}
+              />
+            </div>
           </div>
 
         </div>

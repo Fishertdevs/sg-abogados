@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { query } from "./_lib/db";
-import { applyCors, generateToken, requestOrigin } from "./_lib/http";
-import { buildReviewMessage, sendWhatsApp } from "./_lib/whatsapp";
+import { applyCors, requestOrigin } from "./_lib/http";
+import { buildReviewMessage, buildWhatsAppUrl } from "./_lib/whatsapp";
 
 interface ReviewRow {
   id: string;
@@ -63,42 +63,29 @@ export default async function handler(
         return;
       }
 
-      const token = generateToken();
-
-      const inserted = await query<{ id: string }>(
+      // action_token kept for schema compatibility; not used for moderation.
+      await query(
         `insert into reviews (name, role, quote, stars, status, action_token)
-         values ($1, $2, $3, $4, 'pending', $5)
-         returning id`,
-        [name, role, quote, stars, token],
+         values ($1, $2, $3, $4, 'pending', '')`,
+        [name, role, quote, stars],
       );
 
-      const reviewId = inserted[0]?.id;
-
-      // Build moderation links and notify the admin via WhatsApp.
+      // Build a wa.me link so the user's browser can open WhatsApp with a
+      // pre-filled notification to the admin. No external API is used.
       const origin = requestOrigin(req);
-      const approveUrl = `${origin}/api/reviews/moderate?id=${reviewId}&token=${token}&action=approve`;
-      const rejectUrl = `${origin}/api/reviews/moderate?id=${reviewId}&token=${token}&action=reject`;
-
-      try {
-        await sendWhatsApp(
-          buildReviewMessage({
-            name,
-            role,
-            quote,
-            stars,
-            approveUrl,
-            rejectUrl,
-          }),
-        );
-      } catch (err) {
-        // The review is saved even if the WhatsApp notification fails;
-        // we log the error but still return success to the user.
-        console.error("[v0] WhatsApp notification failed:", err);
-      }
+      const message = buildReviewMessage({
+        name,
+        role,
+        quote,
+        stars,
+        adminUrl: `${origin}/admin`,
+      });
+      const whatsappUrl = buildWhatsAppUrl(message);
 
       res.status(201).json({
         ok: true,
         message: "¡Gracias por tu reseña! Será revisada antes de publicarse.",
+        whatsappUrl,
       });
       return;
     }

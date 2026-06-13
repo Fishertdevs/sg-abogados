@@ -1,11 +1,18 @@
 /**
- * Sends a WhatsApp message to the admin through the Twilio REST API.
- * Uses fetch (no SDK) to keep the serverless bundle small.
+ * Builds a WhatsApp notification for the admin WITHOUT any external API.
+ * The frontend opens the resulting wa.me link so the message is pre-filled
+ * and addressed to the admin number — no Twilio or paid service required.
  */
+
+/** Admin WhatsApp number (Colombia). Override with ADMIN_WHATSAPP_TO env var. */
+function adminNumber(): string {
+  const raw = process.env.ADMIN_WHATSAPP_TO ?? "573112512939";
+  // wa.me expects digits only (country code + number, no "+" or spaces).
+  return raw.replace(/[^\d]/g, "");
+}
 
 /** Returns a Spanish greeting based on the current hour in Bogotá (UTC-5). */
 export function greetingForNow(date = new Date()): string {
-  // Convert to America/Bogota local hour (UTC-5, no DST).
   const bogotaHour = Number(
     new Intl.DateTimeFormat("es-CO", {
       timeZone: "America/Bogota",
@@ -24,8 +31,7 @@ export interface ReviewMessageInput {
   role?: string | null;
   quote: string;
   stars: number;
-  approveUrl: string;
-  rejectUrl: string;
+  adminUrl: string;
 }
 
 /** Builds the admin notification body for a new review. */
@@ -39,50 +45,11 @@ export function buildReviewMessage(input: ReviewMessageInput): string {
     `El usuario *${input.name}*${roleLine} ha escrito una reseña:\n\n` +
     `${starLine}\n` +
     `"${input.quote}"\n\n` +
-    `¿Deseas aprobar o eliminar la reseña?\n\n` +
-    `✅ Aprobar: ${input.approveUrl}\n` +
-    `🗑️ Eliminar: ${input.rejectUrl}`
+    `Para aprobarla o eliminarla, ingresa al panel:\n${input.adminUrl}`
   );
 }
 
-/** Sends a WhatsApp message via Twilio. Throws if Twilio is not configured. */
-export async function sendWhatsApp(body: string): Promise<void> {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const from = process.env.TWILIO_WHATSAPP_FROM;
-  const to = process.env.ADMIN_WHATSAPP_TO;
-
-  if (!accountSid || !authToken || !from || !to) {
-    throw new Error(
-      "Twilio is not configured. Set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM and ADMIN_WHATSAPP_TO.",
-    );
-  }
-
-  const normalize = (n: string) =>
-    n.startsWith("whatsapp:") ? n : `whatsapp:${n}`;
-
-  const params = new URLSearchParams({
-    From: normalize(from),
-    To: normalize(to),
-    Body: body,
-  });
-
-  const res = await fetch(
-    `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
-    {
-      method: "POST",
-      headers: {
-        Authorization:
-          "Basic " +
-          Buffer.from(`${accountSid}:${authToken}`).toString("base64"),
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    },
-  );
-
-  if (!res.ok) {
-    const detail = await res.text();
-    throw new Error(`Twilio error ${res.status}: ${detail}`);
-  }
+/** Builds a wa.me deep link that opens WhatsApp with the message pre-filled. */
+export function buildWhatsAppUrl(message: string): string {
+  return `https://wa.me/${adminNumber()}?text=${encodeURIComponent(message)}`;
 }

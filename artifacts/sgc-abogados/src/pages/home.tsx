@@ -645,20 +645,19 @@ function TestimoniosSection() {
             </div>
           </div>
 
-          {/* ── RIGHT: imagen estática (full-bleed a la derecha) ── */}
-          <div className="sgc-test-img-col relative flex justify-end">
+          {/* ── RIGHT: imagen estática ── */}
+          <div className="sgc-test-img-col relative flex justify-center lg:justify-end">
             <div style={{
-              position: "relative", width: "100%", maxWidth: "none", height: "100%", minHeight: "600px",
-              marginRight: "calc(50% - 50vw)",
-              maskImage: "linear-gradient(to bottom, black 70%, transparent 98%), linear-gradient(to right, transparent 0%, black 4%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 98%), linear-gradient(to right, transparent 0%, black 4%)",
+              position: "relative", width: "100%", maxWidth: "820px", aspectRatio: "4/5",
+              maskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
               maskComposite: "intersect",
               WebkitMaskComposite: "source-in",
             }}>
               <img src={courthouseImg} alt="Edificio judicial ilustración"
                 style={{
                   width: "100%", height: "100%",
-                  objectFit: "contain", objectPosition: "bottom center",
+                  objectFit: "cover", objectPosition: "top center",
                 }}
               />
             </div>
@@ -1222,7 +1221,7 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <FaqSection />
 
-      {/* ══════════════════��══════════════════════════════════��═
+      {/* ═════════════════════════════════════════════════════��═
           CONTACTO + CTA — fondo café, sección combinada
       ══════════════════════════════════════════════════════════ */}
       <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE, scrollMarginTop: "72px" }}>

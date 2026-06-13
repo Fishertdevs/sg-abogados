@@ -11,6 +11,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@types/node": "catalog:",
     "@types/pg": "^8.20.0",
     "@vercel/node": "^5.8.17",
     "prettier": "^3.8.3",

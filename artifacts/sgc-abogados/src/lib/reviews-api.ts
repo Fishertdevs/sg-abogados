@@ -105,3 +105,19 @@ export async function moderateReview(
     throw new Error(body?.error ?? "No se pudo procesar la acción.");
   }
 }
+
+/** Change the admin password. Uses the current password to authorize. */
+export async function changeAdminPassword(
+  currentPassword: string,
+  newPassword: string,
+): Promise<void> {
+  const res = await fetch("/api/admin/password", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body?.error ?? "No se pudo cambiar la contraseña.");
+  }
+}

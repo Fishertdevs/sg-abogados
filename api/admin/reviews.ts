@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { query } from "../_lib/db";
 import { applyCors } from "../_lib/http";
+import { isPanelConfigured, verifyPassword } from "../_lib/auth";
 
 interface ReviewRow {
   id: string;
@@ -10,15 +11,6 @@ interface ReviewRow {
   stars: number;
   status: string;
   created_at: string;
-}
-
-/** Validates the admin password sent in the x-admin-password header. */
-function isAuthorized(req: VercelRequest): boolean {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return false;
-  const provided =
-    (req.headers["x-admin-password"] as string | undefined) ?? "";
-  return provided.length > 0 && provided === expected;
 }
 
 /**
@@ -32,7 +24,7 @@ export default async function handler(
 ) {
   if (applyCors(req, res)) return;
 
-  if (!process.env.ADMIN_PASSWORD) {
+  if (!(await isPanelConfigured())) {
     res.status(500).json({
       error:
         "El panel no está configurado. Falta la variable ADMIN_PASSWORD.",
@@ -40,7 +32,9 @@ export default async function handler(
     return;
   }
 
-  if (!isAuthorized(req)) {
+  const provided =
+    (req.headers["x-admin-password"] as string | undefined) ?? "";
+  if (!(await verifyPassword(provided))) {
     res.status(401).json({ error: "Contraseña incorrecta." });
     return;
   }

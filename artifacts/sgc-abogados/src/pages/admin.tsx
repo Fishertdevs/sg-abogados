@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Star, Check, Trash2, LogOut, Lock, Loader2, Inbox } from "lucide-react";
+import {
+  Star, Check, Trash2, LogOut, Lock, Loader2, Inbox, KeyRound, X,
+} from "lucide-react";
 import {
   fetchAdminReviews,
   moderateReview,
+  changeAdminPassword,
   type AdminReview,
 } from "@/lib/reviews-api";
 
@@ -28,6 +31,11 @@ export default function AdminPage() {
     setAuthed(false);
   }
 
+  function handlePasswordChanged(newPw: string) {
+    sessionStorage.setItem(SESSION_KEY, newPw);
+    setPassword(newPw);
+  }
+
   return (
     <div
       style={{
@@ -39,7 +47,11 @@ export default function AdminPage() {
       }}
     >
       {authed ? (
-        <Dashboard password={password} onLogout={handleLogout} />
+        <Dashboard
+          password={password}
+          onLogout={handleLogout}
+          onPasswordChanged={handlePasswordChanged}
+        />
       ) : (
         <LoginGate
           onSuccess={(pw) => {
@@ -201,11 +213,14 @@ function LoginGate({ onSuccess }: { onSuccess: (pw: string) => void }) {
 function Dashboard({
   password,
   onLogout,
+  onPasswordChanged,
 }: {
   password: string;
   onLogout: () => void;
+  onPasswordChanged: (newPw: string) => void;
 }) {
   const queryClient = useQueryClient();
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
   const { data, isLoading, isError } = useQuery({
     queryKey: ["admin-reviews"],
     queryFn: () => fetchAdminReviews(password),
@@ -266,28 +281,62 @@ function Dashboard({
             SGC ABOGADOS
           </span>
         </div>
-        <button
-          onClick={onLogout}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            fontFamily: "'Cinzel', serif",
-            fontSize: "0.66rem",
-            letterSpacing: "0.1em",
-            fontWeight: 600,
-            color: BLUE,
-            background: "transparent",
-            border: `1px solid ${BLUE}`,
-            borderRadius: "9px",
-            padding: "9px 16px",
-            cursor: "pointer",
-          }}
-        >
-          <LogOut size={15} />
-          SALIR
-        </button>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button
+            onClick={() => setShowPasswordModal(true)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.66rem",
+              letterSpacing: "0.1em",
+              fontWeight: 600,
+              color: BLUE,
+              background: "transparent",
+              border: `1px solid ${BLUE}`,
+              borderRadius: "9px",
+              padding: "9px 16px",
+              cursor: "pointer",
+            }}
+          >
+            <KeyRound size={15} />
+            CONTRASEÑA
+          </button>
+          <button
+            onClick={onLogout}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.66rem",
+              letterSpacing: "0.1em",
+              fontWeight: 600,
+              color: BLUE,
+              background: "transparent",
+              border: `1px solid ${BLUE}`,
+              borderRadius: "9px",
+              padding: "9px 16px",
+              cursor: "pointer",
+            }}
+          >
+            <LogOut size={15} />
+            SALIR
+          </button>
+        </div>
       </header>
+
+      {showPasswordModal && (
+        <ChangePasswordModal
+          currentPassword={password}
+          onClose={() => setShowPasswordModal(false)}
+          onChanged={(newPw) => {
+            onPasswordChanged(newPw);
+            setShowPasswordModal(false);
+          }}
+        />
+      )}
 
       <main
         style={{
@@ -381,6 +430,183 @@ function SectionTitle({ label, hint }: { label: string; hint: string }) {
       <p style={{ fontSize: "1rem", color: "rgba(17,17,17,0.5)", margin: 0 }}>
         {hint}
       </p>
+    </div>
+  );
+}
+
+function ChangePasswordModal({
+  currentPassword,
+  onClose,
+  onChanged,
+}: {
+  currentPassword: string;
+  onClose: () => void;
+  onChanged: (newPw: string) => void;
+}) {
+  const [current, setCurrent] = useState(currentPassword);
+  const [next, setNext] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+
+    if (next.trim().length < 6) {
+      setError("La nueva contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    if (next.trim() !== confirm.trim()) {
+      setError("Las contraseñas nuevas no coinciden.");
+      return;
+    }
+
+    setSaving(true);
+    try {
+      await changeAdminPassword(current.trim(), next.trim());
+      onChanged(next.trim());
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "No se pudo cambiar la contraseña.",
+      );
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "1.1rem",
+    color: INK,
+    background: "#fff",
+    border: "1px solid rgba(26,61,124,0.25)",
+    borderRadius: "10px",
+    padding: "12px 14px",
+    outline: "none",
+    marginBottom: "12px",
+  };
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(8,18,42,0.45)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "20px",
+        zIndex: 50,
+      }}
+    >
+      <form
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSubmit}
+        style={{
+          width: "100%",
+          maxWidth: "400px",
+          background: "#fff",
+          borderRadius: "18px",
+          boxShadow: "0 24px 70px rgba(8,18,42,0.25)",
+          padding: "30px 28px 26px",
+          position: "relative",
+        }}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Cerrar"
+          style={{
+            position: "absolute",
+            top: "14px",
+            right: "14px",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            color: "rgba(17,17,17,0.4)",
+          }}
+        >
+          <X size={20} />
+        </button>
+
+        <h2
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontStyle: "italic",
+            fontSize: "1.5rem",
+            color: INK,
+            margin: "0 0 6px",
+          }}
+        >
+          Cambiar contraseña
+        </h2>
+        <p
+          style={{
+            fontSize: "1.02rem",
+            color: "rgba(17,17,17,0.55)",
+            margin: "0 0 22px",
+            lineHeight: 1.5,
+          }}
+        >
+          Define una nueva contraseña para entrar al panel.
+        </p>
+
+        <input
+          type="password"
+          value={current}
+          onChange={(e) => setCurrent(e.target.value)}
+          placeholder="Contraseña actual"
+          style={inputStyle}
+        />
+        <input
+          type="password"
+          value={next}
+          onChange={(e) => setNext(e.target.value)}
+          placeholder="Nueva contraseña"
+          style={inputStyle}
+        />
+        <input
+          type="password"
+          value={confirm}
+          onChange={(e) => setConfirm(e.target.value)}
+          placeholder="Confirmar nueva contraseña"
+          style={{ ...inputStyle, marginBottom: error ? "12px" : "18px" }}
+        />
+
+        {error && (
+          <p style={{ color: "#c0392b", fontSize: "1rem", margin: "0 0 16px" }}>
+            {error}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={saving}
+          style={{
+            width: "100%",
+            fontFamily: "'Cinzel', serif",
+            fontSize: "0.76rem",
+            letterSpacing: "0.12em",
+            fontWeight: 600,
+            color: "#fff",
+            background: saving ? BLUE2 : BLUE,
+            border: "none",
+            borderRadius: "11px",
+            padding: "13px",
+            cursor: saving ? "default" : "pointer",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+          }}
+        >
+          {saving && <Loader2 size={16} className="sgc-spin" />}
+          {saving ? "GUARDANDO…" : "GUARDAR CONTRASEÑA"}
+        </button>
+      </form>
     </div>
   );
 }

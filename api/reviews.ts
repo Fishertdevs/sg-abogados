@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { query } from "./_lib/db";
-import { applyCors, requestOrigin } from "./_lib/http";
-import { buildReviewMessage, buildWhatsAppUrl } from "./_lib/whatsapp";
+import { applyCors } from "./_lib/http";
 
 interface ReviewRow {
   id: string;
@@ -49,7 +48,6 @@ export default async function handler(
       const quote = String(body.quote ?? "").trim();
       const stars = Number(body.stars);
 
-      // Validation
       if (name.length < 2 || name.length > 80) {
         res.status(400).json({ error: "Nombre inválido." });
         return;
@@ -63,29 +61,15 @@ export default async function handler(
         return;
       }
 
-      // action_token kept for schema compatibility; not used for moderation.
       await query(
         `insert into reviews (name, role, quote, stars, status, action_token)
          values ($1, $2, $3, $4, 'pending', '')`,
         [name, role, quote, stars],
       );
 
-      // Build a wa.me link so the user's browser can open WhatsApp with a
-      // pre-filled notification to the admin. No external API is used.
-      const origin = requestOrigin(req);
-      const message = buildReviewMessage({
-        name,
-        role,
-        quote,
-        stars,
-        adminUrl: `${origin}/admin`,
-      });
-      const whatsappUrl = buildWhatsAppUrl(message);
-
       res.status(201).json({
         ok: true,
         message: "¡Gracias por tu reseña! Será revisada antes de publicarse.",
-        whatsappUrl,
       });
       return;
     }
@@ -93,7 +77,7 @@ export default async function handler(
     res.setHeader("Allow", "GET, POST, OPTIONS");
     res.status(405).json({ error: "Método no permitido." });
   } catch (err) {
-    console.error("[v0] /api/reviews error:", err);
+    console.error("[vercel] /api/reviews error:", err);
     res.status(500).json({ error: "Error del servidor." });
   }
 }

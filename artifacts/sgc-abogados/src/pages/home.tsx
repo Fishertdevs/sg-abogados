@@ -497,33 +497,10 @@ interface Testimonio {
   stars: number;
 }
 
-const TESTIMONIOS: Testimonio[] = [
-  {
-    quote: "SGC Abogados resolvió mi caso laboral con una rapidez y profesionalismo que superó mis expectativas. Desde el primer día sentí que mi situación era tratada con absoluta seriedad.",
-    author: "Carlos Méndez",
-    role: "Empresario · Bogotá",
-    stars: 5,
-  },
-  {
-    quote: "El acompañamiento fue impecable. Siempre tuve claridad sobre el estado de mi proceso. Un equipo que combina excelencia jurídica con trato verdaderamente humano.",
-    author: "María Fernanda Ruiz",
-    role: "Médica · Medellín",
-    stars: 5,
-  },
-  {
-    quote: "Gracias a SGC Abogados logré resolver un conflicto societario que parecía imposible. Su estrategia y conocimiento del derecho marcaron la diferencia.",
-    author: "Andrés Palomino",
-    role: "Director Financiero · Cali",
-    stars: 5,
-  },
-];
-
 function TestimoniosSection() {
   const [idx, setIdx] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  // Approved reviews come from the serverless API. If it's unavailable
-  // (e.g. the Vite dev preview), we silently fall back to the static list.
   const { data: approved } = useQuery({
     queryKey: ["approved-reviews"],
     queryFn: fetchApprovedReviews,
@@ -531,15 +508,14 @@ function TestimoniosSection() {
     retry: false,
   });
 
-  const dynamic: Testimonio[] = (approved ?? []).map((r) => ({
+  const reviews: Testimonio[] = (approved ?? []).map((r) => ({
     quote: r.quote,
     author: r.name,
     role: r.role,
     stars: r.stars,
   }));
 
-  const reviews: Testimonio[] = dynamic.length > 0 ? dynamic : TESTIMONIOS;
-  const safeIdx = Math.min(idx, reviews.length - 1);
+  const safeIdx = Math.min(idx, Math.max(0, reviews.length - 1));
   const t = reviews[safeIdx];
 
   return (
@@ -610,80 +586,84 @@ function TestimoniosSection() {
               La confianza de nuestros clientes es el reflejo de nuestro compromiso con la excelencia jurídica.
             </p>
 
-            {/* Línea separadora */}
-            <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
+            {reviews.length > 0 && (
+              <>
+                {/* Línea separadora */}
+                <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
 
-            {/* Card contenedor — reseña activa */}
-            <div className="sgc-test-card" style={{
-              width: "100%",
-              background: "#f0f4fa",
-              borderRadius: "16px",
-              border: "1px solid rgba(26,61,124,0.12)",
-              padding: "26px 28px 22px",
-              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
-              marginBottom: "20px",
-            }}>
-              <AnimatePresence mode="wait">
-                <motion.div key={safeIdx}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.38 }}
-                  className="flex flex-col items-center">
+                {/* Card contenedor — reseña activa */}
+                <div className="sgc-test-card" style={{
+                  width: "100%",
+                  background: "#f0f4fa",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(26,61,124,0.12)",
+                  padding: "26px 28px 22px",
+                  boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+                  marginBottom: "20px",
+                }}>
+                  <AnimatePresence mode="wait">
+                    <motion.div key={safeIdx}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.38 }}
+                      className="flex flex-col items-center">
 
-                  {/* Estrellas de la reseña */}
-                  <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={18} strokeWidth={1.5} color={CAFE}
-                        fill={s <= t.stars ? CAFE : "transparent"} />
-                    ))}
-                  </div>
+                      {/* Estrellas de la reseña */}
+                      <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <Star key={s} size={18} strokeWidth={1.5} color={CAFE}
+                            fill={s <= reviews[safeIdx].stars ? CAFE : "transparent"} />
+                        ))}
+                      </div>
 
-                  <p className="sgc-test-quote" style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
-                    color: TEXT, lineHeight: 1.88, marginBottom: "22px",
-                    fontStyle: "italic", textAlign: "center",
-                  }}>
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>{'\u201c'}</span>
-                    {t.quote}
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>{'\u201d'}</span>
-                  </p>
+                      <p className="sgc-test-quote" style={{
+                        fontFamily: "'Cormorant Garamond', serif", fontSize: "1.14rem",
+                        color: TEXT, lineHeight: 1.88, marginBottom: "22px",
+                        fontStyle: "italic", textAlign: "center",
+                      }}>
+                        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginRight: "2px" }}>{'\u201c'}</span>
+                        {reviews[safeIdx].quote}
+                        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5em", color: CAFE, lineHeight: 0, verticalAlign: "-0.18em", marginLeft: "2px" }}>{'\u201d'}</span>
+                      </p>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                    <div style={{ textAlign: "center" }}>
-                      <p className="sgc-test-author" style={{
-                        fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
-                        color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
-                      }}>{t.author}</p>
-                      <p className="sgc-test-role" style={{
-                        fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
-                        color: TEXT, marginTop: "3px",
-                      }}>{t.role}</p>
-                    </div>
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center" }}>
+                        <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                        <div style={{ textAlign: "center" }}>
+                          <p className="sgc-test-author" style={{
+                            fontFamily: "'Cinzel', serif", fontSize: "0.78rem",
+                            color: TEXT, fontWeight: 700, letterSpacing: "0.07em",
+                          }}>{reviews[safeIdx].author}</p>
+                          <p className="sgc-test-role" style={{
+                            fontFamily: "'Cormorant Garamond', serif", fontSize: "0.92rem",
+                            color: TEXT, marginTop: "3px",
+                          }}>{reviews[safeIdx].role}</p>
+                        </div>
+                        <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-            {/* Puntos de paginación */}
-            <div className="flex items-center gap-3">
-              {reviews.map((_, i) => (
-                <button key={i} onClick={() => setIdx(i)}
-                  style={{
-                    width: i === safeIdx ? "28px" : "8px",
-                    height: "8px",
-                    borderRadius: "4px",
-                    background: i === safeIdx ? CAFE : `${CAFE}30`,
-                    border: "none", cursor: "pointer",
-                    transition: "all 0.35s ease",
-                    padding: 0,
-                  }}
-                  aria-label={`Reseña ${i + 1}`}
-                />
-              ))}
-            </div>
+                {/* Puntos de paginación */}
+                <div className="flex items-center gap-3">
+                  {reviews.map((_, i) => (
+                    <button key={i} onClick={() => setIdx(i)}
+                      style={{
+                        width: i === safeIdx ? "28px" : "8px",
+                        height: "8px",
+                        borderRadius: "4px",
+                        background: i === safeIdx ? CAFE : `${CAFE}30`,
+                        border: "none", cursor: "pointer",
+                        transition: "all 0.35s ease",
+                        padding: 0,
+                      }}
+                      aria-label={`Reseña ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
 
             {/* Botón: subir reseña */}
             <button

@@ -3,9 +3,10 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const BLUE  = "#1e56b4";
-const TEXT  = "#111111";
-const MUTED = "#777777";
+const CAFE  = "#C4A355";
+const DARK  = "#3F4937";
+const TEXT  = "#2A2820";
+const MUTED = "#6B6455";
 
 const navLinks = [
   { name: "INICIO",   href: "/"         },
@@ -86,7 +87,7 @@ function LegalNav() {
               fontSize: "0.78rem", letterSpacing: "0.18em",
               color: TEXT, fontWeight: 600, textDecoration: "none",
             };
-            const enter = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = BLUE);
+            const enter = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = CAFE);
             const leave = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = TEXT);
             return l.href === "/" ? (
               <Link key={l.name} href={l.href}
@@ -154,7 +155,7 @@ function LegalFooter() {
           .sgc-lf-link  { font-size: 0.58rem !important; letter-spacing: 0.10em !important; }
         }
       `}</style>
-      <div style={{ width: "100%", height: "3px", background: BLUE }} />
+      <div style={{ width: "100%", height: "3px", background: DARK }} />
       <div className="sgc-lf-top flex flex-col items-center px-8 py-14">
         <div className="flex items-center gap-4 mb-7">
           {[
@@ -166,14 +167,14 @@ function LegalFooter() {
             <a key={label} href={href} target="_blank" rel="noopener noreferrer"
               aria-label={label}
               className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-              style={{ background: "#f0f4fa", color: BLUE }}
+              style={{ background: "rgba(63,73,55,0.08)", color: CAFE }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = BLUE;
+                (e.currentTarget as HTMLElement).style.background = CAFE;
                 (e.currentTarget as HTMLElement).style.color = "#ffffff";
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = "#f0f4fa";
-                (e.currentTarget as HTMLElement).style.color = BLUE;
+                (e.currentTarget as HTMLElement).style.background = "rgba(63,73,55,0.08)";
+                (e.currentTarget as HTMLElement).style.color = CAFE;
               }}
             ><Icon /></a>
           ))}
@@ -182,7 +183,7 @@ function LegalFooter() {
         <p className="sgc-lf-tagline" style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: "italic", fontSize: "1.10rem",
-          color: "#111111",
+          color: TEXT,
         }}>Estrategia jurídica con carácter.</p>
       </div>
 
@@ -269,7 +270,7 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
       >
         <p style={{
           fontFamily: "'Cinzel', serif", fontSize: "0.62rem",
-          color: BLUE, letterSpacing: "0.22em", marginBottom: "16px",
+          color: CAFE, letterSpacing: "0.22em", marginBottom: "16px",
           textAlign: "center",
         }}>SGC ABOGADOS</p>
         <h1 style={{
@@ -280,7 +281,7 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
           textAlign: "center",
           whiteSpace: "nowrap",
         }}>{title}</h1>
-        <div style={{ width: "40px", height: "2px", background: BLUE, margin: "0 auto 10px" }} />
+        <div style={{ width: "40px", height: "2px", background: CAFE, margin: "0 auto 10px" }} />
         <p
           className="sgc-legal-updated"
           style={{
@@ -306,9 +307,9 @@ export function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) 
               fontFamily: "'Cinzel', serif",
               fontSize: "0.70rem",
               letterSpacing: "0.22em",
-              color: BLUE,
+              color: CAFE,
               textDecoration: "none",
-              borderBottom: `1px solid ${BLUE}`,
+              borderBottom: `1px solid ${CAFE}`,
               paddingBottom: "3px",
               transition: "opacity 0.2s",
             }}

@@ -907,9 +907,10 @@ export default function Home() {
         <style>{`
           @media (max-width: 640px) {
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
-            .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
+            .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; color: rgba(255,255,255,0.92) !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
-            .sgc-hero-h1    { font-size: 1.6rem !important; }
+            .sgc-hero-h1   { font-size: 5.2vw !important; white-space: nowrap !important; }
+            .sgc-hero-bg-img { object-position: 18% top !important; }
           }
           .sgc-hero-line1 { display: block; }
           .sgc-hero-line2 { display: block; }
@@ -917,6 +918,7 @@ export default function Home() {
 
         {/* Fondo: imagen de oficina SGC */}
         <img
+          className="sgc-hero-bg-img"
           src={heroOfficeImg}
           alt="Oficina SGC Abogados"
           style={{
@@ -931,16 +933,17 @@ export default function Home() {
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
         <div className="sgc-hero-wrap relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
-          {/* TEXT — izquierda en desktop, centrado en mobile */}
-          <div className="sgc-hero-text w-full md:w-[54%] flex flex-col items-center md:items-start justify-center text-center md:text-left py-24 md:py-28 z-20 relative">
+          {/* TEXT — centrado en columna izquierda */}
+          <div className="sgc-hero-text w-full md:w-[54%] flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
 
             {/* Headline */}
             <h1 ref={headlineRef} className="sgc-hero-h1 mb-6 md:mb-8 w-full"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(1.75rem, 4.0vw, 3.6rem)",
-                color: TEXT, fontStyle: "normal", fontWeight: 900,
-                lineHeight: 1.15,
+                fontSize: "clamp(2.2rem, 3.5vw, 3.5rem)",
+                color: "#ffffff", fontStyle: "normal", fontWeight: 900,
+                lineHeight: 1.12,
+                textShadow: "0 2px 18px rgba(0,0,0,0.35)",
               }}>
               <span className="sgc-hero-line1" style={{ display: "block" }}>{"Nuestra prioridad es"}</span>
               <span className="sgc-hero-line2" style={{ display: "block" }}>{"tu tranquilidad legal."}</span>
@@ -958,8 +961,9 @@ export default function Home() {
             <p ref={subRef} className="sgc-hero-sub" style={{
               opacity: 0,
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: TEXT, lineHeight: 1.85,
+              fontSize: "clamp(1.05rem, 2.5vw, 1.18rem)", color: "rgba(255,255,255,0.92)", lineHeight: 1.85,
               maxWidth: "480px", marginBottom: "40px", padding: "0 8px",
+              textShadow: "0 1px 8px rgba(0,0,0,0.30)",
             }}>
               Bienvenido a SGC Abogados. Somos un equipo jurídico comprometido con la defensa de sus derechos,
               ofreciéndole asesoría experta, acompañamiento integral y soluciones efectivas en cada etapa de su proceso legal.
@@ -972,20 +976,22 @@ export default function Home() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
-                  color: TEXT, fontWeight: 700, opacity: 0,
+                  color: "#ffffff", fontWeight: 700, opacity: 0,
+                  textShadow: "0 1px 6px rgba(0,0,0,0.30)",
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
-                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
+                onMouseLeave={e => (e.currentTarget.style.color = "#ffffff")}
               >AGENDAR CONSULTA</a>
 
               <a href="#areas"
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em",
-                  color: TEXT, fontWeight: 700, opacity: 0,
+                  color: "#ffffff", fontWeight: 700, opacity: 0,
+                  textShadow: "0 1px 6px rgba(0,0,0,0.30)",
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
-                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
+                onMouseLeave={e => (e.currentTarget.style.color = "#ffffff")}
               >NUESTRAS ÁREAS</a>
             </div>
           </div>

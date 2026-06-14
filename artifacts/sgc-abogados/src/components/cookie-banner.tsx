@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-const BLUE = "#1a3d7c";
+const CAFE = "#C4A355";
+const DARK = "#3F4937";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -27,8 +28,8 @@ export function CookieBanner() {
     <div
       style={{
         position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 9999,
-        background: "#ffffff",
-        borderTop: `1px solid rgba(26,61,124,0.20)`,
+        background: "#FAF7F2",
+        borderTop: `1px solid rgba(63,73,55,0.18)`,
         boxShadow: "0 -2px 16px rgba(0,0,0,0.08)",
         animation: "sgcSlideUp 0.4s ease",
       }}
@@ -52,7 +53,7 @@ export function CookieBanner() {
         .sgc-cookie-text {
           font-family: 'Cormorant Garamond', serif;
           font-size: 0.96rem;
-          color: #333333;
+          color: #2A2820;
           line-height: 1.5;
           flex: 1 1 260px;
           margin: 0;
@@ -71,12 +72,16 @@ export function CookieBanner() {
           font-weight: 700;
           padding: 7px 18px;
           border-radius: 999px;
-          border: 1px solid ${BLUE};
+          border: 1px solid ${DARK};
           cursor: pointer;
           transition: all 0.2s;
           white-space: nowrap;
           color: #ffffff;
-          background: ${BLUE};
+          background: ${DARK};
+        }
+        .sgc-cookie-btn:hover {
+          background: ${CAFE};
+          border-color: ${CAFE};
         }
         @media (max-width: 640px) {
           .sgc-cookie-wrap {
@@ -106,23 +111,13 @@ export function CookieBanner() {
           Utilizamos cookies para mejorar su experiencia.
           <br className="sgc-cookie-br" />
           {" "}
-          <a href="/cookies" style={{ color: BLUE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+          <a href="/cookies" style={{ color: CAFE, textDecoration: "underline", textUnderlineOffset: "3px" }}>
             Política de Cookies y Privacidad
           </a>.
         </p>
         <div className="sgc-cookie-btns">
-          <button
-            onClick={dismiss}
-            className="sgc-cookie-btn"
-            onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
-          >RECHAZAR</button>
-          <button
-            onClick={accept}
-            className="sgc-cookie-btn"
-            onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
-          >ACEPTAR</button>
+          <button onClick={dismiss} className="sgc-cookie-btn">RECHAZAR</button>
+          <button onClick={accept} className="sgc-cookie-btn">ACEPTAR</button>
         </div>
       </div>
     </div>

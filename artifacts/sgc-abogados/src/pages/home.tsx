@@ -151,6 +151,7 @@ function AreasCarousel() {
   const [active, setActive] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const total = AREAS.length;
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -160,9 +161,23 @@ function AreasCarousel() {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => setActive(p => (p + 1) % total), 4000);
+    const timer = setInterval(() => setActive(p => (p + 1) % total), 7000);
     return () => clearInterval(timer);
   }, [total]);
+
+  const prev = () => setActive(p => (p - 1 + total) % total);
+  const next = () => setActive(p => (p + 1) % total);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (delta > 50) prev();
+    else if (delta < -50) next();
+    touchStartX.current = null;
+  };
 
   const getPos = (i: number) => {
     let d = i - active;
@@ -205,72 +220,114 @@ function AreasCarousel() {
     };
   };
 
+  const arrowBase: React.CSSProperties = {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 20,
+    width: "44px", height: "44px",
+    borderRadius: "50%",
+    background: "rgba(255,255,255,0.14)",
+    border: "1.5px solid rgba(255,255,255,0.45)",
+    color: "#ffffff",
+    cursor: "pointer",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    backdropFilter: "blur(6px)",
+    transition: "background 0.2s, border-color 0.2s",
+    padding: 0,
+  };
+
   return (
     <div className="flex flex-col items-center gap-10 w-full">
 
-      {/* Card stage — overflow-x clips side cards, overflow-y visible so top/bottom rounding shows */}
-      <div className="relative w-full flex items-center justify-center"
-        style={{ height: isMobile ? "340px" : "390px", overflowX: "hidden", overflowY: "visible" }}>
-        {AREAS.map((area, i) => {
-          const pos = getPos(i);
-          const maxVisible = isMobile ? 1 : 2;
-          if (Math.abs(pos) > maxVisible) return null;
-          return (
-            <div key={i} style={cardStyle(pos)}
-              onClick={() => pos !== 0 && setActive(i)}>
-              <div className="flex flex-col items-center"
-                style={{
-                  background: "#ffffff",
-                  borderRadius: "20px",
-                  minHeight: isMobile ? "310px" : "350px",
-                  padding: "14px 14px 16px",
-                  boxShadow: isMobile ? "none" : pos === 0
-                    ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
-                    : "0 8px 30px rgba(0,0,0,0.18)",
-                }}>
+      {/* Card stage + desktop arrows */}
+      <div className="relative w-full">
 
-                <span style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.2rem" : "2.8rem", fontWeight: 700,
-                  color: TEXT, lineHeight: 1, marginBottom: "3px",
-                  textAlign: "center", width: "100%",
-                }}>{area.roman}</span>
+        {/* Left arrow — desktop only */}
+        {!isMobile && (
+          <button style={{ ...arrowBase, left: "16px" }} onClick={prev} aria-label="Anterior"
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.28)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.70)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.14)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.45)"; }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+        )}
 
-                <div style={{ width: "28px", height: "2px", background: CAFE, marginBottom: "6px" }} />
+        {/* Card stage — overflow-x clips side cards, overflow-y visible so top/bottom rounding shows */}
+        <div className="relative w-full flex items-center justify-center"
+          style={{ height: isMobile ? "340px" : "390px", overflowX: "hidden", overflowY: "visible" }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}>
+          {AREAS.map((area, i) => {
+            const pos = getPos(i);
+            const maxVisible = isMobile ? 1 : 2;
+            if (Math.abs(pos) > maxVisible) return null;
+            return (
+              <div key={i} style={cardStyle(pos)}
+                onClick={() => pos !== 0 && setActive(i)}>
+                <div className="flex flex-col items-center"
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "20px",
+                    minHeight: isMobile ? "310px" : "350px",
+                    padding: "14px 14px 16px",
+                    boxShadow: isMobile ? "none" : pos === 0
+                      ? "0 24px 70px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.18)"
+                      : "0 8px 30px rgba(0,0,0,0.18)",
+                  }}>
 
-                <h3 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.68rem" : "0.75rem", fontWeight: 700,
-                  color: TEXT, letterSpacing: "0.07em", marginBottom: "7px",
-                  textAlign: "center", width: "100%",
-                }}>{area.title}</h3>
+                  <span style={{
+                    fontFamily: "'Cinzel', serif", fontSize: isMobile ? "2.2rem" : "2.8rem", fontWeight: 700,
+                    color: TEXT, lineHeight: 1, marginBottom: "3px",
+                    textAlign: "center", width: "100%",
+                  }}>{area.roman}</span>
 
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: isMobile ? "0.88rem" : "0.93rem", color: TEXT, lineHeight: 1.55, marginBottom: "10px",
-                  textAlign: "center", width: "100%",
-                }}>{area.desc}</p>
+                  <div style={{ width: "28px", height: "2px", background: CAFE, marginBottom: "6px" }} />
 
-                <div style={{ width: "100%", height: "1px", background: `${CAFE}28`, margin: "12px 0 10px" }} />
-                <ul className="flex flex-col w-full">
-                  {area.items.slice(0, isMobile ? 3 : 4).map((item, j, arr) => (
-                    <li key={j}>
-                      {j > 0 && <div style={{ width: "100%", height: "1px", background: `${CAFE}22`, marginBottom: "6px" }} />}
-                      <div className="flex items-center gap-2" style={{ paddingBottom: "6px" }}>
-                        <div style={{
-                          width: "4px", height: "4px", background: CAFE,
-                          transform: "rotate(45deg)", flexShrink: 0,
-                        }} />
-                        <span style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: "0.88rem", color: TEXT, lineHeight: 1.4,
-                        }}>{item}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                  <h3 style={{
+                    fontFamily: "'Cinzel', serif", fontSize: isMobile ? "0.68rem" : "0.75rem", fontWeight: 700,
+                    color: TEXT, letterSpacing: "0.07em", marginBottom: "7px",
+                    textAlign: "center", width: "100%",
+                  }}>{area.title}</h3>
+
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: isMobile ? "0.88rem" : "0.93rem", color: TEXT, lineHeight: 1.55, marginBottom: "10px",
+                    textAlign: "center", width: "100%",
+                  }}>{area.desc}</p>
+
+                  <div style={{ width: "100%", height: "1px", background: `${CAFE}28`, margin: "12px 0 10px" }} />
+                  <ul className="flex flex-col w-full">
+                    {area.items.slice(0, isMobile ? 3 : 4).map((item, j) => (
+                      <li key={j}>
+                        {j > 0 && <div style={{ width: "100%", height: "1px", background: `${CAFE}22`, marginBottom: "6px" }} />}
+                        <div className="flex items-center gap-2" style={{ paddingBottom: "6px" }}>
+                          <div style={{
+                            width: "4px", height: "4px", background: CAFE,
+                            transform: "rotate(45deg)", flexShrink: 0,
+                          }} />
+                          <span style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: "0.88rem", color: TEXT, lineHeight: 1.4,
+                          }}>{item}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+
+        {/* Right arrow — desktop only */}
+        {!isMobile && (
+          <button style={{ ...arrowBase, right: "16px" }} onClick={next} aria-label="Siguiente"
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.28)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.70)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.14)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.45)"; }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        )}
+
       </div>
 
       {/* Pagination dots */}
@@ -869,8 +926,8 @@ export default function Home() {
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
             .sgc-hero-h1    { font-size: 1.6rem !important; white-space: nowrap !important; }
           }
-          .sgc-hero-line1 { display: block; transform: translateX(-8%); }
-          .sgc-hero-line2 { display: block; transform: translateX(8%); }
+          .sgc-hero-line1 { display: block; }
+          .sgc-hero-line2 { display: block; }
         `}</style>
 
         {/* Ambient azul detrás de estatua */}
@@ -882,8 +939,8 @@ export default function Home() {
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
         <div className="sgc-hero-wrap relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
-          {/* TEXT — centrado dentro de su columna */}
-          <div className="sgc-hero-text flex-1 flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
+          {/* TEXT — centrado en todo el viewport */}
+          <div className="sgc-hero-text w-full flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
 
             {/* Headline */}
             <h1 ref={headlineRef} className="sgc-hero-h1 mb-6 md:mb-8 w-full"
@@ -942,8 +999,9 @@ export default function Home() {
           </div>
 
           {/* ESTATUA — derecha, monumental */}
-          <div className="sgc-hero-img hidden md:flex flex-none items-end justify-center relative pointer-events-none"
+          <div className="sgc-hero-img hidden md:flex items-end justify-center pointer-events-none"
             style={{
+              position: "absolute", right: 0, top: 0,
               width: "clamp(280px, 46vw, 650px)", height: "100vh", transform: "translateZ(0)",
               overflow: "hidden",
               maskImage: "linear-gradient(to bottom, black 45%, transparent 88%)",

@@ -855,7 +855,7 @@ export default function Home() {
           <a href="#inicio" className="flex items-center">
             <span style={{
               fontFamily: "'Cinzel', serif",
-              color: atHero ? CAFE : TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
+              color: "#000000", letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
             }}>SGC ABOGADOS</span>
           </a>
 
@@ -906,8 +906,8 @@ export default function Home() {
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; color: rgba(255,255,255,0.92) !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
-            .sgc-hero-h1   { font-size: 5.2vw !important; white-space: nowrap !important; }
-            .sgc-hero-bg-img { object-position: left top !important; }
+            .sgc-hero-h1   { font-size: 7.8vw !important; white-space: normal !important; line-height: 1.15 !important; }
+            .sgc-hero-bg-img { object-position: center 60% !important; }
           }
           .sgc-hero-line1 { display: block; }
           .sgc-hero-line2 { display: block; }
@@ -1079,7 +1079,7 @@ export default function Home() {
       <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{
           backgroundColor: DARK,
           backgroundImage: `url('${nosotrosImg}')`,
-          backgroundSize: "cover",
+          backgroundSize: "45% auto",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "bottom center",
           scrollMarginTop: "90px",
@@ -1129,73 +1129,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ── Fotos de la abogada ── */}
-          <div style={{ width: "100%", marginBottom: "36px" }}>
-            <style>{`
-              .sgc-abogada-grid {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: flex-end;
-                gap: 20px;
-                margin-top: 20px;
-              }
-              .sgc-abogada-foto {
-                width: clamp(200px, 28vw, 280px);
-                flex-shrink: 0;
-              }
-              .sgc-abogada-foto img {
-                width: 100%;
-                height: clamp(300px, 42vw, 420px);
-                object-fit: cover;
-                object-position: top center;
-                border-radius: 14px;
-                box-shadow: 0 10px 36px rgba(0,0,0,0.30);
-                border: 2px solid rgba(255,255,255,0.15);
-                display: block;
-              }
-              @media (max-width: 600px) {
-                .sgc-abogada-grid {
-                  flex-direction: column;
-                  align-items: center;
-                  gap: 16px;
-                }
-                .sgc-abogada-foto {
-                  width: clamp(200px, 72vw, 300px);
-                }
-                .sgc-abogada-foto img {
-                  height: clamp(280px, 90vw, 380px);
-                }
-              }
-            `}</style>
-
-            <p style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: "clamp(0.65rem, 1vw, 0.75rem)",
-              letterSpacing: "0.18em",
-              color: "rgba(255,255,255,0.60)",
-              fontWeight: 600,
-              textAlign: "center",
-              marginBottom: "2px",
-            }}>FUNDADORA</p>
-            <p style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
-              color: "#ffffff",
-              fontStyle: "italic",
-              textAlign: "center",
-              letterSpacing: "0.02em",
-            }}>Sofía Garavito</p>
-
-            <div className="sgc-abogada-grid">
-              <div className="sgc-abogada-foto" style={{ transform: "rotate(-1.5deg)" }}>
-                <img src={abogada1Img} alt="Sofía Garavito, abogada fundadora de SGC Abogados" />
-              </div>
-              <div className="sgc-abogada-foto" style={{ transform: "rotate(1.2deg)" }}>
-                <img src={abogada2Img} alt="Sofía Garavito, SGC Abogados Bogotá" />
-              </div>
-            </div>
-          </div>
 
           {/* Grid: imagen izquierda + contenido centrado derecha */}
           <div className="sgc-nos-content flex flex-col items-center text-center">

@@ -927,19 +927,12 @@ export default function Home() {
             pointerEvents: "none",
           }}
         />
-        {/* Overlay para legibilidad del texto */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to right, rgba(250,247,242,0.82) 0%, rgba(250,247,242,0.60) 50%, rgba(250,247,242,0.28) 100%)",
-          zIndex: 1,
-          pointerEvents: "none",
-        }} />
 
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
         <div className="sgc-hero-wrap relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 flex items-center" style={{ minHeight: "100vh" }}>
 
-          {/* TEXT — centrado en todo el viewport */}
-          <div className="sgc-hero-text w-full flex flex-col items-center justify-center text-center py-24 md:py-28 z-20 relative">
+          {/* TEXT — izquierda en desktop, centrado en mobile */}
+          <div className="sgc-hero-text w-full md:w-[54%] flex flex-col items-center md:items-start justify-center text-center md:text-left py-24 md:py-28 z-20 relative">
 
             {/* Headline */}
             <h1 ref={headlineRef} className="sgc-hero-h1 mb-6 md:mb-8 w-full"

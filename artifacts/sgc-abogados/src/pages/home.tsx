@@ -12,6 +12,8 @@ import justiceStatueImg from "@assets/image_1779927370844.png";
 import nosotrosImg from "@assets/image_1780858385741.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/image-Photoroom_(10)_1781316791990.png";
+import abogada1Img from "@assets/image_1781471723866.png";
+import abogada2Img from "@assets/image_1781471734683.png";
 
 /* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
 const BG    = "#ffffff";
@@ -1115,6 +1117,74 @@ export default function Home() {
             </div>
           </div>
 
+          {/* ── Fotos de la abogada ── */}
+          <div style={{ width: "100%", marginBottom: "36px" }}>
+            <style>{`
+              .sgc-abogada-grid {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-end;
+                gap: 20px;
+                margin-top: 20px;
+              }
+              .sgc-abogada-foto {
+                width: clamp(200px, 28vw, 280px);
+                flex-shrink: 0;
+              }
+              .sgc-abogada-foto img {
+                width: 100%;
+                height: clamp(300px, 42vw, 420px);
+                object-fit: cover;
+                object-position: top center;
+                border-radius: 14px;
+                box-shadow: 0 10px 36px rgba(0,0,0,0.30);
+                border: 2px solid rgba(255,255,255,0.15);
+                display: block;
+              }
+              @media (max-width: 600px) {
+                .sgc-abogada-grid {
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 16px;
+                }
+                .sgc-abogada-foto {
+                  width: clamp(200px, 72vw, 300px);
+                }
+                .sgc-abogada-foto img {
+                  height: clamp(280px, 90vw, 380px);
+                }
+              }
+            `}</style>
+
+            <p style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(0.65rem, 1vw, 0.75rem)",
+              letterSpacing: "0.18em",
+              color: "rgba(255,255,255,0.60)",
+              fontWeight: 600,
+              textAlign: "center",
+              marginBottom: "2px",
+            }}>FUNDADORA</p>
+            <p style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+              color: "#ffffff",
+              fontStyle: "italic",
+              textAlign: "center",
+              letterSpacing: "0.02em",
+            }}>Sofía Garavito</p>
+
+            <div className="sgc-abogada-grid">
+              <div className="sgc-abogada-foto" style={{ transform: "rotate(-1.5deg)" }}>
+                <img src={abogada1Img} alt="Sofía Garavito, abogada fundadora de SGC Abogados" />
+              </div>
+              <div className="sgc-abogada-foto" style={{ transform: "rotate(1.2deg)" }}>
+                <img src={abogada2Img} alt="Sofía Garavito, SGC Abogados Bogotá" />
+              </div>
+            </div>
+          </div>
+
           {/* Grid: imagen izquierda + contenido centrado derecha */}
           <div className="sgc-nos-content flex flex-col items-center text-center">
 
@@ -1383,32 +1453,32 @@ export default function Home() {
                 {
                   Icon: SvgEmail,
                   label: "Correo electrónico",
-                  value: "contacto@sgabogados.co",
+                  value: "Sofiagaravito.abogada@hotmail.com",
                   detail: null,
                   linkHref: null,
                   linkText: null,
                   external: false,
-                  mainHref: "mailto:contacto@sgabogados.co",
+                  mainHref: "mailto:Sofiagaravito.abogada@hotmail.com",
                 },
                 {
                   Icon: SvgPhone,
                   label: "Teléfono",
-                  value: "+57 (300) 123-4567",
+                  value: "+57 319 651 9645",
                   detail: null,
                   linkHref: null,
                   linkText: null,
                   external: false,
-                  mainHref: "tel:+573001234567",
+                  mainHref: "tel:+573196519645",
                 },
                 {
                   Icon: SvgWhatsApp,
                   label: "WhatsApp",
-                  value: "+57 (300) 123-4567",
+                  value: "+57 319 651 9645",
                   detail: null,
                   linkHref: null,
                   linkText: null,
                   external: true,
-                  mainHref: "https://wa.me/573001234567",
+                  mainHref: "https://wa.me/573196519645",
                 },
               ].map((item, i) => (
                 <div key={i} className="sgc-cc2-item">

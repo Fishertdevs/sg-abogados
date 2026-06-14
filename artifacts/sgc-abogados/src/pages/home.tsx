@@ -588,12 +588,13 @@ function TestimoniosSection() {
           .sgc-test-img-col > div {
             max-width: 100% !important;
             width: 100% !important;
-            height: 340px !important;
+            height: 430px !important;
             aspect-ratio: unset !important;
           }
           .sgc-test-img-col img {
-            object-fit: cover !important;
-            object-position: top center !important;
+            object-fit: contain !important;
+            object-position: bottom center !important;
+            width: 100% !important;
           }
           .sgc-test-section > div {
             padding-bottom: 0 !important;
@@ -1229,15 +1230,19 @@ export default function Home() {
 
               {/* Tarjetas móvil — Misión / Visión / Compromiso (ocultas en desktop) */}
               <div className="sgc-nos-cards" style={{ display: "none", width: "100%", marginBottom: "20px" }}>
-                {/* Flechas mobile */}
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", justifyContent: "center" }}>
+                <div style={{ position: "relative" }}>
+                  {/* Flechas izquierda/derecha centradas en la tarjeta */}
                   {([-1, 1] as const).map(dir => (
                     <button key={dir} onClick={() => nosNavigate(dir)}
                       style={{
+                        position: "absolute",
+                        [dir === -1 ? "left" : "right"]: "-18px",
+                        top: "50%", transform: "translateY(-50%)",
+                        zIndex: 10,
                         width: "36px", height: "36px", borderRadius: "50%",
                         background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.28)",
                         cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-                        color: "#fff", outline: "none", flexShrink: 0,
+                        color: "#fff", outline: "none",
                       }}
                       aria-label={dir === -1 ? "Anterior" : "Siguiente"}>
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -1245,7 +1250,6 @@ export default function Home() {
                       </svg>
                     </button>
                   ))}
-                </div>
                 <AnimatePresence mode="wait">
                   <motion.div key={nosCardIdx}
                     initial={{ opacity: 0, x: 32 }}
@@ -1277,7 +1281,8 @@ export default function Home() {
                     </p>
                   </motion.div>
                 </AnimatePresence>
-                <div style={{ display: "flex", gap: "8px", justifyContent: "center", alignItems: "center" }}>
+                </div>{/* end position:relative */}
+                <div style={{ display: "flex", gap: "8px", justifyContent: "center", alignItems: "center", marginTop: "10px" }}>
                   {[0, 1, 2].map(i => (
                     <button key={i} onClick={() => { setNosCardIdx(i); startNosTimer(); }} style={{
                       width: i === nosCardIdx ? "24px" : "7px",

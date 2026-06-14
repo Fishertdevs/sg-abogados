@@ -248,13 +248,23 @@ function AreasCarousel() {
         <button
           style={{
             ...arrowBase,
-            left: isMobile ? "6px" : "16px",
-            width: isMobile ? "36px" : "44px",
-            height: isMobile ? "36px" : "44px",
+            left: isMobile ? "calc(50% - min(36vw, 135px) - 22px)" : "16px",
+            width: isMobile ? "38px" : "44px",
+            height: isMobile ? "38px" : "44px",
+            background: isMobile ? "rgba(196,163,85,0.18)" : "rgba(255,255,255,0.14)",
+            border: isMobile ? "1.5px solid rgba(196,163,85,0.55)" : "1.5px solid rgba(255,255,255,0.45)",
+            color: isMobile ? CAFE : "#ffffff",
+            backdropFilter: isMobile ? "none" : "blur(6px)",
           }}
           onClick={prev} aria-label="Anterior"
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.28)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.70)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.14)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.45)"; }}>
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = isMobile ? "rgba(196,163,85,0.34)" : "rgba(255,255,255,0.28)";
+            (e.currentTarget as HTMLElement).style.borderColor = isMobile ? "rgba(196,163,85,0.80)" : "rgba(255,255,255,0.70)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = isMobile ? "rgba(196,163,85,0.18)" : "rgba(255,255,255,0.14)";
+            (e.currentTarget as HTMLElement).style.borderColor = isMobile ? "rgba(196,163,85,0.55)" : "rgba(255,255,255,0.45)";
+          }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
 
@@ -329,13 +339,23 @@ function AreasCarousel() {
         <button
           style={{
             ...arrowBase,
-            right: isMobile ? "6px" : "16px",
-            width: isMobile ? "36px" : "44px",
-            height: isMobile ? "36px" : "44px",
+            right: isMobile ? "calc(50% - min(36vw, 135px) - 22px)" : "16px",
+            width: isMobile ? "38px" : "44px",
+            height: isMobile ? "38px" : "44px",
+            background: isMobile ? "rgba(196,163,85,0.18)" : "rgba(255,255,255,0.14)",
+            border: isMobile ? "1.5px solid rgba(196,163,85,0.55)" : "1.5px solid rgba(255,255,255,0.45)",
+            color: isMobile ? CAFE : "#ffffff",
+            backdropFilter: isMobile ? "none" : "blur(6px)",
           }}
           onClick={next} aria-label="Siguiente"
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.28)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.70)"; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.14)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.45)"; }}>
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = isMobile ? "rgba(196,163,85,0.34)" : "rgba(255,255,255,0.28)";
+            (e.currentTarget as HTMLElement).style.borderColor = isMobile ? "rgba(196,163,85,0.80)" : "rgba(255,255,255,0.70)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = isMobile ? "rgba(196,163,85,0.18)" : "rgba(255,255,255,0.14)";
+            (e.currentTarget as HTMLElement).style.borderColor = isMobile ? "rgba(196,163,85,0.55)" : "rgba(255,255,255,0.45)";
+          }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
 

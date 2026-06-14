@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { ReviewDialog } from "@/components/review-dialog";
 import { fetchApprovedReviews } from "@/lib/reviews-api";
-import justiceStatueImg from "@assets/image_1779927370844.png";
+import heroOfficeImg from "@assets/image_1781474542799.png";
 import nosotrosImg from "@assets/image_1780858385741.png";
 import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/image-Photoroom_(10)_1781316791990.png";
@@ -906,34 +906,33 @@ export default function Home() {
       <section id="inicio" className="relative overflow-hidden" style={{ minHeight: "100vh", background: BG }}>
         <style>{`
           @media (max-width: 640px) {
-            .sgc-hero-img {
-              display: block !important;
-              position: absolute !important;
-              top: 0 !important;
-              left: 0 !important;
-              right: 0 !important;
-              width: 100% !important;
-              height: 100% !important;
-              pointer-events: none !important;
-              z-index: 1 !important;
-              overflow: hidden !important;
-              -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 95%) !important;
-              mask-image: linear-gradient(to bottom, black 75%, transparent 95%) !important;
-            }
-            .sgc-hero-img img { display: none !important; }
             .sgc-hero-text { z-index: 2 !important; position: relative !important; }
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
-            .sgc-hero-h1    { font-size: 1.6rem !important; white-space: nowrap !important; }
+            .sgc-hero-h1    { font-size: 1.6rem !important; }
           }
           .sgc-hero-line1 { display: block; }
           .sgc-hero-line2 { display: block; }
         `}</style>
 
-        {/* Ambient azul detrás de estatua */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 55% 70% at 78% 58%, rgba(63,73,55,0.07) 0%, transparent 72%)",
+        {/* Fondo: imagen de oficina SGC */}
+        <img
+          src={heroOfficeImg}
+          alt="Oficina SGC Abogados"
+          style={{
+            position: "absolute", inset: 0,
+            width: "100%", height: "100%",
+            objectFit: "cover", objectPosition: "center top",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        />
+        {/* Overlay para legibilidad del texto */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to right, rgba(250,247,242,0.82) 0%, rgba(250,247,242,0.60) 50%, rgba(250,247,242,0.28) 100%)",
           zIndex: 1,
+          pointerEvents: "none",
         }} />
 
         {/* Layout: contenido centrado en columna izquierda, estatua derecha */}
@@ -998,49 +997,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ESTATUA — derecha, monumental */}
-          <div className="sgc-hero-img hidden md:flex items-end justify-center pointer-events-none"
-            style={{
-              position: "absolute", right: 0, top: 0,
-              width: "clamp(280px, 46vw, 650px)", height: "100vh", transform: "translateZ(0)",
-              overflow: "hidden",
-              maskImage: "linear-gradient(to bottom, black 45%, transparent 88%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 45%, transparent 88%)",
-              ...(isMobile ? {
-                backgroundImage: `url(${justiceStatueImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center bottom",
-                backgroundRepeat: "no-repeat",
-                backgroundColor: BG,
-                opacity: 0.22,
-              } : {}),
-            }}>
-
-            {/* Ambiente azul — pre-composited */}
-            <div style={{
-              position: "absolute",
-              width: "480px", height: "480px", borderRadius: "50%",
-              top: "50%", left: "50%",
-              transform: "translateZ(0) translate(-50%, -50%)",
-              background: "radial-gradient(circle, rgba(63,73,55,0.10) 0%, rgba(63,73,55,0.04) 45%, transparent 68%)",
-              filter: "blur(60px)",
-              willChange: "filter",
-            }} />
-
-            <img
-              src={justiceStatueImg}
-              alt="Diosa de la Justicia, Themis — SGC Abogados"
-              style={{
-                position: "relative", zIndex: 10,
-                width: "clamp(360px, 44vw, 660px)",
-                height: "auto", objectFit: "contain",
-                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(63,73,55,0.16))",
-                alignSelf: "flex-end",
-                willChange: "filter",
-                transform: "translateZ(0)",
-              }}
-            />
-          </div>
         </div>
 
         {/* Ola de transición hero→áreas: vive en el hero para evitar repaint cruzado */}

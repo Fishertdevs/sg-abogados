@@ -1,6 +1,6 @@
 import { LegalLayout, H2, P, UL, LI } from "@/components/legal-layout";
 
-const BLUE = "#1e56b4";
+const BLUE = "#C4A355";
 
 export default function PrivacyPage() {
   return (

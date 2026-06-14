@@ -7,10 +7,10 @@ import {
   type AdminReview,
 } from "@/lib/reviews-api";
 
-const BLUE = "#1e56b4";
-const BLUE2 = "#163d90";
-const INK = "#111111";
-const BG = "#f4f5f8";
+const BLUE = "#C4A355";
+const BLUE2 = "#9E8033";
+const INK = "#2A2820";
+const BG = "#FAF7F2";
 
 const SESSION_KEY = "sgc_admin_pw";
 
@@ -153,7 +153,7 @@ function LoginGate({ onSuccess }: { onSuccess: (pw: string) => void }) {
             fontSize: "1.1rem",
             color: INK,
             background: "#fff",
-            border: "1px solid rgba(26,61,124,0.25)",
+            border: "1px solid rgba(63,73,55,0.25)",
             borderRadius: "10px",
             padding: "12px 14px",
             outline: "none",
@@ -235,7 +235,7 @@ function Dashboard({
       <header
         style={{
           background: "#fff",
-          borderBottom: "1px solid rgba(26,61,124,0.12)",
+          borderBottom: "1px solid rgba(63,73,55,0.12)",
           padding: "18px 24px",
           display: "flex",
           alignItems: "center",
@@ -397,7 +397,7 @@ function EmptyState({ text }: { text: string }) {
         color: "rgba(17,17,17,0.4)",
         background: "#fff",
         borderRadius: "14px",
-        border: "1px dashed rgba(26,61,124,0.2)",
+        border: "1px dashed rgba(63,73,55,0.2)",
       }}
     >
       <Inbox size={26} />
@@ -428,7 +428,7 @@ function ReviewCard({
       style={{
         background: "#fff",
         borderRadius: "14px",
-        border: "1px solid rgba(26,61,124,0.1)",
+        border: "1px solid rgba(63,73,55,0.1)",
         boxShadow: "0 6px 20px rgba(8,18,42,0.05)",
         padding: "20px 22px",
         marginBottom: "14px",

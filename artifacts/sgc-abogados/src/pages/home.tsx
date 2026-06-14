@@ -16,11 +16,13 @@ import abogada1Img from "@assets/image_1781471723866.png";
 import abogada2Img from "@assets/image_1781471734683.png";
 
 /* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
-const BG    = "#ffffff";
-const BG2   = "#f0f4fa";
-const CAFE  = "#1e56b4";        /* azul – acento principal   */
-const CAFE2 = "#163d90";        /* azul oscuro – hover       */
-const TEXT  = "#111111";
+const BG    = "#FAF7F2";
+const BG2   = "#EDE7DC";
+const CAFE  = "#C4A355";        /* oro cálido – acento principal   */
+const CAFE2 = "#9E8033";        /* oro oscuro – hover              */
+const DARK  = "#3F4937";        /* verde oliva – fondos de sección */
+const DARK2 = "#2F3A29";        /* verde oliva oscuro – paneles    */
+const TEXT  = "#2A2820";
 const MUTED = "rgba(17,17,17,0.52)";
 
 /* ─── WhatsApp contact ───────────────────────────────────── */
@@ -366,7 +368,7 @@ function FaqSection() {
             padding: 10px 14px 8px !important;
             margin-bottom: 8px !important;
             border-radius: 10px !important;
-            background: rgba(240,244,250,0.97) !important;
+            background: rgba(237,231,220,0.97) !important;
             height: 210px !important;
             overflow: hidden !important;
             display: flex !important;
@@ -422,11 +424,11 @@ function FaqSection() {
             {/* Card contenedor — pregunta + respuesta */}
             <div className="sgc-faq-card" style={{
               width: "100%",
-              background: "#f0f4fa",
+              background: "#EDE7DC",
               borderRadius: "16px",
-              border: "1px solid rgba(26,61,124,0.12)",
+              border: "1px solid rgba(63,73,55,0.12)",
               padding: "26px 28px 22px",
-              boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+              boxShadow: "0 4px 24px rgba(63,73,55,0.07)",
               marginBottom: "20px",
             }}>
               <AnimatePresence mode="wait">
@@ -485,7 +487,7 @@ function FaqSection() {
           style={{ display: "block", width: "100%", height: "100px" }}>
           <path
             d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-            fill={CAFE} />
+            fill={DARK} />
         </svg>
       </div>
     </section>
@@ -596,11 +598,11 @@ function TestimoniosSection() {
                 {/* Card contenedor — reseña activa */}
                 <div className="sgc-test-card" style={{
                   width: "100%",
-                  background: "#f0f4fa",
+                  background: "#EDE7DC",
                   borderRadius: "16px",
-                  border: "1px solid rgba(26,61,124,0.12)",
+                  border: "1px solid rgba(63,73,55,0.12)",
                   padding: "26px 28px 22px",
-                  boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+                  boxShadow: "0 4px 24px rgba(63,73,55,0.07)",
                   marginBottom: "20px",
                 }}>
                   <AnimatePresence mode="wait">
@@ -722,7 +724,7 @@ function TestimoniosSection() {
           style={{ display: "block", width: "100%", height: "100px" }}>
           <path
             d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-            fill="#1a3d7c" />
+            fill="#3F4937" />
         </svg>
       </div>
 
@@ -753,7 +755,7 @@ export default function Home() {
   const dividerRef  = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
-  const navBg     = useTransform(scrollY, [0, 80], ["rgba(255,255,255,0.0)", "rgba(255,255,255,0.97)"]);
+  const navBg     = useTransform(scrollY, [0, 80], ["rgba(250,247,242,0.0)", "rgba(250,247,242,0.97)"]);
   const navBlur   = useTransform(scrollY, [0, 80], ["blur(0px)", "blur(16px)"]);
   const navShadow = useTransform(scrollY, [0, 80], ["none", "0 1px 0 rgba(0,0,0,0.06)"]);
 
@@ -818,7 +820,7 @@ export default function Home() {
             ))}
           </nav>
 
-          <button className="md:hidden p-2" style={{ color: "rgba(17,17,17,0.65)", background: "none", border: "none" }}
+          <button className="md:hidden p-2" style={{ color: "rgba(42,40,32,0.65)", background: "none", border: "none" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -829,7 +831,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
               className="md:hidden px-8 py-6 flex flex-col gap-6"
-              style={{ background: "rgba(255,255,255,0.98)", borderBottom: `1px solid rgba(0,0,0,0.06)`, backdropFilter: "blur(16px)" }}
+              style={{ background: "rgba(250,247,242,0.98)", borderBottom: `1px solid rgba(0,0,0,0.06)`, backdropFilter: "blur(16px)" }}
             >
               {navLinks.map(l => (
                 <a key={l.name} href={l.href}
@@ -873,7 +875,7 @@ export default function Home() {
 
         {/* Ambient azul detrás de estatua */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: "radial-gradient(ellipse 55% 70% at 78% 58%, rgba(26,61,124,0.07) 0%, transparent 72%)",
+          background: "radial-gradient(ellipse 55% 70% at 78% 58%, rgba(63,73,55,0.07) 0%, transparent 72%)",
           zIndex: 1,
         }} />
 
@@ -962,7 +964,7 @@ export default function Home() {
               width: "480px", height: "480px", borderRadius: "50%",
               top: "50%", left: "50%",
               transform: "translateZ(0) translate(-50%, -50%)",
-              background: "radial-gradient(circle, rgba(26,61,124,0.10) 0%, rgba(26,61,124,0.04) 45%, transparent 68%)",
+              background: "radial-gradient(circle, rgba(63,73,55,0.10) 0%, rgba(63,73,55,0.04) 45%, transparent 68%)",
               filter: "blur(60px)",
               willChange: "filter",
             }} />
@@ -974,7 +976,7 @@ export default function Home() {
                 position: "relative", zIndex: 10,
                 width: "clamp(360px, 44vw, 660px)",
                 height: "auto", objectFit: "contain",
-                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(26,61,124,0.16))",
+                filter: "brightness(1.04) contrast(1.08) saturate(0.80) drop-shadow(0 0 44px rgba(63,73,55,0.16))",
                 alignSelf: "flex-end",
                 willChange: "filter",
                 transform: "translateZ(0)",
@@ -989,7 +991,7 @@ export default function Home() {
             style={{ display: "block", width: "100%", height: "100px" }}>
             <path
               d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-              fill={CAFE} />
+              fill={DARK} />
           </svg>
         </div>
 
@@ -1009,7 +1011,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════════
           ÁREAS DE PRÁCTICA — fondo café, carrusel 3D
       ══════════════════════════════════════════════════════════ */}
-      <section id="areas" className="relative overflow-hidden" style={{ background: CAFE, paddingTop: "80px", paddingBottom: "120px" }}>
+      <section id="areas" className="relative overflow-hidden" style={{ background: DARK, paddingTop: "80px", paddingBottom: "120px" }}>
         <style>{`
           @media (max-width: 640px) {
             .sgc-areas-title { font-size: 1.45rem !important; }
@@ -1065,7 +1067,7 @@ export default function Home() {
           SOBRE NOSOTROS
       ══════════════════════════════════════════════════════════ */}
       <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{
-          backgroundColor: "#1a3d7c",
+          backgroundColor: DARK,
           backgroundImage: `url('${nosotrosImg}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -1075,7 +1077,7 @@ export default function Home() {
         {/* Overlay azul global */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
-          background: "linear-gradient(to bottom, rgba(26,61,124,1.00) 0%, rgba(26,61,124,0.88) 16%, rgba(26,61,124,0.72) 30%, rgba(26,61,124,0.60) 100%)",
+          background: "linear-gradient(to bottom, rgba(63,73,55,1.00) 0%, rgba(63,73,55,0.88) 16%, rgba(63,73,55,0.72) 30%, rgba(63,73,55,0.60) 100%)",
         }} />
         <style>{`
           .sgc-nos-section > * { position: relative; z-index: 1; }
@@ -1214,14 +1216,14 @@ export default function Home() {
                     return (
                       <div key={i} style={st} onClick={() => abs !== 0 && setNosCardIdx(i)}>
                         <div className="flex flex-col items-center px-10 py-7" style={{
-                          background: "rgba(240,244,250,0.97)",
-                          border: "1px solid rgba(26,61,124,0.12)",
+                          background: "rgba(237,231,220,0.97)",
+                          border: "1px solid rgba(63,73,55,0.12)",
                           height: "300px",
                           borderRadius: "14px",
                           overflow: "hidden",
                           boxShadow: abs === 0
-                            ? "0 8px 32px rgba(26,61,124,0.18)"
-                            : "0 4px 16px rgba(26,61,124,0.10)",
+                            ? "0 8px 32px rgba(63,73,55,0.18)"
+                            : "0 4px 16px rgba(63,73,55,0.10)",
                         }}>
                           <span style={{
                             fontFamily: "'Cinzel', serif", fontSize: "0.88rem", fontWeight: 700,
@@ -1263,12 +1265,12 @@ export default function Home() {
                     exit={{ opacity: 0, x: -32 }}
                     transition={{ duration: 0.32 }}
                     style={{
-                      background: "rgba(240,244,250,0.97)",
-                      border: "1px solid rgba(26,61,124,0.12)",
+                      background: "rgba(237,231,220,0.97)",
+                      border: "1px solid rgba(63,73,55,0.12)",
                       borderRadius: "14px",
                       padding: "18px 16px 16px",
                       marginBottom: "14px",
-                      boxShadow: "0 4px 24px rgba(26,61,124,0.07)",
+                      boxShadow: "0 4px 24px rgba(63,73,55,0.07)",
                       height: "190px",
                       overflow: "hidden",
                       display: "flex",
@@ -1344,7 +1346,7 @@ export default function Home() {
       {/* ═════════════════════════════════════════════════════��═
           CONTACTO + CTA — fondo café, sección combinada
       ══════════════════════════════════════════════════════════ */}
-      <section id="contacto" className="relative overflow-hidden" style={{ background: CAFE, scrollMarginTop: "72px" }}>
+      <section id="contacto" className="relative overflow-hidden" style={{ background: DARK, scrollMarginTop: "72px" }}>
 
         {/* Ola inferior: café → blanco */}
         <div className="sgc-cc2-wave" style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
@@ -1352,7 +1354,7 @@ export default function Home() {
             style={{ display: "block", width: "100%", height: "55px" }}>
             <path
               d="M0,55 L0,38 C420,55 580,5 720,25 C860,42 1100,0 1280,30 C1360,43 1420,28 1440,33 L1440,55 Z"
-              fill="#ffffff" />
+              fill={BG} />
           </svg>
         </div>
 
@@ -1361,7 +1363,7 @@ export default function Home() {
           .sgc-cc2-outer      { max-width: 1200px; margin: 0 auto; padding: 56px 40px 64px; }
           .sgc-cc2-cta        { text-align: center; margin-bottom: 14px; }
           .sgc-cc2-card       { display: grid; grid-template-columns: 340px 1fr; border-radius: 18px; overflow: hidden; box-shadow: 0 12px 60px rgba(0,0,0,0.32); }
-          .sgc-cc2-left       { background: ${CAFE2}; padding: 16px 24px; display: flex; flex-direction: column; align-items: stretch; }
+          .sgc-cc2-left       { background: ${DARK2}; padding: 16px 24px; display: flex; flex-direction: column; align-items: stretch; }
           .sgc-cc2-map        { align-self: stretch; min-height: 180px; }
           .sgc-cc2-title      { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: #ffffff; font-style: italic; line-height: 1.1; margin-bottom: 2px; text-align: center; }
           .sgc-cc2-sched-head { font-family: 'Cinzel', serif; font-size: 0.50rem; letter-spacing: 0.10em; color: rgba(255,255,255,0.55); margin-bottom: 2px; margin-top: 6px; text-align: center; }
@@ -1525,7 +1527,7 @@ export default function Home() {
           FOOTER — oscuro, centrado, íconos en círculo
       ══════════════════════════════════════════════════════════ */}
       <motion.footer
-        style={{ background: "#ffffff" }}
+        style={{ background: BG }}
         initial={{ opacity: 0, y: 36 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -1552,13 +1554,13 @@ export default function Home() {
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 aria-label={label}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-                style={{ background: "#f0f4fa", color: CAFE }}
+                style={{ background: "#EDE7DC", color: CAFE }}
                 onMouseEnter={e => {
                   (e.currentTarget as HTMLElement).style.background = CAFE;
                   (e.currentTarget as HTMLElement).style.color = "#ffffff";
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = "#f0f4fa";
+                  (e.currentTarget as HTMLElement).style.background = "#EDE7DC";
                   (e.currentTarget as HTMLElement).style.color = CAFE;
                 }}
               ><Icon /></a>

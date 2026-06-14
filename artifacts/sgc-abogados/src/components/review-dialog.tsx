@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Star, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import { submitReview } from "@/lib/reviews-api";
 
-const BLUE = "#1e56b4";
-const BLUE2 = "#163d90";
+const BLUE = "#C4A355";
+const BLUE2 = "#9E8033";
 const TEXT = "#111111";
 
 const STEPS = ["stars", "name", "role", "quote"] as const;
@@ -108,7 +108,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
     fontFamily: "'Cormorant Garamond', serif",
     fontSize: inputSz, color: TEXT,
     background: "#f4f6fb",
-    border: "1.5px solid rgba(26,61,124,0.15)",
+    border: "1.5px solid rgba(63,73,55,0.15)",
     borderRadius: "10px",
     padding: inputPad,
     outline: "none", textAlign: "center",
@@ -173,7 +173,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
                 style={{
                   background: "#fff", borderRadius: card.borderRadius,
                   padding: isMobile ? "22px 14px" : "32px 20px",
-                  textAlign: "center", boxShadow: "0 2px 14px rgba(30,86,180,0.10)",
+                  textAlign: "center", boxShadow: "0 2px 14px rgba(196,163,85,0.10)",
                 }}
               >
                 <CheckCircle2 size={isMobile ? 40 : 52} color={BLUE} strokeWidth={1.5} />
@@ -193,7 +193,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
             ) : (
               <>
                 {/* Header card */}
-                <div style={{ background: "#fff", borderRadius: card.borderRadius, padding: card.padding, textAlign: "center", boxShadow: "0 2px 10px rgba(30,86,180,0.08)", marginBottom: isMobile ? "8px" : "10px" }}>
+                <div style={{ background: "#fff", borderRadius: card.borderRadius, padding: card.padding, textAlign: "center", boxShadow: "0 2px 10px rgba(196,163,85,0.08)", marginBottom: isMobile ? "8px" : "10px" }}>
                   <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: title, color: TEXT, fontWeight: 600, fontStyle: "italic", margin: "0 0 3px" }}>
                     Comparte tu experiencia
                   </h3>
@@ -205,7 +205,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
                 {/* Progress dots */}
                 <div style={{ display: "flex", justifyContent: "center", gap: isMobile ? "5px" : "7px", marginBottom: isMobile ? "8px" : "10px" }}>
                   {STEPS.map((_, i) => (
-                    <div key={i} style={{ width: i === stepIndex ? (isMobile ? "18px" : "22px") : (isMobile ? "6px" : "7px"), height: isMobile ? "6px" : "7px", borderRadius: "4px", background: i <= stepIndex ? BLUE : "rgba(30,86,180,0.2)", transition: "all 0.3s ease" }} />
+                    <div key={i} style={{ width: i === stepIndex ? (isMobile ? "18px" : "22px") : (isMobile ? "6px" : "7px"), height: isMobile ? "6px" : "7px", borderRadius: "4px", background: i <= stepIndex ? BLUE : "rgba(196,163,85,0.2)", transition: "all 0.3s ease" }} />
                   ))}
                 </div>
 
@@ -216,7 +216,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
                       key={currentStep} custom={direction}
                       variants={variants} initial="enter" animate="center" exit="exit"
                       transition={{ duration: 0.22, ease: "easeInOut" }}
-                      style={{ background: "#fff", borderRadius: stepCard.borderRadius, padding: stepCard.padding, textAlign: "center", boxShadow: "0 2px 14px rgba(30,86,180,0.10)" }}
+                      style={{ background: "#fff", borderRadius: stepCard.borderRadius, padding: stepCard.padding, textAlign: "center", boxShadow: "0 2px 14px rgba(196,163,85,0.10)" }}
                     >
                       {currentStep === "stars" && (
                         <>
@@ -289,7 +289,7 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
                 <div style={{ display: "flex", gap: isMobile ? "8px" : "10px", marginTop: isMobile ? "8px" : "10px" }}>
                   {stepIndex > 0 && (
                     <button onClick={goBack} aria-label="Volver"
-                      style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff", border: "none", borderRadius: isMobile ? "10px" : "12px", padding: isMobile ? "10px 11px" : "12px 14px", cursor: "pointer", color: BLUE, boxShadow: "0 2px 8px rgba(30,86,180,0.12)" }}
+                      style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff", border: "none", borderRadius: isMobile ? "10px" : "12px", padding: isMobile ? "10px 11px" : "12px 14px", cursor: "pointer", color: BLUE, boxShadow: "0 2px 8px rgba(196,163,85,0.12)" }}
                     >
                       <ArrowLeft size={isMobile ? 15 : 18} strokeWidth={2} />
                     </button>
@@ -297,13 +297,13 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
 
                   {currentStep !== "quote" ? (
                     <button onClick={goNext}
-                      style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "7px", fontFamily: "'Cinzel', serif", fontSize: btnFont, letterSpacing: "0.11em", fontWeight: 600, color: "#fff", background: BLUE, border: "none", borderRadius: isMobile ? "10px" : "12px", padding: btnPad, cursor: "pointer", boxShadow: "0 4px 16px rgba(30,86,180,0.28)" }}
+                      style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "7px", fontFamily: "'Cinzel', serif", fontSize: btnFont, letterSpacing: "0.11em", fontWeight: 600, color: "#fff", background: BLUE, border: "none", borderRadius: isMobile ? "10px" : "12px", padding: btnPad, cursor: "pointer", boxShadow: "0 4px 16px rgba(196,163,85,0.28)" }}
                     >
                       CONTINUAR <ArrowRight size={isMobile ? 13 : 15} strokeWidth={2.2} />
                     </button>
                   ) : (
                     <button onClick={handleSubmit} disabled={status === "sending"}
-                      style={{ flex: 1, fontFamily: "'Cinzel', serif", fontSize: btnFont, letterSpacing: "0.11em", fontWeight: 600, color: "#fff", background: status === "sending" ? BLUE2 : BLUE, border: "none", borderRadius: isMobile ? "10px" : "12px", padding: btnPad, cursor: status === "sending" ? "default" : "pointer", opacity: status === "sending" ? 0.8 : 1, boxShadow: "0 4px 16px rgba(30,86,180,0.28)", transition: "background 0.2s" }}
+                      style={{ flex: 1, fontFamily: "'Cinzel', serif", fontSize: btnFont, letterSpacing: "0.11em", fontWeight: 600, color: "#fff", background: status === "sending" ? BLUE2 : BLUE, border: "none", borderRadius: isMobile ? "10px" : "12px", padding: btnPad, cursor: status === "sending" ? "default" : "pointer", opacity: status === "sending" ? 0.8 : 1, boxShadow: "0 4px 16px rgba(196,163,85,0.28)", transition: "background 0.2s" }}
                     >
                       {status === "sending" ? "ENVIANDO…" : "ENVIAR RESEÑA"}
                     </button>

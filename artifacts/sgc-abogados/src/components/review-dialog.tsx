@@ -88,15 +88,10 @@ export function ReviewDialog({ open, onClose }: ReviewDialogProps) {
     setError(null);
     if (quote.trim().length < 10) { setError("Tu reseña es muy corta."); return; }
     setStatus("sending");
-    const waTab = window.open("", "_blank");
     try {
-      const { whatsappUrl } = await submitReview({ name: name.trim(), role: role.trim(), quote: quote.trim(), stars });
-      if (whatsappUrl && waTab && !waTab.closed) waTab.location.href = whatsappUrl;
-      else if (whatsappUrl) window.location.href = whatsappUrl;
-      else if (waTab && !waTab.closed) waTab.close();
+      await submitReview({ name: name.trim(), role: role.trim(), quote: quote.trim(), stars });
       setStatus("done");
     } catch (err) {
-      if (waTab && !waTab.closed) waTab.close();
       setStatus("idle");
       setError(err instanceof Error ? err.message : "No se pudo enviar. Intenta de nuevo.");
     }

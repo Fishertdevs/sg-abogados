@@ -35,12 +35,9 @@ export async function fetchApprovedReviews(): Promise<Review[]> {
 
 /**
  * Submit a new review. It is stored as "pending" until the admin approves it
- * from the /admin panel. Returns a wa.me URL the caller can open to notify the
- * admin via WhatsApp (no external API involved).
+ * from the /admin panel at /admin.
  */
-export async function submitReview(
-  review: NewReview,
-): Promise<{ whatsappUrl?: string }> {
+export async function submitReview(review: NewReview): Promise<void> {
   const res = await fetch("/api/reviews", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -56,8 +53,6 @@ export async function submitReview(
     }
     throw new Error(message);
   }
-  const data = await res.json().catch(() => ({}));
-  return { whatsappUrl: data?.whatsappUrl };
 }
 
 /* ─── Admin API (protected by a shared password) ─────────────── */

@@ -32,14 +32,6 @@ async function query<T = Record<string, unknown>>(
   return result.rows as T[];
 }
 
-function buildWhatsAppUrl(message: string): string {
-  const adminNumber = (process.env.ADMIN_WHATSAPP_TO ?? "573112512939").replace(
-    /[^\d]/g,
-    "",
-  );
-  return `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`;
-}
-
 const router = Router();
 
 router.get("/reviews", async (req, res) => {
@@ -101,41 +93,9 @@ router.post("/reviews", async (req, res) => {
       [name, role, quote, stars],
     );
 
-    const proto =
-      (req.headers["x-forwarded-proto"] as string | undefined) ?? "http";
-    const host =
-      (req.headers["x-forwarded-host"] as string | undefined) ??
-      (req.headers.host as string | undefined) ??
-      "";
-    const origin = `${proto}://${host}`;
-
-    const greeting = (() => {
-      const h = Number(
-        new Intl.DateTimeFormat("es-CO", {
-          timeZone: "America/Bogota",
-          hour: "numeric",
-          hour12: false,
-        }).format(new Date()),
-      );
-      if (h >= 5 && h < 12) return "Buenos días";
-      if (h >= 12 && h < 19) return "Buenas tardes";
-      return "Buenas noches";
-    })();
-    const stars_str = "⭐".repeat(Math.max(1, Math.min(5, stars)));
-    const roleLine = role ? ` (${role})` : "";
-    const message =
-      `${greeting}.\n\n` +
-      `El usuario *${name}*${roleLine} ha escrito una reseña:\n\n` +
-      `${stars_str}\n` +
-      `"${quote}"\n\n` +
-      `Para aprobarla o eliminarla, ingresa al panel:\n${origin}/admin`;
-
-    const whatsappUrl = buildWhatsAppUrl(message);
-
     res.status(201).json({
       ok: true,
       message: "¡Gracias por tu reseña! Será revisada antes de publicarse.",
-      whatsappUrl,
     });
   } catch (err) {
     console.error("[reviews] POST error:", err);

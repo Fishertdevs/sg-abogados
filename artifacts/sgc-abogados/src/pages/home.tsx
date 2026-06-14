@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import { gsap } from "gsap";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -10,10 +10,11 @@ import { ReviewDialog } from "@/components/review-dialog";
 import { fetchApprovedReviews } from "@/lib/reviews-api";
 import heroOfficeImg from "@assets/image_1781474542799.png";
 import nosotrosImg from "@assets/image_1780858385741.png";
-import courthouseImg from "@assets/image-Photoroom_(6)_1780277969866.png";
 import faqImg from "@assets/image-Photoroom_(10)_1781316791990.png";
 import abogada1Img from "@assets/image_1781471723866.png";
 import abogada2Img from "@assets/image_1781471734683.png";
+
+const sofiaReviewImg = "/abogada-sofia.png";
 
 /* ─── Paleta oficial: Azul · Blanco ──────────────────────── */
 const BG    = "#FAF7F2";
@@ -378,43 +379,55 @@ const NOS_ITEMS = [
 
 function FaqSection() {
   const [idx, setIdx] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const total = FAQS.length;
+
+  function startTimer() {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => setIdx(p => (p + 1) % total), 8000);
+  }
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIdx(prev => (prev + 1) % FAQS.length);
-    }, 4500);
-    return () => clearInterval(timer);
+    startTimer();
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function navigate(dir: 1 | -1) {
+    setIdx(p => (p + dir + total) % total);
+    startTimer();
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    if (delta > 50) navigate(-1);
+    else if (delta < -50) navigate(1);
+    touchStartX.current = null;
+  };
+
+  const arrowStyle: React.CSSProperties = {
+    position: "absolute", top: "50%", transform: "translateY(-50%)",
+    zIndex: 10, width: "40px", height: "40px", borderRadius: "50%",
+    background: `rgba(196,163,85,0.12)`, border: `1px solid rgba(196,163,85,0.35)`,
+    cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+    color: CAFE, transition: "background 0.2s", outline: "none",
+  };
 
   const faq = FAQS[idx];
 
   return (
     <section className="sgc-faq-section relative overflow-hidden" style={{ backgroundColor: BG }}>
-      {/* Imagen derecha — ocupa toda la altura de la sección, solo desktop */}
       <img
-        src={faqImg}
-        alt=""
-        aria-hidden="true"
-        className="hidden lg:block"
+        src={faqImg} alt="" aria-hidden="true" className="hidden lg:block"
         style={{
-          position: "absolute",
-          top: "-10%", right: 0,
-          width: "44%",
-          height: "120%",
-          objectFit: "cover",
-          objectPosition: "top center",
-          pointerEvents: "none",
-          zIndex: 1,
-          maskImage: `
-            linear-gradient(to bottom, black 0%, black 72%, transparent 83%),
-            linear-gradient(to right,  transparent 0%, black 18%)
-          `,
-          WebkitMaskImage: `
-            linear-gradient(to bottom, black 0%, black 72%, transparent 83%),
-            linear-gradient(to right,  transparent 0%, black 18%)
-          `,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
+          position: "absolute", top: "-10%", right: 0, width: "44%", height: "120%",
+          objectFit: "cover", objectPosition: "top center", pointerEvents: "none", zIndex: 1,
+          maskImage: `linear-gradient(to bottom, black 0%, black 72%, transparent 83%), linear-gradient(to right, transparent 0%, black 18%)`,
+          WebkitMaskImage: `linear-gradient(to bottom, black 0%, black 72%, transparent 83%), linear-gradient(to right, transparent 0%, black 18%)`,
+          maskComposite: "intersect", WebkitMaskComposite: "source-in",
         }}
       />
       <style>{`
@@ -422,129 +435,113 @@ function FaqSection() {
           .sgc-faq-img-col { display: none !important; }
           .sgc-faq-inner { padding-top: 16px !important; }
           .sgc-faq-card {
-            padding: 10px 14px 8px !important;
-            margin-bottom: 8px !important;
-            border-radius: 10px !important;
-            background: rgba(237,231,220,0.97) !important;
-            height: 210px !important;
-            overflow: hidden !important;
-            display: flex !important;
-            align-items: center !important;
+            padding: 10px 14px 8px !important; margin-bottom: 8px !important;
+            border-radius: 10px !important; background: rgba(237,231,220,0.97) !important;
+            height: 220px !important; overflow: hidden !important;
+            display: flex !important; align-items: center !important;
           }
           .sgc-faq-card > div { width: 100% !important; }
           .sgc-faq-title { font-size: 1.45rem !important; text-align: center !important; }
-          .sgc-faq-subtitle {
-            font-size: 0.80rem !important;
-            text-align: center !important;
-            margin-bottom: 20px !important;
-            white-space: normal !important;
-          }
+          .sgc-faq-subtitle { font-size: 0.80rem !important; text-align: center !important; margin-bottom: 20px !important; white-space: normal !important; }
           .sgc-faq-q { font-size: 0.58rem !important; margin-bottom: 5px !important; text-align: center !important; }
           .sgc-faq-deco { margin-bottom: 5px !important; }
-          .sgc-faq-a {
-            font-size: 0.72rem !important;
-            line-height: 1.5 !important;
-            text-align: center !important;
-          }
+          .sgc-faq-a { font-size: 0.72rem !important; line-height: 1.5 !important; text-align: center !important; }
         }
       `}</style>
 
       <div className="sgc-faq-inner relative max-w-7xl mx-auto px-6 md:px-14 lg:px-20" style={{ paddingTop: "48px", paddingBottom: "120px" }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          {/* ── LEFT: label + título + carousel de FAQs ── */}
           <div className="flex flex-col items-center text-center">
 
-            <span style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: "clamp(0.72rem, 2vw, 0.88rem)",
-              letterSpacing: "0.14em", color: CAFE, marginBottom: "16px",
-              fontWeight: 600, display: "block",
-            }}>PREGUNTAS FRECUENTES</span>
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(0.72rem, 2vw, 0.88rem)", letterSpacing: "0.14em", color: CAFE, marginBottom: "16px", fontWeight: 600, display: "block" }}>PREGUNTAS FRECUENTES</span>
 
-            <h2 className="sgc-faq-title" style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)",
-              color: TEXT, fontWeight: 500, fontStyle: "italic",
-              lineHeight: 1.22, marginBottom: "12px",
-            }}>Resolvemos sus dudas</h2>
+            <h2 className="sgc-faq-title" style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.0rem, 3.4vw, 2.8rem)", color: TEXT, fontWeight: 500, fontStyle: "italic", lineHeight: 1.22, marginBottom: "12px" }}>Resolvemos sus dudas</h2>
 
-            <p className="sgc-faq-subtitle" style={{
-              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem",
-              color: TEXT, lineHeight: 1.7, marginBottom: "40px",
-            }}>
+            <p className="sgc-faq-subtitle" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.15rem", color: TEXT, lineHeight: 1.7, marginBottom: "40px" }}>
               Las respuestas a las preguntas más comunes de nuestros clientes.
             </p>
 
             <div style={{ width: "100%", height: "1px", background: CAFE, marginBottom: "24px" }} />
 
-            {/* Card contenedor — pregunta + respuesta */}
-            <div className="sgc-faq-card" style={{
-              width: "100%",
-              background: "#EDE7DC",
-              borderRadius: "16px",
-              border: "1px solid rgba(63,73,55,0.12)",
-              padding: "26px 28px 22px",
-              boxShadow: "0 4px 24px rgba(63,73,55,0.07)",
-              marginBottom: "20px",
-            }}>
-              <AnimatePresence mode="wait">
-                <motion.div key={idx}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.38 }}
-                  className="flex flex-col items-center w-full">
+            {/* Card con flechas (desktop) + swipe (mobile) */}
+            <div style={{ position: "relative", width: "100%" }}>
 
-                  <p className="sgc-faq-q" style={{
-                    fontFamily: "'Cinzel', serif", fontSize: "0.72rem",
-                    letterSpacing: "0.12em", color: CAFE, fontWeight: 700,
-                    textAlign: "center", marginBottom: "14px", textTransform: "uppercase",
-                  }}>{faq.q}</p>
+              {/* Flecha izquierda — solo desktop */}
+              <button className="hidden md:flex" aria-label="Anterior"
+                style={{ ...arrowStyle, left: "-22px" }}
+                onClick={() => navigate(-1)}
+                onMouseEnter={e => (e.currentTarget.style.background = `rgba(196,163,85,0.26)`)}
+                onMouseLeave={e => (e.currentTarget.style.background = `rgba(196,163,85,0.12)`)}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
 
-                  <div className="sgc-faq-deco" style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "14px" }}>
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                    <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
-                    <div style={{ width: "28px", height: "1px", background: CAFE }} />
-                  </div>
+              <div className="sgc-faq-card"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                style={{
+                  width: "100%", background: "#EDE7DC", borderRadius: "16px",
+                  border: "1px solid rgba(63,73,55,0.12)", padding: "26px 28px 22px",
+                  boxShadow: "0 4px 24px rgba(63,73,55,0.07)", marginBottom: "20px",
+                  userSelect: "none", touchAction: "pan-y",
+                }}>
+                <AnimatePresence mode="wait">
+                  <motion.div key={idx}
+                    initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.38 }}
+                    className="flex flex-col items-center w-full">
 
-                  <p className="sgc-faq-a" style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: "1.18rem",
-                    color: TEXT, lineHeight: 1.88, textAlign: "center",
-                  }}>{faq.a}</p>
+                    <p className="sgc-faq-q" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.72rem", letterSpacing: "0.12em", color: CAFE, fontWeight: 700, textAlign: "center", marginBottom: "14px", textTransform: "uppercase" }}>{faq.q}</p>
 
-                </motion.div>
-              </AnimatePresence>
+                    <div className="sgc-faq-deco" style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "14px" }}>
+                      <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                      <div style={{ width: "5px", height: "5px", background: CAFE, transform: "rotate(45deg)" }} />
+                      <div style={{ width: "28px", height: "1px", background: CAFE }} />
+                    </div>
+
+                    <p className="sgc-faq-a" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.18rem", color: TEXT, lineHeight: 1.88, textAlign: "center" }}>{faq.a}</p>
+
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Flecha derecha — solo desktop */}
+              <button className="hidden md:flex" aria-label="Siguiente"
+                style={{ ...arrowStyle, right: "-22px" }}
+                onClick={() => navigate(1)}
+                onMouseEnter={e => (e.currentTarget.style.background = `rgba(196,163,85,0.26)`)}
+                onMouseLeave={e => (e.currentTarget.style.background = `rgba(196,163,85,0.12)`)}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
             </div>
 
-            {/* Indicadores de posición */}
+            {/* Indicadores de posición — ahora clicables */}
             <div className="flex items-center gap-3">
               {FAQS.map((_, i) => (
-                <div key={i}
+                <button key={i}
+                  onClick={() => { setIdx(i); startTimer(); }}
                   style={{
-                    width: i === idx ? "28px" : "8px",
-                    height: "8px",
-                    borderRadius: "4px",
+                    width: i === idx ? "28px" : "8px", height: "8px", borderRadius: "4px",
                     background: i === idx ? CAFE : `${CAFE}30`,
-                    transition: "all 0.35s ease",
+                    border: "none", cursor: "pointer", transition: "all 0.35s ease", padding: 0,
                   }}
+                  aria-label={`Pregunta ${i + 1}`}
                 />
               ))}
             </div>
           </div>
 
-          {/* ── RIGHT: espacio reservado (imagen como fondo de sección) ── */}
           <div className="sgc-faq-img-col" />
 
         </div>
       </div>
-      {/* Ola inferior: blanco → café */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, lineHeight: 0, pointerEvents: "none" }}>
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none"
-          style={{ display: "block", width: "100%", height: "100px" }}>
-          <path
-            d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z"
-            fill={DARK} />
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "100px" }}>
+          <path d="M0,100 L0,70 C420,100 580,10 720,45 C860,75 1100,0 1280,55 C1360,78 1420,50 1440,60 L1440,100 Z" fill={DARK} />
         </svg>
       </div>
     </section>
@@ -754,16 +751,14 @@ function TestimoniosSection() {
             </button>
           </div>
 
-          {/* ── RIGHT: imagen estática ── */}
+          {/* ── RIGHT: foto abogada ── */}
           <div className="sgc-test-img-col relative flex justify-center lg:justify-end">
             <div style={{
-              position: "relative", width: "100%", maxWidth: "820px", aspectRatio: "4/5",
-              maskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent 96%), linear-gradient(to right, transparent 0%, black 6%)",
-              maskComposite: "intersect",
-              WebkitMaskComposite: "source-in",
+              position: "relative", width: "100%", maxWidth: "680px", aspectRatio: "4/5",
+              maskImage: "linear-gradient(to bottom, black 76%, transparent 98%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 76%, transparent 98%)",
             }}>
-              <img src={courthouseImg} alt="Edificio judicial ilustración"
+              <img src={sofiaReviewImg} alt="Abogada Sofia Garavito"
                 style={{
                   width: "100%", height: "100%",
                   objectFit: "cover", objectPosition: "top center",
@@ -815,6 +810,8 @@ export default function Home() {
   const navBg     = useTransform(scrollY, [0, 80], ["rgba(250,247,242,0.0)", "rgba(250,247,242,0.97)"]);
   const navBlur   = useTransform(scrollY, [0, 80], ["blur(0px)", "blur(16px)"]);
   const navShadow = useTransform(scrollY, [0, 80], ["none", "0 1px 0 rgba(0,0,0,0.06)"]);
+  const [atHero, setAtHero] = useState(true);
+  useMotionValueEvent(scrollY, "change", (v) => setAtHero(v < 80));
 
   /* GSAP hero entrance */
   useEffect(() => {
@@ -858,7 +855,7 @@ export default function Home() {
           <a href="#inicio" className="flex items-center">
             <span style={{
               fontFamily: "'Cinzel', serif",
-              color: TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
+              color: atHero ? CAFE : TEXT, letterSpacing: "0.28em", fontSize: "0.80rem", fontWeight: 600,
             }}>SGC ABOGADOS</span>
           </a>
 
@@ -869,15 +866,15 @@ export default function Home() {
                 style={{
                   fontFamily: "'Cinzel', serif",
                   fontSize: "0.78rem", letterSpacing: "0.18em",
-                  color: TEXT, fontWeight: 600,
+                  color: atHero ? CAFE : TEXT, fontWeight: 600,
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = CAFE)}
-                onMouseLeave={e => (e.currentTarget.style.color = TEXT)}
+                onMouseLeave={e => (e.currentTarget.style.color = atHero ? CAFE : TEXT)}
               >{l.name}</a>
             ))}
           </nav>
 
-          <button className="md:hidden p-2" style={{ color: "rgba(42,40,32,0.65)", background: "none", border: "none" }}
+          <button className="md:hidden p-2" style={{ color: atHero ? "rgba(196,163,85,0.9)" : "rgba(42,40,32,0.65)", background: "none", border: "none" }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -910,7 +907,7 @@ export default function Home() {
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; color: rgba(255,255,255,0.92) !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
             .sgc-hero-h1   { font-size: 5.2vw !important; white-space: nowrap !important; }
-            .sgc-hero-bg-img { object-position: 18% top !important; }
+            .sgc-hero-bg-img { object-position: left top !important; }
           }
           .sgc-hero-line1 { display: block; }
           .sgc-hero-line2 { display: block; }

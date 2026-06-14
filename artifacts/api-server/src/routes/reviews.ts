@@ -34,6 +34,31 @@ async function query<T = Record<string, unknown>>(
 
 const router = Router();
 
+/* ─── Settings helpers ───────────────────────────────────── */
+
+async function initSettingsTable() {
+  await query(`
+    CREATE TABLE IF NOT EXISTS sgc_settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TIMESTAMPTZ DEFAULT now()
+    )
+  `);
+}
+
+async function getAdminPassword(): Promise<string | undefined> {
+  try {
+    await initSettingsTable();
+    const rows = await query<{ value: string }>(
+      `SELECT value FROM sgc_settings WHERE key = 'admin_password'`,
+    );
+    if (rows.length > 0) return rows[0].value;
+  } catch {
+    /* fall through to env */
+  }
+  return process.env.ADMIN_PASSWORD;
+}
+
 router.get("/reviews", async (req, res) => {
   try {
     const rows = await query<{
@@ -103,18 +128,13 @@ router.post("/reviews", async (req, res) => {
   }
 });
 
-router.get("/admin/reviews", (req, res, next) => {
-  const expected = process.env.ADMIN_PASSWORD;
+router.get("/admin/reviews", async (req, res, next) => {
+  const expected = await getAdminPassword();
   if (!expected) {
-    res
-      .status(500)
-      .json({
-        error: "El panel no está configurado. Falta la variable ADMIN_PASSWORD.",
-      });
+    res.status(500).json({ error: "El panel no está configurado. Falta la variable ADMIN_PASSWORD." });
     return;
   }
-  const provided =
-    (req.headers["x-admin-password"] as string | undefined) ?? "";
+  const provided = (req.headers["x-admin-password"] as string | undefined) ?? "";
   if (!provided || provided !== expected) {
     res.status(401).json({ error: "Contraseña incorrecta." });
     return;
@@ -158,18 +178,13 @@ router.get("/admin/reviews", async (_req, res) => {
   }
 });
 
-router.post("/admin/reviews", (req, res, next) => {
-  const expected = process.env.ADMIN_PASSWORD;
+router.post("/admin/reviews", async (req, res, next) => {
+  const expected = await getAdminPassword();
   if (!expected) {
-    res
-      .status(500)
-      .json({
-        error: "El panel no está configurado. Falta la variable ADMIN_PASSWORD.",
-      });
+    res.status(500).json({ error: "El panel no está configurado. Falta la variable ADMIN_PASSWORD." });
     return;
   }
-  const provided =
-    (req.headers["x-admin-password"] as string | undefined) ?? "";
+  const provided = (req.headers["x-admin-password"] as string | undefined) ?? "";
   if (!provided || provided !== expected) {
     res.status(401).json({ error: "Contraseña incorrecta." });
     return;
@@ -206,6 +221,38 @@ router.post("/admin/reviews", async (req, res) => {
     res.status(400).json({ error: "Acción no válida." });
   } catch (err) {
     console.error("[admin/reviews] POST error:", err);
+    res.status(500).json({ error: "Error del servidor." });
+  }
+});
+
+router.post("/admin/change-password", async (req, res) => {
+  try {
+    const expected = await getAdminPassword();
+    if (!expected) {
+      res.status(500).json({ error: "El panel no está configurado." });
+      return;
+    }
+    const provided = (req.headers["x-admin-password"] as string | undefined) ?? "";
+    if (!provided || provided !== expected) {
+      res.status(401).json({ error: "Contraseña actual incorrecta." });
+      return;
+    }
+    const body = req.body ?? {};
+    const newPassword = String(body.newPassword ?? "").trim();
+    if (newPassword.length < 6) {
+      res.status(400).json({ error: "La nueva contraseña debe tener al menos 6 caracteres." });
+      return;
+    }
+    await initSettingsTable();
+    await query(
+      `INSERT INTO sgc_settings (key, value, updated_at)
+       VALUES ('admin_password', $1, now())
+       ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = now()`,
+      [newPassword],
+    );
+    res.status(200).json({ ok: true });
+  } catch (err) {
+    console.error("[admin/change-password] error:", err);
     res.status(500).json({ error: "Error del servidor." });
   }
 });

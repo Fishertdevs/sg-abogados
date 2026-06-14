@@ -798,9 +798,19 @@ export default function Home() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const nosIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  function startNosTimer() {
+    if (nosIntervalRef.current) clearInterval(nosIntervalRef.current);
+    nosIntervalRef.current = setInterval(() => setNosCardIdx(p => (p + 1) % 3), 4500);
+  }
+  function nosNavigate(dir: 1 | -1) {
+    setNosCardIdx(p => (p + dir + 3) % 3);
+    startNosTimer();
+  }
   useEffect(() => {
-    const timer = setInterval(() => setNosCardIdx(p => (p + 1) % 3), 4500);
-    return () => clearInterval(timer);
+    startNosTimer();
+    return () => { if (nosIntervalRef.current) clearInterval(nosIntervalRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const subRef      = useRef<HTMLParagraphElement>(null);
   const ctaRef      = useRef<HTMLDivElement>(null);
@@ -907,7 +917,7 @@ export default function Home() {
             .sgc-hero-sub  { text-align: center !important; font-size: 0.95rem !important; padding: 0 !important; color: rgba(255,255,255,0.92) !important; }
             .sgc-hero-ctas { gap: 24px !important; flex-wrap: nowrap !important; }
             .sgc-hero-h1   { font-size: 7.8vw !important; white-space: normal !important; line-height: 1.15 !important; }
-            .sgc-hero-bg-img { object-position: center 60% !important; }
+            .sgc-hero-bg-img { object-position: 28% 55% !important; }
           }
           .sgc-hero-line1 { display: block; }
           .sgc-hero-line2 { display: block; }
@@ -1078,10 +1088,6 @@ export default function Home() {
       ══════════════════════════════════════════════════════════ */}
       <section id="nosotros" className="sgc-nos-section relative overflow-hidden" style={{
           backgroundColor: DARK,
-          backgroundImage: `url('${nosotrosImg}')`,
-          backgroundSize: "45% auto",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "bottom center",
           scrollMarginTop: "90px",
         }}>
         {/* Overlay azul global */}
@@ -1135,6 +1141,27 @@ export default function Home() {
 
               {/* Carrusel desktop — animaciones translateX+escala igual que Áreas de Práctica */}
               <div className="hidden lg:block" style={{ width: "100%", marginBottom: "28px" }}>
+                <div style={{ position: "relative", width: "100%" }}>
+                  {/* Flechas desktop */}
+                  {(["left", "right"] as const).map(side => (
+                    <button key={side}
+                      onClick={() => nosNavigate(side === "left" ? -1 : 1)}
+                      style={{
+                        position: "absolute", top: "50%", transform: "translateY(-50%)",
+                        [side]: "-28px", zIndex: 20,
+                        width: "44px", height: "44px", borderRadius: "50%",
+                        background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.28)",
+                        cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                        color: "#fff", outline: "none", transition: "background 0.2s",
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.22)")}
+                      onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.10)")}
+                      aria-label={side === "left" ? "Anterior" : "Siguiente"}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d={side === "left" ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  ))}
                 <div className="relative w-full flex items-center justify-center"
                   style={{ height: "390px", overflowX: "hidden", overflowY: "visible" }}>
                   {NOS_ITEMS.map((item, i) => {
@@ -1183,10 +1210,11 @@ export default function Home() {
                       </div>
                     );
                   })}
-                </div>
+                </div>{/* end carousel items container */}
+                </div>{/* end position:relative wrapper */}
                 <div className="flex items-center gap-2.5 justify-center" style={{ marginTop: "16px" }}>
                   {NOS_ITEMS.map((_, i) => (
-                    <button key={i} onClick={() => setNosCardIdx(i)}
+                    <button key={i} onClick={() => { setNosCardIdx(i); startNosTimer(); }}
                       style={{
                         width: i === nosCardIdx ? "24px" : "8px",
                         height: "8px", borderRadius: "4px",
@@ -1201,6 +1229,23 @@ export default function Home() {
 
               {/* Tarjetas móvil — Misión / Visión / Compromiso (ocultas en desktop) */}
               <div className="sgc-nos-cards" style={{ display: "none", width: "100%", marginBottom: "20px" }}>
+                {/* Flechas mobile */}
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", justifyContent: "center" }}>
+                  {([-1, 1] as const).map(dir => (
+                    <button key={dir} onClick={() => nosNavigate(dir)}
+                      style={{
+                        width: "36px", height: "36px", borderRadius: "50%",
+                        background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.28)",
+                        cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                        color: "#fff", outline: "none", flexShrink: 0,
+                      }}
+                      aria-label={dir === -1 ? "Anterior" : "Siguiente"}>
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path d={dir === -1 ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  ))}
+                </div>
                 <AnimatePresence mode="wait">
                   <motion.div key={nosCardIdx}
                     initial={{ opacity: 0, x: 32 }}
@@ -1234,7 +1279,7 @@ export default function Home() {
                 </AnimatePresence>
                 <div style={{ display: "flex", gap: "8px", justifyContent: "center", alignItems: "center" }}>
                   {[0, 1, 2].map(i => (
-                    <button key={i} onClick={() => setNosCardIdx(i)} style={{
+                    <button key={i} onClick={() => { setNosCardIdx(i); startNosTimer(); }} style={{
                       width: i === nosCardIdx ? "24px" : "7px",
                       height: "7px", borderRadius: "4px",
                       background: i === nosCardIdx ? "#ffffff" : "rgba(255,255,255,0.30)",
